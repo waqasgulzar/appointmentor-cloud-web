@@ -1,0 +1,1267 @@
+﻿<form id="sky-form3" class="sky-form zero-border" novalidate (ngSubmit)="onSubmit(userForm, isMenuhidden)" [formGroup]="userForm">
+  <header>Opening Times</header>
+  <fieldset>
+    <section>
+      <div class="tab-content">
+        <div class="tab-pane active" role="tabpanel" id="step2" style="padding-top:0px;">
+          <div class="step2">
+            <div class="alert alert-success" [hidden]="isHidden">
+              <strong>Success!</strong> Opening times has been updated successfully.
+            </div>
+            <div class="panel panel-green margin-bottom-40 zero-border">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-tasks"></i> Opening Times</h3>
+              </div>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="text-center opening-td" width="20%">Open For Business?</th>
+                    <th class="text-center opening-td" width="10%"></th>
+                    <th class="text-center opening-td" width="20%">Opening Time</th>
+                    <th class="text-center opening-td" width="20%">Closing Time</th>
+                    <th class="text-center opening-td" width="30%"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="opening-td">Monday</td>
+                    <td>
+                      <label class="checkbox zero-padding opening-margin opening-section "><input type="checkbox" formControlName="ckMonday" (change)="onChange('ckMonday',$event)" value="Monday" [checked]="true" /><i align="center"></i></label>
+                    </td>
+                    <td align="center">
+                      <!--<select formControlName="MondayOpeningHour" [hidden]="isMondayhidden" class="zero-padding">
+                          <option [selected]="selectedOpeningHour == 00">00</option>
+                          <option [selected]="selectedOpeningHour == 01">01</option>
+                          <option [selected]="selectedOpeningHour == 02">02</option>
+                          <option [selected]="selectedOpeningHour == 03">03</option>
+                          <option [selected]="selectedOpeningHour == 04">04</option>
+                          <option [selected]="selectedOpeningHour == 05">05</option>
+                          <option [selected]="selectedOpeningHour == 06">06</option>
+                          <option [selected]="selectedOpeningHour == 07">07</option>
+                          <option [selected]="selectedOpeningHour == 08">08</option>
+                          <option [selected]="selectedOpeningHour == 09">09</option>
+                          <option [selected]="selectedOpeningHour == 10">10</option>
+                          <option [selected]="selectedOpeningHour == 11">11</option>
+                          <option [selected]="selectedOpeningHour == 12">12</option>
+                          <option [selected]="selectedOpeningHour == 13">13</option>
+                          <option [selected]="selectedOpeningHour == 14">14</option>
+                          <option [selected]="selectedOpeningHour == 15">15</option>
+                          <option [selected]="selectedOpeningHour == 16">16</option>
+                          <option [selected]="selectedOpeningHour == 17">17</option>
+                          <option [selected]="selectedOpeningHour == 18">18</option>
+                          <option [selected]="selectedOpeningHour == 19">19</option>
+                          <option [selected]="selectedOpeningHour == 20">20</option>
+                          <option [selected]="selectedOpeningHour == 21">21</option>
+                          <option [selected]="selectedOpeningHour == 22">22</option>
+                          <option [selected]="selectedOpeningHour == 23">23</option>
+                      </select>
+                      <select formControlName="MondayOpeningMinute" [hidden]="isMondayhidden" class="zero-padding ">
+                          <option [selected]="selectedOpeningMinute == 00">00</option>
+                          <option [selected]="selectedOpeningMinute == 15">15</option>
+                          <option [selected]="selectedOpeningMinute == 30">30</option>
+                          <option [selected]="selectedOpeningMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section">
+                          <label class="select">
+                            <select formControlName="MondayOpeningHour" [hidden]="isMondayhidden" class="zero-padding">
+                              <option [selected]="selectedOpeningHour == 00">00</option>
+                              <option [selected]="selectedOpeningHour == 01">01</option>
+                              <option [selected]="selectedOpeningHour == 02">02</option>
+                              <option [selected]="selectedOpeningHour == 03">03</option>
+                              <option [selected]="selectedOpeningHour == 04">04</option>
+                              <option [selected]="selectedOpeningHour == 05">05</option>
+                              <option [selected]="selectedOpeningHour == 06">06</option>
+                              <option [selected]="selectedOpeningHour == 07">07</option>
+                              <option [selected]="selectedOpeningHour == 08">08</option>
+                              <option [selected]="selectedOpeningHour == 09">09</option>
+                              <option [selected]="selectedOpeningHour == 10">10</option>
+                              <option [selected]="selectedOpeningHour == 11">11</option>
+                              <option [selected]="selectedOpeningHour == 12">12</option>
+                              <option [selected]="selectedOpeningHour == 13">13</option>
+                              <option [selected]="selectedOpeningHour == 14">14</option>
+                              <option [selected]="selectedOpeningHour == 15">15</option>
+                              <option [selected]="selectedOpeningHour == 16">16</option>
+                              <option [selected]="selectedOpeningHour == 17">17</option>
+                              <option [selected]="selectedOpeningHour == 18">18</option>
+                              <option [selected]="selectedOpeningHour == 19">19</option>
+                              <option [selected]="selectedOpeningHour == 20">20</option>
+                              <option [selected]="selectedOpeningHour == 21">21</option>
+                              <option [selected]="selectedOpeningHour == 22">22</option>
+                              <option [selected]="selectedOpeningHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6  opening-section">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select formControlName="MondayOpeningMinute" [hidden]="isMondayhidden" class="zero-padding ">
+                              <option [selected]="selectedOpeningMinute == 00">00</option>
+                              <option [selected]="selectedOpeningMinute == 15">15</option>
+                              <option [selected]="selectedOpeningMinute == 30">30</option>
+                              <option [selected]="selectedOpeningMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td>
+                      <!--<select formControlName="MondayClosingHour" [hidden]="isMondayhidden" class="zero-padding">
+                          <option [selected]="selectedClosingHour == 00">00</option>
+                          <option [selected]="selectedClosingHour == 01">01</option>
+                          <option [selected]="selectedClosingHour == 02">02</option>
+                          <option [selected]="selectedClosingHour == 03">03</option>
+                          <option [selected]="selectedClosingHour == 04">04</option>
+                          <option [selected]="selectedClosingHour == 05">05</option>
+                          <option [selected]="selectedClosingHour == 06">06</option>
+                          <option [selected]="selectedClosingHour == 07">07</option>
+                          <option [selected]="selectedClosingHour == 08">08</option>
+                          <option [selected]="selectedClosingHour == 09">09</option>
+                          <option [selected]="selectedClosingHour == 10">10</option>
+                          <option [selected]="selectedClosingHour == 11">11</option>
+                          <option [selected]="selectedClosingHour == 12">12</option>
+                          <option [selected]="selectedClosingHour == 13">13</option>
+                          <option [selected]="selectedClosingHour == 14">14</option>
+                          <option [selected]="selectedClosingHour == 15">15</option>
+                          <option [selected]="selectedClosingHour == 16">16</option>
+                          <option [selected]="selectedClosingHour == 17">17</option>
+                          <option [selected]="selectedClosingHour == 18">18</option>
+                          <option [selected]="selectedClosingHour == 19">19</option>
+                          <option [selected]="selectedClosingHour == 20">20</option>
+                          <option [selected]="selectedClosingHour == 21">21</option>
+                          <option [selected]="selectedClosingHour == 22">22</option>
+                          <option [selected]="selectedClosingHour == 23">23</option>
+                      </select>
+
+                      <select formControlName="MondayClosingMinute" [hidden]="isMondayhidden" class="zero-padding">
+                          <option [selected]="selectedClosingMinute == 00">00</option>
+                          <option [selected]="selectedClosingMinute == 15">15</option>
+                          <option [selected]="selectedClosingMinute == 30">30</option>
+                          <option [selected]="selectedClosingMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select formControlName="MondayClosingHour" [hidden]="isMondayhidden" class="zero-padding">
+                              <option [selected]="selectedClosingHour == 00">00</option>
+                              <option [selected]="selectedClosingHour == 01">01</option>
+                              <option [selected]="selectedClosingHour == 02">02</option>
+                              <option [selected]="selectedClosingHour == 03">03</option>
+                              <option [selected]="selectedClosingHour == 04">04</option>
+                              <option [selected]="selectedClosingHour == 05">05</option>
+                              <option [selected]="selectedClosingHour == 06">06</option>
+                              <option [selected]="selectedClosingHour == 07">07</option>
+                              <option [selected]="selectedClosingHour == 08">08</option>
+                              <option [selected]="selectedClosingHour == 09">09</option>
+                              <option [selected]="selectedClosingHour == 10">10</option>
+                              <option [selected]="selectedClosingHour == 11">11</option>
+                              <option [selected]="selectedClosingHour == 12">12</option>
+                              <option [selected]="selectedClosingHour == 13">13</option>
+                              <option [selected]="selectedClosingHour == 14">14</option>
+                              <option [selected]="selectedClosingHour == 15">15</option>
+                              <option [selected]="selectedClosingHour == 16">16</option>
+                              <option [selected]="selectedClosingHour == 17">17</option>
+                              <option [selected]="selectedClosingHour == 18">18</option>
+                              <option [selected]="selectedClosingHour == 19">19</option>
+                              <option [selected]="selectedClosingHour == 20">20</option>
+                              <option [selected]="selectedClosingHour == 21">21</option>
+                              <option [selected]="selectedClosingHour == 22">22</option>
+                              <option [selected]="selectedClosingHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select formControlName="MondayClosingMinute" [hidden]="isMondayhidden" class="zero-padding ">
+                              <option [selected]="selectedClosingMinute == 00">00</option>
+                              <option [selected]="selectedClosingMinute == 15">15</option>
+                              <option [selected]="selectedClosingMinute == 30">30</option>
+                              <option [selected]="selectedClosingMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+
+                    </td>
+                    <td class="opening-td">
+                      <a style="cursor:pointer" (click)="ApplyChangesForAll('Monday')" [hidden]="isMondayhidden">Apply                   time to all</a>
+                      <span [hidden]="!isMondayhidden">sit back and relax-all day closed</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="opening-td">Tuesday</td>
+                    <td>
+                      <label class="checkbox zero-padding opening-margin opening-section"><input type="checkbox" formControlName="ckTuesday" (change)="onChange('ckTuesday',$event)" value="Tuesday" [checked]="true" /><i></i></label>
+                    </td>
+                    <td>
+                      <!--<select formControlName="TuesdayOpeningHour" [hidden]="isTuesdayhidden" class="zero-padding">
+                          <option [selected]="selectedOpeningHour == 00">00</option>
+                          <option [selected]="selectedOpeningHour == 01">01</option>
+                          <option [selected]="selectedOpeningHour == 02">02</option>
+                          <option [selected]="selectedOpeningHour == 03">03</option>
+                          <option [selected]="selectedOpeningHour == 04">04</option>
+                          <option [selected]="selectedOpeningHour == 05">05</option>
+                          <option [selected]="selectedOpeningHour == 06">06</option>
+                          <option [selected]="selectedOpeningHour == 07">07</option>
+                          <option [selected]="selectedOpeningHour == 08">08</option>
+                          <option [selected]="selectedOpeningHour == 09">09</option>
+                          <option [selected]="selectedOpeningHour == 10">10</option>
+                          <option [selected]="selectedOpeningHour == 11">11</option>
+                          <option [selected]="selectedOpeningHour == 12">12</option>
+                          <option [selected]="selectedOpeningHour == 13">13</option>
+                          <option [selected]="selectedOpeningHour == 14">14</option>
+                          <option [selected]="selectedOpeningHour == 15">15</option>
+                          <option [selected]="selectedOpeningHour == 16">16</option>
+                          <option [selected]="selectedOpeningHour == 17">17</option>
+                          <option [selected]="selectedOpeningHour == 18">18</option>
+                          <option [selected]="selectedOpeningHour == 19">19</option>
+                          <option [selected]="selectedOpeningHour == 20">20</option>
+                          <option [selected]="selectedOpeningHour == 21">21</option>
+                          <option [selected]="selectedOpeningHour == 22">22</option>
+                          <option [selected]="selectedOpeningHour == 23">23</option>
+                      </select>
+
+                      <select formControlName="TuesdayOpeningMinute" [hidden]="isTuesdayhidden" class="zero-padding">
+                          <option [selected]="selectedOpeningMinute == 00">00</option>
+                          <option [selected]="selectedOpeningMinute == 15">15</option>
+                          <option [selected]="selectedOpeningMinute == 30">30</option>
+                          <option [selected]="selectedOpeningMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select formControlName="TuesdayOpeningHour" [hidden]="isTuesdayhidden" class="zero-padding">
+                              <option [selected]="selectedOpeningHour == 00">00</option>
+                              <option [selected]="selectedOpeningHour == 01">01</option>
+                              <option [selected]="selectedOpeningHour == 02">02</option>
+                              <option [selected]="selectedOpeningHour == 03">03</option>
+                              <option [selected]="selectedOpeningHour == 04">04</option>
+                              <option [selected]="selectedOpeningHour == 05">05</option>
+                              <option [selected]="selectedOpeningHour == 06">06</option>
+                              <option [selected]="selectedOpeningHour == 07">07</option>
+                              <option [selected]="selectedOpeningHour == 08">08</option>
+                              <option [selected]="selectedOpeningHour == 09">09</option>
+                              <option [selected]="selectedOpeningHour == 10">10</option>
+                              <option [selected]="selectedOpeningHour == 11">11</option>
+                              <option [selected]="selectedOpeningHour == 12">12</option>
+                              <option [selected]="selectedOpeningHour == 13">13</option>
+                              <option [selected]="selectedOpeningHour == 14">14</option>
+                              <option [selected]="selectedOpeningHour == 15">15</option>
+                              <option [selected]="selectedOpeningHour == 16">16</option>
+                              <option [selected]="selectedOpeningHour == 17">17</option>
+                              <option [selected]="selectedOpeningHour == 18">18</option>
+                              <option [selected]="selectedOpeningHour == 19">19</option>
+                              <option [selected]="selectedOpeningHour == 20">20</option>
+                              <option [selected]="selectedOpeningHour == 21">21</option>
+                              <option [selected]="selectedOpeningHour == 22">22</option>
+                              <option [selected]="selectedOpeningHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select formControlName="TuesdayOpeningMinute" [hidden]="isTuesdayhidden" class="zero-padding">
+                              <option [selected]="selectedOpeningMinute == 00">00</option>
+                              <option [selected]="selectedOpeningMinute == 15">15</option>
+                              <option [selected]="selectedOpeningMinute == 30">30</option>
+                              <option [selected]="selectedOpeningMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td>
+                      <!--<select formControlName="TuesdayClosingHour" [hidden]="isTuesdayhidden" class="zero-padding">
+                          <option [selected]="selectedClosingHour == 00">00</option>
+                          <option [selected]="selectedClosingHour == 01">01</option>
+                          <option [selected]="selectedClosingHour == 02">02</option>
+                          <option [selected]="selectedClosingHour == 03">03</option>
+                          <option [selected]="selectedClosingHour == 04">04</option>
+                          <option [selected]="selectedClosingHour == 05">05</option>
+                          <option [selected]="selectedClosingHour == 06">06</option>
+                          <option [selected]="selectedClosingHour == 07">07</option>
+                          <option [selected]="selectedClosingHour == 08">08</option>
+                          <option [selected]="selectedClosingHour == 09">09</option>
+                          <option [selected]="selectedClosingHour == 10">10</option>
+                          <option [selected]="selectedClosingHour == 11">11</option>
+                          <option [selected]="selectedClosingHour == 12">12</option>
+                          <option [selected]="selectedClosingHour == 13">13</option>
+                          <option [selected]="selectedClosingHour == 14">14</option>
+                          <option [selected]="selectedClosingHour == 15">15</option>
+                          <option [selected]="selectedClosingHour == 16">16</option>
+                          <option [selected]="selectedClosingHour == 17">17</option>
+                          <option [selected]="selectedClosingHour == 18">18</option>
+                          <option [selected]="selectedClosingHour == 19">19</option>
+                          <option [selected]="selectedClosingHour == 20">20</option>
+                          <option [selected]="selectedClosingHour == 21">21</option>
+                          <option [selected]="selectedClosingHour == 22">22</option>
+                          <option [selected]="selectedClosingHour == 23">23</option>
+                      </select>
+
+                      <select formControlName="TuesdayClosingMinute" [hidden]="isTuesdayhidden" class="zero-padding">
+                          <option [selected]="selectedClosingMinute == 00">00</option>
+                          <option [selected]="selectedClosingMinute == 15">15</option>
+                          <option [selected]="selectedClosingMinute == 30">30</option>
+                          <option [selected]="selectedClosingMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select formControlName="TuesdayClosingHour" [hidden]="isTuesdayhidden" class="zero-padding">
+                              <option [selected]="selectedClosingHour == 00">00</option>
+                              <option [selected]="selectedClosingHour == 01">01</option>
+                              <option [selected]="selectedClosingHour == 02">02</option>
+                              <option [selected]="selectedClosingHour == 03">03</option>
+                              <option [selected]="selectedClosingHour == 04">04</option>
+                              <option [selected]="selectedClosingHour == 05">05</option>
+                              <option [selected]="selectedClosingHour == 06">06</option>
+                              <option [selected]="selectedClosingHour == 07">07</option>
+                              <option [selected]="selectedClosingHour == 08">08</option>
+                              <option [selected]="selectedClosingHour == 09">09</option>
+                              <option [selected]="selectedClosingHour == 10">10</option>
+                              <option [selected]="selectedClosingHour == 11">11</option>
+                              <option [selected]="selectedClosingHour == 12">12</option>
+                              <option [selected]="selectedClosingHour == 13">13</option>
+                              <option [selected]="selectedClosingHour == 14">14</option>
+                              <option [selected]="selectedClosingHour == 15">15</option>
+                              <option [selected]="selectedClosingHour == 16">16</option>
+                              <option [selected]="selectedClosingHour == 17">17</option>
+                              <option [selected]="selectedClosingHour == 18">18</option>
+                              <option [selected]="selectedClosingHour == 19">19</option>
+                              <option [selected]="selectedClosingHour == 20">20</option>
+                              <option [selected]="selectedClosingHour == 21">21</option>
+                              <option [selected]="selectedClosingHour == 22">22</option>
+                              <option [selected]="selectedClosingHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select formControlName="TuesdayClosingMinute" [hidden]="isTuesdayhidden" class="zero-padding">
+                              <option [selected]="selectedClosingMinute == 00">00</option>
+                              <option [selected]="selectedClosingMinute == 15">15</option>
+                              <option [selected]="selectedClosingMinute == 30">30</option>
+                              <option [selected]="selectedClosingMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td class="opening-td">
+                      <a style="cursor:pointer" (click)="ApplyChangesForAll('Tuesday')" [hidden]="isTuesdayhidden">Apply time to all</a>
+                      <span [hidden]="!isTuesdayhidden">sit back and relax-all day closed</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="opening-td">Wednesday</td>
+                    <td><label class="checkbox zero-padding opening-margin opening-section  "><input type="checkbox" formControlName="ckWednesday" (change)="onChange('ckWednesday',$event)" value="Wednesday" [checked]="true" /><i></i></label></td>
+                    <td>
+                      <!--<select formControlName="WednesdayOpeningHour" [hidden]="isWednesdayhidden" class="zero-padding">
+                          <option [selected]="selectedOpeningHour == 00">00</option>
+                          <option [selected]="selectedOpeningHour == 01">01</option>
+                          <option [selected]="selectedOpeningHour == 02">02</option>
+                          <option [selected]="selectedOpeningHour == 03">03</option>
+                          <option [selected]="selectedOpeningHour == 04">04</option>
+                          <option [selected]="selectedOpeningHour == 05">05</option>
+                          <option [selected]="selectedOpeningHour == 06">06</option>
+                          <option [selected]="selectedOpeningHour == 07">07</option>
+                          <option [selected]="selectedOpeningHour == 08">08</option>
+                          <option [selected]="selectedOpeningHour == 09">09</option>
+                          <option [selected]="selectedOpeningHour == 10">10</option>
+                          <option [selected]="selectedOpeningHour == 11">11</option>
+                          <option [selected]="selectedOpeningHour == 12">12</option>
+                          <option [selected]="selectedOpeningHour == 13">13</option>
+                          <option [selected]="selectedOpeningHour == 14">14</option>
+                          <option [selected]="selectedOpeningHour == 15">15</option>
+                          <option [selected]="selectedOpeningHour == 16">16</option>
+                          <option [selected]="selectedOpeningHour == 17">17</option>
+                          <option [selected]="selectedOpeningHour == 18">18</option>
+                          <option [selected]="selectedOpeningHour == 19">19</option>
+                          <option [selected]="selectedOpeningHour == 20">20</option>
+                          <option [selected]="selectedOpeningHour == 21">21</option>
+                          <option [selected]="selectedOpeningHour == 22">22</option>
+                          <option [selected]="selectedOpeningHour == 23">23</option>
+                      </select>
+
+                      <select formControlName="WednesdayOpeningMinute" [hidden]="isWednesdayhidden" class="zero-padding">
+                          <option [selected]="selectedOpeningMinute == 00">00</option>
+                          <option [selected]="selectedOpeningMinute == 15">15</option>
+                          <option [selected]="selectedOpeningMinute == 30">30</option>
+                          <option [selected]="selectedOpeningMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select formControlName="WednesdayOpeningHour" [hidden]="isMondayhidden" class="zero-padding">
+                              <option [selected]="selectedOpeningHour == 00">00</option>
+                              <option [selected]="selectedOpeningHour == 01">01</option>
+                              <option [selected]="selectedOpeningHour == 02">02</option>
+                              <option [selected]="selectedOpeningHour == 03">03</option>
+                              <option [selected]="selectedOpeningHour == 04">04</option>
+                              <option [selected]="selectedOpeningHour == 05">05</option>
+                              <option [selected]="selectedOpeningHour == 06">06</option>
+                              <option [selected]="selectedOpeningHour == 07">07</option>
+                              <option [selected]="selectedOpeningHour == 08">08</option>
+                              <option [selected]="selectedOpeningHour == 09">09</option>
+                              <option [selected]="selectedOpeningHour == 10">10</option>
+                              <option [selected]="selectedOpeningHour == 11">11</option>
+                              <option [selected]="selectedOpeningHour == 12">12</option>
+                              <option [selected]="selectedOpeningHour == 13">13</option>
+                              <option [selected]="selectedOpeningHour == 14">14</option>
+                              <option [selected]="selectedOpeningHour == 15">15</option>
+                              <option [selected]="selectedOpeningHour == 16">16</option>
+                              <option [selected]="selectedOpeningHour == 17">17</option>
+                              <option [selected]="selectedOpeningHour == 18">18</option>
+                              <option [selected]="selectedOpeningHour == 19">19</option>
+                              <option [selected]="selectedOpeningHour == 20">20</option>
+                              <option [selected]="selectedOpeningHour == 21">21</option>
+                              <option [selected]="selectedOpeningHour == 22">22</option>
+                              <option [selected]="selectedOpeningHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select formControlName="WednesdayOpeningMinute" [hidden]="isMondayhidden" class="zero-padding ">
+                              <option [selected]="selectedOpeningMinute == 00">00</option>
+                              <option [selected]="selectedOpeningMinute == 15">15</option>
+                              <option [selected]="selectedOpeningMinute == 30">30</option>
+                              <option [selected]="selectedOpeningMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td>
+                      <!--<select formControlName="WednesdayClosingHour" [hidden]="isWednesdayhidden" class="zero-padding">
+                          <option [selected]="selectedClosingHour == 00">00</option>
+                          <option [selected]="selectedClosingHour == 01">01</option>
+                          <option [selected]="selectedClosingHour == 02">02</option>
+                          <option [selected]="selectedClosingHour == 03">03</option>
+                          <option [selected]="selectedClosingHour == 04">04</option>
+                          <option [selected]="selectedClosingHour == 05">05</option>
+                          <option [selected]="selectedClosingHour == 06">06</option>
+                          <option [selected]="selectedClosingHour == 07">07</option>
+                          <option [selected]="selectedClosingHour == 08">08</option>
+                          <option [selected]="selectedClosingHour == 09">09</option>
+                          <option [selected]="selectedClosingHour == 10">10</option>
+                          <option [selected]="selectedClosingHour == 11">11</option>
+                          <option [selected]="selectedClosingHour == 12">12</option>
+                          <option [selected]="selectedClosingHour == 13">13</option>
+                          <option [selected]="selectedClosingHour == 14">14</option>
+                          <option [selected]="selectedClosingHour == 15">15</option>
+                          <option [selected]="selectedClosingHour == 16">16</option>
+                          <option [selected]="selectedClosingHour == 17">17</option>
+                          <option [selected]="selectedClosingHour == 18">18</option>
+                          <option [selected]="selectedClosingHour == 19">19</option>
+                          <option [selected]="selectedClosingHour == 20">20</option>
+                          <option [selected]="selectedClosingHour == 21">21</option>
+                          <option [selected]="selectedClosingHour == 22">22</option>
+                          <option [selected]="selectedClosingHour == 23">23</option>
+                      </select>
+
+                      <select formControlName="WednesdayClosingMinute" [hidden]="isWednesdayhidden" class="zero-padding">
+                          <option [selected]="selectedClosingMinute == 00">00</option>
+                          <option [selected]="selectedClosingMinute == 15">15</option>
+                          <option [selected]="selectedClosingMinute == 30">30</option>
+                          <option [selected]="selectedClosingMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select formControlName="WednesdayClosingHour" [hidden]="isWednesdayhidden" class="zero-padding">
+                              <option [selected]="selectedClosingHour == 00">00</option>
+                              <option [selected]="selectedClosingHour == 01">01</option>
+                              <option [selected]="selectedClosingHour == 02">02</option>
+                              <option [selected]="selectedClosingHour == 03">03</option>
+                              <option [selected]="selectedClosingHour == 04">04</option>
+                              <option [selected]="selectedClosingHour == 05">05</option>
+                              <option [selected]="selectedClosingHour == 06">06</option>
+                              <option [selected]="selectedClosingHour == 07">07</option>
+                              <option [selected]="selectedClosingHour == 08">08</option>
+                              <option [selected]="selectedClosingHour == 09">09</option>
+                              <option [selected]="selectedClosingHour == 10">10</option>
+                              <option [selected]="selectedClosingHour == 11">11</option>
+                              <option [selected]="selectedClosingHour == 12">12</option>
+                              <option [selected]="selectedClosingHour == 13">13</option>
+                              <option [selected]="selectedClosingHour == 14">14</option>
+                              <option [selected]="selectedClosingHour == 15">15</option>
+                              <option [selected]="selectedClosingHour == 16">16</option>
+                              <option [selected]="selectedClosingHour == 17">17</option>
+                              <option [selected]="selectedClosingHour == 18">18</option>
+                              <option [selected]="selectedClosingHour == 19">19</option>
+                              <option [selected]="selectedClosingHour == 20">20</option>
+                              <option [selected]="selectedClosingHour == 21">21</option>
+                              <option [selected]="selectedClosingHour == 22">22</option>
+                              <option [selected]="selectedClosingHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select formControlName="WednesdayClosingMinute" [hidden]="isWednesdayhidden" class="zero-padding">
+                              <option [selected]="selectedClosingMinute == 00">00</option>
+                              <option [selected]="selectedClosingMinute == 15">15</option>
+                              <option [selected]="selectedClosingMinute == 30">30</option>
+                              <option [selected]="selectedClosingMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td class="opening-td">
+                      <a style="cursor:pointer" (click)="ApplyChangesForAll('Wednesday')" [hidden]="isWednesdayhidden">Apply time to all</a>
+                      <span [hidden]="!isWednesdayhidden">sit back and relax-all day closed</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="opening-td">Thursday</td>
+                    <td><label class="checkbox zero-padding opening-margin opening-section  "><input type="checkbox" formControlName="ckThursday" (change)="onChange('ckThursday',$event)" value="Thursday" [checked]="true" /><i></i></label></td>
+                    <td>
+                      <!--<select formControlName="ThursdayOpeningHour" [hidden]="isThursdayhidden" class="zero-padding">
+                          <option [selected]="selectedOpeningHour == 00">00</option>
+                          <option [selected]="selectedOpeningHour == 01">01</option>
+                          <option [selected]="selectedOpeningHour == 02">02</option>
+                          <option [selected]="selectedOpeningHour == 03">03</option>
+                          <option [selected]="selectedOpeningHour == 04">04</option>
+                          <option [selected]="selectedOpeningHour == 05">05</option>
+                          <option [selected]="selectedOpeningHour == 06">06</option>
+                          <option [selected]="selectedOpeningHour == 07">07</option>
+                          <option [selected]="selectedOpeningHour == 08">08</option>
+                          <option [selected]="selectedOpeningHour == 09">09</option>
+                          <option [selected]="selectedOpeningHour == 10">10</option>
+                          <option [selected]="selectedOpeningHour == 11">11</option>
+                          <option [selected]="selectedOpeningHour == 12">12</option>
+                          <option [selected]="selectedOpeningHour == 13">13</option>
+                          <option [selected]="selectedOpeningHour == 14">14</option>
+                          <option [selected]="selectedOpeningHour == 15">15</option>
+                          <option [selected]="selectedOpeningHour == 16">16</option>
+                          <option [selected]="selectedOpeningHour == 17">17</option>
+                          <option [selected]="selectedOpeningHour == 18">18</option>
+                          <option [selected]="selectedOpeningHour == 19">19</option>
+                          <option [selected]="selectedOpeningHour == 20">20</option>
+                          <option [selected]="selectedOpeningHour == 21">21</option>
+                          <option [selected]="selectedOpeningHour == 22">22</option>
+                          <option [selected]="selectedOpeningHour == 23">23</option>
+                      </select>
+
+                      <select formControlName="ThursdayOpeningMinute" [hidden]="isThursdayhidden" class="zero-padding">
+                          <option [selected]="selectedOpeningMinute == 00">00</option>
+                          <option [selected]="selectedOpeningMinute == 15">15</option>
+                          <option [selected]="selectedOpeningMinute == 30">30</option>
+                          <option [selected]="selectedOpeningMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select formControlName="ThursdayOpeningHour" [hidden]="isThursdayhidden" class="zero-padding">
+                              <option [selected]="selectedOpeningHour == 00">00</option>
+                              <option [selected]="selectedOpeningHour == 01">01</option>
+                              <option [selected]="selectedOpeningHour == 02">02</option>
+                              <option [selected]="selectedOpeningHour == 03">03</option>
+                              <option [selected]="selectedOpeningHour == 04">04</option>
+                              <option [selected]="selectedOpeningHour == 05">05</option>
+                              <option [selected]="selectedOpeningHour == 06">06</option>
+                              <option [selected]="selectedOpeningHour == 07">07</option>
+                              <option [selected]="selectedOpeningHour == 08">08</option>
+                              <option [selected]="selectedOpeningHour == 09">09</option>
+                              <option [selected]="selectedOpeningHour == 10">10</option>
+                              <option [selected]="selectedOpeningHour == 11">11</option>
+                              <option [selected]="selectedOpeningHour == 12">12</option>
+                              <option [selected]="selectedOpeningHour == 13">13</option>
+                              <option [selected]="selectedOpeningHour == 14">14</option>
+                              <option [selected]="selectedOpeningHour == 15">15</option>
+                              <option [selected]="selectedOpeningHour == 16">16</option>
+                              <option [selected]="selectedOpeningHour == 17">17</option>
+                              <option [selected]="selectedOpeningHour == 18">18</option>
+                              <option [selected]="selectedOpeningHour == 19">19</option>
+                              <option [selected]="selectedOpeningHour == 20">20</option>
+                              <option [selected]="selectedOpeningHour == 21">21</option>
+                              <option [selected]="selectedOpeningHour == 22">22</option>
+                              <option [selected]="selectedOpeningHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select formControlName="ThursdayOpeningMinute" [hidden]="isThursdayhidden" class="zero-padding">
+                              <option [selected]="selectedOpeningMinute == 00">00</option>
+                              <option [selected]="selectedOpeningMinute == 15">15</option>
+                              <option [selected]="selectedOpeningMinute == 30">30</option>
+                              <option [selected]="selectedOpeningMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td>
+                      <!--<select formControlName="ThursdayClosingHour" [hidden]="isThursdayhidden" class="zero-padding">
+                          <option [selected]="selectedClosingHour == 00">00</option>
+                          <option [selected]="selectedClosingHour == 01">01</option>
+                          <option [selected]="selectedClosingHour == 02">02</option>
+                          <option [selected]="selectedClosingHour == 03">03</option>
+                          <option [selected]="selectedClosingHour == 04">04</option>
+                          <option [selected]="selectedClosingHour == 05">05</option>
+                          <option [selected]="selectedClosingHour == 06">06</option>
+                          <option [selected]="selectedClosingHour == 07">07</option>
+                          <option [selected]="selectedClosingHour == 08">08</option>
+                          <option [selected]="selectedClosingHour == 09">09</option>
+                          <option [selected]="selectedClosingHour == 10">10</option>
+                          <option [selected]="selectedClosingHour == 11">11</option>
+                          <option [selected]="selectedClosingHour == 12">12</option>
+                          <option [selected]="selectedClosingHour == 13">13</option>
+                          <option [selected]="selectedClosingHour == 14">14</option>
+                          <option [selected]="selectedClosingHour == 15">15</option>
+                          <option [selected]="selectedClosingHour == 16">16</option>
+                          <option [selected]="selectedClosingHour == 17">17</option>
+                          <option [selected]="selectedClosingHour == 18">18</option>
+                          <option [selected]="selectedClosingHour == 19">19</option>
+                          <option [selected]="selectedClosingHour == 20">20</option>
+                          <option [selected]="selectedClosingHour == 21">21</option>
+                          <option [selected]="selectedClosingHour == 22">22</option>
+                          <option [selected]="selectedClosingHour == 23">23</option>
+                      </select>
+
+                      <select formControlName="ThursdayClosingMinute" [hidden]="isThursdayhidden" class="zero-padding">
+                          <option [selected]="selectedClosingMinute == 00">00</option>
+                          <option [selected]="selectedClosingMinute == 15">15</option>
+                          <option [selected]="selectedClosingMinute == 30">30</option>
+                          <option [selected]="selectedClosingMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select formControlName="ThursdayClosingHour" [hidden]="isThursdayhidden" class="zero-padding">
+                              <option [selected]="selectedClosingHour == 00">00</option>
+                              <option [selected]="selectedClosingHour == 01">01</option>
+                              <option [selected]="selectedClosingHour == 02">02</option>
+                              <option [selected]="selectedClosingHour == 03">03</option>
+                              <option [selected]="selectedClosingHour == 04">04</option>
+                              <option [selected]="selectedClosingHour == 05">05</option>
+                              <option [selected]="selectedClosingHour == 06">06</option>
+                              <option [selected]="selectedClosingHour == 07">07</option>
+                              <option [selected]="selectedClosingHour == 08">08</option>
+                              <option [selected]="selectedClosingHour == 09">09</option>
+                              <option [selected]="selectedClosingHour == 10">10</option>
+                              <option [selected]="selectedClosingHour == 11">11</option>
+                              <option [selected]="selectedClosingHour == 12">12</option>
+                              <option [selected]="selectedClosingHour == 13">13</option>
+                              <option [selected]="selectedClosingHour == 14">14</option>
+                              <option [selected]="selectedClosingHour == 15">15</option>
+                              <option [selected]="selectedClosingHour == 16">16</option>
+                              <option [selected]="selectedClosingHour == 17">17</option>
+                              <option [selected]="selectedClosingHour == 18">18</option>
+                              <option [selected]="selectedClosingHour == 19">19</option>
+                              <option [selected]="selectedClosingHour == 20">20</option>
+                              <option [selected]="selectedClosingHour == 21">21</option>
+                              <option [selected]="selectedClosingHour == 22">22</option>
+                              <option [selected]="selectedClosingHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select formControlName="ThursdayClosingMinute" [hidden]="isThursdayhidden" class="zero-padding">
+                              <option [selected]="selectedClosingMinute == 00">00</option>
+                              <option [selected]="selectedClosingMinute == 15">15</option>
+                              <option [selected]="selectedClosingMinute == 30">30</option>
+                              <option [selected]="selectedClosingMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td class="opening-td">
+                      <a style="cursor:pointer" (click)="ApplyChangesForAll('Thursday')" [hidden]="isThursdayhidden">Apply time to all</a>
+                      <span [hidden]="!isThursdayhidden">sit back and relax-all day closed</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="opening-td">Friday</td>
+                    <td align="center"><label class="checkbox zero-padding opening-margin opening-section  "><input type="checkbox" formControlName="ckFriday" (change)="onChange('ckFriday',$event)" value="Friday" [checked]="true" /><i></i></label></td>
+                    <td>
+                      <!--<select formControlName="FridayOpeningHour" [hidden]="isFridayhidden" class="zero-padding">
+                          <option [selected]="selectedOpeningHour == 00">00</option>
+                          <option [selected]="selectedOpeningHour == 01">01</option>
+                          <option [selected]="selectedOpeningHour == 02">02</option>
+                          <option [selected]="selectedOpeningHour == 03">03</option>
+                          <option [selected]="selectedOpeningHour == 04">04</option>
+                          <option [selected]="selectedOpeningHour == 05">05</option>
+                          <option [selected]="selectedOpeningHour == 06">06</option>
+                          <option [selected]="selectedOpeningHour == 07">07</option>
+                          <option [selected]="selectedOpeningHour == 08">08</option>
+                          <option [selected]="selectedOpeningHour == 09">09</option>
+                          <option [selected]="selectedOpeningHour == 10">10</option>
+                          <option [selected]="selectedOpeningHour == 11">11</option>
+                          <option [selected]="selectedOpeningHour == 12">12</option>
+                          <option [selected]="selectedOpeningHour == 13">13</option>
+                          <option [selected]="selectedOpeningHour == 14">14</option>
+                          <option [selected]="selectedOpeningHour == 15">15</option>
+                          <option [selected]="selectedOpeningHour == 16">16</option>
+                          <option [selected]="selectedOpeningHour == 17">17</option>
+                          <option [selected]="selectedOpeningHour == 18">18</option>
+                          <option [selected]="selectedOpeningHour == 19">19</option>
+                          <option [selected]="selectedOpeningHour == 20">20</option>
+                          <option [selected]="selectedOpeningHour == 21">21</option>
+                          <option [selected]="selectedOpeningHour == 22">22</option>
+                          <option [selected]="selectedOpeningHour == 23">23</option>
+                      </select>
+
+                      <select formControlName="FridayOpeningMinute" [hidden]="isFridayhidden" class="zero-padding">
+                          <option [selected]="selectedOpeningMinute == 00">00</option>
+                          <option [selected]="selectedOpeningMinute == 15">15</option>
+                          <option [selected]="selectedOpeningMinute == 30">30</option>
+                          <option [selected]="selectedOpeningMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select formControlName="FridayOpeningHour" [hidden]="isFridayhidden" class="zero-padding">
+                              <option [selected]="selectedOpeningHour == 00">00</option>
+                              <option [selected]="selectedOpeningHour == 01">01</option>
+                              <option [selected]="selectedOpeningHour == 02">02</option>
+                              <option [selected]="selectedOpeningHour == 03">03</option>
+                              <option [selected]="selectedOpeningHour == 04">04</option>
+                              <option [selected]="selectedOpeningHour == 05">05</option>
+                              <option [selected]="selectedOpeningHour == 06">06</option>
+                              <option [selected]="selectedOpeningHour == 07">07</option>
+                              <option [selected]="selectedOpeningHour == 08">08</option>
+                              <option [selected]="selectedOpeningHour == 09">09</option>
+                              <option [selected]="selectedOpeningHour == 10">10</option>
+                              <option [selected]="selectedOpeningHour == 11">11</option>
+                              <option [selected]="selectedOpeningHour == 12">12</option>
+                              <option [selected]="selectedOpeningHour == 13">13</option>
+                              <option [selected]="selectedOpeningHour == 14">14</option>
+                              <option [selected]="selectedOpeningHour == 15">15</option>
+                              <option [selected]="selectedOpeningHour == 16">16</option>
+                              <option [selected]="selectedOpeningHour == 17">17</option>
+                              <option [selected]="selectedOpeningHour == 18">18</option>
+                              <option [selected]="selectedOpeningHour == 19">19</option>
+                              <option [selected]="selectedOpeningHour == 20">20</option>
+                              <option [selected]="selectedOpeningHour == 21">21</option>
+                              <option [selected]="selectedOpeningHour == 22">22</option>
+                              <option [selected]="selectedOpeningHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select formControlName="FridayOpeningMinute" [hidden]="isFridayhidden" class="zero-padding">
+                              <option [selected]="selectedOpeningMinute == 00">00</option>
+                              <option [selected]="selectedOpeningMinute == 15">15</option>
+                              <option [selected]="selectedOpeningMinute == 30">30</option>
+                              <option [selected]="selectedOpeningMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td>
+                      <!--<select formControlName="FridayClosingHour" [hidden]="isFridayhidden" class="zero-padding">
+                          <option [selected]="selectedClosingHour == 00">00</option>
+                          <option [selected]="selectedClosingHour == 01">01</option>
+                          <option [selected]="selectedClosingHour == 02">02</option>
+                          <option [selected]="selectedClosingHour == 03">03</option>
+                          <option [selected]="selectedClosingHour == 04">04</option>
+                          <option [selected]="selectedClosingHour == 05">05</option>
+                          <option [selected]="selectedClosingHour == 06">06</option>
+                          <option [selected]="selectedClosingHour == 07">07</option>
+                          <option [selected]="selectedClosingHour == 08">08</option>
+                          <option [selected]="selectedClosingHour == 09">09</option>
+                          <option [selected]="selectedClosingHour == 10">10</option>
+                          <option [selected]="selectedClosingHour == 11">11</option>
+                          <option [selected]="selectedClosingHour == 12">12</option>
+                          <option [selected]="selectedClosingHour == 13">13</option>
+                          <option [selected]="selectedClosingHour == 14">14</option>
+                          <option [selected]="selectedClosingHour == 15">15</option>
+                          <option [selected]="selectedClosingHour == 16">16</option>
+                          <option [selected]="selectedClosingHour == 17">17</option>
+                          <option [selected]="selectedClosingHour == 18">18</option>
+                          <option [selected]="selectedClosingHour == 19">19</option>
+                          <option [selected]="selectedClosingHour == 20">20</option>
+                          <option [selected]="selectedClosingHour == 21">21</option>
+                          <option [selected]="selectedClosingHour == 22">22</option>
+                          <option [selected]="selectedClosingHour == 23">23</option>
+                      </select>
+
+                      <select formControlName="FridayClosingMinute" [hidden]="isFridayhidden" class="zero-padding">
+                          <option [selected]="selectedClosingMinute == 00">00</option>
+                          <option [selected]="selectedClosingMinute == 15">15</option>
+                          <option [selected]="selectedClosingMinute == 30">30</option>
+                          <option [selected]="selectedClosingMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select formControlName="FridayClosingHour" [hidden]="isFridayhidden" class="zero-padding">
+                              <option [selected]="selectedClosingHour == 00">00</option>
+                              <option [selected]="selectedClosingHour == 01">01</option>
+                              <option [selected]="selectedClosingHour == 02">02</option>
+                              <option [selected]="selectedClosingHour == 03">03</option>
+                              <option [selected]="selectedClosingHour == 04">04</option>
+                              <option [selected]="selectedClosingHour == 05">05</option>
+                              <option [selected]="selectedClosingHour == 06">06</option>
+                              <option [selected]="selectedClosingHour == 07">07</option>
+                              <option [selected]="selectedClosingHour == 08">08</option>
+                              <option [selected]="selectedClosingHour == 09">09</option>
+                              <option [selected]="selectedClosingHour == 10">10</option>
+                              <option [selected]="selectedClosingHour == 11">11</option>
+                              <option [selected]="selectedClosingHour == 12">12</option>
+                              <option [selected]="selectedClosingHour == 13">13</option>
+                              <option [selected]="selectedClosingHour == 14">14</option>
+                              <option [selected]="selectedClosingHour == 15">15</option>
+                              <option [selected]="selectedClosingHour == 16">16</option>
+                              <option [selected]="selectedClosingHour == 17">17</option>
+                              <option [selected]="selectedClosingHour == 18">18</option>
+                              <option [selected]="selectedClosingHour == 19">19</option>
+                              <option [selected]="selectedClosingHour == 20">20</option>
+                              <option [selected]="selectedClosingHour == 21">21</option>
+                              <option [selected]="selectedClosingHour == 22">22</option>
+                              <option [selected]="selectedClosingHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select formControlName="FridayClosingMinute" [hidden]="isFridayhidden" class="zero-padding">
+                              <option [selected]="selectedClosingMinute == 00">00</option>
+                              <option [selected]="selectedClosingMinute == 15">15</option>
+                              <option [selected]="selectedClosingMinute == 30">30</option>
+                              <option [selected]="selectedClosingMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td class="opening-td">
+                      <a style="cursor:pointer" (click)="ApplyChangesForAll('Friday')" [hidden]="isFridayhidden">Apply time to all</a>
+                      <span [hidden]="!isFridayhidden">sit back and relax-all day closed</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="opening-td">Saturday</td>
+                    <td align="center"><label class="checkbox zero-padding opening-margin opening-section  "><input type="checkbox" formControlName="ckSaturday" (change)="onChange('ckSaturday',$event)" value="Saturday" [checked]="false" /><i></i></label></td>
+                    <td>
+                      <!--<select [hidden]="isSaturdayhidden" formControlName="SaturdayOpeningHour" class="zero-padding">
+                          <option [selected]="selectedOpeningHour == 00">00</option>
+                          <option [selected]="selectedOpeningHour == 01">01</option>
+                          <option [selected]="selectedOpeningHour == 02">02</option>
+                          <option [selected]="selectedOpeningHour == 03">03</option>
+                          <option [selected]="selectedOpeningHour == 04">04</option>
+                          <option [selected]="selectedOpeningHour == 05">05</option>
+                          <option [selected]="selectedOpeningHour == 06">06</option>
+                          <option [selected]="selectedOpeningHour == 07">07</option>
+                          <option [selected]="selectedOpeningHour == 08">08</option>
+                          <option [selected]="selectedOpeningHour == 09">09</option>
+                          <option [selected]="selectedOpeningHour == 10">10</option>
+                          <option [selected]="selectedOpeningHour == 11">11</option>
+                          <option [selected]="selectedOpeningHour == 12">12</option>
+                          <option [selected]="selectedOpeningHour == 13">13</option>
+                          <option [selected]="selectedOpeningHour == 14">14</option>
+                          <option [selected]="selectedOpeningHour == 15">15</option>
+                          <option [selected]="selectedOpeningHour == 16">16</option>
+                          <option [selected]="selectedOpeningHour == 17">17</option>
+                          <option [selected]="selectedOpeningHour == 18">18</option>
+                          <option [selected]="selectedOpeningHour == 19">19</option>
+                          <option [selected]="selectedOpeningHour == 20">20</option>
+                          <option [selected]="selectedOpeningHour == 21">21</option>
+                          <option [selected]="selectedOpeningHour == 22">22</option>
+                          <option [selected]="selectedOpeningHour == 23">23</option>
+                      </select>
+
+                      <select [hidden]="isSaturdayhidden" formControlName="SaturdayOpeningMinute" class="zero-padding">
+                          <option [selected]="selectedOpeningMinute == 00">00</option>
+                          <option [selected]="selectedOpeningMinute == 15">15</option>
+                          <option [selected]="selectedOpeningMinute == 30">30</option>
+                          <option [selected]="selectedOpeningMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select [hidden]="isSaturdayhidden" formControlName="SaturdayOpeningHour" class="zero-padding">
+                              <option [selected]="selectedOpeningHour == 00">00</option>
+                              <option [selected]="selectedOpeningHour == 01">01</option>
+                              <option [selected]="selectedOpeningHour == 02">02</option>
+                              <option [selected]="selectedOpeningHour == 03">03</option>
+                              <option [selected]="selectedOpeningHour == 04">04</option>
+                              <option [selected]="selectedOpeningHour == 05">05</option>
+                              <option [selected]="selectedOpeningHour == 06">06</option>
+                              <option [selected]="selectedOpeningHour == 07">07</option>
+                              <option [selected]="selectedOpeningHour == 08">08</option>
+                              <option [selected]="selectedOpeningHour == 09">09</option>
+                              <option [selected]="selectedOpeningHour == 10">10</option>
+                              <option [selected]="selectedOpeningHour == 11">11</option>
+                              <option [selected]="selectedOpeningHour == 12">12</option>
+                              <option [selected]="selectedOpeningHour == 13">13</option>
+                              <option [selected]="selectedOpeningHour == 14">14</option>
+                              <option [selected]="selectedOpeningHour == 15">15</option>
+                              <option [selected]="selectedOpeningHour == 16">16</option>
+                              <option [selected]="selectedOpeningHour == 17">17</option>
+                              <option [selected]="selectedOpeningHour == 18">18</option>
+                              <option [selected]="selectedOpeningHour == 19">19</option>
+                              <option [selected]="selectedOpeningHour == 20">20</option>
+                              <option [selected]="selectedOpeningHour == 21">21</option>
+                              <option [selected]="selectedOpeningHour == 22">22</option>
+                              <option [selected]="selectedOpeningHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select [hidden]="isSaturdayhidden" formControlName="SaturdayOpeningMinute" class="zero-padding">
+                              <option [selected]="selectedOpeningMinute == 00">00</option>
+                              <option [selected]="selectedOpeningMinute == 15">15</option>
+                              <option [selected]="selectedOpeningMinute == 30">30</option>
+                              <option [selected]="selectedOpeningMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td>
+                      <!--<select [hidden]="isSaturdayhidden" formControlName="SaturdayClosingHour" class="zero-padding">
+                          <option [selected]="selectedClosingHour == 00">00</option>
+                          <option [selected]="selectedClosingHour == 01">01</option>
+                          <option [selected]="selectedClosingHour == 02">02</option>
+                          <option [selected]="selectedClosingHour == 03">03</option>
+                          <option [selected]="selectedClosingHour == 04">04</option>
+                          <option [selected]="selectedClosingHour == 05">05</option>
+                          <option [selected]="selectedClosingHour == 06">06</option>
+                          <option [selected]="selectedClosingHour == 07">07</option>
+                          <option [selected]="selectedClosingHour == 08">08</option>
+                          <option [selected]="selectedClosingHour == 09">09</option>
+                          <option [selected]="selectedClosingHour == 10">10</option>
+                          <option [selected]="selectedClosingHour == 11">11</option>
+                          <option [selected]="selectedClosingHour == 12">12</option>
+                          <option [selected]="selectedClosingHour == 13">13</option>
+                          <option [selected]="selectedClosingHour == 14">14</option>
+                          <option [selected]="selectedClosingHour == 15">15</option>
+                          <option [selected]="selectedClosingHour == 16">16</option>
+                          <option [selected]="selectedClosingHour == 17">17</option>
+                          <option [selected]="selectedClosingHour == 18">18</option>
+                          <option [selected]="selectedClosingHour == 19">19</option>
+                          <option [selected]="selectedClosingHour == 20">20</option>
+                          <option [selected]="selectedClosingHour == 21">21</option>
+                          <option [selected]="selectedClosingHour == 22">22</option>
+                          <option [selected]="selectedClosingHour == 23">23</option>
+                      </select>
+
+                      <select [hidden]="isSaturdayhidden" formControlName="SaturdayClosingMinute" class="zero-padding">
+                          <option [selected]="selectedClosingMinute == 00">00</option>
+                          <option [selected]="selectedClosingMinute == 15">15</option>
+                          <option [selected]="selectedClosingMinute == 30">30</option>
+                          <option [selected]="selectedClosingMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select [hidden]="isSaturdayhidden" formControlName="SaturdayClosingHour" class="zero-padding">
+                              <option [selected]="selectedClosingHour == 00">00</option>
+                              <option [selected]="selectedClosingHour == 01">01</option>
+                              <option [selected]="selectedClosingHour == 02">02</option>
+                              <option [selected]="selectedClosingHour == 03">03</option>
+                              <option [selected]="selectedClosingHour == 04">04</option>
+                              <option [selected]="selectedClosingHour == 05">05</option>
+                              <option [selected]="selectedClosingHour == 06">06</option>
+                              <option [selected]="selectedClosingHour == 07">07</option>
+                              <option [selected]="selectedClosingHour == 08">08</option>
+                              <option [selected]="selectedClosingHour == 09">09</option>
+                              <option [selected]="selectedClosingHour == 10">10</option>
+                              <option [selected]="selectedClosingHour == 11">11</option>
+                              <option [selected]="selectedClosingHour == 12">12</option>
+                              <option [selected]="selectedClosingHour == 13">13</option>
+                              <option [selected]="selectedClosingHour == 14">14</option>
+                              <option [selected]="selectedClosingHour == 15">15</option>
+                              <option [selected]="selectedClosingHour == 16">16</option>
+                              <option [selected]="selectedClosingHour == 17">17</option>
+                              <option [selected]="selectedClosingHour == 18">18</option>
+                              <option [selected]="selectedClosingHour == 19">19</option>
+                              <option [selected]="selectedClosingHour == 20">20</option>
+                              <option [selected]="selectedClosingHour == 21">21</option>
+                              <option [selected]="selectedClosingHour == 22">22</option>
+                              <option [selected]="selectedClosingHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select [hidden]="isSaturdayhidden" formControlName="SaturdayClosingMinute" class="zero-padding">
+                              <option [selected]="selectedClosingMinute == 00">00</option>
+                              <option [selected]="selectedClosingMinute == 15">15</option>
+                              <option [selected]="selectedClosingMinute == 30">30</option>
+                              <option [selected]="selectedClosingMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td class="opening-td">
+                      <a style="cursor:pointer" (click)="ApplyChangesForAll('Saturday')" [hidden]="isSaturdayhidden">Apply time to all</a>
+                      <span [hidden]="!isSaturdayhidden">sit back and relax-all day closed</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="opening-td">Sunday</td>
+                    <td align="center"><label class="checkbox zero-padding opening-margin opening-section  "><input type="checkbox" formControlName="ckSunday" (change)="onChange('ckSunday',$event)" value="Sunday" [checked]="false" /><i></i></label></td>
+                    <td>
+                      <!--<select [hidden]="isSundayhidden" formControlName="SundayOpeningHour" class="zero-padding">
+                          <option [selected]="selectedOpeningHour == 00">00</option>
+                          <option [selected]="selectedOpeningHour == 01">01</option>
+                          <option [selected]="selectedOpeningHour == 02">02</option>
+                          <option [selected]="selectedOpeningHour == 03">03</option>
+                          <option [selected]="selectedOpeningHour == 04">04</option>
+                          <option [selected]="selectedOpeningHour == 05">05</option>
+                          <option [selected]="selectedOpeningHour == 06">06</option>
+                          <option [selected]="selectedOpeningHour == 07">07</option>
+                          <option [selected]="selectedOpeningHour == 08">08</option>
+                          <option [selected]="selectedOpeningHour == 09">09</option>
+                          <option [selected]="selectedOpeningHour == 10">10</option>
+                          <option [selected]="selectedOpeningHour == 11">11</option>
+                          <option [selected]="selectedOpeningHour == 12">12</option>
+                          <option [selected]="selectedOpeningHour == 13">13</option>
+                          <option [selected]="selectedOpeningHour == 14">14</option>
+                          <option [selected]="selectedOpeningHour == 15">15</option>
+                          <option [selected]="selectedOpeningHour == 16">16</option>
+                          <option [selected]="selectedOpeningHour == 17">17</option>
+                          <option [selected]="selectedOpeningHour == 18">18</option>
+                          <option [selected]="selectedOpeningHour == 19">19</option>
+                          <option [selected]="selectedOpeningHour == 20">20</option>
+                          <option [selected]="selectedOpeningHour == 21">21</option>
+                          <option [selected]="selectedOpeningHour == 22">22</option>
+                          <option [selected]="selectedOpeningHour == 23">23</option>
+                      </select>
+
+                      <select [hidden]="isSundayhidden" formControlName="SundayOpeningMinute" class="zero-padding">
+                          <option [selected]="selectedOpeningMinute == 00">00</option>
+                          <option [selected]="selectedOpeningMinute == 15">15</option>
+                          <option [selected]="selectedOpeningMinute == 30">30</option>
+                          <option [selected]="selectedOpeningMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select [hidden]="isSundayhidden" formControlName="SundayOpeningHour" class="zero-padding">
+                              <option [selected]="selectedOpeningHour == 00">00</option>
+                              <option [selected]="selectedOpeningHour == 01">01</option>
+                              <option [selected]="selectedOpeningHour == 02">02</option>
+                              <option [selected]="selectedOpeningHour == 03">03</option>
+                              <option [selected]="selectedOpeningHour == 04">04</option>
+                              <option [selected]="selectedOpeningHour == 05">05</option>
+                              <option [selected]="selectedOpeningHour == 06">06</option>
+                              <option [selected]="selectedOpeningHour == 07">07</option>
+                              <option [selected]="selectedOpeningHour == 08">08</option>
+                              <option [selected]="selectedOpeningHour == 09">09</option>
+                              <option [selected]="selectedOpeningHour == 10">10</option>
+                              <option [selected]="selectedOpeningHour == 11">11</option>
+                              <option [selected]="selectedOpeningHour == 12">12</option>
+                              <option [selected]="selectedOpeningHour == 13">13</option>
+                              <option [selected]="selectedOpeningHour == 14">14</option>
+                              <option [selected]="selectedOpeningHour == 15">15</option>
+                              <option [selected]="selectedOpeningHour == 16">16</option>
+                              <option [selected]="selectedOpeningHour == 17">17</option>
+                              <option [selected]="selectedOpeningHour == 18">18</option>
+                              <option [selected]="selectedOpeningHour == 19">19</option>
+                              <option [selected]="selectedOpeningHour == 20">20</option>
+                              <option [selected]="selectedOpeningHour == 21">21</option>
+                              <option [selected]="selectedOpeningHour == 22">22</option>
+                              <option [selected]="selectedOpeningHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select [hidden]="isSundayhidden" formControlName="SundayOpeningMinute" class="zero-padding">
+                              <option [selected]="selectedOpeningMinute == 00">00</option>
+                              <option [selected]="selectedOpeningMinute == 15">15</option>
+                              <option [selected]="selectedOpeningMinute == 30">30</option>
+                              <option [selected]="selectedOpeningMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td>
+                      <!--<select [hidden]="isSundayhidden" formControlName="SundayClosingHour" class="zero-padding">
+                          <option [selected]="selectedClosingHour == 00">00</option>
+                          <option [selected]="selectedClosingHour == 01">01</option>
+                          <option [selected]="selectedClosingHour == 02">02</option>
+                          <option [selected]="selectedClosingHour == 03">03</option>
+                          <option [selected]="selectedClosingHour == 04">04</option>
+                          <option [selected]="selectedClosingHour == 05">05</option>
+                          <option [selected]="selectedClosingHour == 06">06</option>
+                          <option [selected]="selectedClosingHour == 07">07</option>
+                          <option [selected]="selectedClosingHour == 08">08</option>
+                          <option [selected]="selectedClosingHour == 09">09</option>
+                          <option [selected]="selectedClosingHour == 10">10</option>
+                          <option [selected]="selectedClosingHour == 11">11</option>
+                          <option [selected]="selectedClosingHour == 12">12</option>
+                          <option [selected]="selectedClosingHour == 13">13</option>
+                          <option [selected]="selectedClosingHour == 14">14</option>
+                          <option [selected]="selectedClosingHour == 15">15</option>
+                          <option [selected]="selectedClosingHour == 16">16</option>
+                          <option [selected]="selectedClosingHour == 17">17</option>
+                          <option [selected]="selectedClosingHour == 18">18</option>
+                          <option [selected]="selectedClosingHour == 19">19</option>
+                          <option [selected]="selectedClosingHour == 20">20</option>
+                          <option [selected]="selectedClosingHour == 21">21</option>
+                          <option [selected]="selectedClosingHour == 22">22</option>
+                          <option [selected]="selectedClosingHour == 23">23</option>
+                      </select>
+
+                      <select [hidden]="isSundayhidden" formControlName="SundayClosingMinute" class="zero-padding">
+                          <option [selected]="selectedClosingMinute == 00">00</option>
+                          <option [selected]="selectedClosingMinute == 15">15</option>
+                          <option [selected]="selectedClosingMinute == 30">30</option>
+                          <option [selected]="selectedClosingMinute == 45">45</option>
+                      </select>-->
+                      <div class="row zero-padding">
+                        <section class="col col-6 opening-section ">
+                          <label class="select">
+                            <select [hidden]="isSundayhidden" formControlName="SundayClosingHour" class="zero-padding">
+                              <option [selected]="selectedClosingHour == 00">00</option>
+                              <option [selected]="selectedClosingHour == 01">01</option>
+                              <option [selected]="selectedClosingHour == 02">02</option>
+                              <option [selected]="selectedClosingHour == 03">03</option>
+                              <option [selected]="selectedClosingHour == 04">04</option>
+                              <option [selected]="selectedClosingHour == 05">05</option>
+                              <option [selected]="selectedClosingHour == 06">06</option>
+                              <option [selected]="selectedClosingHour == 07">07</option>
+                              <option [selected]="selectedClosingHour == 08">08</option>
+                              <option [selected]="selectedClosingHour == 09">09</option>
+                              <option [selected]="selectedClosingHour == 10">10</option>
+                              <option [selected]="selectedClosingHour == 11">11</option>
+                              <option [selected]="selectedClosingHour == 12">12</option>
+                              <option [selected]="selectedClosingHour == 13">13</option>
+                              <option [selected]="selectedClosingHour == 14">14</option>
+                              <option [selected]="selectedClosingHour == 15">15</option>
+                              <option [selected]="selectedClosingHour == 16">16</option>
+                              <option [selected]="selectedClosingHour == 17">17</option>
+                              <option [selected]="selectedClosingHour == 18">18</option>
+                              <option [selected]="selectedClosingHour == 19">19</option>
+                              <option [selected]="selectedClosingHour == 20">20</option>
+                              <option [selected]="selectedClosingHour == 21">21</option>
+                              <option [selected]="selectedClosingHour == 22">22</option>
+                              <option [selected]="selectedClosingHour == 23">23</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                        <section class="col col-6 opening-section ">
+                          <label class="select " style="padding:0px;margin:0px;">
+                            <select [hidden]="isSundayhidden" formControlName="SundayClosingMinute" class="zero-padding">
+                              <option [selected]="selectedClosingMinute == 00">00</option>
+                              <option [selected]="selectedClosingMinute == 15">15</option>
+                              <option [selected]="selectedClosingMinute == 30">30</option>
+                              <option [selected]="selectedClosingMinute == 45">45</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </section>
+                      </div>
+                    </td>
+                    <td class="opening-td">
+                      <a style="cursor:pointer" (click)="ApplyChangesForAll('Sunday')" [hidden]="isSundayhidden">Apply time to all</a>
+                      <span [hidden]="!isSundayhidden">sit back and relax-all day closed</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          <div class="row">
+            <section class="col col-6 opening-section ">
+              <label class="select">
+                <lookup-component formControlName="timezoneControl" [lookup]="timezonelist" [lookupselected]="selectedTimeZone" ngDefaultControl></lookup-component>
+                <i></i>
+              </label>
+            </section>
+            <section class="col col-6 opening-section ">
+              <label class="select">
+                <lookup-component formControlName="currencyControl" [lookup]="currencylist" [lookupselected]="selectedCurrency" ngDefaultControl></lookup-component>
+                <i></i>
+              </label>
+            </section>
+          </div>
+          <div class="row">
+
+            <div class="col col-6">
+              <h5>Calendar interval increments</h5>
+            </div>
+            <div class="col col-6">
+              <label class="select">
+                <select>
+                  <option value="1">1 minute</option>
+                  <option value="2">2 minutes</option>
+                  <option value="3">3 minutes</option>
+                  <option value="5">5 minutes</option>
+                  <option value="10">10 minutes</option>
+                  <option value="15">15 minutes</option>
+                  <option value="30">30 minutes</option>
+                  <option value="60">60 minutes</option>
+                </select>
+                <i></i>
+              </label>
+            </div>
+          </div>
+            <!--<div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6 pull-left">
+                        <div class="col-md-12 pull-left zero-padding">
+                            <div class="form-group">
+                                <label class="pull-left" style="margin-top:5px;">TimeZone:&nbsp;&nbsp;</label>
+                                <lookup-component formControlName="timezoneControl" [lookup]="timezonelist" [lookupselected]="selectedTimeZone" ngDefaultControl></lookup-component>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pull-left">
+                        <div class="col-md-12 pull-left zero-padding">
+                            <div class="form-group">
+                                <label class="pull-left" style="margin-top:5px;">Currency:&nbsp;&nbsp;</label>
+                                <lookup-component formControlName="currencyControl" [lookup]="currencylist" [lookupselected]="selectedCurrency" ngDefaultControl></lookup-component>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <footer class="wizard-footer">
+              <ul class="list-inline pull-right" [hidden]="!isMenuhidden">
+                <li><button type="submit" class="button next-step">{{savebuttonText}} and continue</button></li>
+              </ul>
+              <ul class="list-inline pull-right" [hidden]="isMenuhidden">
+                <li><button type="submit" class="button next-step">{{savebuttonText}}</button></li>
+              </ul>
+            </footer>
+            <div class="message">
+              <i class="rounded-x fa fa-check"></i>
+              <p>Your message was successfully sent!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </fieldset>
+</form>

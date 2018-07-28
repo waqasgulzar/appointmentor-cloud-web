@@ -1,0 +1,118 @@
+﻿
+<form method="post" id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" style="border:1px solid transparent;">
+    <section class="col-md-12">
+        
+                <div class="tab-content">
+                    <div class="tab-pane active" role="tabpanel" id="complete" style="padding-top:0px;">
+                        <div class="step44">
+                            <div class="panel panel-green margin-bottom-40" *ngIf="bookingQuestions && bookingQuestions.length>0">
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <td><strong>Question Type</strong></td>
+                                                <td><strong>Question</strong></td>
+                                                <td>Services</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of bookingQuestions">
+                                                <td>{{item.questionType}}</td>
+                                                <td>{{item.questionType}}</td>
+                                                <td>
+                                                    <ng-container *ngFor="let data of item.questionservice">
+                                                        <div class="panel-heading" style="color: #333; background-color: #f5f5f5; border-color: #ddd;">
+                                                            {{data.serviceName}}
+                                                        </div>
+                                                    </ng-container>
+                                                </td>
+                                                <td>{{item.isRequired==true?'Required':''}}</td>
+                                                <td><span><a style="cursor:pointer;" (click)="BookingQuestionIdForDelete(item.bookingQuestionId); modal2.show();"><i class="fa fa-trash-o"></i></a></span>&nbsp;&nbsp;<span><a style="cursor:pointer;" (click)="clearServices(); LoadBookingQuestionById(item.bookingQuestionId);"><i class="fa fa-pencil"></i></a></span>&nbsp;&nbsp;</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <app-modal #modal2>
+                                        <div class="app-modal-header">
+                                            <h3 class="panel-title"><i class="fa fa-check"></i>Confirm</h3>
+                                        </div>
+                                        <div class="app-modal-body">
+                                            <p>Are you sure you want to delete this question?</p>
+                                        </div>
+                                        <div class="app-modal-footer">
+                                            <button type="button" class="btn-u btn-u-default" (click)="modal2.hide()">Cancel</button>
+                                            <button type="button" class="btn-u btn-default" (click)="RemoveBookingQuestion(); modal2.hide();">Delete</button>
+                                        </div>
+                                    </app-modal>
+                                </div>
+                            </div>
+                            <fieldset>
+                                <div class="row">
+                                    <div class="panel panel-u">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title"><i class="fa fa-tasks"></i> Booking Questions</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <section>
+                                                <label class="label">Question Type*:</label>
+                                                <label class="input">
+                                                    <select class="form-control" formControlName="questionType">
+                                                        <option value="Text">Text</option>
+                                                        <option value="Checkbox">Checkbox</option>
+                                                        <option value="TermAndCondition">Term And Conditions</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <label class="label">Question*:</label>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-user"></i>
+                                                    <input formControlName="question" maxlength="100" type="text" class="form-control" placeholder="Question">
+                                                </label>
+                                            </section>
+                                            <section>
+                                                <label class="label">Link:</label>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-user"></i>
+                                                    <input formControlName="link" maxlength="500" type="text" class="form-control" placeholder="Link">
+                                                </label>
+                                            </section>
+                                            <div class="row">
+                                                <section class="col col-11">
+                                                    <label class="label">Required:</label> 
+                                                </section>
+
+                                                <section class="col col-1">
+                                                    <label class="checkbox"><input type="checkbox" name="checkbox" formControlName="isRequired"><i></i></label>
+                                                </section>
+                                            </div>
+                                            <section>
+                                                <label class="label">Show Question:</label>
+                                                <div class="inline-group">
+                                                    <label class="radio"><input type="radio" name="radio-inline" (click)="IsShow(true)" formControlName="isAlwaysShow" checked="isAlwaysShow" /><i class="rounded-x"></i>Always Show</label>
+                                                    <label class="radio"><input type="radio" name="radio-inline" (click)="IsShow(false)" checked="!isAlwaysShow" /><i class="rounded-x"></i>Select Services</label>
+                                                </div>
+                                            </section>
+
+                                            <section>
+                                                <div align="left" *ngIf="!isAlwaysShow" class="panel panel-default col-md-12" style="padding-bottom:15px;padding-top:12px;">
+                                                    <span class="panel-heading" *ngFor="let item of services" style="margin-left:5px;">
+                                                        {{item.serviceName}}&nbsp;
+                                                        <input (change)="onChange(item.serviceId, $event)" [checked]="isCheckAll || isServiceChecked(item.serviceId)" type="checkbox" value="{{item.serviceId}}">
+                                                    </span>
+                                                </div>
+                                            </section>
+                                            <section>
+                                                <button type="submit" [disabled]="userForm.invalid" class="btn-u pull-right">{{savebuttonText}} Question</button>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+           
+    </section>
+</form>

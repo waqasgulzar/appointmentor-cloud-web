@@ -1,0 +1,357 @@
+﻿<header>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Admin
+                            <span class=""><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a [routerLink]="['/monthly-overview']">Monthly Overview</a></li>
+                            <li><a [routerLink]="['/resources']">Resources</a></li>
+                            <li><a [routerLink]="['/services']">Services</a></li>
+                            <li><a [routerLink]="['/openingtimes']">Opening times</a></li>
+                            <li><a [routerLink]="['/adminassets']">Assets</a></li>
+                            <li><a [routerLink]="['/bookingapps']">Booking Apps</a></li>
+                            <li><a [routerLink]="['/reviews']">Reviews</a></li>
+                            <li><a [routerLink]="['/reports']">Reports</a></li>
+                            <li><a [routerLink]="['/paymenthistory']">Payment history</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Marketing
+                            <span class=""><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a [routerLink]="['/notifications']">Notifications</a></li>
+                            <li><a [routerLink]="['/campaigns']">Campaigns</a></li>
+                        </ul>
+                    </li>
+                    <li><a [routerLink]="['/support']">Support</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Personal
+                            <span class=""><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a [routerLink]="['/bookingmicrosite']">Booking microsite</a></li>
+                            <li><a [routerLink]="['/accountprofile']">Account profile</a></li>
+                            <li><a [routerLink]="['/billing']">Billing</a></li>
+                            <li><a [routerLink]="['/useraccount']">User Account</a></li>
+                            <li><a [routerLink]="['/logout']">Logout</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class=""><i class="fa fa-cog fa-2x" aria-hidden="true"></i></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a [routerLink]="['/general']">General</a></li>
+                            <li><a [routerLink]="['/customers']">Customers</a></li>
+                            <li><a [routerLink]="['/userssetting']">Users</a></li>
+                            <li><a [routerLink]="['/emailssetting']">Emails</a></li>
+                            <li><a [routerLink]="['/sms']">SMS</a></li>
+                            <li><a [routerLink]="['/freeagent']">Freeagent</a></li>
+                            <li><a [routerLink]="['/payments']">Payments</a></li>
+                            <li><a [routerLink]="['/epos']">EPoS</a></li>
+                            <li><a [routerLink]="['/microsite']">Microsite</a></li>
+                            <li><a [routerLink]="['/onlinebooking']">Online Booking</a></li>
+                            <li><a [routerLink]="['/calendarsync']">Calendar sync</a></li>
+                            <li><a [routerLink]="['/api']">API</a></li>
+                            <li><a [routerLink]="['/webhooks']">Webhooks</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!----------------------------------------Navbar2--------------------------------------------------------->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar1">
+
+                <ul class="nav navbar-nav">
+                    <li><a [routerLink]="['/appointment']">APPOINTMENTS</a></li>
+                    <li><a [routerLink]="['/customers1']">CUSTOMERS</a></li>
+                    <li><a [routerLink]="['/tasks']">TASKS</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add Booking</button></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content col-md-12 zero-padding">
+
+                <div class="modal-body zero-padding col-md-12 zero-padding">
+                    <ul class="nav nav-pills nav-stacked col-md-3 zero-padding">
+                        <li class="active"><a ng-class="isItThirdPageB()" data-toggle="pill" href="#home"><span><i class="fa fa-calendar" aria-hidden="true"></i></span>&nbsp;&nbsp;Appointment</a></li>
+                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu1"><span><i class="fa fa-id-card-o" aria-hidden="true"></i></span>&nbsp;&nbsp;Class</a></li>
+                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu2"><span><i class="fa fa-id-card-o" aria-hidden="true"></i></span>&nbsp;&nbsp;Invitation</a></li>
+                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu3"><span><i class="fa fa-coffee" aria-hidden="true"></i></span>&nbsp;&nbsp;Break</a></li>
+                    </ul>
+                    <div id="home" class="tab-pane fade in active col-md-9" style="padding-bottom:20px;">
+                        <ol class="wizard-progress wizard-3-steps clearfix center-block" style="    height: 5px;">
+                            <li class="step-done">
+                                <span class="step-num">1</span>
+                                <span class="step-name"></span>
+                            </li>
+                            <li ng-class="isItSecondPage()">
+                                <span class="step-num">2</span>
+                                <span class="step-name"></span>
+                            </li>
+                            <li ng-class="isItThirdPage()">
+                                <span class="step-num">3</span>
+                                <span class="step-name"></span>
+                            </li>
+                        </ol>
+
+                        <form class="form-horizontal" ng-show="appointmentPage2">
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="control-label col-sm-2">Date:</label>
+                                <div class="col-md-offset-1 col-md-9">
+                                    <!--<datepicker date-enabled-dates="{{enableDates}}" date-format="dd-MM-yyyy">
+                                        <input class="form-control" ng-change="dateChoised()" ng-model="date" type="text" />
+                                    </datepicker>-->
+                                </div>
+                            </div>
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="col-md-2">Period:</label>
+                                <div class="col-md-offset-1 col-md-9">
+                                    <select class="form-control" ng-model="selectedAppointmentperiod" ng-change="appointmentPeriodChanged()" ng-options="item.label  disable when item.id == '0' for item in periods"></select>
+                                </div>
+                            </div>
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="col-md-2">Time:</label>
+                                <!--<div class=" col-md-9" style="
+									max-height: 200px;
+									    overflow-y: scroll;
+									    background: #fff;border: 1px solid #979797;border-radius: 4px;width: 306px;margin-left: 53px;">
+                                    <div ng-if="availableTimings.length == 0">
+                                        <label>Sorry no time available</label>
+                                    </div>
+                                    <div *ngFor="let time of availableTimings">
+                                        <label class="btn-block">{{time}}<input ng-click="timeSelected(time)" type="radio" name="optradio" class="pull-right"></label>
+                                    </div>
+                                </div>-->
+                            </div>
+                            <label ng-if="errorOnPage2" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
+                            <div class="form-group cstm-padding">
+                                <button ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
+                                <button ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
+                            </div>
+                        </form>
+
+
+
+
+                        <!---- <form class="form-horizontal" ng-show="appointmentPage1">
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="control-label col-sm-2">Category:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <select class="form-control" ng-model="selectedAppointmentCategory" ng-change="AppointmentCategoryChanged()" ng-options="item.label  disable when item.id == '0' for item in appointmentCategorys"></select>
+                                 </div>
+                             </div>
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="col-md-2">Service:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <select class="form-control" ng-model="selectedAppointmentService" ng-change="appointmentServiceChanged()" ng-options="item.label  disable when item.id == '0' for item in appointmentServices"></select>
+                                 </div>
+                             </div>
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="col-md-2">Resource:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <select class="form-control" ng-model="selectedAppointmentResource" ng-options="item.label  disable when item.id == '0' for item in appointmentResource"></select>
+                                 </div>
+                             </div>
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="col-md-2">Price:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <input class="form-control" type="text" value="{{selectedAppointmentService.price}}">
+                                 </div>
+                             </div>-->
+                        <!-- <div class="form-group">
+                        <label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
+                        <!-- </div> -->
+                        <!---- <div class="form-group cstm-padding">
+                                <button ng-hide="appointmentPage1" ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
+                                <button ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
+                            </div>
+                        </form>-->
+                        <!-----<form class="form-horizontal" ng-show="appointmentPage3">
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="control-label col-sm-2">Existing Customer</label>
+                                <div class="col-md-offset-1 col-md-9">
+                                    <!--<angucomplete-alt id="ex1"
+                                                      placeholder="Search Customer"
+                                                      pause="100"
+                                                      selected-object="selectedCustomer"
+                                                      local-data="customers"
+                                                      search-fields="name"
+                                                      title-field="name"
+                                                      minlength="1"
+                                                      input-class="form-control form-control-small" />-->
+                        <!-----</div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2">New Customer:</label>
+                            <div class="col-md-offset-1 col-md-4">
+                                <input type="text" class="form-control" ng-model="fname">
+                            </div>
+                            <div class="col-md-4 norightpadding">
+                                <input type="text" class="form-control" ng-model="lname">
+                            </div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2"></label>
+                            <div class="col-md-offset-1 col-md-9">
+                                <input type="text" class="form-control" placeholder="Email Address" name="" value="">
+                            </div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2"></label>
+                            <div class="col-md-offset-1 col-md-4">
+                                <input type="text" class="form-control" ng-model="fname">
+                            </div>
+                            <div class="col-md-4 norightpadding">
+                                <input type="text" class="form-control" ng-model="lname">
+                            </div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2">Booking Notes</label>
+                            <div class="col-md-offset-1 col-md-4">
+                                <textarea name="name" rows="4" cols="34" placeholder="Booking Notes"></textarea>
+                            </div>
+
+                        </div>-->
+                        <!-- <div class="form-group"> -->
+                        <!----<label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
+                         <!-- </div> -->
+                        <!----<div class="form-group cstm-padding">
+                                <button ng-hide="appointmentPage1" ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
+                                <button ng-hide="appointmentPage3" ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
+                            </div>
+                        </form>-->
+
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+
+                    </div>
+                    <div id="menu3" class="tab-pane fade">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</header>
+<section class="col-md-12 admin_margin">
+    <div class="panel panel-green margin-bottom-40">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-tasks"></i>Admin</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row tab-v3">
+                <div class="col-sm-3">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a [routerLink]="['/monthlyOverview']" data-toggle="tab">
+                                <i class="fa fa-home"></i> Monthly
+                                Overview
+                            </a>
+                        </li>
+                        <li><a [routerLink]="['/resources']" data-toggle="tab"><i class="fa fa-cloud"></i>Resources</a></li>
+                        <li><a [routerLink]="['/task']" data-toggle="tab"><i class="fa fa-tasks"></i> Tasks</a></li>
+                        <li><a [routerLink]="['/openingtimes']" data-toggle="tab"><i class="fa fa-clock-o"></i> Opening Times</a></li>
+                        <li><a [routerLink]="['/assets']" data-toggle="tab"><i class="fa fa-th-list"></i> Assets</a></li>
+                        <li><a [routerLink]="['/services']" data-toggle="tab"><i class="fa fa-shield"></i> Services</a></li>
+                        <li><a [routerLink]="['/reviews']" data-toggle="tab"><i class="fa fa-star-o"></i> Reviews</a></li>
+                        <li><a [routerLink]="['/reports']" data-toggle="tab"><i class="fa fa-bar-chart"></i> Reports</a></li>
+                        <li class="active"><a [routerLink]="['/stock']" data-toggle="tab"><i class="fa fa-exchange"></i> Stock</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9">
+                    <section style="background:#fafafa;padding:20px;">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <form action="#" id="sky-form" class="sky-form" novalidate="novalidate">
+                                    <header>Add Items</header>
+                                    <fieldset>
+                                        <div class="row">
+                                            <section class="col col-6">
+                                                <label>Item Name</label>
+                                                <label class="input">
+                                                    <i class="icon-prepend fa fa-user"></i>
+                                                    <input type="text" placeholder="Item Name" class="form-control">
+                                                </label>
+                                            </section>
+                                            <section class="col col-6">
+                                                <label>Stock code</label>
+                                                <label class="input">
+                                                    <i class="icon-prepend fa fa-exchange" aria-hidden="true"></i>
+                                                    <input type="text" placeholder="Stock code" class="form-control">
+                                                </label>
+                                            </section>
+                                        </div>
+                                        <div class="row">
+                                            <section class="col col-6">
+                                                <label>Price</label>
+                                                <label class="input">
+                                                    <i class="icon-prepend fa fa-money" aria-hidden="true"></i>
+                                                    <input name="text" placeholder="$" type="text" class="form-control">
+                                                </label>
+                                            </section>
+                                            <section class="col col-6">
+                                                <label>Quantity</label>
+                                                <label class="input">
+                                                    <i class="icon-prepend fa fa-at" aria-hidden="true"></i>
+                                                    <input type="text" placeholder="Quantity" class="form-control">
+                                                </label>
+                                            </section>
+                                        </div>
+                                    </fieldset>
+                                    <footer>
+                                        <button type="submit" class="btn-u">Add Item</button>
+                                    </footer>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

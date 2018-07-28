@@ -1,0 +1,45 @@
+﻿<dashboard-component></dashboard-component>
+<div class="col-md-12 admin_margin">
+    <div class="panel panel-green margin-bottom-40">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-tasks"></i>Admin</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row tab-v3">
+                <div class="col-sm-3">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a [routerLink]="['/monthlyOverview']" data-toggle="tab">
+                                <i class="fa fa-home"></i> Monthly
+                                Overview
+                            </a>
+                        </li>
+                        <li><a [routerLink]="['/resources']" data-toggle="tab"><i class="fa fa-cloud"></i>Resources</a></li>
+                        <li><a [routerLink]="['/task']" data-toggle="tab"><i class="fa fa-tasks"></i> Tasks</a></li>
+                        <li><a [routerLink]="['/openingtimes']" data-toggle="tab"><i class="fa fa-clock-o"></i> Opening Times</a></li>
+                        <li class="active"><a [routerLink]="['/assets']" data-toggle="tab"><i class="fa fa-th-list"></i> Assets</a></li>
+                        <li><a [routerLink]="['/services']" data-toggle="tab"><i class="fa fa-shield"></i> Services</a></li>
+                        <li><a [routerLink]="['/reviews']" data-toggle="tab"><i class="fa fa-star-o"></i> Reviews</a></li>
+                        <li><a [routerLink]="['/reports']" data-toggle="tab"><i class="fa fa-bar-chart"></i> Reports</a></li>
+                        <li><a [routerLink]="['/stock']" data-toggle="tab"><i class="fa fa-exchange"></i> Stock</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9">
+                    <div class="col-md-12">
+                        <div class="panel panel-green margin-bottom-40">
+                            <div class="panel-heading ">
+                                <h3 class="panel-title">Payment History</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="jumbotron" align="center">
+                                    <h4 align="center">Start taking Online Payment Today</h4>
+                                    <button type="button" class="btn-u btn-u-green">Set Up Payments</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

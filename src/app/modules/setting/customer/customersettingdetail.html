@@ -1,0 +1,114 @@
+﻿<div class="wrapper">
+    <form action="#" method="post" id="sky-form4" class="sky-form" novalidate>
+        <div class="container-fluid row login_bg">
+            <!---for mobile view header-->
+            <div class="container content hidden-md hidden-lg" style="padding-bottom:10px;padding-top:10px;">
+                <div class="col-md-12">
+                    <h1 style="color:#FFF;">
+                        <b><span class="fa fa-clock-o"></span> Appointmentor</b>
+                    </h1>
+                </div>
+                <div class="col-md-12">
+                    <section>
+                        <label class="input">
+                            <i class="icon-append fa fa-search"></i>
+                            <input name="search" placeholder="Search" type="text">
+                        </label>
+                    </section>
+                </div>
+                <div class="col-md-12" style="margin-top:10px;">
+                    <i class="fa fa-external-link"><a [routerLink]="['/user.resgistration']" style="color:#fff;">Go to Appointmentor</a></i>
+                </div>
+            </div>
+            <!--desktop view header-->
+            <div class="container content hidden-sm hidden-xs" style="padding-bottom:10px;padding-top:10px;" align="center">
+                <div class="col-md-4">
+                    <h1 style="color:#FFF;">
+                        <b class="pull-left"><span class="fa fa-clock-o"></span> Appointmentor</b>
+                    </h1>
+                </div>
+                <div class="col-md-6">
+                    <section>
+                        <label class="input pull-right">
+                            <i class="icon-append fa fa-search"></i>
+                            <input name="search" placeholder="Search" type="text">
+                        </label>
+                    </section>
+                </div>
+                <div class="col-md-2 pull-right" style="margin-top:10px;">
+                    <i class="fa fa-external-link"><a [routerLink]="['/user.resgistration']" style="color:#fff;">Go to Appointmentor</a></i>
+                </div>
+            </div>
+        </div>
+        <div class="container content bookingtext">
+            <fieldset>
+                <div class="clearfix margin-bottom-30"></div>
+                <section>
+                    <div class="tab-v1">
+                        <ul class="nav nav-tabs">
+                            <li><a href="#" data-toggle="tab">All Collections</a></li>
+                            <li><a href="#" data-toggle="tab">Online booking tools</a></li>
+                            <li><a href="#" data-toggle="tab">Online booking settings</a></li>
+                            <li class="active"><a [routerLink]="['/customersettingdetail']" data-toggle="tab">Custom Field Details</a></li>
+                        </ul>
+                        <div class="tab-content">
+                                <div class="tab-pane fade in" id="settings">
+                                    <div class="clearfix margin-bottom-30"></div>
+                                    <div class="row">
+                                        <h3>How to create custom fields for your online booking tool</h3>
+                                        <b>Create a custom field to collect additional information about the customer through your online booking tools, to be stored in your CRM.</b>
+                                        <div class="testimonial-info">
+                                            <img class="rounded-x" src="assets/img/user.jpg" alt="user-img" width="70" height="70">
+                                            <span class="testimonial-author">
+                                                Written by
+                                                <em> Kirsty McLaughlin, Updated over a week ago</em><br />
+                                            </span>
+                                        </div>
+                                        <p>
+                                            With Appointmentor, you can take the information that you need from your customer before they confirm the booking. You can take this information in the form of custom questions and custom fields.
+                                        </p>
+                                        <h3>What are custom fields?</h3>
+                                        <p>A custom field is created to store and collect extra information about the customer. This could be the customer's membership number or the breed of their dog(s).</p>
+                                        <p>
+                                            This information is saved in a custom field in that customer's record in your CRM. You can see this information by clicking on the customer's name in the booking and in the customer record.
+                                        </p>
+                                        <div class="clearfix margin-bottom-30"></div>
+                                        <img src="https://downloads.intercomcdn.com/i/o/40744385/31b267a5c0c8c75de5eb0a61/ezgif.com-video-to-gif%2520%2832%29.gif%3Fheight%3D420%26amp%3Bname%3Dezgif.com-video-to-gif%2B%252832%2529.gif%26amp%3Bt%3D1511453690834%26amp%3Bwidth%3D700" class="img-responsive">
+                                        <div class="clearfix margin-bottom-30"></div>
+                                        <p>
+                                            You can also search for customers by custom field in your CRM search tool.
+                                        </p>
+                                        <h3>How to create a custom field</h3>
+                                        <p>You can create custom fields from your Appointmentor calendar screen:</p>
+                                        <ul>
+                                            <li>Hover over the settings cog</li>
+                                            <li>Select customers from the drop-down menu</li>
+                                        </ul>
+                                        <p>
+                                            Here, you can see all of your existing custom fields and add new ones:
+                                        </p>
+                                        <ul>
+                                            <li>Click <b>add custom field</b>&nbsp;</li>
+                                            <li>Enter the name of the field</li>
+                                            <li>The field ID will automatically populate from the field name that you entered&nbsp;</li>
+                                        </ul>
+                                        <p><b>Note:</b> the <b>field ID</b> is used when importing customers to your CRM.</p>
+                                        <ul>
+                                            <li>Check the box to set the custom field as required</li>
+                                            <li>Be sure to <b>save fields</b>.</li>
+                                        </ul>
+                                        <p>
+                                            Please note that to make use of custom fields, you should allow customers to log in without creating an account. See more about required login here.
+                                        </p>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </section>
+            </fieldset>
+            <footer>
+                <p class="text-center">Did This Answer To your Question?</p>
+            </footer>
+        </div>
+    </form>
+</div>

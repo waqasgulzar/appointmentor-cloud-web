@@ -1,0 +1,143 @@
+﻿<div class="wrapper">
+    <form action="assets/php/demo-contacts-process.php" method="post" id="sky-form4" class="sky-form" novalidate>
+        <div class="container-fluid row login_bg">
+            <!---for mobile view header-->
+            <div class="container content hidden-md hidden-lg" style="padding-bottom:10px;padding-top:10px;">
+                <div class="col-md-12">
+                    <h1 style="color:#FFF;">
+                        <b><span class="fa fa-clock-o"></span> Appointmentor</b>
+                    </h1>
+                </div>
+                <div class="col-md-12">
+                    <section>
+                        <label class="input">
+                            <i class="icon-append fa fa-search"></i>
+                            <input name="search" placeholder="Search" type="text">
+                        </label>
+                    </section>
+                </div>
+                <div class="col-md-12" style="margin-top:10px;">
+                    <i class="fa fa-external-link"><a [routerLink]="['/user.resgistration']" style="color:#fff;">Go to Appointmentor</a></i>
+                </div>
+            </div>
+            <!--desktop view header-->
+            <div class="container content hidden-sm hidden-xs" style="padding-bottom:10px;padding-top:10px;" align="center">
+                <div class="col-md-4">
+                    <h1 style="color:#FFF;">
+                        <b class="pull-left"><span class="fa fa-clock-o"></span> Appointmentor</b>
+                    </h1>
+                </div>
+                <div class="col-md-6">
+                    <section>
+                        <label class="input pull-right">
+                            <i class="icon-append fa fa-search"></i>
+                            <input name="search" placeholder="Search" type="text">
+                        </label>
+                    </section>
+                </div>
+                <div class="col-md-2 pull-right" style="margin-top:10px;">
+                    <i class="fa fa-external-link"><a [routerLink]="['/user.resgistration']" style="color:#fff;">Go to Appointmentor</a></i>
+                </div>
+            </div>
+        </div>
+        <div class="container content bookingtext">
+            <fieldset>
+                <div class="clearfix margin-bottom-30"></div>
+                <section>
+                    <div class="tab-v1">
+                        <ul class="nav nav-tabs">
+                            <li><a href="#" data-toggle="tab">All Collections</a></li>
+                            <li><a href="#" data-toggle="tab">Online booking tools</a></li>
+                            <li><a href="#" data-toggle="tab">Online booking settings</a></li>
+                            <li class="active"><a [routerLink]="['/emailsettingdetail']" data-toggle="tab">Manage user access with user permissions</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="home">
+                                <div class="clearfix margin-bottom-30"></div>
+                                <div class="row">
+                                    <h3>How to manage user access with user permissions</h3>
+                                    <b>Invite users to access your account with their own logins and limit the level of access they have.</b>
+                                    <div class="testimonial-info">
+                                        <img class="rounded-x" src="assets/img/user.jpg" alt="user-img" width="70" height="70">
+                                        <span class="testimonial-author">
+                                            Written by
+                                            <em> Kirsty McLaughlin, Updated over a week ago</em><br />
+                                        </span>
+                                    </div>
+                                    <p>
+                                        User permissions can only be managed by the organisation administrator - at first, this is the person who created the Appointmentor organisation and as users are added, any user can be an administrator.
+                                    </p>
+                                    <p>
+                                        There are three levels of user permissions which you can grant to a user of your Appointmentor organisation:
+                                    </p>
+                                    <ul>
+                                        <li>An <b>administrator</b> has full access to Appointmentor, all features and can also manage user permissions. This is usually the owner of the organisation.</li>
+                                        <li>A <b>standard user</b> has access to Appointmentor and all features but cannot manage user permissions. This is usually the manager of the organisation.</li>
+                                        <li>A <b>restricted user</b> has access to those calendars which are assigned to them by an Administrator. They can make and modify bookings in those calendars and access tasks assigned to those resources. A restricted user can search for a customer to add them to a booking, therefore giving them access to the name, phone number and email address of relevant cusotmers. They do not have access to customers tab, admin, marketing or settings.&nbsp;</li>
+                                    </ul>
+                                    <p>
+                                        Top tip: if you want to give someone access to a resource's bookings but don't want them to log in to your Appointmentor account, you can connect the resource's Appointmentor calendar to an external calendar e.g. Google or Outlook. Check out this support guide for more details.
+                                    </p>
+                                    <h3>
+                                        How to add a user to your organisation
+                                    </h3>
+                                    <p>
+                                        You must be an Administrator of the organisation to add a user.
+                                    </p>
+                                    <ul>
+                                        <li>Click the settings cog</li>
+                                        <li>Click <b>users</b>&nbsp;</li>
+                                        <li>Click<b> add user</b>&nbsp;</li>
+                                        <li>Enter the <b>name</b> of the user</li>
+                                        <li>Enter the <b>email address</b> of the user</li>
+                                        <li>Select the level of <b>permissions</b> that this user should have</li>
+                                        <li>If this user will be a <b>restricted user</b>, you should select the resources' calendars which they should have access to</li>
+                                        <li>Click <b>send invite</b>.&nbsp;</li>
+                                    </ul>
+                                    <div class="clearfix margin-bottom-30"></div>
+                                    <img src="https://downloads.intercomcdn.com/i/o/40755165/9d6c0d471e3e9d94ec57c227/ezgif.com-video-to-gif%2520%2879%29.gif%3Fheight%3D406%26amp%3Bname%3Dezgif.com-video-to-gif%2B%252879%2529.gif%26amp%3Bt%3D1511453690834%26amp%3Bwidth%3D700">
+                                    <div class="clearfix margin-bottom-30"></div>
+                                    <p>
+                                        An invite is sent to the user's email address. The user will then follow the link to accept the invite. If the user already has a user account (this could be on a different Appointmentor account), they will be prompted to log in to that account. If they don't yet have a user account, they will create their password.
+                                    </p>
+                                    <p>
+                                        This user now has their own login to your Appointmentor organisation.
+                                    </p>
+                                    <h3>
+                                        How to re-send an invitation
+                                    </h3>
+                                    <ul>
+                                        <li>In the user management page, click on the pencil icon next to the user you have invited</li>
+                                        <li>Click <b>resend invitation</b>&nbsp;</li>
+                                    </ul>
+                                    <h3>
+                                        How to delete a user
+                                    </h3>
+                                    <p>
+                                        The same process should be followed to delete an existing user or to delete a user who has not yet accepted an invitation:
+                                    </p>
+                                    <ul>
+                                        <li>In the user management page, click on the pencil icon next to the user you wish to delete</li>
+                                        <li>Click <b>delete user </b>or <b>delete invite</b>&nbsp;</li>
+                                        <li>Click<b> yes</b>&nbsp;</li>
+                                    </ul>
+                                    <h3>
+                                        How to edit the permissions of a user
+                                    </h3>
+                                    <ul>
+                                        <li>In the user management page, click on the pencil icon next to the user you wish to edit</li>
+                                        <li>Select the user permissions which you wish the user to have</li>
+                                        <li>Click <b>save changes</b>.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </fieldset>
+            <footer>
+                <p class="text-center">Did This Answer To your Question?</p>
+            </footer>
+        </div>
+    </form>
+</div>

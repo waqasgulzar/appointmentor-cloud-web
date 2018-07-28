@@ -1,0 +1,91 @@
+﻿<dashboard-component></dashboard-component>
+<div class="clearfix margin-bottom-30"></div>
+<div class="col-md-12">
+    <div class="row tab-v3">
+        <div class="col-sm-3 setting-scroller">
+            <ul class="nav nav-pills nav-stacked">
+                <li><a [routerLink]="['/report']"><i class="fa fa-home"></i> Business</a></li>
+                <li class="active"><a [routerLink]="['/resourcereport']" ><i class="fa fa-cloud"></i> Resource</a></li>
+                <li><a [routerLink]="['/servicereport']" ><i class="fa fa-comments"></i> Service</a></li>
+                <li><a [routerLink]="['/customerreport']" ><i class="fa fa-gear"></i> Customer</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 setting-scroller">
+            <form action="#" id="sky-form" class="sky-form reportborder" novalidate="novalidate">
+                <div class="tab-content setting-box">
+                        <h4>Resource Report</h4>
+                        <section>
+                            <div class="tag-box tag-box-v1 margin-bottom-40">
+                                <div class="row">
+                                    <section class="col col-8">
+                                       <label>Resource</label>
+                                    </section>
+                                    <section class="col col-4">
+                                        <label class="select">
+                                            <select name="gender">
+                                                <option value="0">sadia</option>
+                                                <option value="1">All</option>
+                                            </select>
+                                            <i></i>
+                                        </label>
+                                    </section>
+                                </div>  
+                            </div>
+                        </section>
+                        <section>
+                            <div class="tag-box tag-box-v1 margin-bottom-40">
+                                <div class="row">
+                                    <section class="col col-8">
+                                        <label>TimeFrame</label>
+                                    </section>
+                                    <section class="col col-4">
+                                        <label class="select">
+                                            <select name="gender">
+                                                <option value="0">Bookings occuring within</option>
+                                                <option value="1">Bookings created within</option>
+                                            </select>
+                                            <i></i>
+                                        </label>
+                                    </section>
+                                </div>
+                                    <div class="inline-group">
+                                        <label class="radio"><input name="radio-inline pull-right" checked="" type="radio"><i class="rounded-x"></i>Today</label>
+                                        <label class="radio"><input name="radio-inline pull-right" type="radio"><i class="rounded-x"></i>This week</label>
+                                        <label class="radio"><input name="radio-inline pull-right" type="radio"><i class="rounded-x"></i>This Month</label>
+                                        <label class="radio"><input name="radio-inline pull-right" type="radio"><i class="rounded-x"></i>This Year</label>
+                                        <label class="radio"><input name="radio-inline pull-right" type="radio"><i class="rounded-x"></i>Custom</label>
+                                    </div>
+                            </div>
+                        </section>
+                        <section>
+                            <h5>Showing data for 1st November 2017 to 4th November 2017</h5>
+                        </section>
+                        <section>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Resource</th>
+                                        <th> Booking</th>
+                                        <th>Duration (Hours) </th>
+                                        <th>Cancellations</th>
+                                        <th>Cancellation Rate</th>
+                                        <th>Tasks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>sadia</td>
+                                        <td>0</td>
+                                        <td>$0.00</td>
+                                        <td>0</td>
+                                        <td>0%</td>
+                                        <td>0/0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

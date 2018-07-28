@@ -1,0 +1,123 @@
+﻿<dashboard-component></dashboard-component>
+<div class="clearfix margin-bottom-30"></div>
+<div class="container">
+    <div align="left">
+        <div class="tab-v1">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true">Notification</a></li>
+                <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="false">Compaign</a></li>
+            </ul>
+            <div class="clearfix margin-bottom-30"></div>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="home">
+                    <div class="sky-form row" id="sky-form1">
+                        <header>Notification<button type="button" class="btn-u pull-right">Add Notification</button></header>
+                        <fieldset>
+                            <div class="row">
+                                <section class="col col-12">
+                                    <h1>Active</h1>
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section class="col col-12">
+                                    <h1 style="color:#ccc;">Inactive</h1>
+                                </section>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="panel margin-bottom-40">
+                <table class="table" style="background:#eee;">
+                    <tbody>
+                        <tr>
+                            <td>Name: sadia</td>
+                            <td>Type: Email</td>
+                            <td>Messages Sent: 0</td>
+                            <td><span><a href=""><i class="fa fa-trash-o" data-toggle="modal" data-target="#responsive"></i></a></span>&nbsp;&nbsp;&nbsp;
+                            <span><a href=""><i class="fa fa-edit"></i></a></span>&nbsp;&nbsp;&nbsp;<span><a href=""><i class="fa fa-eye" data-toggle="modal" data-target="#responsive1"></i></a></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!---delete pop-up-->
+        <div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel4"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete ?</p>
+                        <button type="button" class="btn-u btn-u-green">Confirm</button>
+                        <button type="button" class="btn-u btn-u-default">Cancel</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---view pop-up-->
+        <div class="modal fade" id="responsive1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel4"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form  method="post" id="sky-form3" class="sky-form" novalidate="novalidate">
+                            <header>View Notification</header>
+                            <fieldset>
+                                <section>
+                                    <label class="label">Preview:</label>
+                                    <div class="panel panel-default-dark">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title"><i class="fa fa-tasks"></i> From: teksify (sadia@gmail.com)<br>
+                                            subject:sd</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <p>sadia</p>
+                                            <p><u>Unsubscribe from mailing list</u></p>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section>
+                                    <label class="label">Estimated Volume:</label>
+                                    <div class="tag-box tag-box-v1 margin-bottom-40">
+                                        <p>Based on current customer records and estimated for the current  month</p>
+                                    </div>
+                                    <div class="tag-box tag-box-v1 margin-bottom-40">
+                                        <p>You have 0 customers who meet the criteria for this notification</p>
+                                    </div>
+                                </section>
+                                <section>
+                                    <label class="checkbox"><input name="copy" type="checkbox"><i></i>* excludes unsubscribed customers</label>
+                                </section>
+                                <section>
+                                    <button type="button" class="btn-u">Activate Notification</button>
+                                </section>
+                                
+                            </fieldset>
+                            <footer>
+                                <button type="submit" class="button">back to notification</button>
+                            </footer>
+                            <div class="message">
+                                <i class="rounded-x fa fa-check"></i>
+                                <p>Your message was successfully sent!</p>
+                            </div>
+                        </form>
+                        <button type="button" class="btn-u btn-u-green">Confirm</button>
+                        <button type="button" class="btn-u btn-u-default">Cancel</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

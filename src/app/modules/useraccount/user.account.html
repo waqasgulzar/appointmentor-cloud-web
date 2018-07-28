@@ -1,0 +1,68 @@
+﻿<form action="#" method="post" id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+  <header align="left">User Account</header>
+  <section class="col-md-12 admin_margin">
+    <div *ngIf="!isPasswordMatch">
+      <div class="alert alert-info alert-dismissible">
+        <h4><i class="icon fa fa-"></i>Alert!</h4>
+        Passwords do not match. Please try again.
+      </div>
+    </div>
+    <div *ngIf="isSuccessfulMessage">
+      <div class="alert alert-success alert-dismissible">
+        <h4><i class="icon fa fa-"></i>Alert!</h4>
+        User account information has been saved successfully.
+      </div>
+    </div>
+  </section>
+  <fieldset>
+    <div class="row">
+      <section class="col col-6">
+        <label class="label">First Name<span style="color:red;">*</span></label>
+        <label class="input">
+          <i class="icon-append fa fa-user"></i>
+          <input formControlName="firstName" maxlength="50" type="text" class="form-control" placeholder="First Name" required>
+        </label>
+      </section>
+      <section class="col col-6">
+        <label class="label">Last Name <span style="color:red;">*</span></label>
+        <label class="input">
+          <i class="icon-append fa fa-user"></i>
+          <input formControlName="lastName" maxlength="50" type="text" class="form-control" placeholder="Last Name" required>
+        </label>
+      </section>
+    </div>
+    <div class="row">
+      <section class="col col-6">
+        <label class="label">E-mail <span style="color:red;">*</span></label>
+        <label class="input">
+          <i class="icon-append fa fa-envelope-o"></i>
+          <input formControlName="emailAddress" disabled="disabled" maxlength="100" type="email" class="form-control" placeholder="Email Address" required>
+        </label>
+      </section>
+      <section class="col col-6">
+        <label class="label">Password <span style="color:red;">*</span></label>
+        <label class="input">
+          <i class="icon-append fa fa-key"></i>
+          <input formControlName="password" maxlength="100" type="password" class="form-control" placeholder="Password" required>
+        </label>
+      </section>
+    </div>
+    <div class="row">
+      <section class="col col-6">
+        <label class="label"> Confirm Password <span style="color:red;">*</span></label>
+        <label class="input">
+          <i class="icon-append fa fa-key"></i>
+          <input formControlName="confirmPassword" maxlength="100" type="password" class="form-control" placeholder="Confirm Password" required>
+        </label>
+      </section>
+      <section class="col col-6"></section>
+    </div>
+    <footer>
+      <button type="submit" class="button">Save Changes</button>
+    </footer>
+  </fieldset>
+  <div class="message">
+    <i class="rounded-x fa fa-check"></i>
+    <p>Your message was successfully sent!</p>
+  </div>
+</form>

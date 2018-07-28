@@ -1,0 +1,50 @@
+﻿
+    <div class="container-fluid zero-padding">
+         <header>
+            <div class="row login_bg" align="center">
+                <h1 style="color:#FFF;">
+                    <b><span class="fa fa-clock-o"></span> Appointmentor</b>
+                </h1>
+            </div>
+        </header>
+        <div *ngIf="isEmailSendMessage" class="container" align="center">
+            <div class="clearfix margin-bottom-30"></div>
+            <div class="alert alert-info alert-dismissible">
+                <h4><i class="icon fa fa-"></i>Alert!</h4>
+                If your email address was recognised, a password reset email is on its way to you.
+            </div>
+            <a [routerLink]="['']">Home</a>
+        </div>
+        <div class="clearfix margin-bottom-30"></div>
+        <section class="col-md-12">
+            <div class="col-md-offset-3 col-md-6 col-md-offset-3">
+                <form action="#" id="sky-form2" class="sky-form" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" *ngIf="!isEmailSendMessage">
+                    
+                    <fieldset>
+                        <section>
+                            <div class="row">
+                                <label class="label col col-4">E-mail <span style="color:red;">*</span></label>
+                                <div class="col col-8">
+                                    <label class="input">
+                                        <i class="icon-append fa fa-envelope"></i>
+                                        <input formControlName="emailAddress" maxlength="100" class="" placeholder="Your@email.com" type="email" required />
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
+                        <section>
+                            <div class="row">
+                                <div class="col col-4"></div>
+                                <div class="col col-8">
+                                    <span class="h3">Enter your email address  and we'll send you a link to securely reset your password.</span><br /><br />
+                                </div>
+                            </div>
+                        </section>
+                    </fieldset>
+                    <footer>
+                        <button type="submit" [disabled]="userForm.invalid" class="btn-u pull-right">Reset</button>
+                    </footer>
+                </form>
+            </div>
+        </section>
+    </div>

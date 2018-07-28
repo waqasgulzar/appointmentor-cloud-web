@@ -1,0 +1,252 @@
+﻿
+<form novalidate (ngSubmit)="onSubmit(userForm);" [formGroup]="userForm" id="sky-form4" class="sky-form" style="border:1px solid transparent;">
+  <!--<section class="col-md-12 admin_margin">
+      <div class="row tab-v3">
+          <div class="col-sm-3">
+              <ul class="nav nav-pills nav-stacked setting-scroller">
+                  <li><a [routerLink]="['/general']" data-toggle="tab"><i class="fa fa-comments"></i>General</a></li>
+                  <li><a [routerLink]="['/customersetting']" data-toggle="tab"><i class="fa fa-user"></i>Customers</a></li>
+                  <li><a [routerLink]="['/usersetting']" data-toggle="tab"><i class="fa fa-user"></i>Users</a></li>
+                  <li><a [routerLink]="['/emailsetting']" data-toggle="tab"><i class="fa fa-envelope"></i>Emails</a></li>
+                  <li><a [routerLink]="['/smssetting']" data-toggle="tab"><i class="fa fa-envelope"></i>SMS</a></li>
+                  <li><a disabled="true" data-toggle="tab"><i class="fa fa-money"></i>Accounting</a></li>
+                  <li><a disabled="true" data-toggle="tab"><i class="fa fa-credit-card"></i>Payments</a></li>
+                  <li><a disabled="true" data-toggle="tab"><i class="fa fa-shopping-cart"></i>EPoS</a></li>
+                  <li><a disabled="true" data-toggle="tab"><i class="fa fa-comments"></i>Microsite</a></li>
+                  <li><a [routerLink]="['/bookingquestion']"><i class="fa fa-sticky-note"></i>Booking Question</a></li>
+                  <li class="active"><a [routerLink]="['/onlinebookingsetting']" data-toggle="tab"><i class="fa fa-book"></i>Online Booking</a></li>
+                  <li><a disabled="true" data-toggle="tab"><i class="fa fa-calendar"></i>Calender Sync</a></li>
+                  <li><a disabled="true" data-toggle="tab"><i class="fa fa-comments"></i>API</a></li>
+                  <li><a disabled="true" data-toggle="tab"><i class="fa fa-comments"></i>Webhooks</a></li>
+              </ul>
+          </div>
+          <div class="col-sm-9 setting-scroller setting-box">-->
+  <div class="tab-content" style="padding:10px;background-color:#fff;border:0px;">
+    <div class="tab-pane fade in active panel-default">
+      <h2>Online booking settings</h2>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Send customers an sms when a booking is made
+          <label class="toggle pull-right"><input formControlName="isCustomAllowBooking" checked="" (click)="onSubmit(userForm);" type="checkbox"><i class="no-rounded"></i></label>
+        </p>
+      </div>
+      <h2>Booking policies</h2>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Required notice for online bookings
+          <label class="select pull-right">
+            <select formControlName="noticeForOnlineBooking" (change)="onSubmit(userForm);" class="form-control" style="padding: 6px 30px;">
+              <option selected="" value="30 minutes">30 minutes</option>
+              <option value="15 minutes">15 minutes</option>
+              <option value="45 mintues">45 mintues</option>
+              <option value="No notice">No notice</option>
+              <option value="1 hour">1 hour</option>
+              <option value="2 hours">2 hours</option>
+              <option value="3 hours">3 hours</option>
+              <option value="4 hours">4 hours</option>
+              <option value="5 hours">5 hours</option>
+              <option value="6 hours">6 hours</option>
+              <option value="8 hours">8 hours</option>
+              <option value="10 hours">10 hour</option>
+              <option value="12 hours">12 hour</option>
+              <option value="24 hours">24 hour</option>
+              <option value="1 week">1 week</option>
+              <option value="2 weeks">2 weeks</option>
+              <option value="3 weeks">3 weeks</option>
+            </select>
+            <i></i>
+          </label>
+        </p>
+      </div>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Block availability after
+          <label class="select pull-right">
+            <select formControlName="blockAvailabilityAfter" (change)="onSubmit(userForm);" class="form-control" style="padding: 6px 20px;">
+              <option value="" selected="">No limit</option>
+              <option value="1 day">1 day</option>
+              <option value="2 days">2 days</option>
+              <option value="7 days">7 days</option>
+              <option value="14 days">14 days</option>
+              <option value="21 days">21 days</option>
+              <option value="1 month">1 month</option>
+              <option value="2 months">2 months</option>
+              <option value="3 months">3 months</option>
+              <option value="6 months">6 months</option>
+              <option value="12 months">12 months</option>
+            </select>
+            <i></i>
+          </label>
+        </p>
+      </div>
+      <h2>Service and resource selection</h2>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Show Prices
+          <label class="toggle pull-right"><input formControlName="isShowPrice" checked="" (click)="onSubmit(userForm);" type="checkbox"><i class="no-rounded"></i></label>
+        </p>
+      </div>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Allow customers to select their resource group
+          <label class="toggle pull-right"><input formControlName="isCustomerSelectResourceGroup" checked="" (click)="onSubmit(userForm);" type="checkbox"><i class="no-rounded"></i></label>
+        </p>
+      </div>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Allow customers to select their resource
+          <label class="toggle pull-right"><input formControlName="isCustomerSelectResources" checked="" (click)="onSubmit(userForm);" type="checkbox"><i class="no-rounded"></i></label>
+        </p>
+      </div>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Where to show resource selection?
+          <label class="select pull-right">
+            <select formControlName="showResourceSelection" (change)="onSubmit(userForm);" class="form-control">
+              <option value="1" selected="">Before availability</option>
+              <option value="2">After availability</option>
+            </select>
+            <i></i>
+          </label>
+        </p>
+      </div>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Show resource images on resource selection
+          <label class="toggle pull-right"><input formControlName="isShowResourceImage" checked="" (click)="onSubmit(userForm);" type="checkbox"><i class="no-rounded"></i></label>
+        </p>
+      </div>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Allow customers to select “any”
+          <label class="toggle pull-right"><input formControlName="isCustomerAllowAny" checked="" (click)="onSubmit(userForm);" type="checkbox"><i class="no-rounded"></i></label>
+        </p>
+      </div>
+      <h2>Date and time</h2>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Default customer timezone in booking tools
+          <label class="select pull-right">
+            <lookup-component formControlName="defaultTimeZoneID" [lookup]="timezonelist" ngDefaultControl></lookup-component>
+            <i></i>
+          </label>
+        </p>
+      </div>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Time increments to display in availability
+          <label class="select pull-right">
+            <select formControlName="timeIncrementsAvailability" (change)="onSubmit(userForm);" class="form-control" style="padding: 6px 58px;">
+              <option value="15 minutes" selected="">15 minutes</option>
+              <option value="20 minutes">20 minutes</option>
+              <option value="30 minutes">30 minutes</option>
+              <option value="On the hours">On the hours</option>
+            </select>
+            <i></i>
+          </label>
+        </p>
+      </div>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Message to display when there is no availability
+          <button type="submit" class="btn-u pull-right">Save</button>
+        </p>
+        <div class="clearfix margin-bottom-30"></div>
+        <label class="textarea">
+          <textarea formControlName="noAvailabilityMessage" rows="3" cols="12">
+                                     There's no availability for the selected date. Please try another day.
+                                    </textarea>
+        </label>
+      </div>
+      <h2>Customer details</h2>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Allow customers to book online without an Appointmentor account
+          <label class="toggle pull-right"><input formControlName="isCustomerBookwithoutAccount" checked="" (click)="onSubmit(userForm);" type="checkbox"><i class="no-rounded"></i></label>
+        </p>
+      </div>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Mark mobile as a required field
+          <label class="toggle pull-right"><input formControlName="isMobileRequired" checked="" (click)="onSubmit(userForm);" type="checkbox"><i class="no-rounded"></i></label>
+        </p>
+      </div>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Allow notes to be added to online bookings
+          <label class="toggle pull-right"><input formControlName="isNotesForOnlineBooking" checked="" (click)="onSubmit(userForm);" type="checkbox"><i class="no-rounded"></i></label>
+        </p>
+        <div class="clearfix margin-bottom-30"></div>
+        <p>
+          <label class="textarea">
+            <textarea formControlName="notesForOnlineBooking" rows="3" cols="12">
+                                        Attach a message to your booking
+                                 </textarea>
+          </label>
+        </p>
+        <div align="right">
+          <button type="submit" class="btn-u">Save</button>
+        </div>
+      </div>
+      <h2>Confirmation</h2>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Message to display when booking is made
+          <button type="submit" class="btn-u pull-right">Save</button>
+        </p>
+        <div class="clearfix margin-bottom-30"></div>
+        <label class="textarea">
+          <textarea formControlName="confirmationMessageForBooking" rows="3" cols="12">
+                                   Remember to come back and tell us how it went...
+                                </textarea>
+        </label>
+      </div>
+      <h2>Cancellations</h2>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Required notice for cancellations
+          <label class="select pull-right">
+            <select formControlName="noticeForCancellation" (change)="onSubmit(userForm);" class="form-control" style="padding: 6px 30px;">
+              <option value="1 hour" selected="">1 hours</option>
+              <option value="2 hours">2 hours</option>
+              <option value="3 hours">3 hours</option>
+              <option value="4 hours">4 hours</option>
+              <option value="5 hours">5 hours</option>
+              <option value="6 hours">6 hours</option>
+              <option value="7 hours">7 hours</option>
+              <option value="8 hours">8 hours</option>
+              <option value="9 hours">9 hours</option>
+              <option value="10 hours">10 hours</option>
+              <option value="11 hours">11 hours</option>
+              <option value="12 hours">12 hours</option>
+              <option value="13 hours">13 hours</option>
+              <option value="14 hours">14 hours</option>
+              <option value="15 hours">15 hours</option>
+              <option value="16 hours">16 hours</option>
+              <option value="17 hours">17 hours</option>
+              <option value="18 hours">18 hours</option>
+              <option value="19 hours">19 hours</option>
+              <option value="20 hours">20 hours</option>
+              <option value="21 hours">21 hours</option>
+              <option value="22 hours">22 hours</option>
+              <option value="23 hours">23 hours</option>
+              <option value="24 hours">24 hours</option>
+              <option value="48 hours">48 hours</option>
+              <option value="72 hours">72 hours</option>
+            </select>
+            <i></i>
+          </label>
+        </p>
+      </div>
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <p>
+          Allow participants to cancel bookings from confirmation emails
+          <label class="toggle pull-right"><input formControlName="isCustomerCancelFromConfirmation" checked="" (click)="onSubmit(userForm);" type="checkbox"><i class="no-rounded"></i></label>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!--</div>
+      </div>
+  </section>-->
+</form>

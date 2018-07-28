@@ -1,0 +1,66 @@
+﻿<div class="container-fluid zero-padding">
+  <header>
+    <div class="row login_bg" align="center">
+      <h1 style="color:#FFF;">
+        <b><span class="fa fa-clock-o"></span> Appointmentor</b>
+      </h1>
+    </div>
+  </header>
+  <div class="clearfix margin-bottom-30"></div>
+  <section class="col-md-12">
+    <div class="col-md-offset-3 col-md-6">
+      <form action="#" id="sky-form2" class="sky-form" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+        <header>Login</header>
+        <fieldset>
+          <section>
+            <div class="row">
+              <label class="label col col-2">E-mail <span style="color:red;">*</span></label>
+              <div class="col col-10">
+                <label class="input">
+                  <i class="icon-append fa fa-envelope"></i>
+                  <input formControlName="emailAddress" maxlength="100" class="" placeholder="Email Address" type="email" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required}" />
+                </label>
+                <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                  <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
+                    Email is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="row">
+              <label class="label col col-2 nopad">Password <span style="color:red;">*</span></label>
+              <div class="col col-10">
+                <label class="input">
+                  <i class="icon-append fa fa-lock"></i>
+                  <input formControlName="password" maxlength="100" class="" placeholder="Password" type="password" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['password'].errors && userForm.controls['password'].errors.required}" />
+                </label>
+                <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                  <div *ngIf="userForm.controls['password'].errors && userForm.controls['password'].errors.required">
+                    Password is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label class="label col col-2"></label>
+              <div class="col col-10">
+                <div class="note"><a [routerLink]="['/forgot']" class="modal-opener">Forgot password?</a></div>
+              </div>
+            </div>
+          </section>
+        </fieldset>
+        <footer>
+          <!--<a [routerLink]="['/registration']" class="btn-u btn-u-default">Click here to register</a>-->
+          <div align="right">
+            <button type="submit" class="btn-u">Log in</button>&nbsp;&nbsp;
+          </div>
+        </footer>
+        <div *ngIf="isValidLogin" class="form-error-content">
+          Incorrect login details entered.
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

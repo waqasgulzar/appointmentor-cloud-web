@@ -1,0 +1,9 @@
+﻿<!--<select  class="form-control">
+    <option *ngFor="let item of lookup" [selected]="item.id == lookupselected" value="{{item.id}}">{{item.title}}</option>
+</select>-->
+<label class="select">
+    <select name="country">
+        <option *ngFor="let item of lookup" [selected]="item.id == lookupselected" value="{{item.id}}">{{item.title}}</option>
+    </select>
+    <i></i>
+</label>

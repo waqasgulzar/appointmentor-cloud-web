@@ -1,0 +1,111 @@
+<!--<div class="wrapper">
+  <div class="header">
+    <div class="container-fluid">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="fa fa-bars"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+              Admin
+            </a>
+            <ul class="dropdown-menu">
+              <li><a [routerLink]="['/monthlyOverview']">Monthly Overview</a></li>
+              <li><a [routerLink]="['/openingtimes']">Opening times</a></li>
+              <li><a [routerLink]="['/services']">Services</a></li>
+              <li><a [routerLink]="['/resources']">Resources</a></li>
+              <li><a [routerLink]="['/asset']">Assets</a></li>
+              <li><a [routerLink]="['/bookingapps']">Booking Apps</a></li>
+              <li><a [routerLink]="['/reviews']">Reviews</a></li>
+              <li><a [routerLink]="['/reports']">Reports</a></li>
+              <li><a [routerLink]="['/paymenthistory']">Payment history</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="javascript:void(0);" [routerLink]="['/marketing']" class="dropdown-toggle" data-toggle="dropdown">
+              Marketing
+            </a>
+            <ul class="dropdown-menu">
+              <li><a [routerLink]="['/notification']">Notifications</a></li>
+              <li><a [routerLink]="['/compaign']">Campaigns</a></li>
+            </ul>
+          </li>
+          <li><a [routerLink]="['/support']">Support</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+              {{organizationName}}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a [routerLink]="['/bookingmicrosite']">Booking microsite</a></li>
+              <li><a [routerLink]="['/profile']">Account profile</a></li>
+              <li><a [routerLink]="['/billing']">Billing</a></li>
+              <li><a [routerLink]="['/account']">User Account</a></li>
+              <li><a [routerLink]="['/logout']">Logout</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle delete" data-toggle="dropdown" href="#">
+              <span class=""><i class="fa fa-cog fa-2x" aria-hidden="true"></i></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a [routerLink]="['/general']">General</a></li>
+              <li><a [routerLink]="['/customersetting']">Customers</a></li>
+              <li><a [routerLink]="['/usersetting']">Users</a></li>
+              <li><a [routerLink]="['/emailsetting']">Emails</a></li>
+              <li><a [routerLink]="['/smssetting']">SMS</a></li>
+              <li><a [routerLink]="['/freeagent']">Freeagent</a></li>
+              <li><a [routerLink]="['/payments']">Payments</a></li>
+              <li><a [routerLink]="['/payments']">EPoS</a></li>
+              <li><a [routerLink]="['/microsite']">Microsite</a></li>
+              <li><a [routerLink]="['/bookingquestion']">Booking Question</a></li>
+              <li><a [routerLink]="['/onlinebookingsetting']">Online Booking</a></li>
+              <li><a [routerLink]="['/calendersync']">Calendar sync</a></li>
+              <li><a [routerLink]="['/api']">API</a></li>
+              <li><a [routerLink]="['/webhooks']">Webhooks</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse zero-padding" id="myNavbar1">
+        <ul class="nav navbar-nav">
+          <li [routerLinkActive]="['active']"><a [routerLink]="['/appointment']">APPOINTMENTS</a></li>
+          <li [routerLinkActive]="['active']"><a [routerLink]="['/customer']">CUSTOMERS</a></li>
+          <li [routerLinkActive]="['active']"><a [routerLink]="['/task']">TASKS</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>-->
+<!--<div>
+  <top-nav></top-nav>
+  <div class="top-separate-bar"></div>
+  <div class="col-xs-2">
+    <div class="accordion slideaccordion editsitemenu">
+      <ng-nav *ngIf="nav.sidebar"></ng-nav>
+    </div>
+  </div>
+  <div class="col-xs-10">
+    <router-outlet></router-outlet>
+  </div>
+</div>-->
+<router-outlet></router-outlet>
+

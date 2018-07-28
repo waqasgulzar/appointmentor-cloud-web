@@ -1,0 +1,163 @@
+﻿<form class="sky-form" [formGroup]="userForm" novalidate="novalidate">
+  <header>Organisation Profile</header>
+  <fieldset>
+    <section>
+      <label class="label">Business Name <span style="color:red;">*</span></label>
+      <label class="input">
+        <i class="icon-append fa fa-building"></i>
+        <input type="text" formControlName="businessName" maxlength="50" class="form-control" placeholder="Enter Business Name">
+      </label>
+      <b class="tooltip tooltip-bottom-right">Needed to enter the Business name</b>
+    </section>
+    <section>
+      <label class="label">About your Business</label>
+      <label class="textarea">
+        <i class="icon-append fa fa-comment"></i>
+        <textarea formControlName="aboutYourBusiness" maxlength="2500" class="form-control" rows="7"></textarea>
+      </label>
+    </section>
+    <section>
+      <label for="logoForMarketingPath">Logo for marketing automation&nbsp;&nbsp;<i class="fa fa-info"></i></label>
+      <input formControlName="logoForMarketingPath" type="file" class="btn-u" />
+    </section>
+    <div class="row">
+      <h3>Address</h3>
+      <section>
+        <label class="label">Street Name</label>
+        <label class="input">
+          <i class="icon-append fa fa-building"></i>
+          <input formControlName="street" type="text" maxlength="50" class="form-control" placeholder="Enter Street Name">
+        </label>
+      </section>
+      <section>
+        <label class="label">City</label>
+        <label class="input">
+          <i class="icon-append fa fa-building"></i>
+          <input formControlName="city" type="text" maxlength="50" class="form-control" placeholder="Enter City Name">
+        </label>
+      </section>
+      <section>
+        <label class="label">Postcode</label>
+        <label class="input">
+          <i class="icon-append fa fa-area-chart"></i>
+          <input formControlName="postCode" type="text" maxlength="50" class="form-control" placeholder="Enter Postcode Name">
+        </label>
+      </section>
+    </div>
+    <div class="row">
+      <h3>Contact Details</h3>
+      <section>
+        <label class="label">Business Phone Number</label>
+        <label class="input">
+          <i class="icon-append fa fa-building"></i>
+          <input formControlName="businessPhoneNumber" type="text" maxlength="50" class="form-control" placeholder="Enter Business Phone Number">
+        </label>
+      </section>
+      <section>
+        <label class="label">Business Website</label>
+        <label class="input">
+          <i class="icon-append fa fa-building"></i>
+          <input formControlName="businessWebsite" type="text" maxlength="500" class="form-control" placeholder="Enter Business Website">
+        </label>
+      </section>
+    </div>
+    <div class="row">
+      <h3>Communication Details</h3>
+      <section>
+        <label class="label">Mobile Number where we send the notification</label>
+        <label class="input">
+          <i class="icon-append fa fa-phone"></i>
+          <input formControlName="mobileNumber" type="text" maxlength="50" class="form-control" placeholder="Enter mobile number">
+        </label>
+      </section>
+      <section>
+        <label class="label">Email Address</label>
+        <label class="input">
+          <i class="icon-append fa fa-envelope-o"></i>
+          <input formControlName="emailAddress" type="email" maxlength="50" class="form-control" placeholder="Enter Email Address">
+        </label>
+      </section>
+      <section>
+        <label class="label">Other Email Address(where we send copies of your notification separted by commas)</label>
+        <label class="input">
+          <i class="icon-append fa fa-envelope-o"></i>
+          <input formControlName="otherEmailAddress" type="email" maxlength="500" class="form-control" placeholder="e.g hello@appointmentor.com,info@appointmentor.com">
+        </label>
+      </section>
+      <section>
+        <label class="label">Send Email Address (The email address shown to customer in email we send on your behalf)</label>
+        <label class="input">
+          <i class="icon-append fa fa-envelope-o"></i>
+          <input formControlName="sendFromEmailAddress" type="email" maxlength="50" class="form-control" placeholder="e.g hello@appointmentor.com">
+        </label>
+      </section>
+      <section>
+        <label class="label">Other Email Address (where we send copies of your notification separted by commas)</label>
+        <label class="input">
+          <i class="icon-append fa fa-envelope-o"></i>
+          <input formControlName="otherEmailAddress" type="email" maxlength="500" class="form-control" placeholder="e.g hello@appointmentor.com,info@appointmentor.com">
+        </label>
+      </section>
+      <section>
+        <label class="label">Send from Name for Email Address (The name shown to your customers in email we send on your behalf)</label>
+        <label class="input">
+          <i class="icon-append fa fa-envelope-o"></i>
+          <input formControlName="sendFromNameForEmail" type="email" maxlength="50" class="form-control" placeholder="e.g personal">
+        </label>
+      </section>
+      <section>
+        <label class="label">Send from Name for SMS (The name shown to your customers in SMS we send on your behalf(11 character max))</label>
+        <label class="input">
+          <i class="icon-append fa fa-envelope-o"></i>
+          <input formControlName="sendFromNameForSMS" type="email" maxlength="11" class="form-control" id="eaddress" placeholder="@ Appointmentor">
+        </label>
+      </section>
+    </div>
+    <div class="row">
+      <section class="col col-3">
+        <label class="label">Profile images for microsite 1/4 </label>
+        <label class="input">
+          <input formControlName="profileImageForMicrosite1" type="file" class="btn-u" />
+        </label><label class="checkbox"><input type="checkbox" name="copy"><i></i></label>
+        <div class="clearfix margin-bottom-30"></div>
+      </section>
+      <section class="col col-3">
+        <label class="label">Profile images for microsite 2/4 </label>
+        <label class="input">
+          <input formControlName="profileImageForMicrosite1" type="file" class="btn-u" />
+        </label><label class="checkbox"><input type="checkbox" name="copy"><i></i></label>
+        <div class="clearfix margin-bottom-30"></div>
+      </section>
+      <section class="col col-3">
+        <label class="label">Profile images for microsite 3/4 </label>
+        <label class="input">
+          <input formControlName="profileImageForMicrosite1" type="file" class="btn-u" />
+        </label><label class="checkbox"><input type="checkbox" name="copy"><i></i></label>
+        <div class="clearfix margin-bottom-30"></div>
+      </section>
+      <section class="col col-3">
+        <label class="label">Profile images for microsite 4/4 </label>
+        <label class="input">
+          <input formControlName="profileImageForMicrosite1" type="file" class="btn-u" />
+        </label><label class="checkbox"><input type="checkbox" name="copy"><i></i></label>
+        <div class="clearfix margin-bottom-30"></div>
+      </section>
+    </div>
+    <section>
+      <label class="label">Banner Name for microsite&nbsp;&nbsp;<i class="fa fa-info"></i></label>
+      <label class="input">
+        <input formControlName="bannerImageForMicrosite" type="file" class="btn-u" />
+      </label>
+    </section>
+
+  </fieldset>
+
+  <footer>
+    <button type="submit" [disabled]="userForm.invalid" class="btn-u  pull-right">Save Changes</button>
+  </footer>
+
+  <div class="message">
+    <i class="rounded-x fa fa-check"></i>
+    <p>Your message was successfully sent!</p>
+  </div>
+</form>

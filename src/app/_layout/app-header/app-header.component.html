@@ -1,0 +1,43 @@
+<nav class="top-bar navbar navbar-static-top ">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <div class="row ">
+        <div class="col-xs-3">
+          <a class="logo-link" href="/" target="_self">
+            <img class="logo" src="../../assets/images/appointmentor-logo.jpg">
+          </a>
+        </div>
+        <div class="col-xs-4">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+            </span>
+          </div>
+          <h3 style="text-align:left;">{{orgInfo.companyName}}</h3>
+        </div>
+        <div class="col-xs-5 text-right">
+          <ul class="largenav nav navbar-nav navbar-right">
+            <li class="upper-links" align="center"><a class="links" href=""><i class="fa fa-question-circle fa-2x"></i><br />Help</a></li>
+            <li class="upper-links" align="center"><a class="links" href=""><i class="fa fa-bell fa-2x"></i><br />Alerts</a></li>
+            <li class="upper-links" align="center"><a class="links" href=""><i class="fa fa-trophy fa-2x"></i><br />Achievements</a></li>
+            <li class="dropdown mega-menu-fullwidth">
+              <a href="#" (click)="$event.preventDefault();" class="links dropdown-toggle" data-toggle="dropdown">
+                <span class=""><i class="fa fa-user-circle fa-2x"></i></span>
+                <strong>{{orgInfo.firstName}}</strong>
+                <span class=""><i class="fa fa-chevron-down"></i></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a [routerLink]="['/account']"><i class="fa fa-user"></i> My Profile</a></li>
+                <li class="divider"></li>
+                <li><a [routerLink]="['/reset', 0]"><i class="fa fa-lock"></i> Change Password</a></li>
+                <li class="divider"></li>
+                <li><a [routerLink]="['/logout']"><i class="fa fa-sign-out-alt"></i> Sign Out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

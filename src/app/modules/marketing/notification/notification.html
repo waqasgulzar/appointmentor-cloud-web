@@ -1,0 +1,141 @@
+﻿<dashboard-component></dashboard-component>
+<div class="clearfix margin-bottom-30"></div>
+<div class="container">
+    <div align="left">
+        
+        <div class="tab-v1">
+            <ul class="nav nav-tabs">
+                <li class="active"><a [routerLink]="['/notification']">Notification</a></li>
+                <li><a [routerLink]="['/compaign']">Compaign</a></li>
+            </ul>
+            <div class="clearfix margin-bottom-30"></div>
+            <div class="tab-content">
+                <div class="tab-pane fade in active">
+                    <form action="#" method="post" id="sky-form3" class="sky-form" novalidate="novalidate">
+                        <header>Notification<span type="button" class="pull-right">Step 1 of 2</span></header>
+                        <fieldset>
+                            <div class="row">
+                                <section>
+                                    <label class="label">Name your notification:<span style="color:red;">*</span></label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-bell"></i>
+                                        <input name="name" id="name" type="text">
+                                    </label>
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section>
+                                    <label class="label">Description: <span style="color:red;">*</span></label>
+                                    <label class="textarea">
+                                        <i class="icon-append fa fa-comment"></i>
+                                        <textarea rows="4" name="message" id="message"></textarea>
+                                    </label>
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section>
+                                    <label class="label">Type</label>
+                                    <i class="fa fa-at fa-3x"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-envelope-o fa-3x"></i>
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section>
+                                    <label class="label">Filters: <span style="color:#ccc;">Filter who to send the notification to</span></label>
+                                    <hr />
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section class="col col-3">
+                                    <label class="select">
+                                        <select name="gender">
+                                            <option value="0" selected="" disabled="">Gender</option>
+                                            <option value="1">Birthday</option>
+                                            <option value="2">First Visit</option>
+                                            <option value="2">Last Visit</option>
+                                            <option value="2">Amount of visits</option>
+                                            <option value="3">Last Staff to other customer</option>
+                                        </select>
+                                        <i></i>
+                                    </label>
+                                </section>
+                                <section class="col col-3">
+                                    <label class="select">
+                                        <select name="gender">
+                                            <option value="0" selected="" disabled="">Male</option>
+                                            <option value="2">Female</option>
+                                            <option value="3">Other</option>
+                                        </select>
+                                        <i></i>
+                                    </label>
+                                </section>
+                                <section class="col col-2">
+                                    <button class="btn-u btn-u-red" type="button"><i class="fa fa-minus"></i></button>
+                                </section>
+                                <section class="col col-4">
+                                    <button class="btn-u btn-u-green pull-right" type="button"><i class="fa fa-plus"></i></button>
+                                </section>
+                            </div>
+                        </fieldset>
+                        <footer>
+                            <button type="button" class=" btn-u btn-u-default">cancel</button>&nbsp;&nbsp; <button type="button" class="btn-u">Next</button>
+                        </footer>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="tab-v1">
+            <ul class="nav nav-tabs">
+                <li class="active"><a [routerLink]="['/notification']">Notification</a></li>
+                <li><a [routerLink]="['/compaign']">Compaign</a></li>
+            </ul>
+            <div class="clearfix margin-bottom-30"></div>
+            <div class="tab-content">
+                <div class="tab-pane fade in active">
+                    <form action="#" method="post" id="sky-form3" class="sky-form" novalidate="novalidate">
+                        <header>Notification<span type="button" class="pull-right">Step 2 of 2</span></header>
+                        <fieldset>
+                            <div class="row">
+                                <section>
+                                    <label class="label">Subject</label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-tag"></i>
+                                        <input type="text" name="subject" id="subject">
+                                    </label>
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section>
+                                    <label class="label">Message Content</label>
+                                </section>
+                            </div>
+                            <div class="row">
+                            </div>
+                        </fieldset>
+                        <footer>
+                            <button type="button" class=" btn-u btn-u-default">cancel</button>&nbsp;&nbsp; <button type="button" class="btn-u">Create Notification</button>
+                        </footer>
+                    </form>
+                </div>
+
+            </div>
+        </div> 
+    </div>
+    <div class="tag-box tag-box-v1 margin-bottom-40">
+        <div class="row" align="center">
+            <h3>The notification has successfully been created</h3>
+            <div class="clearfix margin-bottom-30"></div>
+            <section>
+                <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
+                    <button type="button" class="btn-u">Back to Notification</button>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
+                    <button type="button" class="btn-u">Editing to Notification</button>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4 col-lg-4">
+                    <button type="button" class="btn-u">View Notification</button>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿
+<div class="container-fluid zero-padding">
+  <header>
+    <div class="row login_bg" align="center">
+      <h1 style="color:#FFF;">
+        <b><span class="fa fa-clock-o"></span> Appointmentor</b>
+      </h1>
+    </div>
+  </header>
+  <div class="clearfix margin-bottom-30"></div>
+  
+  <div class="clearfix margin-bottom-30"></div>
+  <section class="col-md-12">
+    <div class="col-md-offset-3 col-md-6 col-md-offset-3">
+      <form action="#" class="sky-form" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+        <header style="padding: 8px 13px;">Get started with Appointmentor today</header>
+        <fieldset>
+          <section>
+            <div class="row">Your work email address<span style="color: red;">*</span></div>
+            <div class="row">
+              <label class="input">
+                <i class="icon-append fa fa-envelope"></i>
+                <input formControlName="emailAddress" maxlength="100" placeholder="you@email.com" type="email" required [ngClass]="{'has-error': userForm.invalid && submitted && userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required}" />
+              </label>
+              <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
+                  Email is required
+                </div>
+                <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.email">
+                  Email is invalid
+                </div>
+              </div>
+              <div *ngIf="submitted" class="form-error-content">
+                <div *ngIf="emailAlreadyExist">
+                  This email has already exists. Please try with other one.
+                </div>
+              </div>
+            </div>
+          </section>
+        </fieldset>
+        <footer style="padding: 15px 14px;">
+          <a [routerLink]="['/login']">Go to login</a>
+          <button type="submit" class="btn-u pull-right">Get Started</button>
+        </footer>
+      </form>
+    </div>
+  </section>
+</div>
+

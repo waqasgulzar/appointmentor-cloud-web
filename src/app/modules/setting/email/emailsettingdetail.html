@@ -1,0 +1,95 @@
+﻿<div class="wrapper">
+    <form action="assets/php/demo-contacts-process.php" method="post" id="sky-form4" class="sky-form" novalidate>
+        <div class="container-fluid row login_bg">
+            <!---for mobile view header-->
+            <div class="container content hidden-md hidden-lg" style="padding-bottom:10px;padding-top:10px;">
+                <div class="col-md-12">
+                    <h1 style="color:#FFF;">
+                        <b><span class="fa fa-clock-o"></span> Appointmentor</b>
+                    </h1>
+                </div>
+                <div class="col-md-12">
+                    <section>
+                        <label class="input">
+                            <i class="icon-append fa fa-search"></i>
+                            <input name="search" placeholder="Search" type="text">
+                        </label>
+                    </section>
+                </div>
+                <div class="col-md-12" style="margin-top:10px;">
+                    <i class="fa fa-external-link"><a [routerLink]="['/user.resgistration']" style="color:#fff;">Go to Appointmentor</a></i>
+                </div>
+            </div>
+            <!--desktop view header-->
+            <div class="container content hidden-sm hidden-xs" style="padding-bottom:10px;padding-top:10px;" align="center">
+                <div class="col-md-4">
+                    <h1 style="color:#FFF;">
+                        <b class="pull-left"><span class="fa fa-clock-o"></span> Appointmentor</b>
+                    </h1>
+                </div>
+                <div class="col-md-6">
+                    <section>
+                        <label class="input pull-right">
+                            <i class="icon-append fa fa-search"></i>
+                            <input name="search" placeholder="Search" type="text">
+                        </label>
+                    </section>
+                </div>
+                <div class="col-md-2 pull-right" style="margin-top:10px;">
+                    <i class="fa fa-external-link"><a [routerLink]="['/user.resgistration']" style="color:#fff;">Go to Appointmentor</a></i>
+                </div>
+            </div>
+        </div>
+        <div class="container content bookingtext">
+            <fieldset>
+                <div class="clearfix margin-bottom-30"></div>
+                <section>
+                    <div class="tab-v1">
+                        <ul class="nav nav-tabs">
+                            <li><a href="#" data-toggle="tab">All Collections</a></li>
+                            <li><a href="#" data-toggle="tab">Online booking tools</a></li>
+                            <li><a href="#" data-toggle="tab">Online booking settings</a></li>
+                            <li class="active"><a [routerLink]="['/emailsettingdetail']" data-toggle="tab">Email Design Details</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="home">
+                                <div class="clearfix margin-bottom-30"></div>
+                                <div class="row">
+                                    <h3>How to edit the design of your email communications</h3>
+                                    <b>Using your own custom html headers and footers, you can design the emails sent to your customers from your account.</b>
+                                    <div class="testimonial-info">
+                                        <img class="rounded-x" src="assets/img/user.jpg" alt="user-img" width="70" height="70">
+                                        <span class="testimonial-author">
+                                            Written by
+                                            <em> Kirsty McLaughlin, Updated over a week ago</em><br />
+                                        </span>
+                                    </div>
+                                    <p>
+                                        To ensure that the email communications sent from your account are clearly from you, you can set the send-from name and email address (see this guide), customize the content of the emails (see this guide) and add your own html header and footer to the emails sent from your account. 
+                                    </p>
+                                    <p>
+                                        By adding html headers and footers to your emails, you can not only customize the header and footer themselves but manipulate the content between the header and footer e.g. applying center-alignment, setting the font etc.
+                                    </p>
+                                    <h3>How to add an html header and footer to your emails </h3>
+                                    <ul>
+                                        <li>Go to the settings cog on the top right of your Appointmentor account</li>
+                                        <li>Select emails from the dropdown</li>
+                                        <li>Scroll to header and footer and click edit header or edit footer</li>
+                                        <li>Click on the box and enter the html</li>
+                                        <li>Click save email.</li>
+                                    </ul>
+                                    <p>
+                                        You can also choose to send the email to yourself to see the effect of the header/footer before saving. Click <b>send test email</b>. This test email will send to the email address of the user you are logged in as.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </fieldset>
+            <footer>
+                <p class="text-center">Did This Answer To your Question?</p>
+            </footer>
+        </div>
+    </form>
+</div>

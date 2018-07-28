@@ -1,0 +1,153 @@
+﻿
+<form action="#" id="sky-form4" class="sky-form" novalidate (ngSubmit)="onSubmit(userForm); modal1.hide()" [formGroup]="userForm" style="border:1px solid transparent;">
+    <section class="col-md-12 admin_margin">
+        
+                <div class="tab-content setting-box">
+                    <div class="tab-pane fade in active panel-default">
+                        <h2>Users</h2>
+                        <div class="" align="center">
+                            <div class="tag-box tag-box-v1 margin-bottom-40">
+                                <h4>Manage user access with user permissions</h4>
+                                <p>Users can be invited to access your Appointmentor account. Assign different user permissions to control the levels of user access. Add a user by sending an email invite from which the user creates their own login.</p>
+
+                                <button type="button" (click)="Redirect()" class="btn-u btn-u-default admin_1">Learn more about user permissions&nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-bottom-30"></div>
+                        <div class="panel panel-green margin-bottom-40 admin_margin" align="left">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-tasks"></i>Users</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Permissions</th>
+                                            <th class="hidden-xs hidden-sm"><button type="button" class="btn-u btn-u-green" (click)="ClearFields(); modal1.show()"><i class="fa fa-plus"></i>&nbsp;Add User</button></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of users">
+                                            <td>{{item.firstName}} {{item.lastName}}</td>
+                                            <td>{{item.emailAddress}}</td>
+                                            <td>Administrator</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr *ngFor="let item of customusers">
+                                            <td>{{item.firstName}} {{item.lastName}}</td>
+                                            <td>{{item.emailAddress}}</td>
+                                            <td>{{item.title}}</td>
+                                            <td class="hidden-xs hidden-sm"><span><a style="cursor:pointer;" (click)="LoadUserById(item.userId); modal1.show();"><i class="fa fa-pencil"></i></a></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="button" class="btn-u btn-u-green hidden-md hidden-lg" (click)="ClearFields(); modal1.show()"><i class="fa fa-plus"></i>&nbsp;Add User</button>
+                                <span class="hidden-lg hidden-md"><a style="cursor:pointer;" (click)="modal1.show();"><i class="fa fa-pencil"></i></a></span>
+                                <!---Add user button popup-->
+                                <app-modal #modal1>
+                                    <div class="app-modal-header">
+                                        <h3 class="panel-title"><i class="fa fa-tasks"></i>Add a Teammate</h3>
+                                    </div>
+                                    <!--desktop view-->
+                                    <div class="app-modal-body hidden-sm hidden-xs">
+                                        <div class="row">
+                                            <section class="col col-6">
+                                                <label class="label">First Name</label>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-user"></i>
+                                                    <input formControlName="firstName" maxlength="50" required  type="text">
+                                                    <b class="tooltip tooltip-bottom-right">Needed to enter the first Name</b>
+                                                </label>
+                                            </section>
+                                            <section class="col col-6">
+                                                <label class="label">Last Name</label>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-user"></i>
+                                                    <input formControlName="LastName" maxlength="50" required type="text">
+                                                    <b class="tooltip tooltip-bottom-right">Needed to enter the last name</b>
+                                                </label>
+                                            </section>
+                                        </div>
+                                        <div class="row">
+                                            <section class="col col-6">
+                                                <label class="label">Email Address*</label>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-envelope"></i>
+                                                    <input formControlName="emailAddress" maxlength="100" required class="form-control" type="email">
+                                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                                                </label>
+                                            </section>
+                                            <section class="col col-6">
+                                            </section>
+                                        </div>
+                                        <div class="row">
+                                            <section class="col col-12">
+                                                <h5>User Permissions*</h5>
+                                                <p>Set what this user will have access to in Appointmentor.</p>
+                                                        <section class="col col-12 zero-padding" *ngFor="let item of permission">
+                                                            <label class="radio pull-right"><input (click)="onClick(item.title, item.id);" type="radio" [checked]="selectedPermissionId == item.id" value="{{item.id}}"><i class="rounded-x"></i></label>
+                                                            <h3>{{item.title}} </h3>
+                                                            <p>{{item.description}}</p>
+                                                            <hr />
+                                                        </section>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <!--mobile view-->
+                                    <div class="app-modal-body hidden-md hidden-lg">
+                                        <div class="row">
+                                            <section class="col col-6">
+                                                <label class="label">First Name</label>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-user"></i>
+                                                    <input formControlName="firstName" maxlength="50" required type="text">
+                                                    <b class="tooltip tooltip-bottom-right">Needed to enter the first Name</b>
+                                                </label>
+                                            </section>
+                                            <section class="col col-6">
+                                                <label class="label">Last Name</label>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-user"></i>
+                                                    <input formControlName="LastName" maxlength="50" required type="text">
+                                                    <b class="tooltip tooltip-bottom-right">Needed to enter the last name</b>
+                                                </label>
+                                            </section>
+                                        </div>
+                                        <div class="row">
+                                            <section class="col col-6">
+                                                <label class="label">Email Address*</label>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-envelope"></i>
+                                                    <input formControlName="emailAddress" maxlength="100" required class="form-control" type="email">
+                                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                                                </label>
+                                            </section>
+                                            <section class="col col-6"></section>
+                                        </div>
+                                        <div class="row">
+                                            <section class="col col-12">
+                                                <h5>User Permissions*</h5>
+                                                <p>Set what this user will have access to in Appointmentor.</p>
+                                                <section class="col col-12 zero-padding" *ngFor="let item of permission">
+                                                    <label class="radio pull-right"><input (click)="onClick(item.title, item.id);" type="radio" [checked]="selectedPermissionId == item.id" value="{{item.id}}"><i class="rounded-x"></i></label>
+                                                    <h3>{{item.title}} </h3>
+                                                    <p>{{item.description}}</p>
+                                                    <hr />
+                                                </section>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="app-modal-footer">
+                                        <button type="button" (click)="modal1.hide()" class="btn-u btn-u-default">Close</button>
+                                        <button type="submit" [disabled]="userForm.invalid" class="btn-u btn-u-primary">{{savebuttonText}} changes</button>
+                                    </div>
+                                </app-modal>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          
+    </section>
+</form>

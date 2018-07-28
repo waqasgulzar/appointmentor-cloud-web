@@ -1,0 +1,199 @@
+﻿
+<header>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content col-md-12 zero-padding">
+
+                <div class="modal-body zero-padding col-md-12 zero-padding">
+                    <ul class="nav nav-pills nav-stacked col-md-3 zero-padding">
+                        <li class="active"><a ng-class="isItThirdPageB()" data-toggle="pill" href="#home"><span><i class="fa fa-calendar" aria-hidden="true"></i></span>&nbsp;&nbsp;Appointment</a></li>
+                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu1"><span><i class="fa fa-id-card-o" aria-hidden="true"></i></span>&nbsp;&nbsp;Class</a></li>
+                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu2"><span><i class="fa fa-id-card-o" aria-hidden="true"></i></span>&nbsp;&nbsp;Invitation</a></li>
+                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu3"><span><i class="fa fa-coffee" aria-hidden="true"></i></span>&nbsp;&nbsp;Break</a></li>
+                    </ul>
+                    <div id="home" class="tab-pane fade in active col-md-9" style="padding-bottom:20px;">
+                        <ol class="wizard-progress wizard-3-steps clearfix center-block" style="    height: 5px;">
+                            <li class="step-done">
+                                <span class="step-num">1</span>
+                                <span class="step-name"></span>
+                            </li>
+                            <li ng-class="isItSecondPage()">
+                                <span class="step-num">2</span>
+                                <span class="step-name"></span>
+                            </li>
+                            <li ng-class="isItThirdPage()">
+                                <span class="step-num">3</span>
+                                <span class="step-name"></span>
+                            </li>
+                        </ol>
+
+                        <form class="form-horizontal" ng-show="appointmentPage2">
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="control-label col-sm-2">Date:</label>
+                                <div class="col-md-offset-1 col-md-9">
+                                    <!--<datepicker date-enabled-dates="{{enableDates}}" date-format="dd-MM-yyyy">
+                                        <input class="form-control" ng-change="dateChoised()" ng-model="date" type="text" />
+                                    </datepicker>-->
+                                </div>
+                            </div>
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="col-md-2">Period:</label>
+                                <div class="col-md-offset-1 col-md-9">
+                                    <select class="form-control" ng-model="selectedAppointmentperiod" ng-change="appointmentPeriodChanged()" ng-options="item.label  disable when item.id == '0' for item in periods"></select>
+                                </div>
+                            </div>
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="col-md-2">Time:</label>
+                                <!--<div class=" col-md-9" style="
+									max-height: 200px;
+									    overflow-y: scroll;
+									    background: #fff;border: 1px solid #979797;border-radius: 4px;width: 306px;margin-left: 53px;">
+                                    <div ng-if="availableTimings.length == 0">
+                                        <label>Sorry no time available</label>
+                                    </div>
+                                    <div *ngFor="let time of availableTimings">
+                                        <label class="btn-block">{{time}}<input ng-click="timeSelected(time)" type="radio" name="optradio" class="pull-right"></label>
+                                    </div>
+                                </div>-->
+                            </div>
+                            <label ng-if="errorOnPage2" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
+                            <div class="form-group cstm-padding">
+                                <button ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
+                                <button ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
+                            </div>
+                        </form>
+
+
+
+
+                        <!---- <form class="form-horizontal" ng-show="appointmentPage1">
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="control-label col-sm-2">Category:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <select class="form-control" ng-model="selectedAppointmentCategory" ng-change="AppointmentCategoryChanged()" ng-options="item.label  disable when item.id == '0' for item in appointmentCategorys"></select>
+                                 </div>
+                             </div>
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="col-md-2">Service:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <select class="form-control" ng-model="selectedAppointmentService" ng-change="appointmentServiceChanged()" ng-options="item.label  disable when item.id == '0' for item in appointmentServices"></select>
+                                 </div>
+                             </div>
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="col-md-2">Resource:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <select class="form-control" ng-model="selectedAppointmentResource" ng-options="item.label  disable when item.id == '0' for item in appointmentResource"></select>
+                                 </div>
+                             </div>
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="col-md-2">Price:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <input class="form-control" type="text" value="{{selectedAppointmentService.price}}">
+                                 </div>
+                             </div>-->
+                        <!-- <div class="form-group">
+                        <label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
+                        <!-- </div> -->
+                        <!---- <div class="form-group cstm-padding">
+                                <button ng-hide="appointmentPage1" ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
+                                <button ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
+                            </div>
+                        </form>-->
+                        <!-----<form class="form-horizontal" ng-show="appointmentPage3">
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="control-label col-sm-2">Existing Customer</label>
+                                <div class="col-md-offset-1 col-md-9">
+                                    <!--<angucomplete-alt id="ex1"
+                                                      placeholder="Search Customer"
+                                                      pause="100"
+                                                      selected-object="selectedCustomer"
+                                                      local-data="customers"
+                                                      search-fields="name"
+                                                      title-field="name"
+                                                      minlength="1"
+                                                      input-class="form-control form-control-small" />-->
+                        <!-----</div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2">New Customer:</label>
+                            <div class="col-md-offset-1 col-md-4">
+                                <input type="text" class="form-control" ng-model="fname">
+                            </div>
+                            <div class="col-md-4 norightpadding">
+                                <input type="text" class="form-control" ng-model="lname">
+                            </div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2"></label>
+                            <div class="col-md-offset-1 col-md-9">
+                                <input type="text" class="form-control" placeholder="Email Address" name="" value="">
+                            </div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2"></label>
+                            <div class="col-md-offset-1 col-md-4">
+                                <input type="text" class="form-control" ng-model="fname">
+                            </div>
+                            <div class="col-md-4 norightpadding">
+                                <input type="text" class="form-control" ng-model="lname">
+                            </div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2">Booking Notes</label>
+                            <div class="col-md-offset-1 col-md-4">
+                                <textarea name="name" rows="4" cols="34" placeholder="Booking Notes"></textarea>
+                            </div>
+
+                        </div>-->
+                        <!-- <div class="form-group"> -->
+                        <!----<label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
+                         <!-- </div> -->
+                        <!----<div class="form-group cstm-padding">
+                                <button ng-hide="appointmentPage1" ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
+                                <button ng-hide="appointmentPage3" ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
+                            </div>
+                        </form>-->
+
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+
+                    </div>
+                    <div id="menu3" class="tab-pane fade">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</header>
+<section class="col-md-12 admin_margin">
+   
+            <div class="tab-content" style="padding:10px;background-color:#fff;border:0px;">
+                <div class="tab-pane fade in active panel-default">
+                    <h2>API <button type="button" class="btn btn-default pull-right">View documentation &nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></button></h2>
+                    <p>Connect to Appointmentor's public facing API</p>
+                    <div class="clearfix margin-bottom-30"></div>
+                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+                        <h5>Client Id<label class="pull-right">NWEwMTQ1YmY3YTA0NzRjNTU0MWI1YmM2</label></h5>
+                    </div>
+                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+                        <h5>Generate an API key to get started with the Appointmentor API<button class="btn-u pull-right">Generate API secret</button></h5>
+                    </div>
+                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+                        <h5>Generate an API key to get started with the Appointmentor API<button class="btn-u pull-right">Generate API token</button></h5>
+                    </div>
+                </div>
+
+            </div>
+      
+</section>

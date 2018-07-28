@@ -1,0 +1,113 @@
+﻿<ul class="nav panel-group">
+  <li>
+    <a [routerLink]="['/dashboard']"><h4 class="panel-title"><i class="fa fa-home"></i>Home</h4></a>
+  </li>
+  <li class="on panel panel-default">
+    <a class="submenu-toggle panel-heading">
+      <h4 class="panel-title"><i class="fa fa-cog"></i>Settings</h4>
+      <i class="fr fa fa-angle-down" *ngIf="active!='settings'" (click)="active='settings'"></i>
+      <i class="fr fa fa-angle-up" *ngIf="active=='settings'" (click)="active=''"></i>
+    </a>
+    <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='settings'">
+      <li><a [routerLink]="['/profile']" routerLinkActive="on">Organisation Proﬁle</a></li>
+      <li><a [routerLink]="['/openingtimes']" routerLinkActive="on">Timings & Calendar</a></li>
+      <li><a [routerLink]="['/services']" routerLinkActive="on">Categories & Services</a></li>
+      <li><a [routerLink]="['/resources']" routerLinkActive="on">Resources & Assets</a></li>
+      <li><a [routerLink]="['/asset']" routerLinkActive="on">Inventory & Stocks</a></li>
+      <li><a [routerLink]="['/task']" routerLinkActive="on">Tasks & Activities </a></li>
+      <li><a [routerLink]="['/account']" routerLinkActive="on">Account Management</a></li>
+    </ul>
+  </li>
+  <li class="on panel panel-default">
+    <a class="submenu-toggle panel-heading">
+      <h4 class="panel-title"><i class="fa fa-bullhorn"></i>Communications</h4>
+      <i class="fr fa fa-angle-down" *ngIf="active!='communications'" (click)="active='communications'"></i>
+      <i class="fr fa fa-angle-up" *ngIf="active=='communications'" (click)="active=''"></i>
+    </a>
+    <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='communications'">
+      <li><a [routerLink]="['/underProcess']">Welcome Packs </a></li>
+      <li><a [routerLink]="['/underProcess']">Feedback & Notiﬁcations</a></li>
+      <li><a [routerLink]="['/emailsetting']">Email & SMS</a></li>
+      <li><a [routerLink]="['/reviews']">Reviews & Social Media</a></li>
+      <li><a [routerLink]="['/marketing']">Marketing Campaigns</a></li>
+      <li><a [routerLink]="['/underProcess']">Templates</a></li>
+    </ul>
+  </li>
+  <li class="on panel panel-default">
+    <a class="submenu-toggle panel-heading">
+      <h4 class="panel-title"><i class="fa fa-gavel"></i>Tools & Plugins</h4>
+      <i class="fr fa fa-angle-down" *ngIf="active!='tools'" (click)="active='tools'"></i>
+      <i class="fr fa fa-angle-up" *ngIf="active=='tools'" (click)="active=''"></i>
+    </a>
+    <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='tools'">
+      <li><a [routerLink]="['/payments']">e-Payments </a></li>
+      <li class=""><a [routerLink]="['/microsite']">Business Micro Web Site</a></li>
+      <li><a [routerLink]="['/underProcess']">Couponator</a></li>
+      <li><a [routerLink]="['/underProcess']">Referrals Magic</a></li>
+      <li><a [routerLink]="['/underProcess']">Recall Manager</a></li>
+      <li><a [routerLink]="['/underProcess']">Customer Connections</a></li>
+      <li><a [routerLink]="['/underProcess']">Provider's myDiary App</a></li>
+      <li><a [routerLink]="['/underProcess']">myAppointments App</a></li>
+    </ul>
+  </li>
+  <li class="on panel panel-default">
+    <a class="submenu-toggle panel-heading">
+      <h4 class="panel-title"><i class="fa fa-cogs"></i>Integrations</h4>
+      <i class="fr fa fa-angle-down" *ngIf="active!='integrations'" (click)="active='integrations'"></i>
+      <i class="fr fa fa-angle-up" *ngIf="active=='integrations'" (click)="active=''"></i>
+    </a>
+    <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='integrations'">
+      <li><a [routerLink]="['/epos']">Point of Sale - EPoS</a></li>
+      <li><a [routerLink]="['/account']">Accounting</a></li>
+      <li><a [routerLink]="['/bookingapps']">Booking Apps</a></li>
+      <li><a [routerLink]="['/api']">APIs & Webhooks</a></li>
+    </ul>
+  </li>
+  <li class="on panel panel-default">
+    <a class="submenu-toggle panel-heading">
+      <h4 class="panel-title"><i class="fa fa-line-chart"></i>Reports</h4>
+      <i class="fr fa fa-angle-down" *ngIf="active!='reports'" (click)="active='reports'"></i>
+      <i class="fr fa fa-angle-up" *ngIf="active=='reports'" (click)="active=''"></i>
+    </a>
+    <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='reports'">
+      <li><a [routerLink]="['/dashboard']">Dashboard</a></li>
+      <li><a [routerLink]="['/underProcess']">Booking Reports</a></li>
+      <li><a [routerLink]="['/monthlyOverview']">Financial Reports</a></li>
+    </ul>
+  </li>
+  <li class="on panel panel-default">
+    <a class="submenu-toggle panel-heading">
+      <h4 class="panel-title"><i class="fa fa-file-invoice"></i>Billings</h4>
+      <i class="fr fa fa-angle-down" *ngIf="active!='billings'" (click)="active='billings'"></i>
+      <i class="fr fa fa-angle-up" *ngIf="active=='billings'" (click)="active=''"></i>
+    </a>
+    <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='billings'">
+      <li><a [routerLink]="['/underProcess']">Invoices and Payments</a></li>
+    </ul>
+  </li>
+  <li class="on panel panel-default">
+    <a class="submenu-toggle panel-heading">
+      <h4 class="panel-title"><i class="fa fa-question-circle"></i>Help & Support</h4>
+      <i class="fr fa fa-angle-down" *ngIf="active!='help'" (click)="active='help'"></i>
+      <i class="fr fa fa-angle-up" *ngIf="active=='help'" (click)="active=''"></i>
+    </a>
+    <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='help'">
+      <li><a [routerLink]="['/underProcess']">Launch Support Ticket</a></li>
+      <li><a [routerLink]="['/underProcess']">UserGuide</a></li>
+      <li><a [routerLink]="['/underProcess']">Support & Feedback</a></li>
+      <li><a [routerLink]="['/underProcess']">Suggestions & Ideas</a></li>
+    </ul>
+  </li>
+  <li class="on panel panel-default">
+    <a class="submenu-toggle panel-heading">
+      <h4 class="panel-title"><i class="fa fa-project-diagram"></i>Recently Used Links</h4>
+      <i class="fr fa fa-angle-down" *ngIf="active!='recently'" (click)="active='recently'"></i>
+      <i class="fr fa fa-angle-up" *ngIf="active=='recently'" (click)="active=''"></i>
+    </a>
+    <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='recently'">
+      <li><a [routerLink]="['/underProcess']">Recall Manager</a></li>
+      <li><a [routerLink]="['/underProcess']">Support & Feedback</a></li>
+      <li><a [routerLink]="['/services']">Services</a></li>
+    </ul>
+  </li>
+</ul>

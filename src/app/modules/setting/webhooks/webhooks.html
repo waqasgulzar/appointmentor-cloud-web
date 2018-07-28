@@ -1,0 +1,294 @@
+﻿
+<header>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content col-md-12 zero-padding">
+
+                <div class="modal-body zero-padding col-md-12 zero-padding">
+                    <ul class="nav nav-pills nav-stacked col-md-3 zero-padding">
+                        <li class="active"><a ng-class="isItThirdPageB()" data-toggle="pill" href="#home"><span><i class="fa fa-calendar" aria-hidden="true"></i></span>&nbsp;&nbsp;Appointment</a></li>
+                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu1"><span><i class="fa fa-id-card-o" aria-hidden="true"></i></span>&nbsp;&nbsp;Class</a></li>
+                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu2"><span><i class="fa fa-id-card-o" aria-hidden="true"></i></span>&nbsp;&nbsp;Invitation</a></li>
+                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu3"><span><i class="fa fa-coffee" aria-hidden="true"></i></span>&nbsp;&nbsp;Break</a></li>
+                    </ul>
+                    <div id="home" class="tab-pane fade in active col-md-9" style="padding-bottom:20px;">
+                        <ol class="wizard-progress wizard-3-steps clearfix center-block" style="    height: 5px;">
+                            <li class="step-done">
+                                <span class="step-num">1</span>
+                                <span class="step-name"></span>
+                            </li>
+                            <li ng-class="isItSecondPage()">
+                                <span class="step-num">2</span>
+                                <span class="step-name"></span>
+                            </li>
+                            <li ng-class="isItThirdPage()">
+                                <span class="step-num">3</span>
+                                <span class="step-name"></span>
+                            </li>
+                        </ol>
+
+                        <form class="form-horizontal" ng-show="appointmentPage2">
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="control-label col-sm-2">Date:</label>
+                                <div class="col-md-offset-1 col-md-9">
+                                    <!--<datepicker date-enabled-dates="{{enableDates}}" date-format="dd-MM-yyyy">
+                                        <input class="form-control" ng-change="dateChoised()" ng-model="date" type="text" />
+                                    </datepicker>-->
+                                </div>
+                            </div>
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="col-md-2">Period:</label>
+                                <div class="col-md-offset-1 col-md-9">
+                                    <select class="form-control" ng-model="selectedAppointmentperiod" ng-change="appointmentPeriodChanged()" ng-options="item.label  disable when item.id == '0' for item in periods"></select>
+                                </div>
+                            </div>
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="col-md-2">Time:</label>
+                                <!--<div class=" col-md-9" style="
+									max-height: 200px;
+									    overflow-y: scroll;
+									    background: #fff;border: 1px solid #979797;border-radius: 4px;width: 306px;margin-left: 53px;">
+                                    <div ng-if="availableTimings.length == 0">
+                                        <label>Sorry no time available</label>
+                                    </div>
+                                    <div *ngFor="let time of availableTimings">
+                                        <label class="btn-block">{{time}}<input ng-click="timeSelected(time)" type="radio" name="optradio" class="pull-right"></label>
+                                    </div>
+                                </div>-->
+                            </div>
+                            <label ng-if="errorOnPage2" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
+                            <div class="form-group cstm-padding">
+                                <button ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
+                                <button ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
+                            </div>
+                        </form>
+
+
+
+
+                        <!---- <form class="form-horizontal" ng-show="appointmentPage1">
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="control-label col-sm-2">Category:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <select class="form-control" ng-model="selectedAppointmentCategory" ng-change="AppointmentCategoryChanged()" ng-options="item.label  disable when item.id == '0' for item in appointmentCategorys"></select>
+                                 </div>
+                             </div>
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="col-md-2">Service:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <select class="form-control" ng-model="selectedAppointmentService" ng-change="appointmentServiceChanged()" ng-options="item.label  disable when item.id == '0' for item in appointmentServices"></select>
+                                 </div>
+                             </div>
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="col-md-2">Resource:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <select class="form-control" ng-model="selectedAppointmentResource" ng-options="item.label  disable when item.id == '0' for item in appointmentResource"></select>
+                                 </div>
+                             </div>
+                             <div class="form-group cstm-padding">
+                                 <label for="Service" class="col-md-2">Price:</label>
+                                 <div class="col-md-offset-1 col-md-9">
+                                     <input class="form-control" type="text" value="{{selectedAppointmentService.price}}">
+                                 </div>
+                             </div>-->
+                        <!-- <div class="form-group">
+                        <label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
+                        <!-- </div> -->
+                        <!---- <div class="form-group cstm-padding">
+                                <button ng-hide="appointmentPage1" ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
+                                <button ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
+                            </div>
+                        </form>-->
+                        <!-----<form class="form-horizontal" ng-show="appointmentPage3">
+                            <div class="form-group cstm-padding">
+                                <label for="Service" class="control-label col-sm-2">Existing Customer</label>
+                                <div class="col-md-offset-1 col-md-9">
+                                    <!--<angucomplete-alt id="ex1"
+                                                      placeholder="Search Customer"
+                                                      pause="100"
+                                                      selected-object="selectedCustomer"
+                                                      local-data="customers"
+                                                      search-fields="name"
+                                                      title-field="name"
+                                                      minlength="1"
+                                                      input-class="form-control form-control-small" />-->
+                        <!-----</div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2">New Customer:</label>
+                            <div class="col-md-offset-1 col-md-4">
+                                <input type="text" class="form-control" ng-model="fname">
+                            </div>
+                            <div class="col-md-4 norightpadding">
+                                <input type="text" class="form-control" ng-model="lname">
+                            </div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2"></label>
+                            <div class="col-md-offset-1 col-md-9">
+                                <input type="text" class="form-control" placeholder="Email Address" name="" value="">
+                            </div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2"></label>
+                            <div class="col-md-offset-1 col-md-4">
+                                <input type="text" class="form-control" ng-model="fname">
+                            </div>
+                            <div class="col-md-4 norightpadding">
+                                <input type="text" class="form-control" ng-model="lname">
+                            </div>
+                        </div>
+                        <div class="form-group cstm-padding">
+                            <label for="Service" class="col-md-2">Booking Notes</label>
+                            <div class="col-md-offset-1 col-md-4">
+                                <textarea name="name" rows="4" cols="34" placeholder="Booking Notes"></textarea>
+                            </div>
+
+                        </div>-->
+                        <!-- <div class="form-group"> -->
+                        <!----<label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
+                         <!-- </div> -->
+                        <!----<div class="form-group cstm-padding">
+                                <button ng-hide="appointmentPage1" ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
+                                <button ng-hide="appointmentPage3" ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
+                            </div>
+                        </form>-->
+
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+
+                    </div>
+                    <div id="menu3" class="tab-pane fade">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</header>
+<section class="col-md-12 admin_margin">
+   
+            <div class="tab-content" style="padding:10px;background-color:#fff;border:0px;">
+                <div class="tab-pane fade in active panel-default">
+                    <h2>Webhooks</h2>
+                    <div class="shadow-wrapper" align="center">
+                        <div class="tag-box tag-box-v1 box-shadow shadow-effect-2 admin_margin">
+                            <h4>Integrate with hundreds of apps using webhooks</h4>
+                            <p>Connect Appointmentor to your favourite tools to automate tedious and repetitive tasks. Webhooks can be configured to trigger behaviour in other tools based on Appointmentor events.</p>
+                            <button type="button" class="btn-u btn-u-default admin_margin">Learn more about webhooks&nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="clearfix margin-bottom-30"></div>
+                    <div class="shadow-wrapper" align="center">
+                        <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+                            <h4>You have no webhooks</h4>
+                            <button type="button" class="btn-u btn-u-green" data-toggle="modal" data-target="#responsive"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp; Add Webhook</button>
+                            <!--<div class="panel panel-green margin-bottom-40 collapse admin_margin" id="demo" align="left">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-tasks"></i>Customers</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Field Name</th>
+                                                <th>Field ID</th>
+                                                <th>Required?</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>custom-field</td>
+                                                <td>custom-field</td>
+                                                <td>Required&nbsp;&nbsp;<input type="checkbox" /></td>
+                                                <td><span class="btn-u btn-u-red">Delete</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix margin-bottom-30"></div>
+                                    <button type="button" class="btn-u">Save Field</button><button type="button" class="btn-u pull-right"><i class="fa fa-plus"></i>&nbsp;Add Field</button>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+    <!---pop-up of webhook button-->
+    <div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content" style="padding:10px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel4">Add Webhook</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="#" class="sky-form" style="border: 1px solid #fff;">
+                                <!---name-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p> <b>Name*</b><input class="form-control" type="text"></p>
+                                    </div>
+                                </div>
+                                <!---select-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="label">
+                                            <b> Webhook Trigger *</b> (Please select which event you would like this webhook to be triggered on.)
+                                        </label>
+                                        <label class="select">
+                                            <select>
+                                                <option value="booking_created">booking_created</option>
+                                                <option value="booking_updated">booking_updated</option>
+                                                <option value="booking_cancelled">booking_cancelled</option>
+                                                <option value="customer_created">customer_created</option>
+                                                <option value="customer_updated">customer_updated</option>
+                                                <option value="customer_deleted">customer_deleted</option>
+                                            </select>
+                                            <i></i>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!---url-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="label">
+                                            <b>URL *</b> (Please specify an endpoint URL which data should be sent to when this webhook is triggered.)
+                                        </label>
+                                        <p><input class="form-control" type="text"></p>
+                                    </div>
+                                </div>
+                                <!---token-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="label">
+                                            <b>Token</b> (If you need to authenticate your webhook requests, please insert your authentication token here.)
+                                        </label>
+                                        <p><input class="form-control" type="text"></p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn-u btn-u-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

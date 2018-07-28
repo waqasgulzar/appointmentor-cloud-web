@@ -1,0 +1,72 @@
+﻿<form novalidate [formGroup]="userForm" id="sky-form4" class="sky-form" style="border:1px solid transparent;">
+  <section class="col-md-12 admin_margin">
+    <div class="tab-content setting-box">
+      <div class="tab-pane fade in active panel-default">
+        <h2>General Setting</h2>
+        <div class="panel-body col-md-12 col-sm-12 col-xs-12 row" style="background-color:#fafafa;">
+          <div class="alert alert-success" [hidden]="isHidden">
+            <strong>Success!</strong> {{messageText}} has been updated successfully.
+          </div>
+        </div>
+        <div class="panel-body col-md-12 col-sm-12 col-xs-12 row" style="background-color:#fafafa;">
+
+          <div class="col-md-7 col-sm-12 col-xs-12">
+            <h5>Calendar interval increments</h5>
+          </div>
+          <div class="col-md-5 col-sm-12 col-xs-12">
+            <label class="select">
+              <select formControlName="calendarIntervalIncrement" (change)="CalendarIncrementChange()">
+                <option value="1">1 minute</option>
+                <option value="2">2 minutes</option>
+                <option value="3">3 minutes</option>
+                <option value="5">5 minutes</option>
+                <option value="10">10 minutes</option>
+                <option value="15">15 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="60">60 minutes</option>
+              </select>
+              <i></i>
+            </label>
+          </div>
+        </div>
+        <div class="panel-body col-md-12 col-sm-12 col-xs-12 row admin_margin" style="background-color:#fafafa;">
+          <div class="col-md-7 col-sm-12 col-xs-12">
+            <h5>Timezone</h5>
+          </div>
+          <div class="col-md-5 col-sm-12 col-xs-12">
+            <label class="select">
+              <lookup-component formControlName="timezoneControl" [lookup]="timezonelist" [lookupselected]="selectedTimeZone" ngDefaultControl (change)="TimeZoneChange()"></lookup-component>
+              <i></i>
+            </label>
+          </div>
+        </div>
+        <div class="panel-body col-md-12 col-sm-12 col-xs-12 row admin_margin" style="background-color:#fafafa;">
+          <div class="col-md-7 col-sm-12 col-xs-12">
+            <h5>Currency</h5>
+          </div>
+          <div class="col-md-5 col-sm-12 col-xs-12">
+            <label class="select">
+              <lookup-component formControlName="currencyControl" [lookup]="currencylist" [lookupselected]="selectedCurrency" ngDefaultControl (change)="CurrencyChange()"></lookup-component>
+              <i></i>
+            </label>
+          </div>
+        </div>
+        <div class="panel-body col-md-12 col-sm-12 col-xs-12 row admin_margin" style="background-color:#fafafa;">
+          <div class="col-md-7 col-sm-12 col-xs-12">
+            <h5>Date Format</h5>
+          </div>
+          <div class="col-md-5 col-sm-12 col-xs-12">
+            <label class="select">
+              <select formControlName="dateFormat" (change)="DateFormatChange()">
+                <option value="dd/mm/yyyy">dd/mm/yyyy</option>
+                <option value="dd/mm/yyyy">dd/mm/yyyy</option>
+              </select>
+              <i></i>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</form>

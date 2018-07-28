@@ -1,0 +1,50 @@
+﻿<form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+  <div class="container">
+
+    <div *ngIf="!isPasswordMatch">
+      <div class="alert alert-info alert-dismissible">
+        <h4><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Alert!</h4>
+        Passwords do not match. Please try again.
+      </div>
+    </div>
+    <div *ngIf="isLinkExpired">
+      <div class="alert alert-info alert-dismissible">
+        <h4><i class="icon fa fa-"></i>Alert!</h4>
+        Reset password link is either wrong or it has been expired. Please perform forgot operation again in order to achive desire result.
+      </div>
+      <a [routerLink]="['']">Home</a>
+    </div>
+    <div *ngIf="isReset">
+      <div class="alert alert-success alert-dismissible">
+        <h4><i class="icon fa fa-"></i>Alert!</h4>
+        Password has been reset successfully.
+      </div>
+      <a [routerLink]="['login']">Sign In</a>
+    </div>
+    <div class="row" *ngIf="!(isReset || isLinkExpired)">
+      <div class="col-md-12">
+        <span class="h3">Enter your new password</span><br /><br />
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-8" align="left">
+        <label for="email">Password <span style="color:red;">*</span></label>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-8" align="left">
+        <input formControlName="password" maxlength="100" class="form-control small_width" placeholder="***********" type="password" required />
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-8" align="left">
+        <label for="email">Confirm Password <span style="color:red;">*</span></label>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-8" align="left">
+        <input formControlName="confirmPassword" maxlength="100" class="form-control small_width" placeholder="***********" type="password" required />
+        <br />
+      </div>
+      <div class="col-md-12" align="center">
+        <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">Reset your Password</button>
+      </div>
+    </div>
+  </div>
+</form>

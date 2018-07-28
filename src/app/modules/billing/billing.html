@@ -1,0 +1,283 @@
+﻿<dashboard-component></dashboard-component>
+<div class="clearfix margin-bottom-30"></div>
+<div class="container">
+
+  <div id="sky-form3" class="sky-form" novalidate="novalidate">
+    <div align="left">
+      <header>Billing</header>
+    </div>
+    <fieldset>
+
+      <div class="tag-box tag-box-v1 margin-bottom-40">
+        <div class="row">
+          <div class="ap-layout-card-row ap-layout-card-row-first">
+            <div class="ap-layout-card-full-width-col">
+              <h2>You have <b>{{orgInfo.stats.trialDaysLeft}}</b> day(s) remaining on your free trial.</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="orgInfo && orgInfo.payment.id <= 0">
+        <div class="row">
+          <section class="col col-4 heading">
+            <h4>Your usage</h4>
+          </section>
+          <section class="col col-8">
+            <h4>You have created <b>{{orgInfo.stats.resources}}</b> resource(s) and <b>{{orgInfo.stats.subUsers}}</b> user(s).</h4>
+            <h4>To continue, you need to subscribe to at least <b> 1 bundle.</b></h4>
+          </section>
+        </div>
+        <hr />
+        <div class="row">
+          <section class="col col-4 heading">
+            <h4>Number of bundles</h4>
+          </section>
+          <section class="col col-2">
+            <div class="input-group number-spinner">
+              <span class="input-group-btn">
+                <button class="btn btn-default"><span class="glyphicon glyphicon-minus" (click)="decrement()"></span></button>
+              </span>
+              <input type="text" class="form-control text-center" [(ngModel)]="bundleToPurchase">
+              <span class="input-group-btn">
+                <button class="btn btn-default"><span class="glyphicon glyphicon-plus" (click)="increment()"></span></button>
+              </span>
+            </div>
+          </section>
+          <section class="col col-6">
+            <h4>{{bundleInfo}}</h4>
+          </section>
+        </div>
+        <hr />
+        <div class="row">
+          <section class="col col-3 heading">
+            <h4>Subscribe</h4>
+          </section>
+          <section class="col col-4 ap-plan-card">
+            <div class="ap-plan-card-title">Pay Monthly</div>
+            <div class="ap-plan-card-subtitle ng-binding">£ {{payMonthly*bundleToPurchase}} per month</div>
+            <button (click)="subscribe('monthly')" class="btn-u pull-right"><span class="ladda-label">Subscribe</span></button>
+          </section>
+          <section class="col col-1"></section>
+          <section class="col col-4 ap-plan-card">
+            <div class="ap-plan-card-title">Pay Annually</div>
+            <div class="ap-plan-card-subtitle ng-binding">£ {{(payAnnualy*bundleToPurchase)-(24 * bundleToPurchase)}} per year (save £ {{24 * this.bundleToPurchase}})</div>
+            <button (click)="subscribe('yearly')" class="btn-u pull-right"><span class="ladda-label">Subscribe</span></button>
+          </section>
+        </div>
+      </div>
+
+      <div *ngIf="orgInfo && orgInfo.payment.id > 0">
+        <div class="tag-box tag-box-v1 margin-bottom-40">
+          <div class="row">
+            <section class="col col-2 heading">
+              <h4>Your subscription</h4>
+            </section>
+            <section class="col col-8">
+              <p>You are subscribed to <b>1 bundle.</b></p>
+              <p>Your next payment of <b>$15.00</b> is due on <b>24th February 2018.</b></p>
+              <br />
+              <p><button type="button" class="btn-u" (click)="modal2.show();">Change to annual billing</button></p>
+              <hr />
+            </section>
+            <section class="col col-2">
+              <button type="button" class="btn-u" (click)="modal1.show();">Edit</button>
+            </section>
+          </div>
+          <div class="row">
+            <section class="col col-2 heading">
+              <h4>Payment</h4>
+            </section>
+            <section class="col col-8">
+              <p>Payments will be taken from a Visa card ending in 9211.</p>
+            </section>
+            <section class="col col-2">
+              <button type="button" class="btn-u" (click)="modal6.show();">Update Details</button>
+            </section>
+          </div>
+        </div>
+        <div class="tag-box tag-box-v1 margin-bottom-40">
+          <div class="row">
+            <section class="col col-2 heading">
+              <h4>SMS Usage</h4>
+            </section>
+            <section class="col col-8">
+              <p>You have not purchased any additional SMS credits.</p>
+              <hr />
+            </section>
+            <section class="col col-2"></section>
+          </div>
+          <div class="row">
+            <section class="col col-3 heading">
+              <h4>Purchase SMS Credits</h4>
+            </section>
+            <section class="col col-3">
+              <div class="tag-box tag-box-v6">
+                <p>100 sms</p>
+                <p>$0.12 each</p>
+                <button type="button" class="btn-u" (click)="modal3.show();">Buy-$12.00</button>
+              </div>
+            </section>
+            <section class="col col-3">
+              <div class="tag-box tag-box-v6">
+                <p>100 sms</p>
+                <p>$0.12 each</p>
+                <button type="button" class="btn-u" (click)="modal4.show();">Buy-$12.00</button>
+              </div>
+            </section>
+            <section class="col col-3">
+              <div class="tag-box tag-box-v6">
+                <p>100 sms</p>
+                <p>$0.12 each</p>
+                <button type="button" class="btn-u" (click)="modal5.show();">Buy-$12.00</button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <a href="">Contact us</a> for billing enquires
+    </fieldset>
+    <div class="message">
+      <i class="rounded-x fa fa-check"></i>
+      <p>Your message was successfully sent!</p>
+    </div>
+  </div>
+</div>
+<!-----pop-up for edit button--->
+<app-modal #modal1>
+  <div class="app-modal-header">
+    Upgrade your subscription
+  </div>
+  <div class="app-modal-body">
+
+    <p>Select the number of bundles you require.</p>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>USAGE</th>
+          <th>ALLOWANCE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Booking apps</td>
+          <td>1</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Resources</td>
+          <td>2</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Users</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <h4>Number of bundles</h4>
+      <div class="col-sm-6">
+        <p>
+          Each bundle on your subscription gives you an allowance of 3 booking apps, 1 resource and 1 user. You can see a full explanation of bundles <a href="">here.</a>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <div class="input-group number-spinner">
+          <span class="input-group-btn">
+            <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+          </span>
+          <input type="text" class="form-control text-center" value="1">
+          <span class="input-group-btn">
+            <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <p align="right">Your monthly bill will be <b>$15.00.</b></p>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" (click)="modal1.hide()" class="btn-u btn-u-default">Close</button>
+    <button type="submit" class="btn btn-default">Confirm Changes</button>
+  </div>
+</app-modal>
+<!--pop-up for annual billing button-->
+<app-modal #modal2>
+  <div class="app-modal-header">
+    Change to annual billing
+  </div>
+  <div class="app-modal-body">
+
+    <p>You are subscribed to <b>1 bundles for $15.00 per month.</b></p>
+    <p>With annual billing, you will be charged <b>$144.00 per year.</b></p>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" (click)="modal2.hide()" class="btn-u btn-u-default">Cancel</button>
+    <button type="submit" class="btn btn-default">Confirm Changes</button>
+  </div>
+</app-modal>
+<!---pop-up for purchasesms button-->
+<app-modal #modal3>
+  <div class="app-modal-header">
+    Buy 100 SMS Credits?
+  </div>
+  <div class="app-modal-body">
+    <p>$12.00 will be charged against the card ending in 9211.</p>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" (click)="modal3.hide()" class="btn-u btn-u-default">Close</button>
+    <button type="submit" class="btn-u btn-u-primary">Save changes</button>
+  </div>
+</app-modal>
+<!---pop-up for purchasesms1 button-->
+<app-modal #modal4>
+  <div class="app-modal-header">
+    Buy 500 SMS Credits?
+  </div>
+  <div class="app-modal-body">
+    <p>$50.00 will be charged against the card ending in 9211.</p>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" (click)="modal4.hide()" class="btn-u btn-u-default">Close</button>
+    <button type="submit" class="btn-u btn-u-primary">Save changes</button>
+  </div>
+</app-modal>
+<!---pop-up for purchasesms2 button-->
+<app-modal #modal5>
+  <div class="app-modal-header">
+    Buy 500 SMS Credits?
+  </div>
+  <div class="app-modal-body">
+    <p>$50.00 will be charged against the card ending in 9211.</p>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" (click)="modal5.hide()" class="btn-u btn-u-default">Close</button>
+    <button type="submit" class="btn-u btn-u-primary">Save changes</button>
+  </div>
+</app-modal>
+<!---pop-up for updatedetails button-->
+<app-modal #modal6>
+  <div class="app-modal-header">
+    Edit payment details
+  </div>
+  <div class="app-modal-body">
+    <div class="row">
+      <form class="sky-form" id="sky-form">
+        <label class="label col col-4">Credit Details <span style="color:red;">*</span></label>
+        <div class="col col-8">
+          <label class="input">
+            <i class="icon-append fa fa-user"></i>
+            <input name="text" type="text">
+          </label>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" (click)="modal6.hide()" class="btn-u btn-u-default">Close</button>
+    <button type="submit" class="btn btn-default">Update Payment Details</button>
+  </div>
+</app-modal>

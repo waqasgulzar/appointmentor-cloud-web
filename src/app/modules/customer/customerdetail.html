@@ -1,0 +1,260 @@
+﻿<dashboard-component></dashboard-component>
+<div class="clearfix margin-bottom-30"></div>
+<div class="container">
+    <div class="panel panel-green margin-bottom-40" style="">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-tasks"></i>Customer
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12 row zero-padding">
+                    <div class="col-md-2">
+                        <img src="assets/img/user.jpg" class="img-circle" alt="Cinque Terre" width="144">
+                    </div>
+                    <div class="col-md-8" align="left">
+                        <div class="clearfix margin-bottom-20"></div>
+                        <h1>Mr.Zaafir</h1>
+                        <p>Email:</p>
+                        <p>Contact No:0300</p>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn-u btn-u-green pull-right btn-lg button-padding" data-toggle="modal" data-target="#responsive">edit customers</button><br /><br />
+                        <button type="button" class="btn-u btn-u-green pull-right btn-lg" data-toggle="modal" data-target="#delete_customer">delete customers</button><br /><br />
+                        <button type="button" class="btn-u btn-u-green pull-right btn-lg button-padding" data-toggle="modal" data-target="#send_message">send message</button><br /><br />
+                    </div>
+                </div>
+                <div class="col-md-12 row" align="right">
+                    <h1>0</h1>
+                    <h3>Previous Bookings</h3>
+                </div>
+                <div class="col-md-12 row hidden-sm hidden-xs" align="right">
+                    <button type="button" class="btn-u btn-u-green">Prev</button>
+                    <button type="button" class="btn-u btn-u-green">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--edit customer popup-->
+<div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel4">Customer</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 zero-padding">
+                    <form class="form-horizontal sky-form" role="form" id="sky-form4" novalidate="novalidate">
+                        <div class="col-md-6">
+                            <h4>Edit Details</h4>
+                            <section>
+                                <label class="input">
+                                    <i class="icon-append fa fa-user"></i>
+                                    <input type="text" name="fname" placeholder="First Name">
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the name</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="input">
+                                    <i class="icon-append fa fa-user"></i>
+                                    <input type="text" name="lname" placeholder="Last Name">
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the name</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="input">
+                                    <i class="icon-append fa fa-phone"></i>
+                                    <input type="text" name="mobile" placeholder="Mobile Number">
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the Mobile Number</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="input">
+                                    <i class="icon-append fa fa-phone"></i>
+                                    <input type="text" name="Contact.no" placeholder="Contact Number">
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the Contact Number</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="input">
+                                    <i class="icon-append fa fa-envelope"></i>
+                                    <input type="email" name="email" placeholder="Email address">
+                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="input">
+                                    <i class="icon-append fa fa-user"></i>
+                                    <input type="text" name="fname" placeholder="Twitter Username">
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the Twitter Username</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="select">
+                                    <select name="gender">
+                                        <option value="0" selected="" disabled="">Gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                        <option value="3">Other</option>
+                                    </select>
+                                    <i></i>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="input">
+                                    <i class="icon-append fa fa-calendar"></i>
+                                    <input type="text" name="start" id="start" placeholder="Expected start date" class="hasDatepicker">
+                                </label>
+                            </section>
+                            <section>
+                                <label class="input">
+                                    <i class="icon-append fa fa-building"></i>
+                                    <input type="text" name="address1" placeholder="Address Line 1">
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter Address Line 1</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="input">
+                                    <i class="icon-append fa fa-building"></i>
+                                    <input type="text" name="address2" placeholder="Address Line 2">
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter Address Line 2</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="input">
+                                    <i class="icon-append fa fa-building"></i>
+                                    <input type="text" name="lname" placeholder="City">
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the City</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="input">
+                                    <i class="icon-append fa fa-tags"></i>
+                                    <input type="text" name="Tags" placeholder="Tags">
+                                    <b class="tooltip tooltip-bottom-right">Needed to enter the Tags</b>
+                                </label>
+                            </section>
+                            <section>
+                                <label class="input">
+                                    <button type="submit" class="btn-u btn-u-green">Save Changes</button>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Add Photo</h4>
+                            <h5>Upload new Photo:</h5>
+                            <h5 style="color:brown;">Accepted formats: PNG, JPEG upload photo Choose File</h5>
+                            <section>
+                                <label for="file" class="input input-file">
+                                    <div class="button"><input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" readonly="">
+                                </label>
+                            </section>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn-u btn-u-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!---delete customer popup-->
+<div class="modal fade" id="delete_customer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel4"></h4>
+            </div>
+            <div class="modal-body">
+                <p>You have chosen to delete the Customer: sadia batool</p>
+                <button type="button" class="btn-u btn-u-green">Confirm</button>
+                <button type="button" class="	btn-u btn-u-default">Cancel</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!---send message popup-->
+<div class="modal fade" id="send_message" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form action="assets/php/demo-contacts-process.php" method="post" id="sky-form3" class="sky-form" novalidate="novalidate" style="border:1px solid transparent;">
+                    <div class="tab-v1">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#sms1" data-toggle="tab">SMS</a></li>
+                            <li><a href="#email1" data-toggle="tab">Email</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="sms1">
+                                <div class="row">
+                                    <fieldset>
+                                        <section>
+                                            <label class="label">Subject</label>
+                                            <label class="input">
+                                                <i class="icon-append fa fa-tag"></i>
+                                                <input type="text" name="subject" id="subject">
+                                            </label>
+                                        </section>
+
+                                        <section>
+                                            <label class="label">Message</label>
+                                            <label class="textarea">
+                                                <i class="icon-append fa fa-comment"></i>
+                                                <textarea rows="4" name="message" id="message"></textarea>
+                                            </label>
+                                        </section>
+                                    </fieldset>
+
+                                    <footer>
+                                        <button type="submit" class="button">Send message</button>
+                                    </footer>
+
+                                    <div class="message">
+                                        <i class="rounded-x fa fa-check"></i>
+                                        <p>Your message was successfully sent!</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade in" id="email1">
+                                <fieldset>
+                                    <section>
+                                        <label class="label">Message</label>
+                                        <label class="textarea">
+                                            <i class="icon-append fa fa-comment"></i>
+                                            <textarea rows="4" name="message" id="message"></textarea>
+                                        </label>
+                                    </section>
+                                </fieldset>
+
+                                <footer>
+                                    <button type="submit" class="button">Send message</button>
+                                </footer>
+
+                                <div class="message">
+                                    <i class="rounded-x fa fa-check"></i>
+                                    <p>Your message was successfully sent!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

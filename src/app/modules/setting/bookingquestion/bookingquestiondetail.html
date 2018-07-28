@@ -1,0 +1,106 @@
+﻿<div class="wrapper">
+    <form action="assets/php/demo-contacts-process.php" method="post" id="sky-form4" class="sky-form" novalidate>
+        <div class="container-fluid row login_bg">
+            <!---for mobile view header-->
+            <div class="container content hidden-md hidden-lg" style="padding-bottom:10px;padding-top:10px;">
+                <div class="col-md-12">
+                    <h1 style="color:#FFF;">
+                        <b><span class="fa fa-clock-o"></span> Appointmentor</b>
+                    </h1>
+                </div>
+                <div class="col-md-12">
+                    <section>
+                        <label class="input">
+                            <i class="icon-append fa fa-search"></i>
+                            <input name="search" placeholder="Search" type="text">
+                        </label>
+                    </section>
+                </div>
+                <div class="col-md-12" style="margin-top:10px;">
+                    <i class="fa fa-external-link"><a [routerLink]="['/user.resgistration']" style="color:#fff;">Go to Appointmentor</a></i>
+                </div>
+            </div>
+            <!--desktop view header-->
+            <div class="container content hidden-sm hidden-xs" style="padding-bottom:10px;padding-top:10px;" align="center">
+                <div class="col-md-4">
+                    <h1 style="color:#FFF;">
+                        <b class="pull-left"><span class="fa fa-clock-o"></span> Appointmentor</b>
+                    </h1>
+                </div>
+                <div class="col-md-6">
+                    <section>
+                        <label class="input pull-right">
+                            <i class="icon-append fa fa-search"></i>
+                            <input name="search" placeholder="Search" type="text">
+                        </label>
+                    </section>
+                </div>
+                <div class="col-md-2 pull-right" style="margin-top:10px;">
+                    <i class="fa fa-external-link"><a [routerLink]="['/user.resgistration']" style="color:#fff;">Go to Appointmentor</a></i>
+                </div>
+            </div>
+        </div>
+        <div class="container content bookingtext">
+            <fieldset>
+                <div class="clearfix margin-bottom-30"></div>
+                <section>
+                    <div class="tab-v1">
+                        <ul class="nav nav-tabs">
+                            <li><a href="#" data-toggle="tab">All Collections</a></li>
+                            <li><a href="#" data-toggle="tab">Online booking tools</a></li>
+                            <li><a href="#" data-toggle="tab">Online booking settings</a></li>
+                            <li class="active"><a [routerLink]="['/bookingquestiondetail']" data-toggle="tab">Booking Question Details</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="home">
+                                    <div class="clearfix margin-bottom-30"></div>
+                                    <div class="row">
+                                        <h3>How to create questions for your online booking tool</h3>
+                                        <b>Gather more information about your customers when they book online by adding questions to your booking tool.</b>
+                                        <div class="testimonial-info">
+                                            <img class="rounded-x" src="assets/img/user.jpg" alt="user-img" width="70" height="70">
+                                            <span class="testimonial-author">
+                                                Written by
+                                                <em> Kirsty McLaughlin, Updated over a week ago</em><br />
+                                            </span>
+                                        </div>
+                                        <p>
+                                            Add questions to be answered by text or checkbox and have customers agree to terms and conditions. Even customise which questions should be asked for which service and which require an answer to continue and make a booking.
+
+                                            To add a question to your online booking tools, first go to your online booking settings:
+                                        </p>
+                                        <ul>
+                                            <li>Click the cog icon in the top right corner</li>
+                                            <li>Click <b>online booking</b></li>
+                                            <li>SectionScroll to the <b>custom questions</b></li>
+                                        </ul>
+                                        <h4>How to add a question</h4>
+                                        <ul>
+                                            <li>Click <b>add a question</b>&nbsp;</li>
+                                            <li>Select the type of answer you require - <b>text</b>, <b>checkbox</b> or <b>terms and conditions</b>&nbsp;</li>
+                                            <li>Enter the question or the URL for the T&amp;Cs in the <b>question </b>field</li>
+                                            <li>Set whether an answer to this question should be <b>required</b> to continue in the booking process</li>
+                                            <li>To apply this question to all services, select <b>all services</b>&nbsp;</li>
+                                            <li>To apply this question to specific services, select those services</li>
+                                            <li>Click <b>save changes</b>.</li>
+                                        </ul>
+                                        <div class="clearfix margin-bottom-30"></div>
+                                        <img src="https://downloads.intercomcdn.com/i/o/40744452/7ef8f5829fe5833b0c6fe2d7/ezgif.com-video-to-gif%2520%281%29-1.gif%3Fheight%3D380%26amp%3Bname%3Dezgif.com-video-to-gif%2B%25281%2529-1.gif%26amp%3Bt%3D1511453690834%26amp%3Bwidth%3D700" class="img-responsive">
+                                        <div class="clearfix margin-bottom-30"></div>
+                                        <p>Answers to questions are stored alongside the notes of that booking, in the notes tab.</p>
+                                        <h4>Tool Tip:</h4>
+                                        <p>
+                                            If you're asking questions for your services, you should turn off the notes step of the online booking process. This will ensure that the booking process is quick and relevant. See more about notes here.
+                                        </p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </fieldset>
+            <footer>
+                <p class="text-center">Did This Answer To your Question?</p>
+            </footer>
+        </div>
+    </form>
+</div>

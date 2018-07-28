@@ -1,0 +1,171 @@
+﻿
+<h2>Services</h2>
+<h4>What services do you offer?</h4>
+<p>Services can be appointments, classes, events or even room booking and rentals. We are flexible in it. You can edit all these and add more from within your Appointmentor Account.</p>
+<hr />
+<div class="panel panel-green margin-bottom-40" *ngIf="services && services.length>0">
+  <div class="panel-body">
+    <table class="table bootstrap">
+      <thead>
+        <tr>
+          <td><b>Services</b></td>
+          <td><b>Duration</b></td>
+          <td><b>Price</b></td>
+          <td><b>Actions</b></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of services">
+          <td><i>{{item.serviceName}}</i></td>
+          <td>{{item.duration}} {{item.durationType}}</td>
+          <td>{{item.isPriceOfApplication==false?item.price:'POA'}}</td>
+          <td><span><a style="cursor:pointer;" (click)="ServiceIdForDelete(item.serviceId); modal2.show()"><i class="fa fa-trash-o"></i></a></span>&nbsp;&nbsp;<span><a style="cursor:pointer;" (click)="LoadServiceById(item.serviceId);"><i class="fa fa-pencil"></i></a></span>&nbsp;&nbsp;<span><a style="cursor:pointer;" (click)="CloneServiceById(item.serviceId);"><i class="fa fa-clone"></i></a></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <app-modal #modal2>
+      <div class="app-modal-header">
+        <h3 class="panel-title"><i class="fa fa-check"></i>Confirm</h3>
+      </div>
+      <div class="app-modal-body">
+        <p>Are you sure you want to delete this service?</p>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class=" btn-u btn-u-default" (click)="modal2.hide()">Cancel</button>
+        <button type="button" class="btn-u btn-default" (click)="RemoveService(); modal2.hide();">Delete</button>
+      </div>
+    </app-modal>
+  </div>
+</div>
+
+<form id="sky-form3" class="sky-form zero-padding" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" style="border:1px solid transparent;">
+  <div class="tab-content">
+    <div class="tab-pane active" role="tabpanel" id="step3" style="padding-top:0px;">
+      <div class="step3">
+        <fieldset style="padding: 25px 15px 5px;">
+          <div class="row">
+            <div class="panel panel-u zero-border">
+              <div class="panel-heading">
+                <h3 class="panel-title" style="text-align:left;"><i class="fa fa-tasks"></i> Service Details</h3>
+              </div>
+              <div class="panel-body">
+                <section>
+                  <label class="label">Service Name*</label>
+                  <label class="input">
+                    <i class="icon-append fa fa-user"></i>
+                    <input type="text" formControlName="ServiceName" maxlength="50" placeholder="Give your service a name">
+                    <b class="tooltip tooltip-bottom-right">Needed to enter service name</b>
+                  </label>
+                  <div class="form-error-content" *ngIf="submitted">
+                    <span *ngIf="userForm.get('ServiceName').errors?.required">
+                      Service name is required
+                    </span>
+                    <span *ngIf="userForm.get('ServiceName').errors?.pattern">
+                      Service name is invalid
+                    </span>
+                    <span *ngIf="userForm.get('ServiceName').errors?.maxlength">
+                      Service name can not more than 50 characters.
+                    </span>
+                  </div>
+                </section>
+                <fieldset>
+                  <div class="row">
+                    <section class="col-md-4">
+                      <div class="col-md-12">
+                        <div class="col-md-6 zero-padding">
+                          <label class="label">Duration</label>
+                          <label class="input">
+                            <input formControlName="Duration" maxlength="2" type="number" class="form-control" placeholder="" />
+                          </label>
+                        </div>
+                        <div class="col-md-6 zero-padding">
+                          <label class="label">Minutes</label>
+                          <label class="select">
+                            <select formControlName="DurationType" class="form-control">
+                              <option selected="selected">Minutes</option>
+                              <option>Hours</option>
+                              <option>Days</option>
+                              <option>Months</option>
+                            </select>
+                            <i></i>
+                          </label>
+                        </div>
+                      </div>
+                    </section>
+                    <section class="col-md-4">
+                      <label class="label">Price*</label>
+                      <label class="input">
+                        <div *ngIf="!isPriceOnApplication">
+                          <input formControlName="Price" maxlength="5" type="number" class="form-control" />
+                        </div>
+                        <div *ngIf="isPriceOnApplication">
+                          <input disabled="disabled" value="{{price}}" type="text" class="form-control" />
+                        </div>
+                      </label>
+                      <div class="form-error-content" *ngIf="submitted">
+                        <span *ngIf="userForm.get('Price').errors?.required">
+                          Price is required
+                        </span>
+                      </div>
+                    </section>
+                    <section class="col-md-4">
+                      <label class="input">
+                        <label class="label" style="color:#fff;">Price Of application</label>
+                        <label class="checkbox" style="padding-left:0px;padding-right:100px;"><input name="checkbox" checked="" type="checkbox" (change)="ChangePrice($event)" formControlName="ckPriceOnApplication" value="price"><i></i>Price on Application </label>
+                      </label>
+                    </section>
+                  </div>
+                </fieldset>
+                <fieldset>
+                  <div class="row">
+                    <section class="col-md-4">
+                      <div class="col-md-12 panel panel-green" style="padding:5px;">
+                        <p [hidden]="isCustomerSupport"> Can multiple customers attend this service at one time? <label class="checkbox"><input (change)="ChangeCustomerSupport($event)" formControlName="ckCustomerSupport" type="checkbox" value="price" /><i style="left:176px;top:-18px;"></i></label></p>
+                        <p [hidden]="!isCustomerSupport"> Occupancy <input formControlName="Occupancy" type="number" value="1" min="1" /></p>
+                      </div>
+                    </section>
+                    <section class="col-md-4">
+                      <div class="col-md-12 panel panel-green" style="padding:20px;">
+                        <label>{{permissionTitle}}</label>?
+                        <a style="cursor:pointer" (click)="modal1.show()"><i class="fa fa-edit"></i></a>
+                        <app-modal #modal1>
+                          <div class="app-modal-header">
+                            <h3 class="panel-title" style="color:#FFF;"><i class="fa fa-lock" style="color:#fff;"></i>Permissions</h3>
+                          </div>
+                          <div class="app-modal-body">
+                            <p>There are different ways for customers to book services. Please choose one of following form four services.</p>
+                            <div class="panel panel-defaultmodal">
+                              <div class="panel-body" *ngFor="let item of permission">
+                                <h4>{{item.title}}<span class="pull-right"><label class="radio"><input (click)="onClick(item.title, item.id); modal1.hide();" type="radio" [checked]="selectedPermissionId == item.id" value="{{item.id}}"><i></i></label></span></h4>
+                                <p>{{item.description}}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="app-modal-footer">
+                            <button type="button" class="btn btn-default" (click)="modal1.hide()">Close</button>
+                          </div>
+                        </app-modal>
+                      </div>
+                    </section>
+                    <section class="col-md-4">
+                      <button type="submit" class="btn-u pull-left" style="margin-top:16px;">{{savebuttonText}} Service</button>
+                    </section>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <footer class="wizard-footer">
+          <ul class="list-inline pull-right" [hidden]="!isMenuhidden">
+            <li><button type="button" [disabled]="!(services && services.length)" (click)="Redirect()" class="button next-step">Save and continue</button></li>
+          </ul>
+        </footer>
+        <div class="message">
+          <i class="rounded-x fa fa-check"></i>
+          <p>Your message was successfully sent!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
