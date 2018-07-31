@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   profileImageForMicrosite3: File;
   profileImageForMicrosite4: File;
   bannerImageForMicrosite: File;
-
+  submitted=false;
   constructor(private fb: FormBuilder, private profileService: ProfileService, private router: Router) {
     if (sessionStorage.getItem("organizationId") == null) {
       this.router.navigate(['']);
@@ -80,6 +80,7 @@ export class ProfileComponent implements OnInit {
   LoadProfile() {
     this.profileService.get(apiUrl, Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
       var obj = data["results"][0];
+
       this.userForm = this.fb.group({
         businessName: [obj["businessName"], Validators.compose([Validators.required, Validators.maxLength(50)])],
         aboutYourBusiness: [obj["aboutYourBusiness"]],
@@ -103,6 +104,7 @@ export class ProfileComponent implements OnInit {
     });
   }
   onSubmit(formData: any) {
+    this.submitted = true;
     this.profile = {
       profileId: 0,
       organizationId: Number(sessionStorage.getItem("organizationId")),
@@ -131,7 +133,6 @@ export class ProfileComponent implements OnInit {
       bannerImageForMicrosite: this.bannerImageForMicrosite,
       isDeleted: false
     };
-    console.log(this.profile);
     this.profileService.post(apiUrl, this.profile).subscribe((data: any) => {
       this.LoadProfile();
     });

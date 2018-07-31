@@ -11,6 +11,7 @@ const apiUrl = environment.apiUrl;
 export class UserAccountComponent implements OnInit {
   userForm: FormGroup;
   isSuccessfulMessage: boolean = false;
+  submitted = false;
   public isPasswordMatch = true;
   constructor(
     private fb: FormBuilder,
@@ -26,13 +27,17 @@ export class UserAccountComponent implements OnInit {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      emailAddress: ['', Validators.required, Validators.maxLength(100), Validators.email],
+      emailAddress: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100), Validators.email])],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-    });
+    },
+      { validator: this.passwordMatchValidator });
     this.LoadUser();
     this.isSuccessfulMessage = false;
     this.isPasswordMatch = true;
+  }
+  passwordMatchValidator(frm: FormGroup) {
+    return frm.controls['password'].value === frm.controls['confirmPassword'].value ? null : { 'mismatch': true };
   }
   LoadUser() {
     this.userAccountService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
@@ -43,6 +48,7 @@ export class UserAccountComponent implements OnInit {
     });
   }
   onSubmit(formData: any) {
+    this.submitted = true;
     var uniqueId = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
     if (formData.value['password'].trim() != formData.value['confirmPassword'].trim()) {
       this.isPasswordMatch = false;

@@ -1,4 +1,4 @@
-﻿export interface Asset {
+﻿export class Asset {
     assetId: number;
     organizationId: number;
     name: string;

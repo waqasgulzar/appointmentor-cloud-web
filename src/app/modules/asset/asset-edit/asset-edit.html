@@ -1,68 +1,60 @@
-﻿<dashboard-component></dashboard-component>
-<div class="container" style="text-align:left;">
-  <div class="row">
-    <header>Create Assets</header>
-    <form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" id="sky-form3" class="sky-form">
-      <section>
-        <div class="wizard">
-          <div class="tab-content">
-            <fieldset>
-              <div class="row">
-                <section class="col col-6">
-                  <label class="label">Name*</label>
-                  <label class="input">
-                    <i class="icon-append fa fa-user"></i>
-                    <input type="text" formControlName="name">
-                  </label>
-                  <div class="form-error-content" *ngIf="submitted">
-                    <span *ngIf="userForm.get('name').errors?.required">
-                      Asset name is required
-                    </span>
-                    <span *ngIf="userForm.get('name').errors?.pattern">
-                      Asset name is invalid
-                    </span>
-                    <span *ngIf="userForm.get('name').errors?.maxlength">
-                      Asset name can not more than 50 characters.
-                    </span>
-                  </div>
-                </section>
-                <section class="col col-6">
-                  <label class="label">Quantity</label>
-                  <label class="input">
-                    <i class="icon-append fa fa-at"></i>
-                    <input type="number" formControlName="quantity" maxlength="5">
-                  </label>
-                  <div class="form-error-content" *ngIf="submitted">
-                    <span *ngIf="userForm.get('quantity').errors?.required">
-                      Quantity required
-                    </span>
-                    <span *ngIf="userForm.get('quantity').errors?.min">
-                      Quantity can not be less than 0.
-                    </span>
-                    <span *ngIf="userForm.get('quantity').errors?.max">
-                      Quantity can not be more than 1000.
-                    </span>
-                  </div>
-                </section>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  Services that require this asset to be available<span class="pull-right"><a (click)="CheckAll()" style="cursor:pointer;">Check All</a>&nbsp;&nbsp;<a (click)="UncheckAll()" style="cursor:pointer;">Uncheck All</a></span>
-                </div>
-                <div class="panel-body">
-                  <div align="left" class="panel panel-default col-md-12" style="padding-bottom:15px;padding-top:12px;">
-                    <label class="checkbox" *ngFor="let item of services">{{item.serviceName}}&nbsp;<input (change)="onChange(item.serviceId, $event)" [checked]="isCheckAll || isServiceChecked(item.serviceId)" type="checkbox" value="{{item.serviceId}}"><i></i></label>
-                  </div>
-                </div>
-              </div>
-              <div class="pull-right">
-                <button type="button" class="btn btn-default" action="action" onclick="window.history.go(-1); return false;">Cancel</button>
-                <button type="submit" class="btn-u">Save</button>
-              </div>
-            </fieldset>
+﻿<header>Create Assets</header>
+<form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" id="sky-form3" class="sky-form">
+  <div class="tab-content">
+    <fieldset>
+      <div class="row">
+        <section class="col col-6">
+          <label class="label">Name*</label>
+          <label class="input">
+            <i class="icon-append fa fa-user"></i>
+            <input type="text" formControlName="name">
+          </label>
+          <div class="form-error-content" *ngIf="submitted">
+            <span *ngIf="userForm.get('name').errors?.required">
+              Asset name is required
+            </span>
+            <span *ngIf="userForm.get('name').errors?.pattern">
+              Asset name is invalid
+            </span>
+            <span *ngIf="userForm.get('name').errors?.maxlength">
+              Asset name can not more than 50 characters.
+            </span>
+          </div>
+        </section>
+        <section class="col col-6">
+          <label class="label">Quantity</label>
+          <label class="input">
+            <i class="icon-append fa fa-at"></i>
+            <input type="number" formControlName="quantity" maxlength="5">
+          </label>
+          <div class="form-error-content" *ngIf="submitted">
+            <span *ngIf="userForm.get('quantity').errors?.required">
+              Quantity required
+            </span>
+            <span *ngIf="userForm.get('quantity').errors?.min">
+              Quantity can not be less than 0.
+            </span>
+            <span *ngIf="userForm.get('quantity').errors?.max">
+              Quantity can not be more than 1000.
+            </span>
+          </div>
+        </section>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Services that require this asset to be available<span class="pull-right"><a (click)="CheckAll()" style="cursor:pointer;">Check All</a>&nbsp;&nbsp;<a (click)="UncheckAll()" style="cursor:pointer;">Uncheck All</a></span>
+        </div>
+        <div class="panel-body">
+          <div align="left" class="panel panel-default col-md-12" style="padding-bottom:15px;padding-top:12px;">
+            <label class="checkbox" *ngFor="let item of services">{{item.serviceName}}&nbsp;<input (change)="onChange(item.serviceId, $event)" [checked]="isCheckAll || isServiceChecked(item.serviceId)" type="checkbox" value="{{item.serviceId}}"><i></i></label>
           </div>
         </div>
-      </section>
-    </form>
+      </div>
+      <div class="pull-right">
+        <button type="button" class="btn btn-default" action="action" onclick="window.history.go(-1); return false;">Cancel</button>
+        <button type="submit" class="btn-u">Save</button>
+      </div>
+    </fieldset>
   </div>
-</div>
+</form>
+

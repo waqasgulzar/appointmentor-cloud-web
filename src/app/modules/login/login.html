@@ -24,6 +24,9 @@
                   <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
                     Email is required
                   </div>
+                  <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.email">
+                    Email is invalid
+                  </div>
                 </div>
               </div>
             </div>

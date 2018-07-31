@@ -1,66 +1,64 @@
-﻿<form id="sky-form3" class="sky-form zero-padding" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" style="border:1px solid transparent;">
-  <section>
-    <div class="wizard">
-      <h2>Resources</h2>
-      <h4>Who or What are your Resources?</h4>
-      <p>Resources are whoever or whatever your customers can book for period of times.They can be employees, facilities or room. For example, normally your first resource is you.</p>
-      <hr />
-      <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='resources'>
-        <ngx-datatable-column name="Resource Name" prop="resourceName" [flexGrow]="2"></ngx-datatable-column>
+﻿<section class="content-wrapper">
+  <form id="sky-form3" class="sky-form zero-padding" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" style="border:1px solid transparent;">
+    <h4>Who or What are your Resources?</h4>
+    <p>Resources are whoever or whatever your customers can book for period of times.They can be employees, facilities or room. For example, normally your first resource is you.</p>
+    <hr />
+    <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='resources'>
+      <ngx-datatable-column name="Resource Name" prop="resourceName" [flexGrow]="2"></ngx-datatable-column>
 
-        <!--<ngx-datatable-column name="Services" [flexGrow]="3">
-      <ng-template let-row="row" let-rowIndex="rowIndex">
-        {{ resources[rowIndex].resources }}
-      </ng-template>
-    </ngx-datatable-column>-->
+      <!--<ngx-datatable-column name="Services" [flexGrow]="3">
+        <ng-template let-row="row" let-rowIndex="rowIndex">
+          {{ resources[rowIndex].resources }}
+        </ng-template>
+      </ngx-datatable-column>-->
 
-        <ngx-datatable-column name="Services" prop="serviceresource" [flexGrow]="3">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <label *ngFor="let item of value" class="margin-left-5">
-              <span class="badge">{{item.serviceName}}</span>
-            </label>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
-          <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
-            <button type="button" class="btn btn-default" (click)="clearServices(); LoadResourceById(row['resourceId']);">
-              <i class="fa fa-pencil"></i>Edit
-            </button>
-            <button type="button" class="btn btn-default" (click)="ServiceIdForDelete(row['resourceId']); modal2.show()">
-              <i class="fa fa-trash"></i> Delete
-            </button>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
+      <ngx-datatable-column name="Services" prop="serviceresource" [flexGrow]="3">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <label *ngFor="let item of value" class="margin-left-5">
+            <span class="badge">{{item.serviceName}}</span>
+          </label>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
+        <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
+          <button type="button" class="btn btn-default" (click)="clearServices(); LoadResourceById(row['resourceId']);">
+            <i class="fa fa-pencil"></i>Edit
+          </button>
+          <button type="button" class="btn btn-default" (click)="ServiceIdForDelete(row['resourceId']); modal2.show()">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
 
-      <app-modal #modal2>
-        <div class="app-modal-header">
-          <h3 class="panel-title"><i class="fa fa-check"></i>Confirm</h3>
-        </div>
-        <div class="app-modal-body">
-          <p>Are you sure you want to delete this resource?</p>
-        </div>
-        <div class="app-modal-footer">
-          <button type="button" class="btn-u btn-u-default" (click)="modal2.hide()">Cancel</button>
-          <button type="button" class="btn-u btn-default" (click)="RemoveResource(); modal2.hide();">Delete</button>
-        </div>
-      </app-modal>
+    <app-modal #modal2>
+      <div class="app-modal-header">
+        <h3 class="panel-title"><i class="fa fa-check"></i>Confirm</h3>
+      </div>
+      <div class="app-modal-body">
+        <p>Are you sure you want to delete this resource?</p>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn-u btn-u-default" (click)="modal2.hide()">Cancel</button>
+        <button type="button" class="btn-u btn-default" (click)="RemoveResource(); modal2.hide();">Delete</button>
+      </div>
+    </app-modal>
 
 
-      <div class="tab-content">
-        <div class="tab-pane active" role="tabpanel" id="complete" style="padding-top:0px;">
-          <div class="step44">
-            <div class="panel panel-green margin-bottom-40" *ngIf="resources && resources.length>0">
-              <div class="panel-body">
-                <!--<table class="table">
-              <thead>
+    <div class="tab-content">
+      <div class="tab-pane active" role="tabpanel" id="complete" style="padding-top:0px;">
+        <div class="step44">
+          <div class="panel panel-green margin-bottom-40" *ngIf="resources && resources.length>0">
+            <div class="panel-body">
+              <!--<table class="table">
+                <thead>
                 <tr>
                   <td><strong>Resource Name</strong></td>
                   <td><strong>Services</strong></td>
                   <td></td>
                 </tr>
-              </thead>
-              <tbody>
+                </thead>
+                <tbody>
                 <tr *ngFor="let item of resources">
                   <td><strong>{{item.resourceName}}</strong></td>
                   <td>
@@ -71,73 +69,69 @@
                     </ng-container>
                   </td>
                   <td>
-                  <span>
-                    <a style="cursor:pointer;" (click)="ServiceIdForDelete(item.resourceId); modal2.show()"><i class="fa fa-trash-o"></i></a>
+                    <span>
+                      <a style="cursor:pointer;" (click)="ServiceIdForDelete(item.resourceId); modal2.show()"><i class="fa fa-trash-o"></i></a>
                     </span>
-                  &nbsp;&nbsp;
-                  <span><a style="cursor:pointer;" (click)="clearServices(); LoadResourceById(item.resourceId);"><i class="fa fa-pencil"></i></a></span>
-                  &nbsp;&nbsp;
-                  <span><a style="cursor:pointer;" (click)="CloneResourceById(item.resourceId);"><i class="fa fa-clone"></i></a></span></td>
+                    &nbsp;&nbsp;
+                    <span><a style="cursor:pointer;" (click)="clearServices(); LoadResourceById(item.resourceId);"><i class="fa fa-pencil"></i></a></span>
+                    &nbsp;&nbsp;
+                    <span><a style="cursor:pointer;" (click)="CloneResourceById(item.resourceId);"><i class="fa fa-clone"></i></a></span></td>
                 </tr>
-              </tbody>
-            </table>-->
+                </tbody>
+              </table>-->
 
-              </div>
             </div>
-            <fieldset style="padding: 25px 15px 5px;">
-              <section>
-                <div class="row">
-                  <div class="panel panel-u zero-border">
-                    <div class="panel-heading">
-                      <h3 class="panel-title" style="text-align:left;"><i class="fa fa-tasks"></i> Services Assigned to this Resource</h3>
-                    </div>
-                    <div class="panel-body">
-                      <section>
-                        <label class="label">Resource Name*:</label>
-                        <label class="input">
-                          <i class="icon-append fa fa-user"></i>
-                          <input formControlName="ResourceName" maxlength="100" type="text" class="form-control" placeholder="Give your resource a name">
-                        </label>
-                        <div class="form-error-content" *ngIf="submitted">
-                          <span *ngIf="userForm.get('ResourceName').errors?.required">
-                            Resource name is required
-                          </span>
-                          <span *ngIf="userForm.get('ResourceName').errors?.pattern">
-                            Resource name is invalid
-                          </span>
-                          <span *ngIf="userForm.get('ResourceName').errors?.maxlength">
-                            Resource name can not more than 50 characters.
-                          </span>
-                        </div>
-                      </section>
-                      <section>
-                        <div align="left" class="panel panel-default col-md-12" style="padding-bottom:15px;padding-top:12px;">
-                          <label class="checkbox" *ngFor="let item of services">{{item.serviceName}}&nbsp;<input (change)="onChange(item.serviceId, $event)" [checked]="isCheckAll || isServiceChecked(item.serviceId)" type="checkbox" value="{{item.serviceId}}"><i></i></label>
-                        </div>
-                      </section>
-                      <section>
-                        <button type="submit" class="btn-u pull-right">{{savebuttonText}} Resource</button>
-                      </section>
-                    </div>
+          </div>
+          <fieldset style="padding: 25px 15px 5px;">
+            <section>
+              <div class="row">
+                <div class="panel panel-u zero-border">
+                  <div class="panel-heading">
+                    <h3 class="panel-title" style="text-align:left;"><i class="fa fa-tasks"></i> Services Assigned to this Resource</h3>
+                  </div>
+                  <div class="panel-body">
+                    <section>
+                      <label class="label">Resource Name*:</label>
+                      <label class="input">
+                        <i class="icon-append fa fa-user"></i>
+                        <input formControlName="ResourceName" maxlength="100" type="text" class="form-control" placeholder="Give your resource a name">
+                      </label>
+                      <div class="form-error-content" *ngIf="submitted">
+                        <span *ngIf="userForm.get('ResourceName').errors?.required">
+                          Resource name is required
+                        </span>
+                        <span *ngIf="userForm.get('ResourceName').errors?.pattern">
+                          Resource name is invalid
+                        </span>
+                        <span *ngIf="userForm.get('ResourceName').errors?.maxlength">
+                          Resource name can not more than 50 characters.
+                        </span>
+                      </div>
+                    </section>
+                    <section>
+                      <div align="left" class="panel panel-default col-md-12" style="padding-bottom:15px;padding-top:12px;">
+                        <label class="checkbox" *ngFor="let item of services">{{item.serviceName}}&nbsp;<input (change)="onChange(item.serviceId, $event)" [checked]="isCheckAll || isServiceChecked(item.serviceId)" type="checkbox" value="{{item.serviceId}}"><i></i></label>
+                      </div>
+                    </section>
+                    <section>
+                      <button type="submit" class="btn-u pull-right">{{savebuttonText}} Resource</button>
+                    </section>
                   </div>
                 </div>
-              </section>
-            </fieldset>
-            <footer class="wizard-footer">
-              <ul class="list-inline pull-right" [hidden]="!isMenuhidden">
-                <li><button type="button" (click)="Redirect()" class="button next-step">Save and continue</button></li>
-              </ul>
-            </footer>
-            <div class="message">
-              <i class="rounded-x fa fa-check"></i>
-              <p>Your message was successfully sent!</p>
-            </div>
+              </div>
+            </section>
+          </fieldset>
+          <footer class="wizard-footer">
+            <ul class="list-inline pull-right" [hidden]="!isMenuhidden">
+              <li><button type="button" (click)="Redirect()" class="button next-step">Save and continue</button></li>
+            </ul>
+          </footer>
+          <div class="message">
+            <i class="rounded-x fa fa-check"></i>
+            <p>Your message was successfully sent!</p>
           </div>
         </div>
       </div>
-
-
     </div>
-  </section>
-
-</form>
+  </form>
+</section>

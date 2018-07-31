@@ -47,7 +47,6 @@
     </section>
   </div>
 </div>
-<dashboard-component [hidden]="isMenuhidden"></dashboard-component>
 <div class="container">
   <div class="row">
     <section>
@@ -104,6 +103,9 @@
                     <div class="form-error-content" *ngIf="submitted">
                       <span *ngIf="userForm.get('phoneNumber').errors?.required">
                         Phone Number is required
+                      </span>
+                      <span *ngIf="userForm.get('phoneNumber').pattern?.required">
+                        Phone Number is invalid
                       </span>
                     </div>
                   </section>

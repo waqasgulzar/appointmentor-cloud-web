@@ -3,36 +3,30 @@
     <div class="collapse navbar-collapse">
       <div class="row ">
         <div class="col-xs-3">
-          <a class="logo-link" href="/" target="_self">
+          <a class="logo-link" [routerLink]="['/appointment']">
             <img class="logo" src="../../assets/images/appointmentor-logo.jpg">
           </a>
         </div>
         <div class="col-xs-4">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
+            <input type="text" class="form-control" placeholder="Search for..." disabled="disabled">
             <span class="input-group-btn">
-              <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+              <button class="btn btn-search" type="button" disabled="disabled"><i class="fa fa-search fa-fw"></i> Search</button>
             </span>
           </div>
           <h3 style="text-align:left;">{{orgInfo.companyName}}</h3>
         </div>
         <div class="col-xs-5 text-right">
-          <ul class="largenav nav navbar-nav navbar-right">
-            <li class="upper-links" align="center"><a class="links" href=""><i class="fa fa-question-circle fa-2x"></i><br />Help</a></li>
-            <li class="upper-links" align="center"><a class="links" href=""><i class="fa fa-bell fa-2x"></i><br />Alerts</a></li>
-            <li class="upper-links" align="center"><a class="links" href=""><i class="fa fa-trophy fa-2x"></i><br />Achievements</a></li>
-            <li class="dropdown mega-menu-fullwidth">
-              <a href="#" (click)="$event.preventDefault();" class="links dropdown-toggle" data-toggle="dropdown">
-                <span class=""><i class="fa fa-user-circle fa-2x"></i></span>
-                <strong>{{orgInfo.firstName}}</strong>
-                <span class=""><i class="fa fa-chevron-down"></i></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a [routerLink]="['/account']"><i class="fa fa-user"></i> My Profile</a></li>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="upper-links" align="center"><a class="links"  disabled="disabled"><i class="fa fa-question-circle fa-2x"></i><br/>Help</a></li>
+            <li class="upper-links" align="center"><a class="links"  disabled="disabled"><i class="fa fa-bell fa-2x"></i><br/>Alerts</a></li>
+            <li class="upper-links" align="center"><a class="links"  disabled="disabled"><i class="fa fa-trophy fa-2x"></i><br/>Achievements</a></li>
+            <li class="dropdown" align="center" (click)="showMenu()"><a class="links"><i class="fa fa-user fa-2x"></i><br/>{{orgInfo.firstName}}&nbsp;&nbsp;<b class="caret"></b></a>
+              <ul class="dropdown-menu user-top-right-menu" *ngIf="active=='user'">
+                <li><a title="Dashboard" [routerLink]="['/account']"><i class="fa fa-book"></i>&nbsp;&nbsp;Profile</a></li>
+                <li><a title="Settings" [routerLink]="['/reset', 0]"><i class="fa fa-gear"></i>&nbsp;&nbsp;Password</a></li>
                 <li class="divider"></li>
-                <li><a [routerLink]="['/reset', 0]"><i class="fa fa-lock"></i> Change Password</a></li>
-                <li class="divider"></li>
-                <li><a [routerLink]="['/logout']"><i class="fa fa-sign-out-alt"></i> Sign Out</a></li>
+                <li><a [routerLink]="['/logout']"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a></li>
               </ul>
             </li>
           </ul>

@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     sessionStorage.removeItem('orgInfo');
 
     this.userForm = this.fb.group({
-      emailAddress: ['', Validators.required],
+      emailAddress: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100), Validators.email])],
       password: ['', Validators.required],
     });
   }
@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
             this.userAccountService.get(Number(JSON.stringify(data.results[0]))).subscribe((data: any) => {
               var obj = data["results"][0];
               sessionStorage.setItem('orgInfo', JSON.stringify(obj));
+              this.router.navigate(['/appointment']);
             });
-            this.router.navigate(['/appointment']);
           } else {
             this.isValidLogin = true;
             setTimeout(function() {

@@ -7,8 +7,15 @@ import { Service } from '../../modules/services/service';
 import { Asset } from './asset';
 import { environment } from '../../environments/environment';
 import { Router } from "@angular/router";
+import { Constant } from '../../shared/constants/constants';
+import { BsModalService } from 'ngx-bootstrap';
+import { AssetEditComponent } from './asset-edit/asset-edit.component';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operator/take';
+
 const apiUrl = environment.apiUrl;
 @Component({
+  selector: 'assets-component',
   moduleId: module.id,
   templateUrl: 'asset.html'
 })
@@ -25,7 +32,12 @@ export class AssetComponent implements OnInit {
   removeAssetId: number = 0;
   updatedAssetId: number = 0;
   isCheckAll: boolean = false;
-  constructor(private fb: FormBuilder, private assetService: AssetService, private resourcesService: ResourcesService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private assetService: AssetService,
+    private bsModalService: BsModalService,
+    private resourcesService: ResourcesService,
+    private router: Router) {
     if (sessionStorage.getItem("organizationId") == null) {
       this.router.navigate(['']);
     }
@@ -184,5 +196,17 @@ export class AssetComponent implements OnInit {
       this.LoadAssets();
       this.ClearFields();
     });
+  }
+
+  createUpdateAsset(asset?: Asset) {
+    const initialState = {
+      action: 'create',
+      asset: asset
+    };
+
+    this.bsModalService.show(
+      AssetEditComponent,
+      Object.assign({}, { initialState }, { class: 'modal-md' })
+    );
   }
 }
