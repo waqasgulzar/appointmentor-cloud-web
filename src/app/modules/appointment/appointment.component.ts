@@ -26,6 +26,7 @@ const apiUrl = environment.apiUrl;
 
 
 @Component({
+  selector: 'appointments-component',
   moduleId: module.id,
   templateUrl: 'appointment.html'
 })

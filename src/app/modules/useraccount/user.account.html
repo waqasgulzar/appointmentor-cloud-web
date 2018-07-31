@@ -22,6 +22,11 @@
           <i class="icon-append fa fa-user"></i>
           <input formControlName="firstName" maxlength="50" type="text" class="form-control" placeholder="First Name" required>
         </label>
+        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+          <div *ngIf="userForm.controls['firstName'].errors && userForm.controls['firstName'].errors.required">
+            First Name is required
+          </div>
+        </div>
       </section>
       <section class="col col-6">
         <label class="label">Last Name <span style="color:red;">*</span></label>
@@ -29,6 +34,11 @@
           <i class="icon-append fa fa-user"></i>
           <input formControlName="lastName" maxlength="50" type="text" class="form-control" placeholder="Last Name" required>
         </label>
+        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+          <div *ngIf="userForm.controls['lastName'].errors && userForm.controls['lastName'].errors.required">
+            Last Name is required
+          </div>
+        </div>
       </section>
     </div>
     <div class="row">
@@ -38,6 +48,14 @@
           <i class="icon-append fa fa-envelope-o"></i>
           <input formControlName="emailAddress" disabled="disabled" maxlength="100" type="email" class="form-control" placeholder="Email Address" required>
         </label>
+        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+          <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
+            Email is required
+          </div>
+          <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.email && !userForm.controls['emailAddress'].errors.required">
+            Email is invalid
+          </div>
+        </div>
       </section>
       <section class="col col-6">
         <label class="label">Password <span style="color:red;">*</span></label>
@@ -45,6 +63,11 @@
           <i class="icon-append fa fa-key"></i>
           <input formControlName="password" maxlength="100" type="password" class="form-control" placeholder="Password" required>
         </label>
+        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+          <div *ngIf="userForm.controls['password'].errors && userForm.controls['password'].errors.required">
+            Password is required
+          </div>
+        </div>
       </section>
     </div>
     <div class="row">
@@ -54,11 +77,19 @@
           <i class="icon-append fa fa-key"></i>
           <input formControlName="confirmPassword" maxlength="100" type="password" class="form-control" placeholder="Confirm Password" required>
         </label>
+        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+          <div *ngIf="userForm.controls['confirmPassword'].errors && userForm.controls['confirmPassword'].errors.required">
+            Confirm Password is required
+          </div>
+          <div *ngIf="userForm.errors?.mismatch && (userForm.controls['password'].dirty || userForm.controls['confirmPassword'].touched && !userForm.controls['confirmPassword'].errors.required)">
+            Passwords don't match.
+          </div>
+        </div>
       </section>
       <section class="col col-6"></section>
     </div>
     <footer>
-      <button type="submit" class="button">Save Changes</button>
+      <button type="submit" class="btn-u pull-right">Save Changes</button>
     </footer>
   </fieldset>
   <div class="message">

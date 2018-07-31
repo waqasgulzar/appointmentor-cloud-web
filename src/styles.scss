@@ -175,10 +175,15 @@ $cell-color: #000000;
    margin-left: 2em;
 }
 
+.dropdown
+{
+   cursor:pointer;
+}
 .nav-menu__main-sections, .nav-menu__login-registration {
    font-size: 16px;
    width: 100.00%;
 }
+
 
 .nav-menu__main-sections li, .nav-menu__login-registration li {
    display: inline-block;
@@ -227,6 +232,10 @@ $cell-color: #000000;
    .modal-body {
       overflow: hidden;
    }
+}
+
+.content-wrapper {
+   padding: 10px;
 }
 
 .navbar {
@@ -532,20 +541,6 @@ $cell-color: #000000;
 
 .dropdown:hover .dropdown-menu {
    display: block;
-}
-
-.dropdown .dropdown-menu {
-   position: absolute;
-   top: 100%;
-   display: none;
-   background-color: #fff;
-   color: #333;
-   left: 0px;
-   border: 0;
-   border-radius: 0;
-   box-shadow: 0 4px 8px -3px #555454;
-   margin: 0;
-   padding: 0px;
 }
 
 .links {

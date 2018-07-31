@@ -2,6 +2,7 @@
 bin
 typings
 node_modules
+dist
 jspm_packages
 link-checker-results.txt
 npm-debug.log

@@ -59,6 +59,7 @@ import { CustomerEditComponent } from './modules/customer/customer-edit.componen
 import { UnderProcessComponent } from './shared/underProcess/underProcess.component';
 import { AppLayoutComponent } from './_layout/app-layout/app-layout.component';
 import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component';
+import { ResourceAssetManagerComponent } from './modules/resource-asset-manager/resource-asset-manager.component';
 
 @NgModule({
   imports: [
@@ -84,7 +85,10 @@ import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component
           { path: 'dashboard', component: DashboardComponent },
           { path: 'accountsetup', component: AccountSetupComponent },
           { path: 'openingtimes', component: OpeningTimesComponent },
-          { path: 'resources', component: ResourcesComponent },
+          { path: 'resources', component: ResourceAssetManagerComponent },
+          { path: 'asset', component: AssetComponent },
+          { path: 'asset/:id', component: AssetEditComponent },
+
           { path: 'services', component: ServicesComponent },
           { path: 'forgot', component: ForgotComponent },
           { path: 'reset/:id', component: ResetComponent },
@@ -93,8 +97,6 @@ import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component
           { path: 'appointment', component: AppointmentComponent },
           { path: 'task', component: TaskComponent },
           { path: 'account', component: UserAccountComponent },
-          { path: 'asset', component: AssetComponent },
-          { path: 'asset/:id', component: AssetEditComponent },
           { path: 'logout', component: LogoutComponent },
           { path: 'profile', component: ProfileComponent },
           { path: 'general', component: GeneralComponent },

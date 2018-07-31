@@ -88,12 +88,7 @@ import { FreeagentComponent } from './modules/setting/freeagent/freeagent.compon
 import { EposComponent } from './modules/setting/epos/epos.component';
 import { PaymentsComponent } from './modules/setting/payments/payments.component';
 import { AppointmentBookingComponent } from './shared/appointmentBooking/appointmentBooking.component';;
-import {
-  ModalModule,
-  BsDatepickerModule,
-  BsDropdownModule,
-  TooltipModule
-} from 'ngx-bootstrap';
+
 import { ToastrModule } from 'ngx-toastr';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import 'rxjs/Rx';
@@ -146,11 +141,22 @@ import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component
 import { AppHeaderComponent } from './_layout/app-header/app-header.component';
 import { SiteHeaderComponent } from './_layout/site-header/site-header.component';
 import { SiteFooterComponent } from './_layout/site-footer/site-footer.component';
+import { ResourceAssetManagerComponent } from './modules/resource-asset-manager/resource-asset-manager.component';
+import {
+  ModalModule,
+  BsDatepickerModule,
+  BsDropdownModule,
+  TooltipModule
+} from 'ngx-bootstrap';
 
 const ROUTER_DIRECTIVES = [RouterLinkActive];
 
 @NgModule({
   imports: [
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
@@ -261,7 +267,8 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     ReceiptComponent,
     AssetEditComponent,
     CustomerEditComponent,
-    UnderProcessComponent
+    UnderProcessComponent,
+    ResourceAssetManagerComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

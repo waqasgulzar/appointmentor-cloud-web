@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AssetService } from '.././asset.service';
 import { Assetservice } from '.././assetservice';
@@ -14,7 +14,6 @@ const apiUrl = environment.apiUrl;
 })
 export class AssetEditComponent implements OnInit {
   assets: Asset[];
-  asset: Asset;
   services: Service[];
   selectedServiceIds: number[] = [];
   assetservices: Assetservice[];
@@ -25,6 +24,7 @@ export class AssetEditComponent implements OnInit {
   removeAssetId: number = 0;
   updatedAssetId: number = 0;
   isCheckAll: boolean = false;
+  @Input() asset: Asset = new Asset();
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private assetService: AssetService, private resourcesService: ResourcesService, private router: Router) {
     if (sessionStorage.getItem("organizationId") == null) {
       this.router.navigate(['']);
@@ -58,13 +58,13 @@ export class AssetEditComponent implements OnInit {
       if (this.updatedAssetId == 0) {
         this.assetService.postAssets(apiUrl, this.asset).subscribe((data: any) => {
           var obj = data["results"][0];
-          this.router.navigate(['/asset']);
+          this.router.navigate(['/resources']);
         });
       }
       else {
         this.assetService.post(apiUrl, this.updatedAssetId).subscribe((data: any) => {
           this.assetService.putAssets(apiUrl, this.updatedAssetId, this.asset).subscribe((data: any) => {
-            this.router.navigate(['/asset']);
+            this.router.navigate(['/resources']);
           });
         });
       }
