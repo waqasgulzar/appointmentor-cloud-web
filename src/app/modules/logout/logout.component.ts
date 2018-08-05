@@ -1,8 +1,13 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../../environments/environment';
-import { Router } from "@angular/router";
-const apiUrl = environment.apiUrl;
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+
+import { Router } from '@angular/router';
+
 @Component({
   moduleId: module.id,
   template: ''
@@ -15,6 +20,6 @@ export class LogoutComponent {
     sessionStorage.removeItem('organizationId');
     sessionStorage.removeItem('isMenuhidden');
     sessionStorage.removeItem('orgInfo');
-    this.router.navigate([''])
+    this.router.navigate(['']);
   }
 }

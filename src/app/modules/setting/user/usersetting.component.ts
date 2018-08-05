@@ -1,14 +1,11 @@
 ﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserSettingService } from './usersetting.service';
-import { environment } from '../../../environments/environment';
 import { User } from './../../../modules/user/user';
 import { OrganizationUser } from './organizationuser';
 import { UserAccountService } from './../../../modules/useraccount/account.service';
 import { ServicesService } from './../../../modules/services/services.service';
 import { Router } from "@angular/router";
-const apiUrl = environment.apiUrl;
-
 @Component({
     moduleId: module.id,
     templateUrl: 'usersetting.html'
@@ -45,19 +42,19 @@ export class UserSettingComponent implements OnInit {
         });
     }
     LoadCustomUsers() {
-        this.userSettingService.get(apiUrl, Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
+        this.userSettingService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
             this.customusers = data["results"];
         });
     }
     LoadPermission() {
-        this.servicesService.getByCategory(apiUrl, "UserPermission").subscribe((data: any) => {
+        this.servicesService.getByCategory("UserPermission").subscribe((data: any) => {
             var obj = data["results"][0];
             this.selectedPermissionId = obj["id"];
             this.permission = data["results"];
         });
     }
     LoadPermissionById(id: number) {
-        this.servicesService.getByCategoryId(apiUrl, id, "UserPermission").subscribe((data: any) => {
+        this.servicesService.getByCategoryId(id, "UserPermission").subscribe((data: any) => {
             var obj = data["results"][0];
             this.selectedPermissionId = obj["id"];
         });
@@ -82,7 +79,7 @@ export class UserSettingComponent implements OnInit {
         this.savebuttonText = "Update";
         this.updatedUserId = userId;
         this.removeUserId = userId;
-        this.userSettingService.getUserById(apiUrl, userId)
+        this.userSettingService.getUserById(userId)
             .subscribe((data: any) => {
                 var obj = data["results"][0];
                 this.selectedPermissionId = obj["permissionID"];
@@ -110,12 +107,12 @@ export class UserSettingComponent implements OnInit {
             isInvitationAccepted: false
         };
         if (this.updatedUserId == 0) {
-            this.userSettingService.post(apiUrl, this.organizationUser).subscribe((data: any) => {
+            this.userSettingService.post(this.organizationUser).subscribe((data: any) => {
                 this.LoadCustomUsers();
             });
         }
         else {
-            this.userSettingService.put(apiUrl, this.updatedUserId, this.organizationUser).subscribe((data: any) => {
+            this.userSettingService.put(this.updatedUserId, this.organizationUser).subscribe((data: any) => {
                 this.LoadCustomUsers();
             });
         }

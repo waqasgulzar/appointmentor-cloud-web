@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentService } from './payment.service';
 import { PaymentInfo } from '../setting/user/organizationuser';
@@ -63,7 +62,7 @@ export class ChargeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.processing = false;
     } else {
       
-      this.paymentInfo.TokenId = token.id;
+      this.paymentInfo.tokenId = token.id;
       this.paymentService.Charge(this.paymentInfo).subscribe(data => {
         this.processing = false;
         this.router.navigate(["premium/receipt/", data.results[0].id]);

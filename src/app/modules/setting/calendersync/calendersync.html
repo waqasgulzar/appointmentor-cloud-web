@@ -1,5 +1,4 @@
-﻿
-<header>
+﻿<header>
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -9,10 +8,30 @@
 
                 <div class="modal-body zero-padding col-md-12 zero-padding">
                     <ul class="nav nav-pills nav-stacked col-md-3 zero-padding">
-                        <li class="active"><a ng-class="isItThirdPageB()" data-toggle="pill" href="#home"><span><i class="fa fa-calendar" aria-hidden="true"></i></span>&nbsp;&nbsp;Appointment</a></li>
-                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu1"><span><i class="fa fa-id-card-o" aria-hidden="true"></i></span>&nbsp;&nbsp;Class</a></li>
-                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu2"><span><i class="fa fa-id-card-o" aria-hidden="true"></i></span>&nbsp;&nbsp;Invitation</a></li>
-                        <li><a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu3"><span><i class="fa fa-coffee" aria-hidden="true"></i></span>&nbsp;&nbsp;Break</a></li>
+                        <li class="active">
+                            <a ng-class="isItThirdPageB()" data-toggle="pill" href="#home">
+                                <span>
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </span>&nbsp;&nbsp;Appointment</a>
+                        </li>
+                        <li>
+                            <a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu1">
+                                <span>
+                                    <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                                </span>&nbsp;&nbsp;Class</a>
+                        </li>
+                        <li>
+                            <a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu2">
+                                <span>
+                                    <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                                </span>&nbsp;&nbsp;Invitation</a>
+                        </li>
+                        <li>
+                            <a ng-class="isItThirdPageB()" data-toggle="pill" href="#menu3">
+                                <span>
+                                    <i class="fa fa-coffee" aria-hidden="true"></i>
+                                </span>&nbsp;&nbsp;Break</a>
+                        </li>
                     </ul>
                     <div id="home" class="tab-pane fade in active col-md-9" style="padding-bottom:20px;">
                         <ol class="wizard-progress wizard-3-steps clearfix center-block" style="    height: 5px;">
@@ -177,50 +196,72 @@
     </div>
 </header>
 <section class="col-md-12 admin_margin">
-    
-            <div class="tab-content" style="padding:10px;background-color:#fff;border:0px;">
-                <div class="tab-pane fade in active panel-default">
-                    <h2>Calender Sync</h2>
-                    <div class="shadow-wrapper" align="center">
-                        <div class="tag-box tag-box-v1 box-shadow shadow-effect-2 admin_margin">
-                            <h4>Connect a calendar to Appointmentor</h4>
-                            <p>With calendar sync, Appointmentor prevents double bookings by checking for existing events in the calendar. New bookings in Appointmentor will be displayed, and can be managed directly in the calendar.</p>
-                            <button type="button" class="btn-u btn-u-default admin_margin">Learn more about calendar sync&nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></button>
-                        </div>
-                    </div>
-                    <div class="clearfix margin-bottom-30"></div>
-                    <div class="shadow-wrapper" align="center">
-                        <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-                            <h4>You have no connected calendars</h4>
-                            <button type="button" class="btn-u btn-u-green" data-toggle="modal" data-target="#responsive"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;Connected Calendars</button>
-                            
-                        </div>
-                    </div>
-                    <h2>External calendar settings</h2>
-                    <form action="#" class="sky-form" style="border:1px solid #fff;">
-                        <div class="tag-box tag-box-v1 margin-bottom-40">
-                            <p>Allow bookings to be made over an “available” external calendar event &nbsp;&nbsp;<i class="fa fa-info"></i><label class="toggle pull-right"><input name="checkbox-toggle" type="checkbox"><i class="no-rounded"></i></label></p>
-                        </div>
-                        <div class="tag-box tag-box-v1 margin-bottom-40">
-                            <p>
-                                Export booking buffers to external calendars<label class="toggle pull-right"><input name="checkbox-toggle" type="checkbox"><i class="no-rounded"></i></label>
-                            </p>
-                        </div>
-                        <div class="tag-box tag-box-v1 margin-bottom-40">
-                            <p>
-                                Cancel bookings in Appointmentor when deleted in external calendar<label class="toggle pull-right"><input name="checkbox-toggle" type="checkbox" checked=""><i class="no-rounded"></i></label>
-                            </p>
-                        </div>
-                        <div class="tag-box tag-box-v1 margin-bottom-40">
-                            <p>
-                                Anonymise external calendar event details<label class="toggle pull-right"><input name="checkbox-toggle" type="checkbox"><i class="no-rounded"></i></label>
-                            </p>
-                        </div>
-                    </form>
-                </div>
 
+    <div class="tab-content" style="padding:10px;background-color:#fff;border:0px;">
+        <div class="tab-pane fade in active panel-default">
+            <h2>Calender Sync</h2>
+            <div class="shadow-wrapper" align="center">
+                <div class="tag-box tag-box-v1 box-shadow shadow-effect-2 admin_margin">
+                    <h4>Connect a calendar to Appointmentor</h4>
+                    <p>With calendar sync, Appointmentor prevents double bookings by checking for existing events in the calendar.
+                        New bookings in Appointmentor will be displayed, and can be managed directly in the calendar.</p>
+                    <button type="button" class="btn-u btn-u-default admin_margin">Learn more about calendar sync&nbsp;&nbsp;
+                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
-     
+            <div class="clearfix margin-bottom-30"></div>
+            <div class="shadow-wrapper" align="center">
+                <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+                    <h4>You have no connected calendars</h4>
+                    <button type="button" class="btn-u btn-u-green" data-toggle="modal" data-target="#responsive">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;Connected Calendars</button>
+
+                </div>
+            </div>
+            <h2>External calendar settings</h2>
+            <form action="#" class="sky-form" style="border:1px solid #fff;">
+                <div class="tag-box tag-box-v1 margin-bottom-40">
+                    <p>Allow bookings to be made over an “available” external calendar event &nbsp;&nbsp;
+                        <i class="fa fa-info"></i>
+                        <label class="toggle pull-right">
+                            <input name="checkbox-toggle" type="checkbox">
+                            <i class="no-rounded"></i>
+                        </label>
+                    </p>
+                </div>
+                <div class="tag-box tag-box-v1 margin-bottom-40">
+                    <p>
+                        Export booking buffers to external calendars
+                        <label class="toggle pull-right">
+                            <input name="checkbox-toggle" type="checkbox">
+                            <i class="no-rounded"></i>
+                        </label>
+                    </p>
+                </div>
+                <div class="tag-box tag-box-v1 margin-bottom-40">
+                    <p>
+                        Cancel bookings in Appointmentor when deleted in external calendar
+                        <label class="toggle pull-right">
+                            <input name="checkbox-toggle" type="checkbox" checked="">
+                            <i class="no-rounded"></i>
+                        </label>
+                    </p>
+                </div>
+                <div class="tag-box tag-box-v1 margin-bottom-40">
+                    <p>
+                        Anonymise external calendar event details
+                        <label class="toggle pull-right">
+                            <input name="checkbox-toggle" type="checkbox">
+                            <i class="no-rounded"></i>
+                        </label>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
     <!--pop-up of calender sync-->
     <div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
@@ -230,59 +271,70 @@
                     <h4 class="modal-title" id="myModalLabel4">Add calendar sync</h4>
                 </div>
                 <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!--how to sync-->
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h5><b>How to sync</b></h5>
-                                        <p>Would you like to connect your own calendar to Appointmentor, or invite a colleague to connect theirs?</p>
-                                        <form action="#" id="sky-form" class="sky-form" novalidate="novalidate">
-                                            <fieldset>
-                                                <section>
-                                                    <div class="form-group">
-                                                        <label class="radio pull-right"><input type="radio" name="radio-inline"><i class="rounded-x"></i></label>
-                                                        <h4>Connect your calendar </h4>
-                                                        <p>Connect your own calendar with Appointmentor.</p>
-                                                    </div>
-                                                </section>
-                                            </fieldset>
-                                            <fieldset>
-                                                <section>
-                                                    <div class="form-group">
-                                                        <label class="radio pull-right"><input type="radio" name="radio-inline"><i class="rounded-x"></i></label>
-                                                        <h4>Send invitation </h4>
-                                                        <p>Invite a colleague to sync their calendar with Appointmentor.</p>
-                                                    </div>
-                                                </section>
-                                            </fieldset>
-                                        </form>
-                                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--how to sync-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>
+                                        <b>How to sync</b>
+                                    </h5>
+                                    <p>Would you like to connect your own calendar to Appointmentor, or invite a colleague to
+                                        connect theirs?</p>
+                                    <form action="#" id="sky-form" class="sky-form" novalidate="novalidate">
+                                        <fieldset>
+                                            <section>
+                                                <div class="form-group">
+                                                    <label class="radio pull-right">
+                                                        <input type="radio" name="radio-inline">
+                                                        <i class="rounded-x"></i>
+                                                    </label>
+                                                    <h4>Connect your calendar </h4>
+                                                    <p>Connect your own calendar with Appointmentor.</p>
+                                                </div>
+                                            </section>
+                                        </fieldset>
+                                        <fieldset>
+                                            <section>
+                                                <div class="form-group">
+                                                    <label class="radio pull-right">
+                                                        <input type="radio" name="radio-inline">
+                                                        <i class="rounded-x"></i>
+                                                    </label>
+                                                    <h4>Send invitation </h4>
+                                                    <p>Invite a colleague to sync their calendar with Appointmentor.</p>
+                                                </div>
+                                            </section>
+                                        </fieldset>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="clearfix margin-bottom-30"></div>
-                            <div class="col-md-12">
-                                <form action="#" id="sky-form" class="sky-form" novalidate="novalidate" style="border:1px solid #fff;">
-                                    <label class="label"><b> Resource</b> (Select which resource to connect the calendar to.)</label>
-                                    <label class="select">
-                                        <select style="">
-                                            <option value="0">0 Minutes</option>
-                                            <option value="15">15 Minutes</option>
-                                            <option value="30">30 Minutes</option>
-                                            <option value="45">45 Minutes</option>
-                                            <option value="60">60 Minutes</option>
-                                            <option value="120">2 Hours</option>
-                                            <option value="240">4 Hours</option>
-                                        </select>
-                                        <i></i>
-                                    </label>
-                                </form>
-                            </div>
                         </div>
+                        <div class="clearfix margin-bottom-30"></div>
+                        <div class="col-md-12">
+                            <form action="#" id="sky-form" class="sky-form" novalidate="novalidate" style="border:1px solid #fff;">
+                                <label class="label">
+                                    <b> Resource</b> (Select which resource to connect the calendar to.)</label>
+                                <label class="select">
+                                    <select style="">
+                                        <option value="0">0 Minutes</option>
+                                        <option value="15">15 Minutes</option>
+                                        <option value="30">30 Minutes</option>
+                                        <option value="45">45 Minutes</option>
+                                        <option value="60">60 Minutes</option>
+                                        <option value="120">2 Hours</option>
+                                        <option value="240">4 Hours</option>
+                                    </select>
+                                    <i></i>
+                                </label>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-u btn-u-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn-u btn-u-default"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Sync</button>
+                    <button type="button" class="btn-u btn-u-default">
+                        <i class="fa fa-refresh"></i>&nbsp;&nbsp;Sync</button>
                 </div>
             </div>
         </div>

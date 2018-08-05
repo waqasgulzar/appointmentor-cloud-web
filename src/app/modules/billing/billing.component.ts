@@ -50,13 +50,13 @@ export class BillingComponent implements OnInit {
   }
 
   subscribe(payType) {
-    this.paymentInfo.OrgId = this.orgInfo.organizationId;
+    this.paymentInfo.orgId = this.orgInfo.organizationId;
     if (payType == 'monthly') {
-      this.paymentInfo.Price = this.payMonthly * this.bundleToPurchase;
-      this.paymentInfo.Notes = this.bundleInfo + ' You have choosen monthly package of £' + this.payMonthly + ' with ' + this.bundleToPurchase + ' bundle(s), the total amount is £' + this.paymentInfo.Price;
+      this.paymentInfo.price = this.payMonthly * this.bundleToPurchase;
+      this.paymentInfo.notes = this.bundleInfo + ' You have choosen monthly package of £' + this.payMonthly + ' with ' + this.bundleToPurchase + ' bundle(s), the total amount is £' + this.paymentInfo.price;
     } else {
-      this.paymentInfo.Price = (this.payAnnualy * this.bundleToPurchase) - (24 * this.bundleToPurchase);
-      this.paymentInfo.Notes = this.bundleInfo + ' You have choosen annualy package of £' + this.payAnnualy + ' with ' + this.bundleToPurchase + ' bundle(s), the total amount is £' + this.paymentInfo.Price;
+      this.paymentInfo.price = (this.payAnnualy * this.bundleToPurchase) - (24 * this.bundleToPurchase);
+      this.paymentInfo.notes = this.bundleInfo + ' You have choosen annualy package of £' + this.payAnnualy + ' with ' + this.bundleToPurchase + ' bundle(s), the total amount is £' + this.paymentInfo.price;
     }
     
     sessionStorage.setItem('paymentInfo', JSON.stringify(this.paymentInfo));

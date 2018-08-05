@@ -5,9 +5,8 @@ import { User } from '../../modules/user/user';
 import { ServiceResource } from './serviceresource';
 import { Service } from '../../modules/services/service';
 import { Resource } from './resource';
-import { environment } from '../../environments/environment';
 import { Router } from "@angular/router";
-const apiUrl = environment.apiUrl;
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'resources-component',
   moduleId: module.id,
@@ -28,7 +27,7 @@ export class ResourcesComponent implements OnInit {
   isCheckAll: boolean = false;
   savebuttonText: string = "Save";
   isMenuhidden: boolean = false;
-  constructor(private fb: FormBuilder, private resourcesService: ResourcesService, private router: Router) {
+  constructor(private spinner: NgxSpinnerService, private fb: FormBuilder, private resourcesService: ResourcesService, private router: Router) {
     if (sessionStorage.getItem("isMenuhidden") == "true") {
       this.isMenuhidden = true;
     }
@@ -47,6 +46,7 @@ export class ResourcesComponent implements OnInit {
   onSubmit(formData: any) {
     this.submitted = true;
     if (!formData.invalid) {
+      this.spinner.show();
       this.resource = {
         resourceId: this.updatedResourceId,
         organizationId: Number(sessionStorage.getItem("organizationId")),
@@ -63,7 +63,7 @@ export class ResourcesComponent implements OnInit {
         isDeleted: false
       };
       if (this.updatedResourceId == 0) {
-        this.resourcesService.postResources(apiUrl, this.resource).subscribe((data: any) => {
+        this.resourcesService.postResources(this.resource).subscribe((data: any) => {
           var obj = data["results"][0];
           for (var i = 0; i < this.selectedServiceIds.length; i++) {
             this.serviceResource = {
@@ -74,17 +74,20 @@ export class ResourcesComponent implements OnInit {
               serviceName: '',
               isDeleted: false
             };
-            this.resourcesService.postServiceResources(apiUrl, this.serviceResource).subscribe((data: any) => {
+            this.resourcesService.postServiceResources(this.serviceResource).subscribe((data: any) => {
               this.LoadResources();
             });
             this.LoadResources();
+            this.serviceResources = null;
+            this.ClearFields();
+            this.spinner.hide();
           }
         });
       }
       else {
         //Mark all resources Services to removed.
-        this.resourcesService.post(apiUrl, this.updatedResourceId).subscribe((data: any) => {
-          this.resourcesService.putResources(apiUrl, this.updatedResourceId, this.resource).subscribe((data: any) => {
+        this.resourcesService.post(this.updatedResourceId).subscribe((data: any) => {
+          this.resourcesService.putResources(this.updatedResourceId, this.resource).subscribe((data: any) => {
             for (var i = 0; i < this.selectedServiceIds.length; i++) {
               this.serviceResource = {
                 serviceResourceId: 0,
@@ -94,26 +97,28 @@ export class ResourcesComponent implements OnInit {
                 serviceName: '',
                 isDeleted: false
               };
-              this.resourcesService.postServiceResources(apiUrl, this.serviceResource).subscribe((data: any) => {
+              this.resourcesService.postServiceResources(this.serviceResource).subscribe((data: any) => {
                 this.LoadResources();
               });
             }
             this.LoadResources();
+            this.serviceResources = null;
+            this.ClearFields();
+            this.spinner.hide();
           });
         });
       }
-      this.serviceResources = null;
-      this.ClearFields();
+      
     }
   }
   LoadServices() {
-    this.resourcesService.getServices(apiUrl, Number(sessionStorage.getItem("organizationId")))
+    this.resourcesService.getServices(Number(sessionStorage.getItem("organizationId")))
       .subscribe((data: any) => {
         this.services = data["results"];
       });
   }
   LoadResources() {
-    this.resourcesService.getResources(apiUrl, Number(sessionStorage.getItem("organizationId")))
+    this.resourcesService.getResources(Number(sessionStorage.getItem("organizationId")))
       .subscribe((data: any) => {
         this.resources = data["results"];
       });
@@ -126,7 +131,7 @@ export class ResourcesComponent implements OnInit {
     this.savebuttonText = "Update";
     this.updatedResourceId = resourceId;
     this.removeResourceId = 0;
-    this.resourcesService.getResourceById(apiUrl, resourceId)
+    this.resourcesService.getResourceById(resourceId)
       .subscribe((data: any) => {
         var obj = data["results"][0];
         this.serviceResources = obj["serviceresource"];
@@ -164,7 +169,7 @@ export class ResourcesComponent implements OnInit {
     this.savebuttonText = "Save";
     this.updatedResourceId = 0;
     this.removeResourceId = 0;
-    this.resourcesService.getResourceById(apiUrl, resourceId)
+    this.resourcesService.getResourceById(resourceId)
       .subscribe((data: any) => {
         var obj = data["results"][0];
         this.serviceResources = obj["serviceresource"];
@@ -182,7 +187,7 @@ export class ResourcesComponent implements OnInit {
     this.removeResourceId = resourceId;
   }
   RemoveResource() {
-    this.resourcesService.deleteResources(apiUrl, this.removeResourceId).subscribe((data: any) => {
+    this.resourcesService.deleteResources(this.removeResourceId).subscribe((data: any) => {
       this.LoadResources();
       this.ClearFields();
     });
@@ -196,7 +201,7 @@ export class ResourcesComponent implements OnInit {
   CheckAll() {
     this.isCheckAll = true;
     this.selectedServiceIds = [];
-    this.resourcesService.getServices(apiUrl, Number(sessionStorage.getItem("organizationId")))
+    this.resourcesService.getServices(Number(sessionStorage.getItem("organizationId")))
       .subscribe((data: any) => {
         for (var i = 0; i < data["results"].length; i++) {
           this.selectedServiceIds.push(data["results"][i]["serviceId"]);

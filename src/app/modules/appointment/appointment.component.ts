@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../../environments/environment';
+
 import { Router } from "@angular/router";
 
 import { MatDialog } from '@angular/material';
@@ -21,9 +21,7 @@ import { AppointmentBookingComponent } from '../../shared/appointmentBooking/app
 import * as $ from 'jquery';
 import 'fullcalendar';
 import 'fullcalendar-scheduler';
-
-const apiUrl = environment.apiUrl;
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'appointments-component',
@@ -48,30 +46,6 @@ export class AppointmentComponent implements OnInit {
   appointmentSlotsLoading: boolean;
   appointmentSlots: AppointmentSlot[];
   containerEl: JQuery;
- 
-  
-  //calendarOptions: Object = {
-  //  defaultView: 'agendaDay',
-  //  editable: true,
-  //  header: {
-  //    left: 'prev,next today',
-  //    center: 'title',
-  //    right: 'month,agendaWeek,agendaDay'
-  //  },
-  //  resources: [
-  //    { id: 'a', title: 'Resource 1' },
-  //    { id: 'b', title: 'Resource 2', eventColor: 'green' },
-  //    { id: 'c', title: 'Resource 3', eventColor: 'orange' },
-  //    { id: 'd', title: 'Resource 4', eventColor: 'red' }
-  //  ],
-  //  events: [
-  //    { id: '1', resourceId: 'a', start: '2018-03-31T09:00:00', end: '2018-03-31T10:00:00', title: 'event 1' },
-  //    { id: '2', resourceId: 'b', start: '2018-03-31T07:30:00', end: '2018-03-31T08:30:00', title: 'event 2' },
-  //    { id: '3', resourceId: 'c', start: '2018-03-31T07:30:00', end: '2018-03-31T08:30:00', title: 'event 3' },
-  //    { id: '4', resourceId: 'd', start: '2018-03-31T10:10:00', end: '2018-03-31T10:40:00', title: 'event 4' },
-  //    { id: '5', resourceId: 'a', start: '2018-03-31T10:10:00', end: '2018-03-31T10:40:00', title: 'event 5' }
-  //  ]
-  //};
 
   constructor(private fb: FormBuilder,
     private resourcesService: ResourcesService,
@@ -79,11 +53,10 @@ export class AppointmentComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private customerService: CustomerService,
     private openingtimesService: OpeningTimesService,
-
     private servicesService: ServicesService,
     private dashboardService: DashboardService,
-
     private router: Router,
+    private spinner: NgxSpinnerService,
     public dialog: MatDialog) {
     if (sessionStorage.getItem("organizationId") == null) {
       this.router.navigate(['']);
@@ -93,11 +66,10 @@ export class AppointmentComponent implements OnInit {
     var r: Resource;
     this.appointment.resource = r;
     this.appointment.customers = new Array<Customer>();
-
-
   }
 
   ngOnInit() {
+    
     this.containerEl = $('#calendar');
 
     this.firstFormGroup = this._formBuilder.group({
@@ -106,18 +78,22 @@ export class AppointmentComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
+
     this.appointmentSlotsLoading = false;
     this.startDate = new Date();
     this.LoadServices();
     this.LoadCustomers();
-    this.LoadAppointments();
     this.LoadResources();
+    this.LoadAppointments();
   }
+
   refresh(): void {
     location.reload();
   }
+
   LoadAppointments() {
-    this.resourcesService.getOrgResources(apiUrl, Number(sessionStorage.getItem("organizationId")))
+    this.spinner.show();
+    this.resourcesService.getOrgResources(Number(sessionStorage.getItem("organizationId")))
       .subscribe((data: any) => {
         this.orgResources = data["results"];
         this.appointmentService.get(Number(sessionStorage.getItem("organizationId")))
@@ -137,18 +113,19 @@ export class AppointmentComponent implements OnInit {
               resources: this.orgResources,
               events: this.appointments
             });
+            this.spinner.hide();
           });
       });
   }
 
   LoadCustomers() {
-    this.customerService.get(apiUrl, Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
+    this.customerService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
       this.customers = data["results"];
     });
   }
 
   LoadOpeningtimes() {
-    this.openingtimesService.get(apiUrl, Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
+    this.openingtimesService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
       var obj = data["results"];
       if (obj != null && obj.length > 0) {
         var mondayobj = data["results"][0];
@@ -163,14 +140,14 @@ export class AppointmentComponent implements OnInit {
   }
 
   LoadServices() {
-    this.servicesService.getServices(apiUrl, Number(sessionStorage.getItem("organizationId")))
+    this.servicesService.getServices(Number(sessionStorage.getItem("organizationId")))
       .subscribe((data: any) => {
         this.services = data["results"];
       });
   }
 
   LoadResources() {
-    this.resourcesService.getResources(apiUrl, Number(sessionStorage.getItem("organizationId")))
+    this.resourcesService.getResources(Number(sessionStorage.getItem("organizationId")))
       .subscribe((data: any) => {
         this.resources = data["results"];
 
@@ -227,7 +204,7 @@ export class AppointmentComponent implements OnInit {
       .subscribe((data: any) => {
         console.log(data);
         this.dialog.closeAll();
-        this.resourcesService.getOrgResources(apiUrl, Number(sessionStorage.getItem("organizationId")))
+        this.resourcesService.getOrgResources(Number(sessionStorage.getItem("organizationId")))
           .subscribe((data: any) => {
             this.orgResources = data["results"];
             this.appointmentService.get(Number(sessionStorage.getItem("organizationId")))

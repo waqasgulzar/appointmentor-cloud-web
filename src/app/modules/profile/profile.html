@@ -3,7 +3,7 @@
     <mat-tab-group>
       <mat-tab label="Basic Info">
         <section class="content-wrapper">
-          <section>
+         
             <label class="label">Business Name<span style="color: red;">*</span></label>
             <label class="input">
               <i class="icon-append fa fa-building"></i>
@@ -15,18 +15,16 @@
                 Business Name is required
               </div>
             </div>
-          </section>
-          <section>
+          
             <label class="label">About your Business</label>
             <label class="textarea">
               <i class="icon-append fa fa-comment"></i>
               <textarea formControlName="aboutYourBusiness" maxlength="2500" class="form-control" rows="7"></textarea>
             </label>
-          </section>
-          <section>
-            <label for="logoForMarketingPath">Logo for marketing automation&nbsp;&nbsp;<i class="fa fa-info"></i></label>
+         
+            <label>Logo for marketing automation&nbsp;&nbsp;<i class="fa fa-info"></i></label>
             <input formControlName="logoForMarketingPath" type="file" class="btn-u" />
-          </section>
+         
 
         </section>
       </mat-tab>
@@ -169,6 +167,6 @@
     </mat-tab-group>
   </fieldset>
   <footer>
-    <button type="submit" class="btn-u pull-right">Save</button>
+    <button class="btn-u pull-right">Save</button>
   </footer>
 </form>

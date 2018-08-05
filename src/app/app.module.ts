@@ -87,14 +87,13 @@ import { MicrositeComponent } from './modules/setting/microsite/microsite.compon
 import { FreeagentComponent } from './modules/setting/freeagent/freeagent.component';
 import { EposComponent } from './modules/setting/epos/epos.component';
 import { PaymentsComponent } from './modules/setting/payments/payments.component';
-import { AppointmentBookingComponent } from './shared/appointmentBooking/appointmentBooking.component';;
+import { AppointmentBookingComponent } from './shared/appointmentBooking/appointmentBooking.component';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import 'rxjs/Rx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  
   MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
@@ -148,11 +147,20 @@ import {
   BsDropdownModule,
   TooltipModule
 } from 'ngx-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NotificationService } from './shared/services/notification.service';
+import { UserInfoService } from './shared/services/userInfo.service';
+import { ServiceEditComponent } from './modules/services/service.edit.component';
+import { RequiredIfDirective } from './shared/directives/required-if.directive';
+import { CategoriesComponent } from './modules/services/category/categories.component';
+import { CategoryEditComponent } from './modules/services/category/category-edit.component';
+import { CategoryService } from './modules/services/category/category.service';
 
 const ROUTER_DIRECTIVES = [RouterLinkActive];
 
 @NgModule({
   imports: [
+    NgxSpinnerModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
@@ -196,7 +204,7 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     MatToolbarModule,
     MatTooltipModule,
     NgxDatatableModule,
-    ToastrModule.forRoot({ preventDuplicates: true }),
+    ToastrModule.forRoot({ preventDuplicates: true })
   ],
   declarations: [
     ROUTER_DIRECTIVES,
@@ -215,6 +223,8 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     OpeningTimesComponent,
     ResourcesComponent,
     ServicesComponent,
+    CategoriesComponent,
+    CategoryEditComponent,
     LoginComponent,
     DashboardComponent,
     ForgotComponent,
@@ -268,7 +278,9 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     AssetEditComponent,
     CustomerEditComponent,
     UnderProcessComponent,
-    ResourceAssetManagerComponent
+    ResourceAssetManagerComponent,
+    ServiceEditComponent,
+    RequiredIfDirective
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
@@ -299,11 +311,13 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     ResourceReportService,
     ServiceReportService,
     ReportsService,
-    PaymentService
+    PaymentService,
+    NotificationService,
+    UserInfoService,
+    CategoryService
   ],
   entryComponents: [AppointmentBookingComponent],
   bootstrap: [AppComponent],
-  exports: ROUTER_DIRECTIVES,
+  exports: ROUTER_DIRECTIVES
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -1,6 +1,4 @@
 export const environment = {
   production: true,
-  //apiUrl: 'https://cloud.teknify.net/json'
-  apiUrl: 'http://appointmentorapi.azurewebsites.net/api/'
-  //apiUrl: 'http://localhost:60775/api/'
+  apiUrl: 'http://json.appointmentorcloud.teksify.com/api/'
 };

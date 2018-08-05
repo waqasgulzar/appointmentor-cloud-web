@@ -1,8 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForgotService } from './forgot.service';
-import { environment } from '../../environments/environment';
-const apiUrl = environment.apiUrl;
+
 @Component({
     moduleId: module.id,
     templateUrl: 'forgot.html'
@@ -17,7 +16,7 @@ export class ForgotComponent implements OnInit {
         });
     }
     onSubmit(formData: any) {
-        this.forgotService.put(apiUrl, formData.value['emailAddress']).subscribe((data: any) => {});
+        this.forgotService.put(formData.value['emailAddress']).subscribe((data: any) => {});
         this.isEmailSendMessage = true;
     }
 }
