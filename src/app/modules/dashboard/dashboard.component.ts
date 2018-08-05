@@ -2,7 +2,6 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DashboardService } from './dashboard.service';
 import { Router } from "@angular/router";
-import { environment } from '../../environments/environment';
 import { AppointmentBookingComponent } from '../../shared/appointmentBooking/appointmentBooking.component';
 import { MatDialog } from '@angular/material';
 import { ServicesService } from '../services/services.service';
@@ -16,9 +15,6 @@ import { Appointment } from './appointment';
 import { OpeningTimesService } from '../openingtimes/openingtimes.service';
 import { AppointmentSlot } from './appointmentSlot';
 import { AppointmentService } from '../appointment/appointment.service';
-import { OrganizationUser, OrganizationInfo } from '../setting/user/organizationuser';
-
-const apiUrl = environment.apiUrl;
 
 @Component({
   selector: 'dashboard-component',
@@ -77,13 +73,13 @@ export class DashboardComponent implements OnInit {
   }
 
   LoadCustomers() {
-    this.customerService.get(apiUrl, Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
+    this.customerService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
       this.customers = data["results"];
     });
   }
 
   LoadOpeningtimes() {
-    this.openingtimesService.get(apiUrl, Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
+    this.openingtimesService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
       var obj = data["results"];
       if (obj != null && obj.length > 0) {
         var mondayobj = data["results"][0];
@@ -98,14 +94,14 @@ export class DashboardComponent implements OnInit {
   }
 
   LoadServices() {
-    this.servicesService.getServices(apiUrl, Number(sessionStorage.getItem("organizationId")))
+    this.servicesService.getServices(Number(sessionStorage.getItem("organizationId")))
       .subscribe((data: any) => {
         this.services = data["results"];
       });
   }
 
   LoadResources() {
-    this.resourcesService.getResources(apiUrl, Number(sessionStorage.getItem("organizationId")))
+    this.resourcesService.getResources(Number(sessionStorage.getItem("organizationId")))
       .subscribe((data: any) => {
         this.resources = data["results"];
       });

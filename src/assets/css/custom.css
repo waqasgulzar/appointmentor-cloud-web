@@ -32,6 +32,10 @@
   padding: 0px;
 }
 
+.f_l {
+  float: left;
+}
+
 .zero-border {
   border-radius: 3px;
   border-top: 0px;

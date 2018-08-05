@@ -5,9 +5,7 @@ import { ResourcesService } from '../../resources/resources.service';
 import { Service } from '../../services/service';
 import { BookingQuestion } from './bookingquestion';
 import { QuestionService } from './questionservice';
-import { environment } from '../../../environments/environment';
 import { Router } from "@angular/router";
-const apiUrl = environment.apiUrl;
 @Component({
     selector: 'bookingquestion-component',
     moduleId: module.id,
@@ -39,7 +37,7 @@ export class BookingQuestionComponent implements OnInit {
         this.ClearFields();
     }
     LoadBookingQuestions() {
-        this.bookingQuestionService.get(apiUrl, Number(sessionStorage.getItem("organizationId")))
+        this.bookingQuestionService.get(Number(sessionStorage.getItem("organizationId")))
             .subscribe((data: any) => {
                 this.bookingQuestions = data["results"];
             });
@@ -48,7 +46,7 @@ export class BookingQuestionComponent implements OnInit {
         this.savebuttonText = "Update";
         this.updatedBookingQuestionId = serviceId;
         this.removeBookingQuestionId = 0;
-        this.bookingQuestionService.getBookingQuestionById(apiUrl, serviceId)
+        this.bookingQuestionService.getBookingQuestionById(serviceId)
             .subscribe((data: any) => {
                 var obj = data["results"][0];
 
@@ -71,7 +69,7 @@ export class BookingQuestionComponent implements OnInit {
         this.removeBookingQuestionId = bookingQuestiond;
     }
     RemoveBookingQuestion() {
-        this.bookingQuestionService.delete(apiUrl, this.removeBookingQuestionId).subscribe((data: any) => {
+        this.bookingQuestionService.delete(this.removeBookingQuestionId).subscribe((data: any) => {
             this.LoadBookingQuestions();
             this.ClearFields();
         });
@@ -102,7 +100,7 @@ export class BookingQuestionComponent implements OnInit {
             isDeleted: false
         };
         if (this.updatedBookingQuestionId == 0) {
-            this.bookingQuestionService.post(apiUrl, this.bookingQuestion).subscribe((data: any) => {
+            this.bookingQuestionService.post(this.bookingQuestion).subscribe((data: any) => {
                 var obj = data["results"][0];
                 for (var i = 0; i < this.selectedServiceIds.length; i++) {
                     this.questionService = {
@@ -112,7 +110,7 @@ export class BookingQuestionComponent implements OnInit {
                         serviceName: '',
                         isDeleted: false
                     };
-                    this.bookingQuestionService.postQuestionServices(apiUrl, this.questionService).subscribe((data: any) => {
+                    this.bookingQuestionService.postQuestionServices(this.questionService).subscribe((data: any) => {
                         this.LoadBookingQuestions();
                     });
                     this.LoadBookingQuestions();
@@ -121,8 +119,8 @@ export class BookingQuestionComponent implements OnInit {
         }
         else {
             //Mark all Question Services to removed.
-            this.bookingQuestionService.postQuestion(apiUrl, this.updatedBookingQuestionId).subscribe((data: any) => {
-                this.bookingQuestionService.put(apiUrl, this.updatedBookingQuestionId, this.bookingQuestion).subscribe((data: any) => {
+            this.bookingQuestionService.postQuestion(this.updatedBookingQuestionId).subscribe((data: any) => {
+                this.bookingQuestionService.put(this.updatedBookingQuestionId, this.bookingQuestion).subscribe((data: any) => {
                     for (var i = 0; i < this.selectedServiceIds.length; i++) {
                         this.questionService = {
                             questionServiceId: 0,
@@ -131,7 +129,7 @@ export class BookingQuestionComponent implements OnInit {
                             serviceName: '',
                             isDeleted: false
                         };
-                        this.bookingQuestionService.postQuestionServices(apiUrl, this.questionService).subscribe((data: any) => {
+                        this.bookingQuestionService.postQuestionServices(this.questionService).subscribe((data: any) => {
                             this.LoadBookingQuestions();
                         });
                         this.LoadBookingQuestions();
@@ -146,7 +144,7 @@ export class BookingQuestionComponent implements OnInit {
         this.isAlwaysShow = isShow;
     }
     LoadServices() {
-        this.resourcesService.getServices(apiUrl, Number(sessionStorage.getItem("organizationId")))
+        this.resourcesService.getServices(Number(sessionStorage.getItem("organizationId")))
             .subscribe((data: any) => {
                 this.services = data["results"];
             });
@@ -172,7 +170,7 @@ export class BookingQuestionComponent implements OnInit {
     CheckAll() {
         this.isCheckAll = true;
         this.selectedServiceIds = [];
-        this.resourcesService.getServices(apiUrl, Number(sessionStorage.getItem("organizationId")))
+        this.resourcesService.getServices(Number(sessionStorage.getItem("organizationId")))
             .subscribe((data: any) => {
                 for (var i = 0; i < data["results"].length; i++) {
                     this.selectedServiceIds.push(data["results"][i]["serviceId"]);

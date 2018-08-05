@@ -1,17 +1,27 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+
+import { Router } from '@angular/router';
+import { Constant } from '../../shared/constants/constants';
+import { OrganizationInfo, Profile } from '../setting/user/organizationuser';
 import { ProfileService } from './profile.service';
-import { Profile } from './profile';
-import { environment } from '../../environments/environment';
-import { Router } from "@angular/router";
-const apiUrl = environment.apiUrl;
+import { NotificationService } from '../../shared/services/notification.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NotificationProperties } from '../../shared/interfaces/NotificationProperties';
+import { UserInfoService } from '../../shared/services/userInfo.service';
+
+
 @Component({
   moduleId: module.id,
   templateUrl: 'profile.html'
 })
 export class ProfileComponent implements OnInit {
-  profiles: Profile[];
-  profile: Profile;
+  orgInfo = new OrganizationInfo();
   userForm: FormGroup;
   logoForMarketingPath: File;
   profileImageForMicrosite1: File;
@@ -19,122 +29,90 @@ export class ProfileComponent implements OnInit {
   profileImageForMicrosite3: File;
   profileImageForMicrosite4: File;
   bannerImageForMicrosite: File;
-  submitted=false;
-  constructor(private fb: FormBuilder, private profileService: ProfileService, private router: Router) {
-    if (sessionStorage.getItem("organizationId") == null) {
-      this.router.navigate(['']);
-    }
-  }
+  submitted = false;
+  constructor(
+    private fb: FormBuilder,
+    private profileService: ProfileService,
+    private router: Router,
+    private notificationService: NotificationService,
+    private spinner: NgxSpinnerService,
+    private userInfo: UserInfoService
+  ) { }
   fileChangeMicrosite(files: any, microsite: number) {
     if (microsite == 0) {
       this.logoForMarketingPath = files[0].nativeElement;
-    }
-    else if (microsite == 1) {
+    } else if (microsite == 1) {
       this.profileImageForMicrosite1 = files[0].nativeElement;
-    }
-    else if (microsite == 2) {
+    } else if (microsite == 2) {
       this.profileImageForMicrosite2 = files[0].nativeElement;
-    }
-    else if (microsite == 3) {
+    } else if (microsite == 3) {
       this.profileImageForMicrosite3 = files[0].nativeElement;
-    }
-    else if (microsite == 4) {
+    } else if (microsite == 4) {
       this.profileImageForMicrosite4 = files[0].nativeElement;
-    }
-    else if (microsite == 5) {
+    } else if (microsite == 5) {
       this.bannerImageForMicrosite = files[0].nativeElement;
     }
   }
-  ngOnInit() {
-    this.userForm = this.fb.group({
-      businessName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
-      aboutYourBusiness: [''],
-      street: [''],
-      city: [''],
-      postCode: [''],
-      businessPhoneNumber: [''],
-      businessWebsite: [''],
-      mobileNumber: [''],
-      emailAddress: [''],
-      otherEmailAddress: [''],
-      sendFromEmailAddress: [''],
-      sendFromNameForEmail: [''],
-      sendFromNameForSMS: [''],
-      logoForMarketingPath: [''],
-      setAsDefaultMircrosite1: [false],
-      setAsDefaultMircrosite2: [false],
-      setAsDefaultMircrosite3: [false],
-      setAsDefaultMircrosite4: [false],
-      profileImageForMicrosite1: [''],
-      
-      profileImageForMicrosite2: [''],
-      
-      profileImageForMicrosite3: [''],
-     
-      profileImageForMicrosite4: [''],
-      
-      bannerImageForMicrosite: ['']
-    });
-    this.LoadProfile();
-  }
-  LoadProfile() {
-    this.profileService.get(apiUrl, Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
-      var obj = data["results"][0];
 
-      this.userForm = this.fb.group({
-        businessName: [obj["businessName"], Validators.compose([Validators.required, Validators.maxLength(50)])],
-        aboutYourBusiness: [obj["aboutYourBusiness"]],
-        street: [obj["street"]],
-        city: [obj["city"]],
-        postCode: [obj["postCode"]],
-        businessPhoneNumber: [obj["businessPhoneNumber"]],
-        businessWebsite: [obj["businessWebsite"]],
-        mobileNumber: [obj["mobileNumber"]],
-        emailAddress: [obj["emailAddress"]],
-        otherEmailAddress: [obj["otherEmailAddress"]],
-        sendFromEmailAddress: [obj["sendFromEmailAddress"]],
-        sendFromNameForEmail: [obj["sendFromNameForEmail"]],
-        sendFromNameForSMS: [obj["sendFromNameForSMS"]],
-        logoForMarketingPath: [obj["logoForMarketingPath"]],
-        setAsDefaultMircrosite1: [obj["setAsDefaultMircrosite1"]],
-        setAsDefaultMircrosite2: [obj["setAsDefaultMircrosite2"]],
-        setAsDefaultMircrosite3: [obj["setAsDefaultMircrosite3"]],
-        setAsDefaultMircrosite4: [obj["setAsDefaultMircrosite4"]],
-      });
+  ngOnInit() {
+    this.orgInfo = this.userInfo.orgInfo;
+    this.loadProfile();
+  }
+
+  loadProfile() {
+    this.userForm = this.fb.group({
+      organizationId: [this.orgInfo.organizationId],
+      businessName: [this.orgInfo.profile.businessName, Validators.compose([Validators.required, Validators.maxLength(50)])],
+      aboutYourBusiness: [this.orgInfo.profile.aboutYourBusiness],
+      street: [this.orgInfo.profile.street],
+      city: [this.orgInfo.profile.city],
+      postCode: [this.orgInfo.profile.postCode],
+      businessPhoneNumber: [this.orgInfo.profile.businessPhoneNumber],
+      businessWebsite: [this.orgInfo.profile.businessWebsite],
+      mobileNumber: [this.orgInfo.profile.mobileNumber],
+      emailAddress: [this.orgInfo.profile.emailAddress],
+      otherEmailAddress: [this.orgInfo.profile.otherEmailAddress],
+      sendFromEmailAddress: [this.orgInfo.profile.sendFromEmailAddress],
+      sendFromNameForEmail: [this.orgInfo.profile.sendFromNameForEmail],
+      sendFromNameForSMS: [this.orgInfo.profile.sendFromNameForSMS],
+      logoForMarketingPath: [this.orgInfo.profile.logoForMarketingPath],
+      setAsDefaultMircrosite1: [this.orgInfo.profile.setAsDefaultMircrosite1 || false],
+      setAsDefaultMircrosite2: [this.orgInfo.profile.setAsDefaultMircrosite2 || false],
+      setAsDefaultMircrosite3: [this.orgInfo.profile.setAsDefaultMircrosite3 || false],
+      setAsDefaultMircrosite4: [this.orgInfo.profile.setAsDefaultMircrosite4 || false],
+      profileImageForMicrosite1: [this.orgInfo.profile.profileImageForMicrosite1],
+      profileImageForMicrosite2: [this.orgInfo.profile.profileImageForMicrosite2],
+      profileImageForMicrosite3: [this.orgInfo.profile.profileImageForMicrosite3],
+      profileImageForMicrosite4: [this.orgInfo.profile.profileImageForMicrosite4],
+      bannerImageForMicrosite: [this.orgInfo.profile.bannerImageForMicrosite]
     });
   }
-  onSubmit(formData: any) {
+
+  onSubmit(userForm: FormGroup) {
     this.submitted = true;
-    this.profile = {
-      profileId: 0,
-      organizationId: Number(sessionStorage.getItem("organizationId")),
-      businessName: formData.controls["businessName"].value,
-      aboutYourBusiness: formData.controls["aboutYourBusiness"].value,
-      street: formData.controls["street"].value,
-      city: formData.controls["city"].value,
-      postCode: formData.controls["postCode"].value,
-      businessPhoneNumber: formData.controls["businessPhoneNumber"].value,
-      businessWebsite: formData.controls["businessWebsite"].value,
-      mobileNumber: formData.controls["mobileNumber"].value,
-      emailAddress: formData.controls["emailAddress"].value,
-      otherEmailAddress: formData.controls["otherEmailAddress"].value,
-      sendFromEmailAddress: formData.controls["sendFromEmailAddress"].value,
-      sendFromNameForEmail: formData.controls["sendFromNameForEmail"].value,
-      sendFromNameForSMS: formData.controls["sendFromNameForSMS"].value,
-      logoForMarketingPath: this.logoForMarketingPath,
-      profileImageForMicrosite1: this.profileImageForMicrosite1,
-      setAsDefaultMircrosite1: formData.controls["setAsDefaultMircrosite1"].value,
-      profileImageForMicrosite2: this.profileImageForMicrosite2,
-      setAsDefaultMircrosite2: formData.controls["setAsDefaultMircrosite2"].value,
-      profileImageForMicrosite3: this.profileImageForMicrosite3,
-      setAsDefaultMircrosite3: formData.controls["setAsDefaultMircrosite3"].value,
-      profileImageForMicrosite4: this.profileImageForMicrosite4,
-      setAsDefaultMircrosite4: formData.controls["setAsDefaultMircrosite4"].value,
-      bannerImageForMicrosite: this.bannerImageForMicrosite,
-      isDeleted: false
-    };
-    this.profileService.post(apiUrl, this.profile).subscribe((data: any) => {
-      this.LoadProfile();
-    });
+    this.spinner.show();
+    if (userForm.valid) {
+      this.profileService.post(userForm.value).subscribe((data: any) => {
+        this.orgInfo.profile = userForm.value;
+        this.userInfo.setInfo(this.orgInfo);
+        const successNotification: NotificationProperties = {
+          message: 'Organisation Profile has been updated successfully.',
+          title: 'Organisation Profile'
+        };
+        this.notificationService.success(successNotification);
+        this.spinner.hide();
+        this.submitted = false;
+        this.loadProfile();
+      },
+        error => {
+          this.spinner.hide();
+          const errorNotification: NotificationProperties = {
+            message: error.error,
+            title: 'Organisation Profile'
+          };
+          this.submitted = false;
+          this.notificationService.error(errorNotification);
+        });
+    }
   }
 }

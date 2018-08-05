@@ -15,73 +15,77 @@
 }
 
 export class OrganizationInfo {
-  OrganizationId: number;
-  FirstName: string;
-  LastName: string;
-  CompanyName: string;
-  PhoneNumber: string;
-  EmailAddress: string;
-  Password: string;
-  TimezoneId: number | null;
-  CurrencyId: number | null;
-  DateFormat: string;
-  CalendarIntervalIncrement: number | null;
-  IsDeleted: boolean;
-  Profile: Profile;
-  Payment: PaymentInfo;
-  CreatedOn: Date | string | null;
-  Stats: Statistics;
+  organizationId: number;
+  firstName: string;
+  lastName: string;
+  companyName: string;
+  phoneNumber: string;
+  emailAddress: string;
+  password: string;
+  timezoneId: number | null;
+  currencyId: number | null;
+  dateFormat: string;
+  calendarIntervalIncrement: number | null;
+  isDeleted: boolean;
+  profile: Profile;
+  payment: PaymentInfo;
+  createdOn: Date | string | null;
+  stats: Statistics;
+
+  constructor() {
+    this.organizationId = 0;
+  }
 }
 
 export class Profile {
-  ProfileID: number;
-  OrganizationId: number;
-  BusinessName: string;
-  AboutYourBusiness: string;
-  Street: string;
-  City: string;
-  PostCode: string;
-  BusinessPhoneNumber: string;
-  BusinessWebsite: string;
-  MobileNumber: string;
-  EmailAddress: string;
-  OtherEmailAddress: string;
-  SendFromEmailAddress: string;
-  SendFromNameForEmail: string;
-  SendFromNameForSMS: string;
-  LogoForMarketingPath: string;
-  ProfileImageForMicrosite1: string;
-  SetAsDefaultMircrosite1: boolean | null;
-  ProfileImageForMicrosite2: string;
-  SetAsDefaultMircrosite2: boolean | null;
-  ProfileImageForMicrosite3: string;
-  SetAsDefaultMircrosite3: boolean | null;
-  ProfileImageForMicrosite4: string;
-  SetAsDefaultMircrosite4: boolean | null;
-  BannerImageForMicrosite: string;
-  IsDeleted: boolean;
+  profileID: number;
+  organizationId: number;
+  businessName: string;
+  aboutYourBusiness: string;
+  street: string;
+  city: string;
+  postCode: string;
+  businessPhoneNumber: string;
+  businessWebsite: string;
+  mobileNumber: string;
+  emailAddress: string;
+  otherEmailAddress: string;
+  sendFromEmailAddress: string;
+  sendFromNameForEmail: string;
+  sendFromNameForSMS: string;
+  logoForMarketingPath: string;
+  profileImageForMicrosite1: string;
+  setAsDefaultMircrosite1: boolean | null;
+  profileImageForMicrosite2: string;
+  setAsDefaultMircrosite2: boolean | null;
+  profileImageForMicrosite3: string;
+  setAsDefaultMircrosite3: boolean | null;
+  profileImageForMicrosite4: string;
+  setAsDefaultMircrosite4: boolean | null;
+  bannerImageForMicrosite: string;
+  isDeleted: boolean;
 }
 
 export class PaymentInfo {
-  Id: number;
-  OrgId: number | null;
-  PackageId: number | null;
-  Price: number | null;
-  PaidOn: Date | string | null;
-  StartDate: Date | string | null;
-  EndDate: Date | string | null;
-  Notes: string;
-  ReturnKey: string;
-  SuccessKey: string;
-  Error: string;
-  TokenId: string;
+  id: number;
+  orgId: number | null;
+  packageId: number | null;
+  price: number | null;
+  paidOn: Date | string | null;
+  startDate: Date | string | null;
+  endDate: Date | string | null;
+  notes: string;
+  returnKey: string;
+  successKey: string;
+  error: string;
+  tokenId: string;
 }
 
 export class Statistics {
-  Resources: number;
-  SubUsers: number;
-  BookingApps: number;
-  Services: number;
-  Assets: number;
-  Customers: number;
+  resources: number;
+  subUsers: number;
+  bookingApps: number;
+  services: number;
+  assets: number;
+  customers: number;
 }

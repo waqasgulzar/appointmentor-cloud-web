@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, PreloadAllModules, Routes } from '@angular/router';
 import { HomeComponent } from './modules/home/home.component';
-import { ProductComponent } from './modules/products/product.component';
 import { UserComponent } from './modules/user/user.component';
 import { AccountSetupComponent } from './modules/user/accountsetup.component';
 import { OpeningTimesComponent } from './modules/openingtimes/openingtimes.component';
-import { ResourcesComponent } from './modules/resources/resources.component';
 import { ServicesComponent } from './modules/services/services.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LoginComponent } from './modules/login/login.component';
@@ -60,11 +58,14 @@ import { UnderProcessComponent } from './shared/underProcess/underProcess.compon
 import { AppLayoutComponent } from './_layout/app-layout/app-layout.component';
 import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component';
 import { ResourceAssetManagerComponent } from './modules/resource-asset-manager/resource-asset-manager.component';
+import { ServiceEditComponent } from './modules/services/service.edit.component';
+import { CategoriesComponent } from './modules/services/category/categories.component';
+import { CategoryEditComponent } from './modules/services/category/category-edit.component';
 
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      //Site routes goes here 
+      //Site routes goes here
       {
         path: '',
         component: SiteLayoutComponent,
@@ -73,6 +74,7 @@ import { ResourceAssetManagerComponent } from './modules/resource-asset-manager/
           { path: 'home', component: HomeComponent },
           { path: 'login', component: LoginComponent },
           { path: 'registration', component: UserComponent },
+          { path: 'forgot', component: ForgotComponent },
           //{ path: 'test/:id', component: AboutComponent }
         ]
       },
@@ -90,7 +92,12 @@ import { ResourceAssetManagerComponent } from './modules/resource-asset-manager/
           { path: 'asset/:id', component: AssetEditComponent },
 
           { path: 'services', component: ServicesComponent },
-          { path: 'forgot', component: ForgotComponent },
+          { path: 'service/:id', component: ServiceEditComponent },
+
+          { path: 'categories', component: CategoriesComponent },
+          { path: 'category/:id', component: CategoryEditComponent },
+
+          
           { path: 'reset/:id', component: ResetComponent },
           { path: 'customer', component: CustomerComponent },
           { path: 'customer/:id', component: CustomerEditComponent },
@@ -101,16 +108,28 @@ import { ResourceAssetManagerComponent } from './modules/resource-asset-manager/
           { path: 'profile', component: ProfileComponent },
           { path: 'general', component: GeneralComponent },
           { path: 'customersetting', component: CustomerSettingComponent },
-          { path: 'customersettingdetail', component: CustomerSettingDetailComponent },
+          {
+            path: 'customersettingdetail',
+            component: CustomerSettingDetailComponent
+          },
           { path: 'usersetting', component: UserSettingComponent },
           { path: 'usersettingdetail', component: UserSettingDetailComponent },
           { path: 'emailsetting', component: EmailSettingComponent },
-          { path: 'emailsettingdetail', component: EmailSettingDetailComponent },
+          {
+            path: 'emailsettingdetail',
+            component: EmailSettingDetailComponent
+          },
           { path: 'customerdetail', component: CustomerDetailComponent },
           { path: 'smssetting', component: SMSSettingComponent },
-          { path: 'onlinebookingsetting', component: OnlineBookingSettingComponent },
+          {
+            path: 'onlinebookingsetting',
+            component: OnlineBookingSettingComponent
+          },
           { path: 'bookingquestion', component: BookingQuestionComponent },
-          { path: 'bookingquestiondetail', component: BookingQuestionDetailComponent },
+          {
+            path: 'bookingquestiondetail',
+            component: BookingQuestionDetailComponent
+          },
           { path: 'marketing', component: MarkettingComponent },
           { path: 'support', component: SupportComponent },
           { path: 'notification', component: NotificationComponent },
@@ -135,20 +154,21 @@ import { ResourceAssetManagerComponent } from './modules/resource-asset-manager/
           { path: 'payments', component: PaymentsComponent },
           { path: 'charge', component: ChargeComponent },
           { path: 'premium/receipt/:id', component: ReceiptComponent },
-          { path: 'underProcess', component: UnderProcessComponent },
+          { path: 'underProcess', component: UnderProcessComponent }
         ]
       },
 
       //no layout routes
-     
+
       // otherwise redirect to home
-      { path: '**', redirectTo: '' },
-    ])],
+      { path: '**', redirectTo: '' }
+    ])
+  ],
   exports: [RouterModule]
 })
 
 //export const routing = RouterModule.forRoot(appRoutes);
-export class AppRoutingModule { }
+export class AppRoutingModule {}
 //@NgModule({
 //  imports: [
 //    RouterModule.forRoot([

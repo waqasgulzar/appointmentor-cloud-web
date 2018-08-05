@@ -2,9 +2,7 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomerSettingService } from './customersetting.service';
 import { CustomField } from './customsetting';
-import { environment } from '../../../environments/environment';
 import { Router } from "@angular/router";
-const apiUrl = environment.apiUrl;
 @Component({
     moduleId: module.id,
     templateUrl: 'customersetting.html'
@@ -33,19 +31,19 @@ export class CustomerSettingComponent implements OnInit {
             isDeleted: false
         };
         if (this.updatedCustomId == 0) {
-            this.customerSettingService.post(apiUrl, this.customfield).subscribe((data: any) => {
+            this.customerSettingService.post(this.customfield).subscribe((data: any) => {
                 this.LoadCustomSetting();
             });
         }
         else {
-            this.customerSettingService.put(apiUrl, this.updatedCustomId, this.customfield).subscribe((data: any) => {
+            this.customerSettingService.put(this.updatedCustomId, this.customfield).subscribe((data: any) => {
                 this.LoadCustomSetting();
             });
         }
         this.ClearFields();
     }
     LoadCustomSetting() {
-        this.customerSettingService.get(apiUrl, Number(sessionStorage.getItem("organizationId")))
+        this.customerSettingService.get(Number(sessionStorage.getItem("organizationId")))
             .subscribe((data: any) => {
                 this.customfields = data["results"];
             });
@@ -54,7 +52,7 @@ export class CustomerSettingComponent implements OnInit {
         this.savebuttonText = "Update";
         this.updatedCustomId = customId;
         this.removeCustomId = 0;
-        this.customerSettingService.getCustomFieldById(apiUrl, customId)
+        this.customerSettingService.getCustomFieldById(customId)
             .subscribe((data: any) => {
                 var obj = data["results"][0];
                 this.userForm = this.fb.group({
@@ -67,7 +65,7 @@ export class CustomerSettingComponent implements OnInit {
         this.removeCustomId = customId;
     }
     RemoveCustomField() {
-        this.customerSettingService.delete(apiUrl, this.removeCustomId).subscribe((data: any) => {
+        this.customerSettingService.delete(this.removeCustomId).subscribe((data: any) => {
             this.LoadCustomSetting();
             this.ClearFields();
         });

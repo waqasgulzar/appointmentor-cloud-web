@@ -5,7 +5,6 @@ import { Assetservice } from './assetservice';
 import { ResourcesService } from '../../modules/resources/resources.service';
 import { Service } from '../../modules/services/service';
 import { Asset } from './asset';
-import { environment } from '../../environments/environment';
 import { Router } from "@angular/router";
 import { Constant } from '../../shared/constants/constants';
 import { BsModalService } from 'ngx-bootstrap';
@@ -13,7 +12,6 @@ import { AssetEditComponent } from './asset-edit/asset-edit.component';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operator/take';
 
-const apiUrl = environment.apiUrl;
 @Component({
   selector: 'assets-component',
   moduleId: module.id,
@@ -38,9 +36,6 @@ export class AssetComponent implements OnInit {
     private bsModalService: BsModalService,
     private resourcesService: ResourcesService,
     private router: Router) {
-    if (sessionStorage.getItem("organizationId") == null) {
-      this.router.navigate(['']);
-    }
     this.LoadAssets();
   }
   ngOnInit() {
@@ -63,7 +58,7 @@ export class AssetComponent implements OnInit {
         isDeleted: false
       };
       if (this.updatedAssetId == 0) {
-        this.assetService.postAssets(apiUrl, this.asset).subscribe((data: any) => {
+        this.assetService.postAssets(this.asset).subscribe((data: any) => {
           var obj = data["results"][0];
           for (var i = 0; i < this.selectedServiceIds.length; i++) {
             this.assetservice = {
@@ -72,7 +67,7 @@ export class AssetComponent implements OnInit {
               serviceId: this.selectedServiceIds[i],
               isDeleted: false
             };
-            this.assetService.postAssetServices(apiUrl, this.assetservice).subscribe((data: any) => {
+            this.assetService.postAssetServices(this.assetservice).subscribe((data: any) => {
               this.LoadAssets();
             });
             this.LoadAssets();
@@ -81,8 +76,8 @@ export class AssetComponent implements OnInit {
       }
       else {
         //Mark all asset Services to removed.
-        this.assetService.post(apiUrl, this.updatedAssetId).subscribe((data: any) => {
-          this.assetService.putAssets(apiUrl, this.updatedAssetId, this.asset).subscribe((data: any) => {
+        this.assetService.post(this.updatedAssetId).subscribe((data: any) => {
+          this.assetService.putAssets(this.updatedAssetId, this.asset).subscribe((data: any) => {
             for (var i = 0; i < this.selectedServiceIds.length; i++) {
               this.assetservice = {
                 assetserviceId: 0,
@@ -90,7 +85,7 @@ export class AssetComponent implements OnInit {
                 serviceId: this.selectedServiceIds[i],
                 isDeleted: false
               };
-              this.assetService.postAssetServices(apiUrl, this.assetservice).subscribe((data: any) => {
+              this.assetService.postAssetServices(this.assetservice).subscribe((data: any) => {
                 this.LoadAssets();
               });
             }
@@ -103,13 +98,13 @@ export class AssetComponent implements OnInit {
     }
   }
   LoadServices() {
-    this.resourcesService.getServices(apiUrl, Number(sessionStorage.getItem("organizationId")))
+    this.resourcesService.getServices(Number(sessionStorage.getItem("organizationId")))
       .subscribe((data: any) => {
         this.services = data["results"];
       });
   }
   LoadAssets() {
-    this.assetService.get(apiUrl, Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
+    this.assetService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
       this.assets = data["results"];
     });
   }
@@ -139,7 +134,7 @@ export class AssetComponent implements OnInit {
     this.updatedAssetId = assetId;
     this.removeAssetId = 0;
     this.LoadServices();
-    this.assetService.getAssetById(apiUrl, assetId)
+    this.assetService.getAssetById(assetId)
       .subscribe((data: any) => {
         console.log(data);
         var obj = data["results"][0];
@@ -157,7 +152,7 @@ export class AssetComponent implements OnInit {
   CheckAll() {
     this.isCheckAll = true;
     this.selectedServiceIds = [];
-    this.resourcesService.getServices(apiUrl, Number(sessionStorage.getItem("organizationId")))
+    this.resourcesService.getServices(Number(sessionStorage.getItem("organizationId")))
       .subscribe((data: any) => {
         for (var i = 0; i < data["results"].length; i++) {
           this.selectedServiceIds.push(data["results"][i]["serviceId"]);
@@ -192,7 +187,7 @@ export class AssetComponent implements OnInit {
     console.log(this.removeAssetId);
   }
   RemoveAsset() {
-    this.assetService.delete(apiUrl, this.removeAssetId).subscribe((data: any) => {
+    this.assetService.delete(this.removeAssetId).subscribe((data: any) => {
       this.LoadAssets();
       this.ClearFields();
     });

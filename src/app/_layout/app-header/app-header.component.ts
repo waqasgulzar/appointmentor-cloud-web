@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserInfoService } from '../../shared/services/userInfo.service';
+import { OrganizationInfo } from '../../modules/setting/user/organizationuser';
 
 @Component({
   selector: 'app-header',
@@ -7,12 +9,11 @@ import { Component, OnInit } from '@angular/core';
  
 })
 export class AppHeaderComponent implements OnInit {
-  orgInfo: any;
   active: string = '';
-  constructor() { }
+  constructor(public userInfo: UserInfoService) { }
 
   ngOnInit() {
-    this.orgInfo = JSON.parse(sessionStorage.getItem('orgInfo')) || {};
+    
   }
 
   showMenu() {

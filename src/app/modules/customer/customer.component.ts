@@ -2,9 +2,8 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from './customer.service';
 import { Customer } from './customer';
-import { environment } from '../../environments/environment';
 import { Router } from "@angular/router";
-const apiUrl = environment.apiUrl;
+
 @Component({
   moduleId: module.id,
   templateUrl: 'customer.html'
@@ -71,7 +70,7 @@ export class CustomerComponent implements OnInit {
     //this.LoadCustomers();
   }
   LoadCustomers() {
-    this.customerService.get(apiUrl, Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
+    this.customerService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
       this.customers = data["results"];
       console.log(data["results"]);
     });
@@ -80,7 +79,7 @@ export class CustomerComponent implements OnInit {
     this.savebuttonText = "Update";
     this.updatedCustomerId = customerId;
     this.removeCustomerId = 0;
-    this.customerService.getCustomerById(apiUrl, customerId)
+    this.customerService.getCustomerById(customerId)
       .subscribe((data: any) => {
         var obj = data["results"][0];
         var genderStatus = obj["gender"] == true ? "1" : "0";
@@ -113,7 +112,7 @@ export class CustomerComponent implements OnInit {
     this.addressline1 = "";
     this.updatedCustomerId = customerId;
 
-    this.customerService.getCustomerById(apiUrl, customerId)
+    this.customerService.getCustomerById(customerId)
       .subscribe((data: any) => {
         var obj = data["results"][0];
         this.customerName = obj["firstName"] + " " + obj["lastName"];
@@ -129,13 +128,13 @@ export class CustomerComponent implements OnInit {
     console.log(this.removeCustomerId);
   }
   RemoveCustomer() {
-    this.customerService.deleteCustomer(apiUrl, this.removeCustomerId).subscribe((data: any) => {
+    this.customerService.deleteCustomer(this.removeCustomerId).subscribe((data: any) => {
       this.LoadCustomers();
       this.ClearFields();
     });
   }
   SearchCustomers(firstname: any, lastname: any, emailaddress: any, city: any) {
-    this.customerService.getCustomerByFilter(apiUrl, Number(sessionStorage.getItem("organizationId")), firstname.value, lastname.value, emailaddress.value, city.value).subscribe((data: any) => {
+    this.customerService.getCustomerByFilter(Number(sessionStorage.getItem("organizationId")), firstname.value, lastname.value, emailaddress.value, city.value).subscribe((data: any) => {
       this.customers = data["results"];
     });
   }
@@ -151,7 +150,7 @@ export class CustomerComponent implements OnInit {
       this.isSubjectSend = true;
       this.isEmptySubject = false;
 
-      this.customerService.postEmail(apiUrl, this.updatedCustomerId, emailbysubject.value, emailbymessage.value).subscribe((data: any) => {
+      this.customerService.postEmail(this.updatedCustomerId, emailbysubject.value, emailbymessage.value).subscribe((data: any) => {
         emailbysubject.value = "";
         emailbymessage.value = "";
       });
@@ -167,7 +166,7 @@ export class CustomerComponent implements OnInit {
     else {
       this.isMessageSend = true;
       this.isEmptyMessage = false;
-      this.customerService.postEmail(apiUrl, this.updatedCustomerId, "", emailbymessage.value).subscribe((data: any) => {
+      this.customerService.postEmail(this.updatedCustomerId, "", emailbymessage.value).subscribe((data: any) => {
         emailbymessage.value = "";
       });
     }
@@ -198,11 +197,11 @@ export class CustomerComponent implements OnInit {
         isDeleted: false
       };
       if (this.updatedCustomerId == 0) {
-        this.customerService.postCustomer(apiUrl, this.customer).subscribe((data: any) => {
+        this.customerService.postCustomer(this.customer).subscribe((data: any) => {
           this.LoadCustomers();
         });
       } else {
-        this.customerService.putCustomer(apiUrl, this.updatedCustomerId, this.customer).subscribe((data: any) => {
+        this.customerService.putCustomer(this.updatedCustomerId, this.customer).subscribe((data: any) => {
           this.LoadCustomers();
         });
       }

@@ -1,8 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ResetService } from './reset.service';
-import { environment } from '../../environments/environment';
-const apiUrl = environment.apiUrl;
 @Component({
   moduleId: module.id,
   templateUrl: 'reset.html'
@@ -28,7 +26,7 @@ export class ResetComponent implements OnInit {
   }
   get() {
     var uniqueId = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
-    this.resetService.get(apiUrl, uniqueId).subscribe((data: any) => {
+    this.resetService.get(uniqueId).subscribe((data: any) => {
       if (data["results"][0]) {
         //Unique Id exist
         this.isLinkExpired = false;
@@ -48,7 +46,7 @@ export class ResetComponent implements OnInit {
       this.isPasswordMatch = false;
     }
     else {
-      this.resetService.put(apiUrl, uniqueId, formData.value['password']).subscribe((data: any) => {
+      this.resetService.put(uniqueId, formData.value['password']).subscribe((data: any) => {
         this.isReset = true;
         this.isLinkExpired = false;
         this.isPasswordMatch = true;

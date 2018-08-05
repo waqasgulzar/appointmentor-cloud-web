@@ -1,6 +1,6 @@
 ﻿<ul class="nav panel-group">
   <li>
-    <a [routerLink]="['/dashboard']"><h4 class="panel-title"><i class="fa fa-home"></i>Home</h4></a>
+    <a [routerLink]="['/appointment']"><h4 class="panel-title"><i class="fa fa-home"></i>Home</h4></a>
   </li>
   <li class="on panel panel-default">
     <a class="submenu-toggle panel-heading">
@@ -11,7 +11,7 @@
     <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='settings'">
       <li><a [routerLink]="['/profile']" routerLinkActive="on">Organisation Proﬁle</a></li>
       <li><a [routerLink]="['/openingtimes']" routerLinkActive="on">Timings & Calendar</a></li>
-      <li><a [routerLink]="['/services']" routerLinkActive="on">Categories & Services</a></li>
+      <li><a [routerLink]="['/categories']" routerLinkActive="on">Categories & Services</a></li>
       <li><a [routerLink]="['/resources']" routerLinkActive="on">Resources & Assets</a></li>
       <li><a [routerLink]="['/asset']" routerLinkActive="on">Inventory & Stocks</a></li>
       <li><a [routerLink]="['/task']" routerLinkActive="on">Tasks & Activities </a></li>

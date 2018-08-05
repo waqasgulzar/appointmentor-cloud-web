@@ -1,4 +1,4 @@
-﻿export interface Service {
+﻿export class Service {
     serviceId: number;
     organizationId: number;
     serviceName: string;
