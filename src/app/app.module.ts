@@ -88,8 +88,11 @@ import { FreeagentComponent } from './modules/setting/freeagent/freeagent.compon
 import { EposComponent } from './modules/setting/epos/epos.component';
 import { PaymentsComponent } from './modules/setting/payments/payments.component';
 import { AppointmentBookingComponent } from './shared/appointmentBooking/appointmentBooking.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { NgxEditorModule } from 'ngx-editor';
 import { ToastrModule } from 'ngx-toastr';
+import { TagInputModule } from 'ngx-chips';
+
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import 'rxjs/Rx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -155,12 +158,16 @@ import { RequiredIfDirective } from './shared/directives/required-if.directive';
 import { CategoriesComponent } from './modules/services/category/categories.component';
 import { CategoryEditComponent } from './modules/services/category/category-edit.component';
 import { CategoryService } from './modules/services/category/category.service';
+import { UploadFileService } from './shared/upload/fileupload.service';
+import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.component';
 
 const ROUTER_DIRECTIVES = [RouterLinkActive];
 
 @NgModule({
   imports: [
+    HttpClientModule,
     NgxSpinnerModule,
+    TagInputModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
@@ -204,7 +211,8 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     MatToolbarModule,
     MatTooltipModule,
     NgxDatatableModule,
-    ToastrModule.forRoot({ preventDuplicates: true })
+    ToastrModule.forRoot({ preventDuplicates: true }),
+    NgxEditorModule 
   ],
   declarations: [
     ROUTER_DIRECTIVES,
@@ -280,7 +288,8 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     UnderProcessComponent,
     ResourceAssetManagerComponent,
     ServiceEditComponent,
-    RequiredIfDirective
+    RequiredIfDirective,
+    WelcomePackComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
@@ -314,7 +323,8 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     PaymentService,
     NotificationService,
     UserInfoService,
-    CategoryService
+    CategoryService,
+    UploadFileService
   ],
   entryComponents: [AppointmentBookingComponent],
   bootstrap: [AppComponent],

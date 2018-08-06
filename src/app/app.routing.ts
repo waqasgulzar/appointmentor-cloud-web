@@ -61,6 +61,7 @@ import { ResourceAssetManagerComponent } from './modules/resource-asset-manager/
 import { ServiceEditComponent } from './modules/services/service.edit.component';
 import { CategoriesComponent } from './modules/services/category/categories.component';
 import { CategoryEditComponent } from './modules/services/category/category-edit.component';
+import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.component';
 
 @NgModule({
   imports: [
@@ -97,7 +98,7 @@ import { CategoryEditComponent } from './modules/services/category/category-edit
           { path: 'categories', component: CategoriesComponent },
           { path: 'category/:id', component: CategoryEditComponent },
 
-          
+          { path: 'welcomepack', component: WelcomePackComponent },
           { path: 'reset/:id', component: ResetComponent },
           { path: 'customer', component: CustomerComponent },
           { path: 'customer/:id', component: CustomerEditComponent },

@@ -358,6 +358,7 @@ $cell-color: #000000;
    color: #333;
    background-color: #f5f5f5;
    border-color: #ddd;
+   cursor:pointer;
 }
 
 .panel-group .panel-heading {
@@ -666,4 +667,9 @@ input:disabled {
    font-family: Roboto,"Helvetica Neue",sans-serif;
    font-size: 14px;
    font-weight: 700;
+}
+
+button, input, select, textarea {
+   font-size: 17px;
+   line-height: inherit;
 }

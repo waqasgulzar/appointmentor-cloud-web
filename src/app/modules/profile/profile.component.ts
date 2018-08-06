@@ -14,7 +14,8 @@ import { NotificationService } from '../../shared/services/notification.service'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NotificationProperties } from '../../shared/interfaces/NotificationProperties';
 import { UserInfoService } from '../../shared/services/userInfo.service';
-
+import { UploadFileService } from '../../shared/upload/fileupload.service';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   moduleId: module.id,
@@ -30,13 +31,19 @@ export class ProfileComponent implements OnInit {
   profileImageForMicrosite4: File;
   bannerImageForMicrosite: File;
   submitted = false;
+  formData = new FormData();
+  fileToUpload: File = null;
+  trustedProfileImageUrl: SafeUrl;
+
   constructor(
     private fb: FormBuilder,
     private profileService: ProfileService,
     private router: Router,
     private notificationService: NotificationService,
     private spinner: NgxSpinnerService,
-    private userInfo: UserInfoService
+    private userInfo: UserInfoService,
+    private uploadFileService: UploadFileService,
+    private sanitizer: DomSanitizer
   ) { }
   fileChangeMicrosite(files: any, microsite: number) {
     if (microsite == 0) {
@@ -60,6 +67,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadProfile() {
+    this.trustedProfileImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.orgInfo.profile.logoForMarketingPath);
     this.userForm = this.fb.group({
       organizationId: [this.orgInfo.organizationId],
       businessName: [this.orgInfo.profile.businessName, Validators.compose([Validators.required, Validators.maxLength(50)])],
@@ -88,31 +96,47 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    this.formData.append('file', files[0], files[0].name);
+  }
+
   onSubmit(userForm: FormGroup) {
     this.submitted = true;
     this.spinner.show();
+
     if (userForm.valid) {
-      this.profileService.post(userForm.value).subscribe((data: any) => {
-        this.orgInfo.profile = userForm.value;
-        this.userInfo.setInfo(this.orgInfo);
-        const successNotification: NotificationProperties = {
-          message: 'Organisation Profile has been updated successfully.',
-          title: 'Organisation Profile'
-        };
-        this.notificationService.success(successNotification);
-        this.spinner.hide();
-        this.submitted = false;
-        this.loadProfile();
-      },
-        error => {
-          this.spinner.hide();
-          const errorNotification: NotificationProperties = {
-            message: error.error,
+      // Upload Image
+      this.uploadFileService.upload(this.formData).subscribe(data => {
+
+        let fileInfo = data.results[0];
+        //userForm.setValue({ logoForMarketingPath: fileInfo.onDiskPath });
+        userForm.get('logoForMarketingPath').setValue(fileInfo.onDiskPath);
+        // Update Profile
+        this.profileService.post(userForm.value).subscribe((data: any) => {
+          this.orgInfo.profile = userForm.value;
+          this.orgInfo.profile.logoForMarketingPath = fileInfo.onDiskPath;
+          this.userInfo.setInfo(this.orgInfo);
+          const successNotification: NotificationProperties = {
+            message: 'Organisation Profile has been updated successfully.',
             title: 'Organisation Profile'
           };
+          this.notificationService.success(successNotification);
+          this.spinner.hide();
           this.submitted = false;
-          this.notificationService.error(errorNotification);
-        });
+          this.loadProfile();
+        },
+          error => {
+            this.spinner.hide();
+            const errorNotification: NotificationProperties = {
+              message: error.error,
+              title: 'Organisation Profile'
+            };
+            this.submitted = false;
+            this.notificationService.error(errorNotification);
+          });
+      });
     }
   }
 }

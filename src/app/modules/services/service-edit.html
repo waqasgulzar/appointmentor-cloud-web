@@ -6,7 +6,7 @@
         <label class="input">
           <i class="icon-append fa fa-user"></i>
           <select formControlName="categoryId">
-            <option *ngFor="let cat of categories" [value]="cat.CategoryId">{{cat.categoryName}}</option>
+            <option *ngFor="let cat of categories" [value]="cat.categoryId">{{cat.categoryName}}</option>
           </select>
         </label>
         <div class="form-error-content" *ngIf="submitted">
@@ -134,5 +134,3 @@
     </footer>
   </div>
 </form>
-
-<pre>{{service|json}}</pre>
