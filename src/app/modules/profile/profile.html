@@ -3,28 +3,34 @@
     <mat-tab-group>
       <mat-tab label="Basic Info">
         <section class="content-wrapper">
-         
-            <label class="label">Business Name<span style="color: red;">*</span></label>
-            <label class="input">
-              <i class="icon-append fa fa-building"></i>
-              <input type="text" formControlName="businessName" maxlength="50" class="form-control" placeholder="Enter Business Name">
-            </label>
-            <b class="tooltip tooltip-bottom-right">Needed to enter the Business name</b>
-            <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-              <div *ngIf="userForm.controls['businessName'].errors && userForm.controls['businessName'].errors.required">
-                Business Name is required
-              </div>
+
+          <label class="label">Business Name<span style="color: red;">*</span></label>
+          <label class="input">
+            <i class="icon-append fa fa-building"></i>
+            <input type="text" formControlName="businessName" maxlength="50" class="form-control" placeholder="Enter Business Name">
+          </label>
+          <b class="tooltip tooltip-bottom-right">Needed to enter the Business name</b>
+          <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+            <div *ngIf="userForm.controls['businessName'].errors && userForm.controls['businessName'].errors.required">
+              Business Name is required
             </div>
-          
-            <label class="label">About your Business</label>
-            <label class="textarea">
-              <i class="icon-append fa fa-comment"></i>
-              <textarea formControlName="aboutYourBusiness" maxlength="2500" class="form-control" rows="7"></textarea>
-            </label>
-         
-            <label>Logo for marketing automation&nbsp;&nbsp;<i class="fa fa-info"></i></label>
-            <input formControlName="logoForMarketingPath" type="file" class="btn-u" />
-         
+          </div>
+
+          <label class="label">About your Business</label>
+          <label class="textarea">
+            <i class="icon-append fa fa-comment"></i>
+            <textarea formControlName="aboutYourBusiness" maxlength="2500" class="form-control" rows="7"></textarea>
+          </label>
+
+          <label>Logo for marketing automation&nbsp;&nbsp;<i class="fa fa-info"></i></label>
+          <input accept="image/*" type="file" class="btn-u" (change)="handleFileInput($event.target.files)" />
+
+          <label class="label"></label>
+          <label class="input">
+            {{orgInfo.profile.logoForMarketingPath}}
+          </label>
+
+          <img [src]="trustedProfileImageUrl" alt="logo" style="width:100%; height:100%" />
 
         </section>
       </mat-tab>

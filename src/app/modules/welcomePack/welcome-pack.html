@@ -1,0 +1,125 @@
+﻿
+
+<div class="row">
+  <pre>
+  1.
+  Welcome pack will contain some attachment documents that we will automatically send to the customer when customer/patient register very first time.
+
+  Cc: (optional)
+  Emails to send cc the same email.
+
+  Message: (mandatory)
+  Please write your welcome message, that you want to send newly registered customer....
+
+  Attachments: (optional)
+  Please attach documents that would automatically be sent to the customer...
+  (These could be organization introduction/brochure, terms & conditions, business policies, parking & transport information etc)
+
+  In Future we may consider to make it more interactive. (e.g. customer agrees or disagree buttons would be available inside mail)
+
+  ----------------------------------------------------------------------------------------------------------
+
+  2.
+  Booking Information pack will contain information about the service booked, some attachment documents that we will automatically send to the customer when customer/patient books an appointment every time.
+
+  Cc: (optional)
+  Emails to send cc the same email.
+
+  Message: (mandatory)
+  Please write your booking information message, that you want to send each time a customer books an appointment....
+
+  Attachments: (optional)
+  Please attach documents that would automatically be sent to the customer...
+  (These could be booked service information, terms & conditions, business policies, parking & transport information etc)
+
+  In Future we may consider to make it more interactive. (e.g. customer agrees or disagree buttons would be available inside mail)
+</pre>
+</div>
+
+<form id="sky-form3" class="sky-form zero-padding" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+  <div class="row">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-8">
+      <div class="row">
+        <div class="col-xs-12">
+          <label class="label">Type*</label>
+          <label class="input">
+            <i class="icon-append fa fa-user"></i>
+            <select formControlName="typeId">
+              <option *ngFor="let t of types" [value]="t.id">{{t.title}}</option>
+            </select>
+          </label>
+          <div class="form-error-content" *ngIf="submitted">
+            <span *ngIf="userForm.get('typeId').errors?.required">
+              Type is required
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <label class="label">Cc To:</label>
+          <label class="input">
+            <i class="icon-append fa fa-user"></i>
+            <mat-form-field>
+              <mat-chip-list #emailCcList>
+                <mat-chip *ngFor="let cc of cclist" [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(cc)">
+                  {{cc.email}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Enter email..."
+                       [matChipInputFor]="emailCcList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+            </mat-form-field>
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <label class="label">Subject*</label>
+          <label class="input">
+            <i class="icon-append fa fa-user"></i>
+            <input type="text" formControlName="subject" maxlength="50">
+          </label>
+          <div class="form-error-content" *ngIf="submitted">
+            <span *ngIf="userForm.get('subject').errors?.required">
+              Subject is required
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="pull-right">
+
+          </div>
+          <label class="label">Message*</label>
+          <label class="input">
+            <i class="icon-append fa fa-user"></i>
+            <app-ngx-editor [config]="editorConfig" [spellcheck]="true" formControlName="message"></app-ngx-editor>
+          </label>
+          <div class="form-error-content" *ngIf="submitted">
+            <span *ngIf="userForm.get('message').errors?.required">
+              Message is required
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="margin-top-30 pull-right">
+        <button type="button" class="btn btn-default">Preview</button>
+        <button class="btn btn-u">Generate</button>
+      </div>
+    </div>
+    <div class="col-xs-3">
+
+    </div>
+  </div>
+</form>

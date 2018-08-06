@@ -25,7 +25,7 @@
       <i class="fr fa fa-angle-up" *ngIf="active=='communications'" (click)="active=''"></i>
     </a>
     <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='communications'">
-      <li><a [routerLink]="['/underProcess']">Welcome Packs </a></li>
+      <li><a [routerLink]="['/welcomepack']">Welcome Packs </a></li>
       <li><a [routerLink]="['/underProcess']">Feedback & Notiﬁcations</a></li>
       <li><a [routerLink]="['/emailsetting']">Email & SMS</a></li>
       <li><a [routerLink]="['/reviews']">Reviews & Social Media</a></li>
@@ -82,7 +82,7 @@
       <i class="fr fa fa-angle-up" *ngIf="active=='billings'" (click)="active=''"></i>
     </a>
     <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='billings'">
-      <li><a [routerLink]="['/underProcess']">Invoices and Payments</a></li>
+      <li><a [routerLink]="['/billing']">Invoices and Payments</a></li>
     </ul>
   </li>
   <li class="on panel panel-default">
