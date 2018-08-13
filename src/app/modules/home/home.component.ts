@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
+import * as _api from '../../shared/services/api';
 
 @Component({
   moduleId: module.id,
@@ -7,11 +8,14 @@
 
 
 export class HomeComponent implements OnInit {
+  constructor(
+    private authenticateService: _api.AuthenticationService
+    ) {
+  }
+
 
   ngOnInit() {
-    sessionStorage.removeItem('organizationId');
-    sessionStorage.removeItem('isMenuhidden');
-    sessionStorage.removeItem('orgInfo');
+    this.authenticateService.logout();
   }
 
 }

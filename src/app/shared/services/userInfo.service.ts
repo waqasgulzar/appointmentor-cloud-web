@@ -1,13 +1,13 @@
-﻿import { OrganizationInfo } from "../../modules/setting/user/organizationuser";
+﻿import * as _model from '../../shared/models/models';
 
 export class UserInfoService {
-  orgInfo: OrganizationInfo = new OrganizationInfo();
+  currentUser: _model.User = JSON.parse(localStorage.getItem('currentUser')) || {};
   
   constructor() {
-    this.orgInfo = JSON.parse(sessionStorage.getItem('orgInfo')) || {};
+    //this.currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
   }
 
-  setInfo(orgInfo: OrganizationInfo) {
-    this.orgInfo = orgInfo;
+  setInfo(currentUser: _model.User) {
+    this.currentUser = currentUser;
   }
 }

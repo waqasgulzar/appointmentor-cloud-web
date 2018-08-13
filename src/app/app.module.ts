@@ -3,77 +3,51 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app.routing';
-import { HttpModule } from '@angular/http';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './nav/nav.component';
 import { ModalComponent } from './shared/modal/modal.component';
 import { LookupComponent } from './shared/lookup/lookup.component';
 import { HomeComponent } from './modules/home/home.component';
-import { ProductComponent } from './modules/products/product.component';
-import { ProductService } from './modules/products/product.service';
+
 import { UserComponent } from './modules/user/user.component';
 import { AccountSetupComponent } from './modules/user/accountsetup.component';
 import { OpeningTimesComponent } from './modules/openingtimes/openingtimes.component';
-import { OpeningTimesService } from './modules/openingtimes/openingtimes.service';
 import { ResourcesComponent } from './modules/resources/resources.component';
-import { ResourcesService } from './modules/resources/resources.service';
 import { ServicesComponent } from './modules/services/services.component';
-import { ServicesService } from './modules/services/services.service';
-import { UserService } from './modules/user/user.service';
 import { LoginComponent } from './modules/login/login.component';
-import { LoginService } from './modules/login/login.service';
+//import { LoginService } from './modules/login/login.service';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { DashboardService } from './modules/dashboard/dashboard.service';
 import { ForgotComponent } from './modules/forgot/forgot.component';
-import { ForgotService } from './modules/forgot/forgot.service';
 import { ResetComponent } from './modules/reset/reset.component';
-import { ResetService } from './modules/reset/reset.service';
 import { LogoutComponent } from './modules/logout/logout.component';
 import { CustomerComponent } from './modules/customer/customer.component';
-import { CustomerService } from './modules/customer/customer.service';
 import { AppointmentComponent } from './modules/appointment/appointment.component';
-import { AppointmentService } from './modules/appointment/appointment.service';
 import { UserAccountComponent } from './modules/useraccount/account.component';
-import { UserAccountService } from './modules/useraccount/account.service';
 import { TaskComponent } from './modules/task/task.component';
-import { TaskService } from './modules/task/task.service';
 import { AssetComponent } from './modules/asset/asset.component';
-import { AssetService } from './modules/asset/asset.service';
 import { ProfileComponent } from './modules/profile/profile.component';
-import { ProfileService } from './modules/profile/profile.service';
 import { GeneralComponent } from './modules/setting/general/general.component';
-import { GeneralService } from './modules/setting/general/general.service';
 import { CustomerSettingComponent } from './modules/setting/customer/customersetting.component';
-import { CustomerSettingService } from './modules/setting/customer/customersetting.service';
 import { CustomerSettingDetailComponent } from './modules/setting/customer/customersettingdetail.component';
 import { UserSettingComponent } from './modules/setting/user/usersetting.component';
-import { UserSettingService } from './modules/setting/user/usersetting.service';
 import { UserSettingDetailComponent } from './modules/setting/user/usersettingdetail.component';
 import { EmailSettingComponent } from './modules/setting/email/emailsetting.component';
-import { EmailSettingService } from './modules/setting/email/emailsetting.service';
 import { EmailSettingDetailComponent } from './modules/setting/email/emailsettingdetail.component';
 import { CustomerDetailComponent } from './modules/customer/customerdetail.component';
 import { SMSSettingComponent } from './modules/setting/sms/smssetting.component';
-import { SMSSettingService } from './modules/setting/sms/smssetting.service';
 import { BookingQuestionComponent } from './modules/setting/bookingquestion/bookingquestion.component';
-import { BookingQuestionService } from './modules/setting/bookingquestion/bookingquestion.service';
 import { BookingQuestionDetailComponent } from './modules/setting/bookingquestion/bookingquestiondetail.component';
 import { OnlineBookingSettingComponent } from './modules/setting/onlinebooking/onlinebooking.component';
-import { OnlineBookingSettingService } from './modules/setting/onlinebooking/onlinebooking.service';
 import { MarkettingComponent } from './modules/marketing/marketing.component';
 import { SupportComponent } from './modules/support/support.component';
 import { CompaignComponent } from './modules/marketing/compaign/compaign.component';
 import { NotificationComponent } from './modules/marketing/notification/notification.component';
 import { BusinessReportComponent } from './modules/reports/business/businessreport.component';
-import { BusinessReportService } from './modules/reports/business/businessreport.service';
 import { CustomerReportComponent } from './modules/reports/customer/customerreport.component';
-import { CustomerReportService } from './modules/reports/customer/customerreport.service';
 import { ResourceReportComponent } from './modules/reports/resource/resourcereport.component';
-import { ResourceReportService } from './modules/reports/resource/resourcereport.service';
 import { ServiceReportComponent } from './modules/reports/service/servicereport.component';
-import { ServiceReportService } from './modules/reports/service/servicereport.service';
 import { ReportsComponent } from './modules/reports/reports.component';
-import { ReportsService } from './modules/reports/reports.service';
 import { BillingComponent } from './modules/billing/billing.component';
 import { StockComponent } from './modules/stock/stock.component';
 import { MonthlyOverviewComponent } from './modules/monthlyOverview/monthlyOverview.component';
@@ -88,11 +62,11 @@ import { FreeagentComponent } from './modules/setting/freeagent/freeagent.compon
 import { EposComponent } from './modules/setting/epos/epos.component';
 import { PaymentsComponent } from './modules/setting/payments/payments.component';
 import { AppointmentBookingComponent } from './shared/appointmentBooking/appointmentBooking.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgxEditorModule } from 'ngx-editor';
 import { ToastrModule } from 'ngx-toastr';
 import { TagInputModule } from 'ngx-chips';
-
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import 'rxjs/Rx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -132,7 +106,6 @@ import {
 } from '@angular/material';
 import { ChargeComponent } from './modules/billing/charge.component';
 import { ReceiptComponent } from './modules/billing/receipt.component';
-import { PaymentService } from './modules/billing/payment.service';
 import { AssetEditComponent } from './modules/asset/asset-edit/asset-edit.component';
 import { CustomerEditComponent } from './modules/customer/customer-edit.component';
 import { RouterLinkActive } from './shared/directives/routerLinkActive.directive';
@@ -157,14 +130,22 @@ import { ServiceEditComponent } from './modules/services/service.edit.component'
 import { RequiredIfDirective } from './shared/directives/required-if.directive';
 import { CategoriesComponent } from './modules/services/category/categories.component';
 import { CategoryEditComponent } from './modules/services/category/category-edit.component';
-import { CategoryService } from './modules/services/category/category.service';
-import { UploadFileService } from './shared/upload/fileupload.service';
+
 import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.component';
+import { AppointmentorAuthInterceptor } from './shared/interceptors/auth.interceptors';
+import { ErrorHandlerService } from './shared/services/error-handler.service';
+import * as _api from './shared/services/api';
+import { AuthGuardService } from './shared/services/auth-guard.service';
+import { DataService } from './shared/services/data.service';
+
+
 
 const ROUTER_DIRECTIVES = [RouterLinkActive];
 
 @NgModule({
   imports: [
+    LoggerModule.forRoot({ level: NgxLoggerLevel.DEBUG }),
+   
     HttpClientModule,
     NgxSpinnerModule,
     TagInputModule,
@@ -177,7 +158,7 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpModule,
+    
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -224,7 +205,6 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     AppComponent,
     ModalComponent,
     HomeComponent,
-    ProductComponent,
     LookupComponent,
     UserComponent,
     AccountSetupComponent,
@@ -292,39 +272,44 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     WelcomePackComponent
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppointmentorAuthInterceptor,
+      multi: true
+    },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    ProductService,
-    UserService,
-    LoginService,
-    DashboardService,
-    ForgotService,
-    OpeningTimesService,
-    ServicesService,
-    ResourcesService,
-    CustomerService,
-    AppointmentService,
-    UserAccountService,
-    ResetService,
-    TaskService,
-    ProfileService,
-    GeneralService,
-    CustomerSettingService,
-    UserSettingService,
-    AssetService,
-    EmailSettingService,
-    SMSSettingService,
-    BookingQuestionService,
-    OnlineBookingSettingService,
-    BusinessReportService,
-    CustomerReportService,
-    ResourceReportService,
-    ServiceReportService,
-    ReportsService,
-    PaymentService,
+    ErrorHandlerService,
+    //LoginService,
     NotificationService,
     UserInfoService,
-    CategoryService,
-    UploadFileService
+    _api.AuthenticationService,
+    AuthGuardService,
+    _api.AppointmentService,
+    _api.AssetService,
+    _api.AssetServiceService,
+    _api.BookingQuestionService,
+    _api.CategoryService,
+    _api.CustomerService,
+    _api.CustomerSettingService,
+    DataService,
+    _api.EmailSettingService,
+    _api.FilesService,
+    _api.ForgotPasswordService,
+    _api.LookupService,
+    _api.OnlineAppointmentBookingSettingsService,
+    _api.OpeningTimeService,
+    _api.OrganizationService,
+    _api.PaymentService,
+    _api.ProfileService,
+    _api.ResetPasswordService,
+    _api.ResourceService,
+    _api.ServiceService,
+    _api.ServiceResourceService,
+    _api.SmsSettingService,
+    _api.TaskService,
+    _api.UserService,
+    _api.UserSettingService,
+    _api.ValidationService
   ],
   entryComponents: [AppointmentBookingComponent],
   bootstrap: [AppComponent],

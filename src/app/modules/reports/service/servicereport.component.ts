@@ -5,7 +5,6 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { ServiceReportService } from './servicereport.service';
 import { Router } from '@angular/router';
 @Component({
   moduleId: module.id,
@@ -13,7 +12,6 @@ import { Router } from '@angular/router';
 })
 export class ServiceReportComponent implements OnInit {
   constructor(
-    private serviceReportService: ServiceReportService,
     private router: Router
   ) {
     if (sessionStorage.getItem('organizationId') == null) {

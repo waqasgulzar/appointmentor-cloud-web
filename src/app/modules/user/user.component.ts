@@ -5,15 +5,17 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { UserService } from './user.service';
-import { User } from './user';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { UserInfoService } from '../../shared/services/userInfo.service';
 @Component({
   moduleId: module.id,
   templateUrl: 'user.registration.html'
 })
 export class UserComponent implements OnInit {
-  users: User[];
+  users: _model.User[];
   userForm: FormGroup;
   emailAddress: FormControl;
   organizationId: number;
@@ -21,25 +23,23 @@ export class UserComponent implements OnInit {
   emailAlreadyExist = false;
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
-    private router: Router
-  ) {}
+    private validationService: _api.ValidationService,
+    private userService: _api.UserService,
+    private orgService: _api.OrganizationService,
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    private userInfo: UserInfoService,
+    private authenticateService: _api.AuthenticationService
+  ) { }
   ngOnInit() {
+    this.authenticateService.logout();
     this.userForm = this.fb.group({
       organizationId: [''],
       firstName: [''],
       lastName: [''],
       companyName: [''],
       phoneNumber: [''],
-      emailAddress: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(100),
-          Validators.email
-        ])
-      ],
+      emailAddress: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100), Validators.email])],
       password: [''],
       timeZoneId: [''],
       currencyId: [''],
@@ -48,25 +48,35 @@ export class UserComponent implements OnInit {
   }
   onSubmit(formData: any) {
     this.submitted = true;
+
     this.emailAlreadyExist = false;
     if (formData.valid) {
-      this.userService
-        .get(formData.value['emailAddress'])
-        .subscribe((data: any) => {
-          if (data['results'][0]) {
-            this.emailAlreadyExist = true;
-          } else {
+      this.spinner.show();
+      this.validationService.verifyEmail(formData.value['emailAddress'])
+        .subscribe(
+          (data: any) => {
             this.emailAlreadyExist = false;
-            this.userService.post(formData.value).subscribe((data: any) => {
-              sessionStorage.setItem(
-                'organizationId',
-                JSON.stringify(data['results'][0])
-              );
-              sessionStorage.setItem('isMenuhidden', 'true');
+            this.orgService.create(formData.value).subscribe((data: any) => {
+              let newOrg = data as _model.User;
+              localStorage.setItem('currentUser', JSON.stringify(newOrg));
+              this.userInfo.setInfo(data);
+              this.spinner.hide();
               this.router.navigate(['/accountsetup']);
             });
-          }
-        });
+          },
+          error => { this.emailAlreadyExist = true; this.spinner.hide(); }
+        );
+
+      //.subscribe((data: any) => {
+      //  if (data[0]) {
+      //    this.emailAlreadyExist = true;
+      //  } else {
+      //    this.emailAlreadyExist = false;
+      //    this.userService.create(formData.value).subscribe((data: any) => {
+      //      this.router.navigate(['/accountsetup']);
+      //    });
+      //  }
+      //});
     }
   }
 }

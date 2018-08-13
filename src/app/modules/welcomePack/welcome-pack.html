@@ -62,20 +62,7 @@
           <label class="label">Cc To:</label>
           <label class="input">
             <i class="icon-append fa fa-user"></i>
-            <mat-form-field>
-              <mat-chip-list #emailCcList>
-                <mat-chip *ngFor="let cc of cclist" [selectable]="selectable"
-                          [removable]="removable" (removed)="remove(cc)">
-                  {{cc.email}}
-                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                </mat-chip>
-                <input placeholder="Enter email..."
-                       [matChipInputFor]="emailCcList"
-                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                       [matChipInputAddOnBlur]="addOnBlur"
-                       (matChipInputTokenEnd)="add($event)">
-              </mat-chip-list>
-            </mat-form-field>
+            
           </label>
         </div>
       </div>

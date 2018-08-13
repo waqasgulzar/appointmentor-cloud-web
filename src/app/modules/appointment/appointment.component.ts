@@ -1,27 +1,16 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { Router } from "@angular/router";
-
-import { MatDialog } from '@angular/material';
-import { ServicesService } from '../services/services.service';
-import { Service } from '../services/service';
-import { CustomerService } from '../customer/customer.service';
-import { Customer } from '../customer/customer';
-import { ResourcesService } from '../resources/resources.service';
-import { Resource } from '../resources/resource';
-import { MatStepper } from '@angular/material';
-import { Appointment } from '../dashboard/appointment';
-import { OpeningTimesService } from '../openingtimes/openingtimes.service';
-import { AppointmentSlot } from '../dashboard/appointmentSlot';
-import { AppointmentService } from '../appointment/appointment.service';
-import { DashboardService } from '../dashboard/dashboard.service';
+import { MatDialog, MatStepper } from '@angular/material';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
 import { AppointmentBookingComponent } from '../../shared/appointmentBooking/appointmentBooking.component';
-
 import * as $ from 'jquery';
 import 'fullcalendar';
 import 'fullcalendar-scheduler';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DataService } from '../../shared/services/data.service';
+
 
 @Component({
   selector: 'appointments-component',
@@ -33,43 +22,40 @@ export class AppointmentComponent implements OnInit {
   isDailyActive: boolean = true;
   allTimes: any;
   todayDate: string;
-  resources: Resource[];
+  resources: _model.Resource[];
   appointments: any;
   orgResources: any;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  customers: Customer[];
-  services: Service[];
-  appointment: Appointment;
+  customers: _model.Customer[];
+  services: _model.Service[];
+  appointment: _model.Appointment;
+  appointmentSlots: any;
   selectedDate: any;
   startDate: Date;
   appointmentSlotsLoading: boolean;
-  appointmentSlots: AppointmentSlot[];
   containerEl: JQuery;
 
   constructor(private fb: FormBuilder,
-    private resourcesService: ResourcesService,
-    private appointmentService: AppointmentService,
+    private dataService: DataService,
+    private resourcesService: _api.ResourceService,
+    private appointmentService: _api.AppointmentService,
     private _formBuilder: FormBuilder,
-    private customerService: CustomerService,
-    private openingtimesService: OpeningTimesService,
-    private servicesService: ServicesService,
-    private dashboardService: DashboardService,
+    private customerService: _api.CustomerService,
+    private openingtimesService: _api.OpeningTimeService,
+    private servicesService: _api.ServiceService,
     private router: Router,
     private spinner: NgxSpinnerService,
     public dialog: MatDialog) {
-    if (sessionStorage.getItem("organizationId") == null) {
-      this.router.navigate(['']);
-    }
 
-    this.appointment = new Appointment(null, null);
-    var r: Resource;
+    this.appointment = new _model.Appointment();
+    var r: _model.Resource;
     this.appointment.resource = r;
-    this.appointment.customers = new Array<Customer>();
+    this.appointment.customers = new Array<_model.Customer>();
   }
 
   ngOnInit() {
-    
+
     this.containerEl = $('#calendar');
 
     this.firstFormGroup = this._formBuilder.group({
@@ -79,12 +65,16 @@ export class AppointmentComponent implements OnInit {
       secondCtrl: ['', Validators.required]
     });
 
-    this.appointmentSlotsLoading = false;
+
     this.startDate = new Date();
-    this.LoadServices();
-    this.LoadCustomers();
-    this.LoadResources();
-    this.LoadAppointments();
+    this.spinner.show();
+    this.dataService.requestDataFromMultipleSources().subscribe(responseList => {
+      this.customers = responseList[0];
+      this.services = responseList[1];
+      this.orgResources = responseList[2];
+      this.LoadAppointments();
+      this.spinner.hide();
+    });
   }
 
   refresh(): void {
@@ -92,68 +82,25 @@ export class AppointmentComponent implements OnInit {
   }
 
   LoadAppointments() {
-    this.spinner.show();
-    this.resourcesService.getOrgResources(Number(sessionStorage.getItem("organizationId")))
+    this.appointmentService.getAll()
       .subscribe((data: any) => {
-        this.orgResources = data["results"];
-        this.appointmentService.get(Number(sessionStorage.getItem("organizationId")))
-          .subscribe((data: any) => {
-            this.appointments = data["results"];
-            this.containerEl.fullCalendar({
-              //now: '2018-03-23',
-              editable: true, // enable draggable events
-              aspectRatio: 1.8,
-              scrollTime: '00:00', // undo default 6am scrollTime
-              header: {
-                left: 'today prev,next',
-                center: 'title',
-                right: 'timelineDay,timelineThreeDays,agendaWeek,month,listWeek'
-              },
-              defaultView: 'agendaDay',
-              resources: this.orgResources,
-              events: this.appointments
-            });
-            this.spinner.hide();
-          });
+        this.appointments = data;
+        this.containerEl.fullCalendar({
+          //now: '2018-03-23',
+          editable: true, // enable draggable events
+          aspectRatio: 1.8,
+          scrollTime: '00:00', // undo default 6am scrollTime
+          header: {
+            left: 'today prev,next',
+            center: 'title',
+            right: 'timelineDay,timelineThreeDays,agendaWeek,month,listWeek'
+          },
+          defaultView: 'agendaDay',
+          resources: this.orgResources,
+          events: this.appointments
+        });
       });
   }
-
-  LoadCustomers() {
-    this.customerService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
-      this.customers = data["results"];
-    });
-  }
-
-  LoadOpeningtimes() {
-    this.openingtimesService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
-      var obj = data["results"];
-      if (obj != null && obj.length > 0) {
-        var mondayobj = data["results"][0];
-        var tuesdayobj = data["results"][1];
-        var wednesdayobj = data["results"][2];
-        var thursdayobj = data["results"][3];
-        var fridayobj = data["results"][4];
-        var saturdayobj = data["results"][5];
-        var sundayobj = data["results"][6];
-      }
-    });
-  }
-
-  LoadServices() {
-    this.servicesService.getServices(Number(sessionStorage.getItem("organizationId")))
-      .subscribe((data: any) => {
-        this.services = data["results"];
-      });
-  }
-
-  LoadResources() {
-    this.resourcesService.getResources(Number(sessionStorage.getItem("organizationId")))
-      .subscribe((data: any) => {
-        this.resources = data["results"];
-
-      });
-  }
-
 
   setService(item, stepper: MatStepper) {
     this.appointment.service = item;
@@ -162,7 +109,6 @@ export class AppointmentComponent implements OnInit {
 
   setAppointmentDate(item) {
     this.appointment.date = item;
-    console.log(this.appointment.date);
     this.appointmentSlots = [
       { id: 1, date: new Date, time: '9:00 am' }, { id: 1, date: new Date, time: '9:30 am' },
       { id: 1, date: new Date, time: '9:45 am' }, { id: 1, date: new Date, time: '10:00 am' }
@@ -200,31 +146,10 @@ export class AppointmentComponent implements OnInit {
 
   createAppointment() {
     this.appointment.createdBy = Number(sessionStorage.getItem("organizationId"));
-    this.appointmentService.post(this.appointment)
+    this.appointmentService.create(this.appointment)
       .subscribe((data: any) => {
         console.log(data);
         this.dialog.closeAll();
-        this.resourcesService.getOrgResources(Number(sessionStorage.getItem("organizationId")))
-          .subscribe((data: any) => {
-            this.orgResources = data["results"];
-            this.appointmentService.get(Number(sessionStorage.getItem("organizationId")))
-              .subscribe((data: any) => {
-                this.appointments = data["results"];
-                this.containerEl.fullCalendar({
-                  editable: true, // enable draggable events
-                  aspectRatio: 1.8,
-                  scrollTime: '00:00', // undo default 6am scrollTime
-                  header: {
-                    left: 'today prev,next',
-                    center: 'title',
-                    right: 'timelineDay,timelineThreeDays,agendaWeek,month,listWeek'
-                  },
-                  defaultView: 'agendaDay',
-                  resources: this.orgResources,
-                  events: this.appointments
-                });
-              });
-          });
       });
   }
 }

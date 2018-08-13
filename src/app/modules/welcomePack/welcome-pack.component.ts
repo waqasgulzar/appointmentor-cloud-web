@@ -1,14 +1,12 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { OrganizationInfo, Profile } from '../setting/user/organizationuser';
+import * as _model from '../../shared/models/models';
 import { NotificationService } from '../../shared/services/notification.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NotificationProperties } from '../../shared/interfaces/NotificationProperties';
 import { UserInfoService } from '../../shared/services/userInfo.service';
-import { UploadFileService } from '../../shared/upload/fileupload.service';
 import { MatChipInputEvent } from '@angular/material';
-
 
 @Component({
   moduleId: module.id,
@@ -16,12 +14,12 @@ import { MatChipInputEvent } from '@angular/material';
 })
 
 export class WelcomePackComponent implements OnInit {
-  orgInfo = new OrganizationInfo();
+  orgInfo = new _model.User();
   userForm: FormGroup;
   submitted = false;
   types: Array<any>;
   cclist = [
-    { email: this.userInfo.orgInfo.emailAddress },
+    { email: this.userInfo.currentUser.emailAddress },
   ];
   editorConfig = {
     editable: true,
@@ -39,13 +37,13 @@ export class WelcomePackComponent implements OnInit {
     private notificationService: NotificationService,
     private spinner: NgxSpinnerService,
     private userInfo: UserInfoService,
-    private uploadFileService: UploadFileService,
+    
   ) {
 
   }
 
   ngOnInit() {
-    this.orgInfo = this.userInfo.orgInfo;
+    this.orgInfo = this.userInfo.currentUser;
     this.types = [{ id: 1, title: 'Appointment Booking' }, {id:2, title:'Appointment Cancellation'}];
     this.userForm = this.fb.group({
       organizationId: this.orgInfo.organizationId,

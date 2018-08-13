@@ -34,7 +34,7 @@
                                                         <tr *ngFor="let item of customfields">
                                                             <td>{{item.fieldName}}</td>
                                                             <td><input type="checkbox" [disabled]="true" [checked]="item.isRequired" /></td>
-                                                            <td><span><a style="cursor:pointer;" (click)="CustomFieldIdForDelete(item.customId); modal2.show()"><i class="fa fa-trash-o"></i></a></span>&nbsp;&nbsp;<span><a style="cursor:pointer;" (click)="LoadCustomFieldById(item.customId);"><i class="fa fa-pencil"></i></a></span>&nbsp;&nbsp;</td>
+                                                            <td><span><a style="cursor:pointer;" (click)="CustomFieldIdForDelete(item.customId); modal2.show()"><i class="fa fa-trash-o"></i></a></span>&nbsp;&nbsp;<span><a style="cursor:pointer;" (click)="LoadCustomFieldById(item.customId);"></a></span>&nbsp;&nbsp;</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

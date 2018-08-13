@@ -5,12 +5,8 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { TaskService } from './task.service';
-import { ResourceTask } from './task';
-import { ResourcesService } from '../../modules/resources/resources.service';
-import { Resource } from '../../modules/resources/resource';
-import { CustomerService } from '../../modules/customer/customer.service';
-import { Customer } from '../../modules/customer/customer';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -19,10 +15,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: 'task.html'
 })
 export class TaskComponent implements OnInit {
-  tasks: ResourceTask[];
-  task: ResourceTask;
-  resources: Resource[];
-  customers: Customer[];
+  tasks: _model.ResourceTask[];
+  task: _model.ResourceTask;
+  resources: _model.Resource[];
+  customers: _model.Customer[];
   isMenuhidden: boolean = false;
   removeTaskId: number;
   userForm: FormGroup;
@@ -30,35 +26,31 @@ export class TaskComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
-    private taskService: TaskService,
-    private customerService: CustomerService,
-    private resourcesService: ResourcesService,
+    private taskService: _api.TaskService,
+    private customerService: _api.CustomerService,
+    private resourcesService: _api.ResourceService,
     private router: Router
   ) {
-    if (sessionStorage.getItem('isMenuhidden') == 'true') {
-      this.isMenuhidden = true;
-    }
+
   }
   ngOnInit() {
     this.ClearFields();
   }
   LoadResources() {
-    this.resourcesService
-      .getResources(Number(sessionStorage.getItem('organizationId')))
+    this.resourcesService.getAll()
       .subscribe((data: any) => {
-        this.resources = data['results'];
+        this.resources = data;
       });
   }
   LoadCustomers() {
-    this.customerService
-      .get(Number(sessionStorage.getItem('organizationId')))
+    this.customerService.getAll()
       .subscribe((data: any) => {
-        this.customers = data['results'];
+        this.customers = data;
       });
   }
   LoadTasks() {
     this.taskService
-      .get(Number(sessionStorage.getItem('organizationId')))
+      .getAll()
       .subscribe((data: any) => {
         console.log(data['results']);
         this.tasks = data['results'];
@@ -90,22 +82,16 @@ export class TaskComponent implements OnInit {
     this.LoadTasks();
   }
   onChange(taskId: number, event: any) {
-    if (!event.target.checked) {
-      this.taskService.put(taskId, false).subscribe((data: any) => {
-        this.ClearFields();
-      });
-    } else {
-      this.taskService.put(taskId, true).subscribe((data: any) => {
-        this.ClearFields();
-      });
-    }
+    this.taskService.update(taskId, null).subscribe((data: any) => {
+      this.ClearFields();
+    });
   }
 
   onSubmit(formData: any) {
     this.submitted = true;
     if (!formData.invalid) {
       this.spinner.show();
-      this.task = {
+      let task = {
         taskId: 0,
         taskName: formData.controls['taskName'].value,
         resourceId: formData.controls['drpresources'].value,
@@ -117,8 +103,8 @@ export class TaskComponent implements OnInit {
         isTaskCompleted: false,
         completedDate: null,
         isDeleted: false
-      };
-      this.taskService.post(this.task).subscribe((data: any) => {
+      } as _model.ResourceTask;
+      this.taskService.create(task).subscribe((data: any) => {
         this.ClearFields();
       });
       this.spinner.hide();

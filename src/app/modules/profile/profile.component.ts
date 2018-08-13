@@ -8,21 +8,21 @@ import {
 
 import { Router } from '@angular/router';
 import { Constant } from '../../shared/constants/constants';
-import { OrganizationInfo, Profile } from '../setting/user/organizationuser';
-import { ProfileService } from './profile.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NotificationProperties } from '../../shared/interfaces/NotificationProperties';
 import { UserInfoService } from '../../shared/services/userInfo.service';
-import { UploadFileService } from '../../shared/upload/fileupload.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
+import { environment } from '../../../environments/environment';
 
 @Component({
   moduleId: module.id,
   templateUrl: 'profile.html'
 })
 export class ProfileComponent implements OnInit {
-  orgInfo = new OrganizationInfo();
+  orgInfo = new _model.User();
   userForm: FormGroup;
   logoForMarketingPath: File;
   profileImageForMicrosite1: File;
@@ -37,12 +37,12 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private profileService: ProfileService,
+    private profileService: _api.ProfileService,
     private router: Router,
     private notificationService: NotificationService,
     private spinner: NgxSpinnerService,
     private userInfo: UserInfoService,
-    private uploadFileService: UploadFileService,
+    private fileService: _api.FilesService,
     private sanitizer: DomSanitizer
   ) { }
   fileChangeMicrosite(files: any, microsite: number) {
@@ -62,12 +62,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orgInfo = this.userInfo.orgInfo;
+    this.orgInfo = this.userInfo.currentUser;
     this.loadProfile();
   }
 
   loadProfile() {
-    this.trustedProfileImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.orgInfo.profile.logoForMarketingPath);
+    this.trustedProfileImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.apiUrl + "/UploadFiles/" + this.orgInfo.profile.logoForMarketingPath);
     this.userForm = this.fb.group({
       organizationId: [this.orgInfo.organizationId],
       businessName: [this.orgInfo.profile.businessName, Validators.compose([Validators.required, Validators.maxLength(50)])],
@@ -108,15 +108,14 @@ export class ProfileComponent implements OnInit {
 
     if (userForm.valid) {
       // Upload Image
-      this.uploadFileService.upload(this.formData).subscribe(data => {
-
-        let fileInfo = data.results[0];
+      this.fileService.upload(this.formData).subscribe(data => {
+        let fileInfo = data as _model.FileInformation;
         //userForm.setValue({ logoForMarketingPath: fileInfo.onDiskPath });
-        userForm.get('logoForMarketingPath').setValue(fileInfo.onDiskPath);
+        userForm.get('logoForMarketingPath').setValue(fileInfo.onDiskName);
         // Update Profile
-        this.profileService.post(userForm.value).subscribe((data: any) => {
+        this.profileService.create(userForm.value).subscribe((data: any) => {
           this.orgInfo.profile = userForm.value;
-          this.orgInfo.profile.logoForMarketingPath = fileInfo.onDiskPath;
+          this.orgInfo.profile.logoForMarketingPath = fileInfo.onDiskName;
           this.userInfo.setInfo(this.orgInfo);
           const successNotification: NotificationProperties = {
             message: 'Organisation Profile has been updated successfully.',

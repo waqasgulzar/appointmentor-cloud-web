@@ -62,6 +62,7 @@ import { ServiceEditComponent } from './modules/services/service.edit.component'
 import { CategoriesComponent } from './modules/services/category/categories.component';
 import { CategoryEditComponent } from './modules/services/category/category-edit.component';
 import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.component';
+import { AuthGuardService as AuthGuard } from './shared/services/auth-guard.service';
 
 @NgModule({
   imports: [
@@ -75,6 +76,7 @@ import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.compone
           { path: 'home', component: HomeComponent },
           { path: 'login', component: LoginComponent },
           { path: 'registration', component: UserComponent },
+          { path: 'accountsetup', component: AccountSetupComponent },
           { path: 'forgot', component: ForgotComponent },
           //{ path: 'test/:id', component: AboutComponent }
         ]
@@ -82,11 +84,11 @@ import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.compone
 
       // App routes goes here here
       {
+        canActivate: [AuthGuard], 
         path: '',
         component: AppLayoutComponent,
         children: [
           { path: 'dashboard', component: DashboardComponent },
-          { path: 'accountsetup', component: AccountSetupComponent },
           { path: 'openingtimes', component: OpeningTimesComponent },
           { path: 'resources', component: ResourceAssetManagerComponent },
           { path: 'asset', component: AssetComponent },

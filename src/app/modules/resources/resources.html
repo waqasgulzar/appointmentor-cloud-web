@@ -22,10 +22,10 @@
       <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
         <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
           <button type="button" class="btn btn-default" (click)="clearServices(); LoadResourceById(row['resourceId']);">
-            <i class="fa fa-pencil"></i>Edit
+            Edit
           </button>
           <button type="button" class="btn btn-default" (click)="ServiceIdForDelete(row['resourceId']); modal2.show()">
-            <i class="fa fa-trash"></i> Delete
+            Delete
           </button>
         </ng-template>
       </ngx-datatable-column>
@@ -73,7 +73,7 @@
                       <a style="cursor:pointer;" (click)="ServiceIdForDelete(item.resourceId); modal2.show()"><i class="fa fa-trash-o"></i></a>
                     </span>
                     &nbsp;&nbsp;
-                    <span><a style="cursor:pointer;" (click)="clearServices(); LoadResourceById(item.resourceId);"><i class="fa fa-pencil"></i></a></span>
+                    <span><a style="cursor:pointer;" (click)="clearServices(); LoadResourceById(item.resourceId);"></a></span>
                     &nbsp;&nbsp;
                     <span><a style="cursor:pointer;" (click)="CloneResourceById(item.resourceId);"><i class="fa fa-clone"></i></a></span></td>
                 </tr>

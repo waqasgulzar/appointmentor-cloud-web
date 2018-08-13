@@ -10,15 +10,16 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { NotificationProperties } from '../../../shared/interfaces/NotificationProperties';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserInfoService } from '../../../shared/services/userInfo.service';
-import { Category } from './category';
-import { CategoryService } from './category.service';
+import * as _model from '../../../shared/models/models';
+import * as _api from '../../../shared/services/api';
+
 
 @Component({
   moduleId: module.id,
   templateUrl: 'category-edit.html'
 })
 export class CategoryEditComponent implements OnInit {
-  category: Category = new Category();
+  category: _model.Category = new _model.Category();
   userForm: FormGroup;
   submitted = false;
 
@@ -26,7 +27,7 @@ export class CategoryEditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private categoryService: CategoryService,
+    private categoryService: _api.CategoryService,
     private router: Router,
     private notificationService: NotificationService,
     private spinner: NgxSpinnerService,
@@ -37,10 +38,8 @@ export class CategoryEditComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      OrganizationId: this.userInfoService.orgInfo.organizationId,
-      CategoryName: [
-        '', Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9 ]*$')])
-      ],
+      OrganizationId: this.userInfoService.currentUser.organizationId,
+      CategoryName: ['', Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9 ]*$')])],
     });
 
     this.route.params.subscribe(params => {
@@ -54,7 +53,7 @@ export class CategoryEditComponent implements OnInit {
     this.submitted = true;
     if (!formData.invalid) {
       this.spinner.show();
-      this.categoryService.post(formData.value).subscribe(
+      this.categoryService.create(formData.value).subscribe(
         (data: any) => {
           const successNotification: NotificationProperties = {
             message: 'Category has been save successfully.',

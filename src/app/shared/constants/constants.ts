@@ -1,8 +1,10 @@
-﻿import { OrganizationInfo } from "../../modules/setting/user/organizationuser";
+﻿import * as _model from '../../shared/models/models';
+import { HttpHeaders } from "@angular/common/http";
 
 export const Constant = {
   appointmentor: {
-    organization: OrganizationInfo
+    organization: new _model.User(),
+    AuthHeaders: new HttpHeaders().set('Authorization', 'bearer ' + sessionStorage.getItem('token'))
   },
 
   ToastrOptions: {

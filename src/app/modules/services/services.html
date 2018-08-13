@@ -23,7 +23,7 @@
         <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
           <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
             <button type="button" class="btn btn-default" [routerLink]="['/service', row['serviceId']]">
-              <i class="fa fa-pencil"></i> Edit
+               Edit
             </button>
           </ng-template>
         </ngx-datatable-column>

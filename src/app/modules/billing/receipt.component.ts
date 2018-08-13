@@ -8,9 +8,7 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-
-
-import { PaymentService } from './payment.service';
+import * as _api from '../../shared/services/api';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -25,7 +23,7 @@ export class ReceiptComponent implements OnInit {
   
   constructor(
     private cd: ChangeDetectorRef,
-    private paymentService: PaymentService,
+    private paymentService: _api.PaymentService,
     private route: ActivatedRoute,
     ) { }
 

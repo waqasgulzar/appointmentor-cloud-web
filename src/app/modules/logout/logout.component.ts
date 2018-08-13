@@ -7,19 +7,18 @@ import {
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import * as _api from '../../shared/services/api';
 
 @Component({
   moduleId: module.id,
   template: ''
 })
 export class LogoutComponent {
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private authenticateService: _api.AuthenticationService) {
     this.logout();
   }
   logout() {
-    sessionStorage.removeItem('organizationId');
-    sessionStorage.removeItem('isMenuhidden');
-    sessionStorage.removeItem('orgInfo');
+    this.authenticateService.logout();
     this.router.navigate(['']);
   }
 }

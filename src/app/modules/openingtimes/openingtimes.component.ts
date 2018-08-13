@@ -5,13 +5,13 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { UserAccountService } from '../../modules/useraccount/account.service';
-import { OpeningTimesService } from './openingtimes.service';
-import { OpeningTime, Timings } from './openingtime';
+
 import { Router } from '@angular/router';
 import { NotificationService } from '../../shared/services/notification.service';
 import { NotificationProperties } from '../../shared/interfaces/NotificationProperties';
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
 
 @Component({
   selector: 'openingtimes-component',
@@ -21,9 +21,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class OpeningTimesComponent implements OnInit {
   timezonelist: any[];
   currencylist: any[];
-  openingTimes: Array<OpeningTime> = [];
-  openingTime: OpeningTime;
-  timings: Timings = new Timings();
+  openingTimes: Array<_model.Openingtimes> = [];
+  openingTime: _model.Openingtimes;
+  timings: _model.Timings = new _model.Timings();
   userForm: FormGroup;
   emailAddress: FormControl;
   selectedTimeZone: string;
@@ -32,15 +32,13 @@ export class OpeningTimesComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userAccountService: UserAccountService,
-    private openingtimesService: OpeningTimesService,
+    private userAccountService: _api.UserService,
+    private openingtimesService: _api.OpeningTimeService,
     private notificationService: NotificationService,
     private spinner: NgxSpinnerService,
     private router: Router
-  ) {}
+  ) { }
   ngOnInit() {
-    this.LoadTimeZone();
-    this.LoadCurrency();
     this.LoadOpeningtimes();
   }
 
@@ -104,44 +102,15 @@ export class OpeningTimesComponent implements OnInit {
   }
 
   LoadOpeningtimes() {
-    this.openingtimesService
-      .get(Number(sessionStorage.getItem('organizationId')))
-      .subscribe((data: any) => {
-        var obj = data['results'];
-        this.openingTimes = data['results'];
-        this.selected = this.openingTimes.filter(op => op.isOpen === true);
-      });
-  }
-  LoadTimeZone() {
-    this.openingtimesService
-      .getByCategory('Timezone')
-      .subscribe((data: any) => {
-        this.timezonelist = data['results'];
-        this.userAccountService
-          .get(Number(sessionStorage.getItem('organizationId')))
-          .subscribe((data: any) => {
-            var obj = data['results'][0];
-            this.selectedTimeZone = obj['timezoneId'];
-          });
-      });
-  }
-  LoadCurrency() {
-    this.openingtimesService
-      .getByCategory('Currency')
-      .subscribe((data: any) => {
-        this.currencylist = data['results'];
-        this.userAccountService
-          .get(Number(sessionStorage.getItem('organizationId')))
-          .subscribe((data: any) => {
-            var obj = data['results'][0];
-            this.selectedCurrency = obj['currencyId'];
-          });
-      });
+    this.openingtimesService.getAll().subscribe((data: any) => {
+      this.openingTimes = data;
+      this.selected = this.openingTimes.filter(op => op.isOpen === true);
+    });
   }
 
   onSubmit(formData: any) {
     this.spinner.show();
-    this.openingtimesService.postOpeningTime(this.openingTimes).subscribe(
+    this.openingtimesService.bulk('create', this.openingTimes).subscribe(
       (data: any) => {
         const successNotification: NotificationProperties = {
           message: 'Opening timings has been updated successfully.',

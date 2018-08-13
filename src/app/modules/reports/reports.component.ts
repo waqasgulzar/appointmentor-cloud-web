@@ -5,7 +5,6 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { ReportsService } from './reports.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,10 +12,8 @@ import { Router } from '@angular/router';
   templateUrl: 'reports.html'
 })
 export class ReportsComponent implements OnInit {
-  constructor(private reportsService: ReportsService, private router: Router) {
-    if (sessionStorage.getItem('organizationId') == null) {
-      this.router.navigate(['']);
-    }
+  constructor(private router: Router) {
+    
   }
   ngOnInit() {}
 }

@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CustomerService } from './customer.service';
-import { Customer } from './customer';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
 import { Router } from "@angular/router";
 
 @Component({
@@ -9,8 +9,8 @@ import { Router } from "@angular/router";
   templateUrl: 'customer.html'
 })
 export class CustomerComponent implements OnInit {
-  customers: Customer[];
-  customer: Customer;
+  customers: _model.Customer[];
+  customer: _model.Customer;
   custForm: FormGroup;
   savebuttonText: string = "Save";
   removeCustomerId: number = 0;
@@ -26,12 +26,9 @@ export class CustomerComponent implements OnInit {
   isEmptySubject: boolean = true;
   isSubjectSend: boolean = false;
   submitted = false;
-  constructor(private fb: FormBuilder, private customerService: CustomerService, private router: Router) {
+  constructor(private fb: FormBuilder, private customerService: _api.CustomerService, private router: Router) {
     this.LoadCustomers();
-    if (sessionStorage.getItem("organizationId") == null) {
-      this.router.navigate(['']);
-    }
-    
+
   }
   ngOnInit() {
     this.ClearFields();
@@ -79,29 +76,10 @@ export class CustomerComponent implements OnInit {
     this.savebuttonText = "Update";
     this.updatedCustomerId = customerId;
     this.removeCustomerId = 0;
-    this.customerService.getCustomerById(customerId)
+    this.customerService.get(customerId)
       .subscribe((data: any) => {
-        var obj = data["results"][0];
+        var obj = data[0];
         var genderStatus = obj["gender"] == true ? "1" : "0";
-        //let dateOfBirth = new Date(obj["dateOfBirth"]);
-        //this.custForm = this.fb.group({
-        //  firstName: [obj["firstName"], Validators.compose([Validators.required, Validators.maxLength(50)])],
-        //  lastName: [obj["lastName"], Validators.compose([Validators.required, Validators.maxLength(50)])],
-        //  mobileNumber: [obj["mobileNumber"], Validators.compose([Validators.required, Validators.maxLength(50)])],
-        //  contactNumber: [obj["contactNumber"], Validators.compose([Validators.required, Validators.maxLength(50)])],
-        //  emailAddress: [obj["emailAddress"], Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100), Validators.email])],
-        //  twitterUserName: [obj["twitterUserName"], Validators.maxLength(50)],
-        //  gender: [genderStatus],
-        //  dateOfBirth: [obj["dateOfBirth"], Validators.required],
-        //  unsubscribed: [obj["unsubscribed"]],
-        //  addressLine1: [obj["addressLine1"], Validators.maxLength(50)],
-        //  addressLine2: [obj["addressLine2"], Validators.maxLength(50)],
-        //  city: [obj["city"], Validators.maxLength(50)],
-        //  postCode: [obj["postCode"], Validators.maxLength(50)],
-        //  tags: ['']
-        //});
-
-        //this.mydateOfBirth = dateOfBirth.toLocaleString();
       });
   }
   LoadCustomerQuickViewById(customerId: number) {
@@ -112,9 +90,9 @@ export class CustomerComponent implements OnInit {
     this.addressline1 = "";
     this.updatedCustomerId = customerId;
 
-    this.customerService.getCustomerById(customerId)
+    this.customerService.get(customerId)
       .subscribe((data: any) => {
-        var obj = data["results"][0];
+        var obj = data[0];
         this.customerName = obj["firstName"] + " " + obj["lastName"];
         this.email = obj["emailAddress"];
         this.contactNumber = obj["contactNumber"];
@@ -128,20 +106,25 @@ export class CustomerComponent implements OnInit {
     console.log(this.removeCustomerId);
   }
   RemoveCustomer() {
-    this.customerService.deleteCustomer(this.removeCustomerId).subscribe((data: any) => {
+    this.customerService.delete(this.removeCustomerId).subscribe((data: any) => {
       this.LoadCustomers();
       this.ClearFields();
     });
   }
   SearchCustomers(firstname: any, lastname: any, emailaddress: any, city: any) {
-    this.customerService.getCustomerByFilter(Number(sessionStorage.getItem("organizationId")), firstname.value, lastname.value, emailaddress.value, city.value).subscribe((data: any) => {
-      this.customers = data["results"];
+    let customer = {
+      organizationId: Number(sessionStorage.getItem("organizationId")),
+      firstName: firstname.value,
+      lastName: lastname.value,
+      emailAddress: emailaddress.value,
+      city: city.value
+    } as _model.Customer;
+    this.customerService.search(customer).subscribe((data: any) => {
+      this.customers = data;
     });
   }
   SendByEmailSubject(emailbysubject: any, emailbymessage: any) {
-    console.log(emailbysubject.value);
-    console.log(emailbymessage.value);
-    console.log(this.updatedCustomerId);
+
     if (emailbysubject.value.trim() == "" || emailbymessage.value.trim() == "") {
       this.isEmptySubject = true;
       this.isSubjectSend = false;
@@ -150,15 +133,14 @@ export class CustomerComponent implements OnInit {
       this.isSubjectSend = true;
       this.isEmptySubject = false;
 
-      this.customerService.postEmail(this.updatedCustomerId, emailbysubject.value, emailbymessage.value).subscribe((data: any) => {
-        emailbysubject.value = "";
-        emailbymessage.value = "";
-      });
+      //this.customerService.postEmail(this.updatedCustomerId, emailbysubject.value, emailbymessage.value).subscribe((data: any) => {
+      //  emailbysubject.value = "";
+      //  emailbymessage.value = "";
+      //});
     }
   }
   SendByEmailMessage(emailbymessage: any) {
-    console.log(emailbymessage.value);
-    console.log(this.updatedCustomerId);
+
     if (emailbymessage.value.trim() == "") {
       this.isEmptyMessage = true;
       this.isMessageSend = false;
@@ -166,9 +148,9 @@ export class CustomerComponent implements OnInit {
     else {
       this.isMessageSend = true;
       this.isEmptyMessage = false;
-      this.customerService.postEmail(this.updatedCustomerId, "", emailbymessage.value).subscribe((data: any) => {
-        emailbymessage.value = "";
-      });
+      //this.customerService.postEmail(this.updatedCustomerId, "", emailbymessage.value).subscribe((data: any) => {
+      //  emailbymessage.value = "";
+      //});
     }
   }
 
@@ -177,7 +159,7 @@ export class CustomerComponent implements OnInit {
     if (formData.valid) {
       //console.log(this.customer);
       var genderStatus = formData.controls["gender"].value == "1" ? true : false;
-      this.customer = {
+      let customer = {
         customerId: this.updatedCustomerId,
         organizationId: Number(sessionStorage.getItem("organizationId")),
         firstName: formData.controls["firstName"].value,
@@ -195,13 +177,13 @@ export class CustomerComponent implements OnInit {
         postCode: formData.controls["postCode"].value,
         profileImage: this.profileImage && this.profileImage.name || '',
         isDeleted: false
-      };
+      } as _model.Customer;
       if (this.updatedCustomerId == 0) {
-        this.customerService.postCustomer(this.customer).subscribe((data: any) => {
+        this.customerService.create(this.customer).subscribe((data: any) => {
           this.LoadCustomers();
         });
       } else {
-        this.customerService.putCustomer(this.updatedCustomerId, this.customer).subscribe((data: any) => {
+        this.customerService.update(this.updatedCustomerId, this.customer).subscribe((data: any) => {
           this.LoadCustomers();
         });
       }
