@@ -1,6 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ResetService } from './reset.service';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
+
 @Component({
   moduleId: module.id,
   templateUrl: 'reset.html'
@@ -11,7 +13,7 @@ export class ResetComponent implements OnInit {
   isReset: boolean = false;
   submitted=false;
   public isPasswordMatch = true;
-  constructor(private fb: FormBuilder, private resetService: ResetService) {
+  constructor(private fb: FormBuilder, private resetService: _api.ResetPasswordService) {
     this.get();
   }
   ngOnInit() {
@@ -26,31 +28,31 @@ export class ResetComponent implements OnInit {
   }
   get() {
     var uniqueId = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
-    this.resetService.get(uniqueId).subscribe((data: any) => {
-      if (data["results"][0]) {
-        //Unique Id exist
-        this.isLinkExpired = false;
-        this.isReset = false;
-      }
-      else {
-        //Link has been expired.
-        this.isLinkExpired = true;
-        this.isReset = false;
-      }
-    });
+    //this.resetService.get(uniqueId).subscribe((data: any) => {
+    //  if (data["results"][0]) {
+    //    //Unique Id exist
+    //    this.isLinkExpired = false;
+    //    this.isReset = false;
+    //  }
+    //  else {
+    //    //Link has been expired.
+    //    this.isLinkExpired = true;
+    //    this.isReset = false;
+    //  }
+    //});
   }
   onSubmit(formData: any) {
     this.submitted = true;
-    var uniqueId = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
-    if (formData.value['password'].trim() != formData.value['confirmPassword'].trim()) {
-      this.isPasswordMatch = false;
-    }
-    else {
-      this.resetService.put(uniqueId, formData.value['password']).subscribe((data: any) => {
-        this.isReset = true;
-        this.isLinkExpired = false;
-        this.isPasswordMatch = true;
-      });
-    }
+    //var uniqueId = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
+    //if (formData.value['password'].trim() != formData.value['confirmPassword'].trim()) {
+    //  this.isPasswordMatch = false;
+    //}
+    //else {
+    //  this.resetService.update(uniqueId, formData.value['password']).subscribe((data: any) => {
+    //    this.isReset = true;
+    //    this.isLinkExpired = false;
+    //    this.isPasswordMatch = true;
+    //  });
+    //}
   }
 }

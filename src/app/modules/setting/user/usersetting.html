@@ -39,12 +39,12 @@
                                             <td>{{item.firstName}} {{item.lastName}}</td>
                                             <td>{{item.emailAddress}}</td>
                                             <td>{{item.title}}</td>
-                                            <td class="hidden-xs hidden-sm"><span><a style="cursor:pointer;" (click)="LoadUserById(item.userId); modal1.show();"><i class="fa fa-pencil"></i></a></span></td>
+                                            <td class="hidden-xs hidden-sm"><span><a style="cursor:pointer;" (click)="LoadUserById(item.userId); modal1.show();"></a></span></td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <button type="button" class="btn-u btn-u-green hidden-md hidden-lg" (click)="ClearFields(); modal1.show()"><i class="fa fa-plus"></i>&nbsp;Add User</button>
-                                <span class="hidden-lg hidden-md"><a style="cursor:pointer;" (click)="modal1.show();"><i class="fa fa-pencil"></i></a></span>
+                                <span class="hidden-lg hidden-md"><a style="cursor:pointer;" (click)="modal1.show();"></a></span>
                                 <!---Add user button popup-->
                                 <app-modal #modal1>
                                     <div class="app-modal-header">

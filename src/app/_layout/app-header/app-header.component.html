@@ -14,8 +14,8 @@
               <button class="btn btn-search" type="button" disabled="disabled"><i class="fa fa-search fa-fw"></i> Search</button>
             </span>
           </div>
-          <strong style="text-align:left;">{{userInfo?.orgInfo?.profile?.businessName}}</strong>
-          <div>{{userInfo?.orgInfo?.profile?.street}}, {{userInfo?.orgInfo?.profile?.city}}, {{userInfo?.orgInfo?.profile?.postCode}}</div>
+          <strong style="text-align:left;">{{userInfo?.currentUser?.profile?.businessName}}</strong>
+          <div>{{userInfo?.currentUser?.profile?.street}}, {{userInfo?.currentUser?.profile?.city}}, {{userInfo?.currentUser?.profile?.postCode}}</div>
 
         </div>
         <div class="col-xs-5 text-right">
@@ -23,7 +23,7 @@
             <li class="upper-links" align="center"><a class="links"  disabled="disabled"><i class="fa fa-question-circle fa-cx"></i><br/>Help</a></li>
             <li class="upper-links" align="center"><a class="links"  disabled="disabled"><i class="fa fa-bell  fa-cx"></i><br/>Alerts</a></li>
             <li class="upper-links" align="center"><a class="links"  disabled="disabled"><i class="fa fa-trophy  fa-cx"></i><br/>Achievements</a></li>
-            <li class="dropdown" align="center" (click)="showMenu()"><a class="links"><i class="fa fa-user  fa-cx"></i><br />{{userInfo?.orgInfo?.firstName}}&nbsp;&nbsp;<b class="caret"></b></a>
+            <li class="dropdown" align="center" (click)="showMenu()"><a class="links"><i class="fa fa-user  fa-cx"></i><br />{{userInfo?.currentUser?.firstName}}&nbsp;&nbsp;<b class="caret"></b></a>
               <ul class="dropdown-menu user-top-right-menu" *ngIf="active=='user'">
                 <li><a title="Dashboard" [routerLink]="['/account']"><i class="fa fa-book"></i>&nbsp;&nbsp;Profile</a></li>
                 <li><a title="Settings" [routerLink]="['/reset', 0]"><i class="fa fa-gear"></i>&nbsp;&nbsp;Password</a></li>

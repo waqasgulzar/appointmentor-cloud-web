@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CustomerService } from './customer.service';
-import { Customer } from './customer';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
 import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -9,8 +9,8 @@ import { Router, ActivatedRoute } from "@angular/router";
   templateUrl: 'customer-edit.html'
 })
 export class CustomerEditComponent implements OnInit {
-  customers: Customer[];
-  customer: Customer;
+  customers: _model.Customer[];
+  customer: _model.Customer;
   custForm: FormGroup;
   savebuttonText: string = "Save";
   removeCustomerId: number = 0;
@@ -29,13 +29,9 @@ export class CustomerEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
-    private customerService: CustomerService,
+    private customerService: _api.CustomerService,
     private router: Router) {
     this.LoadCustomers();
-    if (sessionStorage.getItem("organizationId") == null) {
-      this.router.navigate(['']);
-    }
-
   }
 
   ngOnInit() {
@@ -88,9 +84,8 @@ export class CustomerEditComponent implements OnInit {
   }
 
   LoadCustomers() {
-    this.customerService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
-      this.customers = data["results"];
-      console.log(data["results"]);
+    this.customerService.getAll().subscribe((data: any) => {
+      this.customers = data;
     });
   }
 
@@ -98,7 +93,7 @@ export class CustomerEditComponent implements OnInit {
     this.savebuttonText = "Update";
     this.updatedCustomerId = customerId;
     this.removeCustomerId = 0;
-    this.customerService.getCustomerById(customerId)
+    this.customerService.get(customerId)
       .subscribe((data: any) => {
         var obj = data["results"][0];
         var genderStatus = obj["gender"] == true ? "1" : "0";
@@ -143,7 +138,7 @@ export class CustomerEditComponent implements OnInit {
     this.addressline1 = "";
     this.updatedCustomerId = customerId;
 
-    this.customerService.getCustomerById(customerId)
+    this.customerService.get(customerId)
       .subscribe((data: any) => {
         var obj = data["results"][0];
         this.customerName = obj["firstName"] + " " + obj["lastName"];
@@ -160,39 +155,37 @@ export class CustomerEditComponent implements OnInit {
   }
 
   RemoveCustomer() {
-    this.customerService.deleteCustomer(this.removeCustomerId).subscribe((data: any) => {
+    this.customerService.delete(this.removeCustomerId).subscribe((data: any) => {
       this.LoadCustomers();
       this.ClearFields();
     });
   }
 
   SearchCustomers(firstname: any, lastname: any, emailaddress: any, city: any) {
-    this.customerService
-      .getCustomerByFilter(Number(sessionStorage.getItem("organizationId")),
-        firstname.value,
-        lastname.value,
-        emailaddress.value,
-        city.value).subscribe((data: any) => {
-        this.customers = data["results"];
-      });
+    let model = {
+      organizationId: Number(sessionStorage.getItem("organizationId")),
+      firstName: firstname.value,
+      lastName: lastname.value,
+      emailAddress: emailaddress.value,
+      city: city.value
+    } as _model.Customer;
+    this.customerService.search(model).subscribe((data: any) => {
+      this.customers = data["results"];
+    });
   }
 
   SendByEmailSubject(emailbysubject: any, emailbymessage: any) {
-    console.log(emailbysubject.value);
-    console.log(emailbymessage.value);
-    console.log(this.updatedCustomerId);
     if (emailbysubject.value.trim() == "" || emailbymessage.value.trim() == "") {
       this.isEmptySubject = true;
       this.isSubjectSend = false;
     } else {
       this.isSubjectSend = true;
       this.isEmptySubject = false;
-
-      this.customerService.postEmail(this.updatedCustomerId, emailbysubject.value, emailbymessage.value).subscribe(
-        (data: any) => {
-          emailbysubject.value = "";
-          emailbymessage.value = "";
-        });
+      //this.customerService.postEmail(this.updatedCustomerId, emailbysubject.value, emailbymessage.value).subscribe(
+      //  (data: any) => {
+      //    emailbysubject.value = "";
+      //    emailbymessage.value = "";
+      //  });
     }
   }
 
@@ -205,9 +198,9 @@ export class CustomerEditComponent implements OnInit {
     } else {
       this.isMessageSend = true;
       this.isEmptyMessage = false;
-      this.customerService.postEmail(this.updatedCustomerId, "", emailbymessage.value).subscribe((data: any) => {
-        emailbymessage.value = "";
-      });
+      //this.customerService.postEmail(this.updatedCustomerId, "", emailbymessage.value).subscribe((data: any) => {
+      //  emailbymessage.value = "";
+      //});
     }
   }
 
@@ -216,7 +209,7 @@ export class CustomerEditComponent implements OnInit {
     if (formData.valid) {
       //console.log(this.customer);
       var genderStatus = formData.controls["gender"].value == "1" ? true : false;
-      this.customer = {
+      let customer = {
         customerId: this.updatedCustomerId,
         organizationId: Number(sessionStorage.getItem("organizationId")),
         firstName: formData.controls["firstName"].value,
@@ -234,13 +227,14 @@ export class CustomerEditComponent implements OnInit {
         postCode: formData.controls["postCode"].value,
         profileImage: this.profileImage && this.profileImage.name || '',
         isDeleted: false
-      };
+      } as _model.Customer;
+
       if (this.updatedCustomerId == 0) {
-        this.customerService.postCustomer(this.customer).subscribe((data: any) => {
+        this.customerService.create(customer).subscribe((data: any) => {
           this.LoadCustomers();
         });
       } else {
-        this.customerService.putCustomer(this.updatedCustomerId, this.customer).subscribe((data: any) => {
+        this.customerService.update(this.updatedCustomerId, customer).subscribe((data: any) => {
           this.LoadCustomers();
         });
       }

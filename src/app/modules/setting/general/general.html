@@ -15,7 +15,7 @@
           </div>
           <div class="col-md-5 col-sm-12 col-xs-12">
             <label class="select">
-              <select formControlName="calendarIntervalIncrement" (change)="CalendarIncrementChange()">
+              <select formControlName="calendarIntervalIncrement">
                 <option value="1">1 minute</option>
                 <option value="2">2 minutes</option>
                 <option value="3">3 minutes</option>
@@ -35,7 +35,7 @@
           </div>
           <div class="col-md-5 col-sm-12 col-xs-12">
             <label class="select">
-              <lookup-component formControlName="timezoneControl" [lookup]="timezonelist" [lookupselected]="selectedTimeZone" ngDefaultControl (change)="TimeZoneChange()"></lookup-component>
+              <lookup-component formControlName="timezoneControl" [lookup]="timezonelist" [lookupselected]="selectedTimeZone" ngDefaultControl></lookup-component>
               <i></i>
             </label>
           </div>
@@ -46,7 +46,7 @@
           </div>
           <div class="col-md-5 col-sm-12 col-xs-12">
             <label class="select">
-              <lookup-component formControlName="currencyControl" [lookup]="currencylist" [lookupselected]="selectedCurrency" ngDefaultControl (change)="CurrencyChange()"></lookup-component>
+              <lookup-component formControlName="currencyControl" [lookup]="currencylist" [lookupselected]="selectedCurrency" ngDefaultControl></lookup-component>
               <i></i>
             </label>
           </div>
@@ -57,7 +57,7 @@
           </div>
           <div class="col-md-5 col-sm-12 col-xs-12">
             <label class="select">
-              <select formControlName="dateFormat" (change)="DateFormatChange()">
+              <select formControlName="dateFormat">
                 <option value="dd/mm/yyyy">dd/mm/yyyy</option>
                 <option value="dd/mm/yyyy">dd/mm/yyyy</option>
               </select>

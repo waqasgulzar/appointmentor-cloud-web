@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
-import { UserAccountService } from '../useraccount/account.service';
-import { PaymentInfo } from '../setting/user/organizationuser';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
 @Component({
   moduleId: module.id,
   templateUrl: 'billing.html'
@@ -13,28 +13,18 @@ export class BillingComponent implements OnInit {
   bundleToPurchase: number = 1;
   payMonthly: number = 15;
   payAnnualy: number = 156;
-  paymentInfo: PaymentInfo = new PaymentInfo();
+  paymentInfo: _model.PaymentInfo = new _model.PaymentInfo();
   bundleInfo: string = 'Each bundle allows you to add up to 3 booking apps, 1 resource and 1 user to your account.';
 
   constructor(
     private router: Router,
-    private userAccountService: UserAccountService,
+    private userAccountService: _api.UserService,
   ) {
 
   }
 
   ngOnInit() {
-    this.orgId = sessionStorage.getItem("organizationId");
-
-    if (!this.orgId) {
-      this.router.navigate(['']);
-    } else {
-      this.userAccountService.get(Number(this.orgId)).subscribe((data: any) => {
-        var obj = data["results"][0];
-        this.orgInfo = obj;
-        sessionStorage.setItem('orgInfo', JSON.stringify(obj));
-      });
-    }
+    
   }
 
   increment() {

@@ -5,39 +5,35 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { AssetService } from '.././asset.service';
-import { Assetservice } from '.././assetservice';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ResourcesService } from '../../resources/resources.service';
-import { Asset } from '../asset';
-import { Service } from '../../services/service';
+import * as _model from '../../../shared/models/models';
+import * as _api from '../../../shared/services/api';
+
 @Component({
   moduleId: module.id,
   templateUrl: 'asset-edit.html'
 })
 export class AssetEditComponent implements OnInit {
-  assets: Asset[];
-  services: Service[];
+  assets: _model.Asset[];
+  services: _model.Service[];
   selectedServiceIds: number[] = [];
-  assetservices: Assetservice[];
-  assetservice: Assetservice;
+  assetservices: _model.AssetService[];
+  assetservice: _model.AssetService;
   submitted = false;
   userForm: FormGroup;
   savebuttonText: string = 'Save';
   removeAssetId: number = 0;
   updatedAssetId: number = 0;
   isCheckAll: boolean = false;
-  @Input() asset: Asset = new Asset();
+  @Input() asset: _model.Asset = new _model.Asset();
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private assetService: AssetService,
-    private resourcesService: ResourcesService,
+    private assetService: _api.AssetService,
+    private resourcesService: _api.ResourceService,
     private router: Router
   ) {
-    if (sessionStorage.getItem('organizationId') == null) {
-      this.router.navigate(['']);
-    }
+
     this.LoadAssets();
   }
   ngOnInit() {
@@ -72,43 +68,37 @@ export class AssetEditComponent implements OnInit {
   onSubmit(formData: any) {
     this.submitted = true;
     if (!formData.invalid) {
-      this.asset = {
+      let asset = {
         assetId: this.updatedAssetId,
         organizationId: Number(sessionStorage.getItem('organizationId')),
         name: formData.controls['name'].value,
         quantity: formData.controls['quantity'].value,
         isDeleted: false
-      };
+      } as _model.Asset;
       if (this.updatedAssetId == 0) {
-        this.assetService.postAssets(this.asset).subscribe((data: any) => {
+        this.assetService.create(asset).subscribe((data: any) => {
           var obj = data['results'][0];
           this.router.navigate(['/resources']);
         });
       } else {
-        this.assetService.post(this.updatedAssetId).subscribe((data: any) => {
-          this.assetService
-            .putAssets(this.updatedAssetId, this.asset)
-            .subscribe((data: any) => {
-              this.router.navigate(['/resources']);
-            });
-        });
+        this.assetService.update(this.updatedAssetId, asset).subscribe((data: any) => {
+            this.router.navigate(['/resources']);
+          });
       }
       this.assetservices = null;
       this.ClearFields();
     }
   }
   LoadServices() {
-    this.resourcesService
-      .getServices(Number(sessionStorage.getItem('organizationId')))
+    this.resourcesService.getAll()
       .subscribe((data: any) => {
-        this.services = data['results'];
+        this.services = data;
       });
   }
   LoadAssets() {
-    this.assetService
-      .get(Number(sessionStorage.getItem('organizationId')))
+    this.assetService.getAll()
       .subscribe((data: any) => {
-        this.assets = data['results'];
+        this.assets = data;
       });
   }
   ClearFields() {
@@ -139,9 +129,9 @@ export class AssetEditComponent implements OnInit {
     this.updatedAssetId = assetId;
     this.removeAssetId = 0;
     this.LoadServices();
-    this.assetService.getAssetById(assetId).subscribe((data: any) => {
+    this.assetService.get(assetId).subscribe((data: any) => {
       console.log(data);
-      var obj = data['results'][0];
+      var obj = data[0];
       this.assetservices = obj['assetservice'];
       this.selectedServiceIds = [];
       for (var i = 0; i < obj['assetservice'].length; i++) {
@@ -164,10 +154,10 @@ export class AssetEditComponent implements OnInit {
     this.isCheckAll = true;
     this.selectedServiceIds = [];
     this.resourcesService
-      .getServices(Number(sessionStorage.getItem('organizationId')))
+      .getAll()
       .subscribe((data: any) => {
-        for (var i = 0; i < data['results'].length; i++) {
-          this.selectedServiceIds.push(data['results'][i]['serviceId']);
+        for (var i = 0; i < data.length; i++) {
+          this.selectedServiceIds.push(data[i]['serviceId']);
         }
         console.log(this.selectedServiceIds);
       });

@@ -24,10 +24,10 @@
         <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
           <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
             <button type="button" class="btn btn-default" [routerLink]="['/asset', row['assetId']]">
-              <i class="fa fa-pencil"></i> Edit
+               Edit
             </button>
             <!--<button type="button" class="btn btn-default" (click)="delete()">
-              <i class="fa fa-trash"></i> Delete
+              Delete
             </button>-->
           </ng-template>
         </ngx-datatable-column>

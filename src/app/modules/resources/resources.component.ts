@@ -1,10 +1,7 @@
 ﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ResourcesService } from './resources.service';
-import { User } from '../../modules/user/user';
-import { ServiceResource } from './serviceresource';
-import { Service } from '../../modules/services/service';
-import { Resource } from './resource';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
 import { Router } from "@angular/router";
 import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
@@ -13,12 +10,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: 'resources.html'
 })
 export class ResourcesComponent implements OnInit {
-  services: Service[];
-  resources: Resource[];
-  resource: Resource;
-  serviceResources: ServiceResource[];
-  serviceResource: ServiceResource;
-  selectedServiceResources: ServiceResource[];
+  services: _model.Service[];
+  resources: _model.Resource[];
+  resource: _model.Resource = new _model.Resource();
+  serviceResources: _model.ServiceResource[];
+  serviceResource: _model.ServiceResource;
+  selectedServiceResources: _model.ServiceResource[];
   selectedServiceIds: number[] = [];
   submitted = false;
   userForm: FormGroup;
@@ -27,13 +24,11 @@ export class ResourcesComponent implements OnInit {
   isCheckAll: boolean = false;
   savebuttonText: string = "Save";
   isMenuhidden: boolean = false;
-  constructor(private spinner: NgxSpinnerService, private fb: FormBuilder, private resourcesService: ResourcesService, private router: Router) {
-    if (sessionStorage.getItem("isMenuhidden") == "true") {
-      this.isMenuhidden = true;
-    }
-    if (sessionStorage.getItem("organizationId") == null) {
-      this.router.navigate(['']);
-    }
+  constructor(private spinner: NgxSpinnerService,
+    private fb: FormBuilder,
+    private resourcesService: _api.ResourceService,
+    private router: Router) {
+   
     this.LoadResources();
   }
   ngOnInit() {
@@ -47,80 +42,53 @@ export class ResourcesComponent implements OnInit {
     this.submitted = true;
     if (!formData.invalid) {
       this.spinner.show();
-      this.resource = {
-        resourceId: this.updatedResourceId,
-        organizationId: Number(sessionStorage.getItem("organizationId")),
-        resourceName: formData.controls["ResourceName"].value,
-        contactName: '',
-        emailAddress: '',
-        isSendConfirmationEmail: false,
-        houseNo: '',
-        addressLine1: '',
-        addressLine2: '',
-        city: '',
-        postcode: '',
-        color: '',
-        isDeleted: false
-      };
+      this.resource.resourceId = this.updatedResourceId;
+      this.resource.organizationId = Number(sessionStorage.getItem("organizationId"));
+      this.resource.resourceName = formData.controls["ResourceName"].value;
+      this.resource.contactName = '';
+      this.resource.emailAddress = '';
+      this.resource.isSendConfirmationEmail = false;
+      this.resource.houseNo = '';
+      this.resource.addressLine1 = '';
+      this.resource.addressLine2 = '';
+      this.resource.city = '';
+      this.resource.postcode = '';
+      this.resource.color = '';
+      this.resource.isDeleted = false;
+     
       if (this.updatedResourceId == 0) {
-        this.resourcesService.postResources(this.resource).subscribe((data: any) => {
+        this.resourcesService.create(this.resource).subscribe((data: any) => {
           var obj = data["results"][0];
           for (var i = 0; i < this.selectedServiceIds.length; i++) {
-            this.serviceResource = {
+            let serviceResource = {
               serviceResourceId: 0,
-              resourceId: obj,
-              serviceId: this.selectedServiceIds[i],
-              resourceName: '',
               serviceName: '',
+              resourseName: '',
+              serviceId: this.selectedServiceIds[i],
+              resourceId: obj,
               isDeleted: false
-            };
-            this.resourcesService.postServiceResources(this.serviceResource).subscribe((data: any) => {
-              this.LoadResources();
-            });
-            this.LoadResources();
-            this.serviceResources = null;
-            this.ClearFields();
-            this.spinner.hide();
+            } as _model.ServiceResource;
+            
           }
         });
       }
       else {
-        //Mark all resources Services to removed.
-        this.resourcesService.post(this.updatedResourceId).subscribe((data: any) => {
-          this.resourcesService.putResources(this.updatedResourceId, this.resource).subscribe((data: any) => {
-            for (var i = 0; i < this.selectedServiceIds.length; i++) {
-              this.serviceResource = {
-                serviceResourceId: 0,
-                resourceId: this.updatedResourceId,
-                serviceId: this.selectedServiceIds[i],
-                resourceName: '',
-                serviceName: '',
-                isDeleted: false
-              };
-              this.resourcesService.postServiceResources(this.serviceResource).subscribe((data: any) => {
-                this.LoadResources();
-              });
-            }
-            this.LoadResources();
-            this.serviceResources = null;
-            this.ClearFields();
-            this.spinner.hide();
-          });
-        });
+        
+          
       }
       
     }
   }
   LoadServices() {
-    this.resourcesService.getServices(Number(sessionStorage.getItem("organizationId")))
+    this.resourcesService.getAll()
       .subscribe((data: any) => {
-        this.services = data["results"];
+        this.services = data;
       });
   }
   LoadResources() {
-    this.resourcesService.getResources(Number(sessionStorage.getItem("organizationId")))
+    this.resourcesService.getAll()
       .subscribe((data: any) => {
-        this.resources = data["results"];
+        this.resources = data;
       });
   }
   LoadResourceById(resourceId: number) {
@@ -131,9 +99,9 @@ export class ResourcesComponent implements OnInit {
     this.savebuttonText = "Update";
     this.updatedResourceId = resourceId;
     this.removeResourceId = 0;
-    this.resourcesService.getResourceById(resourceId)
+    this.resourcesService.get(resourceId)
       .subscribe((data: any) => {
-        var obj = data["results"][0];
+        var obj = data[0];
         this.serviceResources = obj["serviceresource"];
         this.selectedServiceIds = [];
         for (var i = 0; i < obj["serviceresource"].length; i++) {
@@ -169,9 +137,9 @@ export class ResourcesComponent implements OnInit {
     this.savebuttonText = "Save";
     this.updatedResourceId = 0;
     this.removeResourceId = 0;
-    this.resourcesService.getResourceById(resourceId)
+    this.resourcesService.get(resourceId)
       .subscribe((data: any) => {
-        var obj = data["results"][0];
+        var obj = data[0];
         this.serviceResources = obj["serviceresource"];
         for (var i = 0; i < obj["serviceresource"].length; i++) {
           this.selectedServiceIds.push(obj["serviceresource"][i]["serviceId"]);
@@ -187,7 +155,7 @@ export class ResourcesComponent implements OnInit {
     this.removeResourceId = resourceId;
   }
   RemoveResource() {
-    this.resourcesService.deleteResources(this.removeResourceId).subscribe((data: any) => {
+    this.resourcesService.delete(this.removeResourceId).subscribe((data: any) => {
       this.LoadResources();
       this.ClearFields();
     });
@@ -201,10 +169,10 @@ export class ResourcesComponent implements OnInit {
   CheckAll() {
     this.isCheckAll = true;
     this.selectedServiceIds = [];
-    this.resourcesService.getServices(Number(sessionStorage.getItem("organizationId")))
+    this.resourcesService.getAll()
       .subscribe((data: any) => {
-        for (var i = 0; i < data["results"].length; i++) {
-          this.selectedServiceIds.push(data["results"][i]["serviceId"]);
+        for (var i = 0; i < data.length; i++) {
+          this.selectedServiceIds.push(data[i]["serviceId"]);
         }
         console.log(this.selectedServiceIds);
       });

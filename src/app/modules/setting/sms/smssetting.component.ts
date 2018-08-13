@@ -5,24 +5,22 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { SMSSettingService } from './smssetting.service';
-import { SMSSetting } from './smssetting';
+import * as _model from '../../../shared/models/models';
+import * as _api from '../../../shared/services/api';
 import { Router } from '@angular/router';
 @Component({
   moduleId: module.id,
   templateUrl: 'smssetting.html'
 })
 export class SMSSettingComponent implements OnInit {
-  smsSetting: SMSSetting;
+  smsSetting: _model.SMSSetting;
   userForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private smsSettingService: SMSSettingService,
+    private smsSettingService: _api.SmsSettingService,
     private router: Router
   ) {
-    if (sessionStorage.getItem('organizationId') == null) {
-      this.router.navigate(['']);
-    }
+    
   }
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -47,8 +45,8 @@ export class SMSSettingComponent implements OnInit {
     this.LoadEmailSetting();
   }
   onSubmit(formData: any) {
-    this.smsSetting = {
-      sMSSettingID: 0,
+    let smsSetting = {
+      smsSettingID: 0,
       organizationID: Number(sessionStorage.getItem('organizationId')),
       isBookingMade: formData.controls['isBookingMade'].value,
       bookingMadeText: formData.controls['bookingMadeText'].value,
@@ -69,15 +67,15 @@ export class SMSSettingComponent implements OnInit {
       isBookingCanceledByCustomer:
         formData.controls['isBookingCanceledByCustomer'].value,
       isDeleted: false
-    };
-    this.smsSettingService.post(this.smsSetting).subscribe((data: any) => {});
+    } as _model.SMSSetting;
+    this.smsSettingService.create(this.smsSetting).subscribe((data: any) => {});
   }
   LoadEmailSetting() {
     this.smsSettingService
-      .get(Number(sessionStorage.getItem('organizationId')))
+      .getAll()
       .subscribe((data: any) => {
-        var obj = data['results'][0];
-        console.log(obj);
+        var obj = data[0];
+        
         this.userForm = this.fb.group({
           isBookingMade: [obj['isBookingMade']],
           bookingMadeText: [obj['bookingMadeText']],

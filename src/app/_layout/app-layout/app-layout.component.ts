@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { OrganizationInfo } from '../../modules/setting/user/organizationuser';
 
 @Component({
   selector: 'app-app-layout',

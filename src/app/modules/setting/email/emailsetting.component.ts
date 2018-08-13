@@ -5,24 +5,22 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { EmailSettingService } from './emailsetting.service';
-import { EmailSetting } from './emailsetting';
+import * as _model from '../../../shared/models/models';
+import * as _api from '../../../shared/services/api';
 import { Router } from '@angular/router';
 @Component({
   moduleId: module.id,
   templateUrl: 'emailsetting.html'
 })
 export class EmailSettingComponent implements OnInit {
-  emailSetting: EmailSetting;
+  emailSetting: _model.EmailSetting;
   userForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private emailSettingService: EmailSettingService,
+    private emailSettingService: _api.EmailSettingService,
     private router: Router
   ) {
-    if (sessionStorage.getItem('organizationId') == null) {
-      this.router.navigate(['']);
-    }
+
   }
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -50,9 +48,9 @@ export class EmailSettingComponent implements OnInit {
     this.LoadEmailSetting();
   }
   onSubmit(formData: any) {
-    this.emailSetting = {
+    let emailSetting = {
       emailSettingID: 0,
-      organizationID: Number(sessionStorage.getItem('organizationId')),
+      organizationId: Number(sessionStorage.getItem('organizationId')),
       isInternalBooking: formData.controls['isInternalBooking'].value,
       internalBookingText: formData.controls['internalBookingText'].value,
       isExternalBooking: formData.controls['isExternalBooking'].value,
@@ -78,17 +76,16 @@ export class EmailSettingComponent implements OnInit {
       emailFooter: formData.controls['emailFooter'].value,
       prefilledDirectMessage: formData.controls['prefilledDirectMessage'].value,
       isDeleted: false
-    };
-    this.emailSettingService
-      .post(this.emailSetting)
-      .subscribe((data: any) => {});
+    } as _model.EmailSetting;
+    this.emailSettingService.create(emailSetting)
+      .subscribe((data: any) => { });
   }
+
   LoadEmailSetting() {
     this.emailSettingService
-      .get(Number(sessionStorage.getItem('organizationId')))
+      .getAll()
       .subscribe((data: any) => {
-        var obj = data['results'][0];
-        console.log(obj);
+        var obj = data[0];
         this.userForm = this.fb.group({
           isInternalBooking: [obj['isInternalBooking']],
           internalBookingText: [obj['internalBookingText']],

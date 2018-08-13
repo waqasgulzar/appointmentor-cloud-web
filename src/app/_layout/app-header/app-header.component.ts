@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfoService } from '../../shared/services/userInfo.service';
-import { OrganizationInfo } from '../../modules/setting/user/organizationuser';
 
 @Component({
   selector: 'app-header',

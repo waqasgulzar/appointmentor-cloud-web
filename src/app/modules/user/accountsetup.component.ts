@@ -1,101 +1,83 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import { UserService } from './user.service';
-import { User } from './user';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators, ValidationErrors } from '@angular/forms';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserInfoService } from '../../shared/services/userInfo.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
   moduleId: module.id,
   templateUrl: 'user.accountsetup.html'
 })
 export class AccountSetupComponent implements OnInit {
   submitted: boolean = false;
-  users: User[];
-  user: User;
+  users: _model.User[];
+  user: _model.User;
   isMenuhidden: boolean = false;
   userForm: FormGroup;
   emailAddress: FormControl;
+  orgId: number = 0;
+  email: string;
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
-    private router: Router
+    private route: ActivatedRoute,
+    private userService: _api.UserService,
+    private orgService: _api.OrganizationService,
+    private router: Router,
+    private userInfo: UserInfoService,
+    private spinner: NgxSpinnerService,
+    private authenticateService: _api.AuthenticationService
   ) {
-    if (sessionStorage.getItem('isMenuhidden') == 'true') {
-      this.isMenuhidden = true;
-    }
-    if (sessionStorage.getItem('organizationId') == null) {
-      this.router.navigate(['']);
-    }
+
   }
   ngOnInit() {
+    this.orgId = this.userInfo.currentUser.organizationId;
+    this.email = this.userInfo.currentUser.emailAddress;
     this.userForm = this.fb.group({
-      organizationId: [sessionStorage.getItem('organizationId')],
-      firstName: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(50)])
-      ],
-      lastName: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(50)])
-      ],
-      companyName: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(50)])
-      ],
-      phoneNumber: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.maxLength(12),
-          Validators.pattern('[0-9]{0-10}')
-        ])
-      ],
-      emailAddress: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(100),
-          Validators.email
-        ])
-      ],
-      password: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(15)
-        ])
-      ],
+      organizationId: [this.orgId],
+      firstName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
+      lastName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
+      companyName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
+      phoneNumber: ['', Validators.compose([Validators.required, Validators.maxLength(12)])],
+      emailAddress: [{value:this.email, disabled: true}],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(15)])],
       timeZoneId: [''],
       currencyId: [''],
       isDeleted: ['']
     });
-    this.LoadUser();
   }
-  LoadUser() {
-    this.userService
-      .getEmailAddress(Number(sessionStorage.getItem('organizationId')))
-      .subscribe((data: any) => {
-        var obj = data['results'][0];
-        this.userForm.controls['emailAddress'].setValue(obj['emailAddress']);
-      });
-  }
+
   onSubmit(userForm: FormGroup) {
     this.submitted = true;
     if (!userForm.invalid) {
-      this.userService
-        .put(
-          Number(sessionStorage.getItem('organizationId')),
-          userForm.value
-        )
-        .subscribe((data: any) => {
-          this.router.navigate(['/openingtimes']);
+      this.spinner.show();
+      this.orgService.update(this.orgId, userForm.value).subscribe((data: any) => {
+        this.authenticateService.login(userForm.value['emailAddress'], userForm.value['password']).subscribe(result => {
+          if (result) {
+            this.userService.getCurrentUser().subscribe((data: any) => {
+              localStorage.setItem('currentUser', JSON.stringify(data));
+              this.userInfo.setInfo(data);
+              this.router.navigate(['/appointment']);
+              this.spinner.hide();
+            });
+          }
+        }, error => {
+          this.spinner.hide();
         });
+      });
     }
+    else { this.getFormValidationErrors(); }
+  }
+
+  getFormValidationErrors() {
+    Object.keys(this.userForm.controls).forEach(key => {
+      const controlErrors: ValidationErrors = this.userForm.get(key).errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+        });
+      }
+    });
   }
 }

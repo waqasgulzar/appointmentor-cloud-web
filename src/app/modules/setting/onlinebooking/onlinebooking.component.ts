@@ -5,28 +5,26 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { OnlineBookingSettingService } from './onlinebooking.service';
-import { OpeningTimesService } from '../../../modules/openingtimes/openingtimes.service';
-import { OnlineBookingSetting } from './onlinebooking';
+import * as _model from '../../../shared/models/models';
+import * as _api from '../../../shared/services/api';
 import { Router } from '@angular/router';
 @Component({
   moduleId: module.id,
   templateUrl: 'onlinebooking.html'
 })
 export class OnlineBookingSettingComponent implements OnInit {
-  onlineBookingSetting: OnlineBookingSetting;
+  onlineBookingSetting: _model.OnlineBookingSetting
   timezonelist: any[];
   userForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private onlineBookingSettingService: OnlineBookingSettingService,
-    private openingtimesService: OpeningTimesService,
+    private onlineBookingSettingService: _api.OnlineAppointmentBookingSettingsService,
+    private openingtimesService: _api.OpeningTimeService,
     private router: Router
   ) {
-    if (sessionStorage.getItem('organizationId') == null) {
-      this.router.navigate(['']);
-    }
+    
   }
+
   ngOnInit() {
     this.userForm = this.fb.group({
       isCustomAllowBooking: [true],
@@ -53,14 +51,13 @@ export class OnlineBookingSettingComponent implements OnInit {
     this.LoadEmailSetting();
   }
   LoadTimeZone() {
-    this.openingtimesService
-      .getByCategory('Timezone')
+    this.openingtimesService.getAll()
       .subscribe((data: any) => {
-        this.timezonelist = data['results'];
+        this.timezonelist = data;
       });
   }
   onSubmit(formData: any) {
-    this.onlineBookingSetting = {
+    let onlineBookingSetting = {
       onlineBookingSettingID: 0,
       organizationID: Number(sessionStorage.getItem('organizationId')),
       isCustomAllowBooking: formData.controls['isCustomAllowBooking'].value,
@@ -90,17 +87,17 @@ export class OnlineBookingSettingComponent implements OnInit {
       isCustomerCancelFromConfirmation:
         formData.controls['isCustomerCancelFromConfirmation'].value,
       isDeleted: false
-    };
-    this.onlineBookingSettingService
-      .post(this.onlineBookingSetting)
+    } as _model.OnlineBookingSetting;
+
+    this.onlineBookingSettingService.create(onlineBookingSetting)
       .subscribe((data: any) => {});
   }
   LoadEmailSetting() {
     this.onlineBookingSettingService
-      .get(Number(sessionStorage.getItem('organizationId')))
+      .getAll()
       .subscribe((data: any) => {
-        var obj = data['results'][0];
-        console.log(obj);
+        var obj = data[0];
+        
         this.userForm = this.fb.group({
           isCustomAllowBooking: [obj['isCustomAllowBooking']],
           noticeForOnlineBooking: [obj['noticeForOnlineBooking']],

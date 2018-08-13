@@ -5,9 +5,8 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { GeneralService } from './general.service';
-import { UserAccountService } from '../../../modules/useraccount/account.service';
-import { OpeningTimesService } from '../../../modules/openingtimes/openingtimes.service';
+import * as _model from '../../../shared/models/models';
+import * as _api from '../../../shared/services/api';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,17 +23,13 @@ export class GeneralComponent implements OnInit {
   userForm: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private generalService: GeneralService,
-    private userAccountService: UserAccountService,
-    private openingtimesService: OpeningTimesService,
+    
+    private userAccountService: _api.UserService,
+    private openingtimesService: _api.OpeningTimeService,
     private router: Router
   ) {
-    if (sessionStorage.getItem('organizationId') == null) {
-      this.router.navigate(['']);
-    }
-    this.LoadTimeZone();
-    this.LoadCurrency();
-    this.LoadGeneralSetting();
+    
+   
   }
   ngOnInit() {
     this.userForm = this.fb.group({
@@ -44,80 +39,5 @@ export class GeneralComponent implements OnInit {
       currencyControl: []
     });
   }
-  LoadTimeZone() {
-    this.openingtimesService
-      .getByCategory('Timezone')
-      .subscribe((data: any) => {
-        this.timezonelist = data['results'];
-        this.userAccountService
-          .get(Number(sessionStorage.getItem('organizationId')))
-          .subscribe((data: any) => {
-            var obj = data['results'][0];
-            this.selectedTimeZone = obj['timezoneId'];
-          });
-      });
-  }
-  LoadCurrency() {
-    this.openingtimesService
-      .getByCategory('Currency')
-      .subscribe((data: any) => {
-        this.currencylist = data['results'];
-        this.userAccountService
-          .get(Number(sessionStorage.getItem('organizationId')))
-          .subscribe((data: any) => {
-            var obj = data['results'][0];
-            this.selectedCurrency = obj['currencyId'];
-          });
-      });
-  }
-  LoadGeneralSetting() {
-    this.userAccountService
-      .get(Number(sessionStorage.getItem('organizationId')))
-      .subscribe((data: any) => {
-        var obj = data['results'][0];
-        console.log(obj);
-        if (
-          obj['calendarIntervalIncrement'] != '' &&
-          obj['calendarIntervalIncrement'] != null
-        ) {
-          this.userForm.controls['calendarIntervalIncrement'].setValue(
-            obj['calendarIntervalIncrement']
-          );
-        }
-        if (obj['dateFormat'] != '' && obj['dateFormat'] != null) {
-          this.userForm.controls['dateFormat'].setValue(obj['dateFormat']);
-        }
-      });
-  }
-  CalendarIncrementChange() {
-    this.messageText = 'Calendar Interval Increment';
-    this.isHidden = false;
-    this.onSubmit();
-  }
-  TimeZoneChange() {
-    this.messageText = 'Time Zone';
-    this.isHidden = false;
-    this.onSubmit();
-  }
-  CurrencyChange() {
-    this.messageText = 'Currency';
-    this.isHidden = false;
-    this.onSubmit();
-  }
-  DateFormatChange() {
-    this.messageText = 'Date Format';
-    this.isHidden = false;
-    this.onSubmit();
-  }
-  onSubmit() {
-    this.generalService
-      .put(
-        Number(sessionStorage.getItem('organizationId')),
-        Number(this.userForm.value['timezoneControl']),
-        Number(this.userForm.value['currencyControl']),
-        this.userForm.controls['dateFormat'].value,
-        Number(this.userForm.controls['calendarIntervalIncrement'].value)
-      )
-      .subscribe((data: any) => {});
-  }
+  
 }

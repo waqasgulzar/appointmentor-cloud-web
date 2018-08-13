@@ -5,8 +5,8 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { ServicesService } from './services.service';
-import { Service } from './service';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
@@ -15,8 +15,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: 'services.html'
 })
 export class ServicesComponent implements OnInit {
-  services: Array<Service>;
-  service: Service;
+  services: Array<_model.Service>;
+  service: _model.Service;
   
   userForm: FormGroup;
   
@@ -33,15 +33,10 @@ export class ServicesComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
-    private servicesService: ServicesService,
+    private servicesService: _api.ServiceService,
     private router: Router
   ) {
-    if (sessionStorage.getItem('isMenuhidden') == 'true') {
-      this.isMenuhidden = true;
-    }
-    if (sessionStorage.getItem('organizationId') == null) {
-      this.router.navigate(['']);
-    }
+    
   }
 
   ngOnInit() {
@@ -69,23 +64,23 @@ export class ServicesComponent implements OnInit {
     this.LoadServices();
   }
   LoadPermission() {
-    this.servicesService
-      .getByCategory('OnlinePermission')
-      .subscribe((data: any) => {
-        var obj = data['results'][0];
-        this.selectedPermissionId = obj['id'];
-        this.permissionTitle = obj['title'];
-        this.permission = data['results'];
-      });
+    //this.servicesService
+    //  .getByCategory('OnlinePermission')
+    //  .subscribe((data: any) => {
+    //    var obj = data['results'][0];
+    //    this.selectedPermissionId = obj['id'];
+    //    this.permissionTitle = obj['title'];
+    //    this.permission = data['results'];
+    //  });
   }
   LoadPermissionById(id: number) {
-    this.servicesService
-      .getByCategoryId(id, 'OnlinePermission')
-      .subscribe((data: any) => {
-        var obj = data['results'][0];
-        this.selectedPermissionId = obj['id'];
-        this.permissionTitle = obj['title'];
-      });
+    //this.servicesService
+    //  .getByCategoryId(id, 'OnlinePermission')
+    //  .subscribe((data: any) => {
+    //    var obj = data['results'][0];
+    //    this.selectedPermissionId = obj['id'];
+    //    this.permissionTitle = obj['title'];
+    //  });
   }
   onClick(title: string, Id: number) {
     this.permissionTitle = title;
@@ -138,11 +133,8 @@ export class ServicesComponent implements OnInit {
   //  }
   //}
   LoadServices() {
-    this.servicesService
-      .getServices(Number(sessionStorage.getItem('organizationId')))
-      .subscribe((data: any) => {
-        console.log(data);
-        this.services = data['results'];
+    this.servicesService.getAll().subscribe((data: any) => {
+        this.services = data;
       });
   }
   
@@ -152,7 +144,7 @@ export class ServicesComponent implements OnInit {
   }
   RemoveService() {
     this.servicesService
-      .deleteServices(this.removeServiceId)
+      .delete(this.removeServiceId)
       .subscribe((data: any) => {
         this.LoadServices();
         

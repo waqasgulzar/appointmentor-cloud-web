@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PaymentService } from './payment.service';
-import { PaymentInfo } from '../setting/user/organizationuser';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
 
 @Component({
   selector: 'charge-component',
@@ -20,12 +20,12 @@ export class ChargeComponent implements OnInit, AfterViewInit, OnDestroy {
   processing: boolean = false;
   errorInfo: string = null;
   price: number;
-  paymentInfo: PaymentInfo = new PaymentInfo();
+  paymentInfo: _model.PaymentInfo = new _model.PaymentInfo();
 
   constructor(
     private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private paymentService: PaymentService,
+    private paymentService: _api.PaymentService,
     private router: Router) { }
 
   ngOnInit() {
@@ -63,9 +63,9 @@ export class ChargeComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       
       this.paymentInfo.tokenId = token.id;
-      this.paymentService.Charge(this.paymentInfo).subscribe(data => {
+      this.paymentService.create(this.paymentInfo).subscribe(data => {
         this.processing = false;
-        this.router.navigate(["premium/receipt/", data.results[0].id]);
+        this.router.navigate(["premium/receipt/", data[0].id]);
       });
     }
   }

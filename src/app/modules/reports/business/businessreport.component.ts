@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { BusinessReportService } from './businessreport.service';
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class BusinessReportComponent implements OnInit {
   constructor(
-    private businessReportService: BusinessReportService,
+    
     private router: Router
   ) {
     if (sessionStorage.getItem('organizationId') == null) {

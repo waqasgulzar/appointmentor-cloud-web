@@ -5,23 +5,22 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { Service } from './service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ServicesService } from './services.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { NotificationProperties } from '../../shared/interfaces/NotificationProperties';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserInfoService } from '../../shared/services/userInfo.service';
-import { Category } from './category/category';
-import { CategoryService } from './category/category.service';
+import * as _model from '../../shared/models/models';
+import * as _api from '../../shared/services/api';
+import { DataService } from '../../shared/services/data.service';
 
 @Component({
   moduleId: module.id,
   templateUrl: 'service-edit.html'
 })
 export class ServiceEditComponent implements OnInit {
-  categories: Array<Category>;
-  service: Service = new Service();
+  categories: Array<_model.Category>;
+  service: _model.Service = new _model.Service();
   userForm: FormGroup;
   submitted = false;
   isPriceOnApplication: boolean = false;
@@ -33,23 +32,28 @@ export class ServiceEditComponent implements OnInit {
   permissionTitle: string;
 
   constructor(
+    private dataService: DataService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private servicesService: ServicesService,
+    private servicesService: _api.ServiceService,
     private router: Router,
     private notificationService: NotificationService,
     private spinner: NgxSpinnerService,
     private userInfoService: UserInfoService,
-    private categoryService: CategoryService,
+    private categoryService: _api.CategoryService,
   ) {
 
   }
 
   ngOnInit() {
-    this.LoadPermission();
+    this.spinner.show();
+    this.categoryService.getAll().subscribe(response => {
+      this.categories = response;
+      this.spinner.hide();
+    });
 
     this.userForm = this.fb.group({
-      OrganizationId: this.userInfoService.orgInfo.organizationId,
+      OrganizationId: this.userInfoService.currentUser.organizationId,
       ServiceName: ['', Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9 ]*$')])],
       Duration: ['', Validators.compose([Validators.required, Validators.maxLength(2)])],
       DurationType: ['Minutes'],
@@ -73,15 +77,12 @@ export class ServiceEditComponent implements OnInit {
       if (id > 0) this.LoadService(id);
     });
 
-    this.categoryService.getAll(this.userInfoService.orgInfo.organizationId).subscribe((data: any) => {
-      this.categories = data['results'];
-    });
   }
 
   LoadPermission() {
-    this.servicesService.getByCategory('OnlinePermission').subscribe((data: any) => {
-      this.permissions = data['results'];
-    });
+    //this.servicesService.getByCategory('OnlinePermission').subscribe((data: any) => {
+    //  this.permissions = data['results'];
+    //});
   }
 
   onSubmit(formData: any) {
@@ -90,7 +91,7 @@ export class ServiceEditComponent implements OnInit {
       this.spinner.show();
       let service = {
         serviceId: this.id,
-        organizationId: this.userInfoService.orgInfo.organizationId,
+        organizationId: this.userInfoService.currentUser.organizationId,
         serviceName: formData.controls['ServiceName'].value,
         duration: formData.controls['Duration'].value,
         durationType: formData.controls['DurationType'].value,
@@ -107,9 +108,9 @@ export class ServiceEditComponent implements OnInit {
         isOnlineGroupBooking: false,
         isCustomBookableTime: false,
         isDeleted: false
-      };
+      } as _model.Service;
 
-      this.servicesService.postServices(service).subscribe(
+      this.servicesService.create(service).subscribe(
         (data: any) => {
           const successNotification: NotificationProperties = {
             message: 'Service has been save successfully.',
@@ -131,7 +132,7 @@ export class ServiceEditComponent implements OnInit {
   }
 
   LoadService(id) {
-    this.servicesService.getServiceById(id).subscribe((data: any) => {
+    this.servicesService.get(id).subscribe((data: any) => {
       let srv = data['results'][0];
       this.userForm.setValue({
         OrganizationId: srv.organizationId,
