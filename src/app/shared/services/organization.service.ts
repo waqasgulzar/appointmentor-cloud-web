@@ -19,7 +19,7 @@ export class OrganizationService extends RestService<_model.OrganizationUser> {
   }
 
   getUri(): string {
-    return `/api/org`;
+    return `/api/orgs`;
   }
 
   getInstance(): Entity {

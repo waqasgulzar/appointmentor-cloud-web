@@ -12,12 +12,26 @@
       <li><a [routerLink]="['/profile']" routerLinkActive="on">Organisation Proﬁle</a></li>
       <li><a [routerLink]="['/openingtimes']" routerLinkActive="on">Timings & Calendar</a></li>
       <li><a [routerLink]="['/categories']" routerLinkActive="on">Categories & Services</a></li>
-      <li><a [routerLink]="['/resources']" routerLinkActive="on">Resources & Assets</a></li>
-      <li><a [routerLink]="['/asset']" routerLinkActive="on">Inventory & Stocks</a></li>
+      <li><a [routerLink]="['/resources']" routerLinkActive="on">Team & Resources</a></li>
+      <li><a [routerLink]="['/asset']" routerLinkActive="on">Assets, Inventory & Stocks</a></li>
       <li><a [routerLink]="['/task']" routerLinkActive="on">Tasks & Activities </a></li>
+      <li><a [routerLink]="['/general']" routerLinkActive="on">Configurations & Bus: Rules</a></li>
       <li><a [routerLink]="['/account']" routerLinkActive="on">Account Management</a></li>
     </ul>
   </li>
+  <li class="on panel panel-default">
+    <a class="submenu-toggle panel-heading">
+      <h4 class="panel-title"><i class="fa fa-bullhorn"></i>Customer Management</h4>
+      <i class="fr fa fa-angle-down" *ngIf="active!='customers'" (click)="active='customers'"></i>
+      <i class="fr fa fa-angle-up" *ngIf="active=='customers'" (click)="active=''"></i>
+    </a>
+    <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='customers'">
+      <li><a [routerLink]="['/customers']">Profiles & Registrations</a></li>
+      <li><a [routerLink]="['/underProcess']">Customer Billing & Payments</a></li>
+      
+    </ul>
+  </li>
+
   <li class="on panel panel-default">
     <a class="submenu-toggle panel-heading">
       <h4 class="panel-title"><i class="fa fa-bullhorn"></i>Communications</h4>

@@ -40,6 +40,7 @@ export class ServiceEditComponent implements OnInit {
     private notificationService: NotificationService,
     private spinner: NgxSpinnerService,
     private userInfoService: UserInfoService,
+    private lookupService: _api.LookupService,
     private categoryService: _api.CategoryService,
   ) {
 
@@ -77,12 +78,13 @@ export class ServiceEditComponent implements OnInit {
       if (id > 0) this.LoadService(id);
     });
 
+    this.loadPermission();
   }
 
-  LoadPermission() {
-    //this.servicesService.getByCategory('OnlinePermission').subscribe((data: any) => {
-    //  this.permissions = data['results'];
-    //});
+  loadPermission() {
+    this.lookupService.load('OnlinePermission').subscribe((data: any) => {
+      this.permissions = data;
+    });
   }
 
   onSubmit(formData: any) {

@@ -64,7 +64,7 @@ export abstract class RestService<T> {
 
   update(id: number, model: T): Observable<boolean> {
     return this.http
-      .put<T>(environment.apiUrl + this.getUri(), model, {
+      .put<T>(environment.apiUrl + this.getUri() + `?id=${id}`, model, {
         observe: 'response'
       })
       .pipe(

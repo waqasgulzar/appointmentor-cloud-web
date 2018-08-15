@@ -1,137 +1,17 @@
-﻿<!--<ul class="nav navbar-nav">
-  <li>
-    <button type="button" class="btn-u" (click)="refresh();" style="margin-top: 9px; margin-right: 27px;"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;Resources View</button>
-  </li>
-</ul>
-<ul class="nav navbar-nav navbar-right">
-  <li>
-    <button type="button" class="btn-u" (click)="stepper.selectedIndex === 0; AppointmentBooking.show();" style="margin-top:9px;margin-right: 27px;"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add Booking</button>
-  </li>
-</ul>
-
-
-<hr class="appointment-calendar-separator-bar" />-->
-
-<!--<angular2-fullcalendar [options]="calendarOptions" id="myCalendar"></angular2-fullcalendar>-->
-
-<ul class="nav navbar-nav navbar-right">
-  <li>
-    <button type="button" class="btn-u" (click)="stepper.selectedIndex === 0; AppointmentBooking.show();" style="margin-top:9px;margin-right: 27px;"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add Booking</button>
-  </li>
-</ul>
-
-<div class="clear-both"></div>
-
-<div id='calendar'></div>
-
-<app-modal #AppointmentBooking id="appointment-booking-popup">
-  <div class="app-modal-header">
-    Appointment Booking
+﻿<section class="content-wrapper">
+  <div class="col-xs-2">
+    <h4>
+      Appointments
+    </h4>
   </div>
-  <div class="app-modal-body">
-    <mat-horizontal-stepper #stepper md-stretch-steppers="always">
-      <mat-step>
-        <div class="row appointment-booking-popup-step-title">
-          Select a Service
-          <button mat-mini-fab class="popup-close-icon" (click)="AppointmentBooking.hide()"><i class="fa fa-close" aria-hidden="true"></i></button>
-        </div>
-        <div class="appointment-booking-popup-step-content">
-          <div class="col-sm-12">
-            <mat-selection-list>
-              <mat-list-option *ngFor="let serv of services" (click)="setService(serv, stepper)">
-                {{serv.serviceName}}
-              </mat-list-option>
-            </mat-selection-list>
-          </div>
-        </div>
-      </mat-step>
-      <mat-step>
-        <form action="#" id="sky-form2" class="sky-form" novalidate="novalidate" style="border: 1px solid transparent;">
-          <div class="row appointment-booking-popup-step-title">
-            <button mat-mini-fab matStepperPrevious><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-            &nbsp;&nbsp;Select a time
-            <button mat-mini-fab class="popup-close-icon" (click)="AppointmentBooking.hide()"><i class="fa fa-close" aria-hidden="true"></i></button>
-          </div>
-          <div class="appointment-booking-popup-step-content">
-            <div class="col-lg-12">
-              <div class="col-lg-6">
-                <mat-calendar [startAt]="startDate" [selected]="this.appointment.date" (selectedChange)="setAppointmentDate($event)">
-                </mat-calendar>
-                <!--<mat-calendar cdkTrapFocus
-                                  [id]="datepicker.id"
-                                  [ngClass]="datepicker.panelClass"
-                                  [startAt]="datepicker.startAt"
-                                  [startView]="datepicker.startView"
-                                  [minDate]="datepicker._minDate"
-                                  [maxDate]="datepicker._maxDate"
-                                  [dateFilter]="datepicker._dateFilter"
-                                  [headerComponent]="datepicker.calendarHeaderComponent"
-                                  [selected]="datepicker._selected"
-                                  [@fadeInCalendar]="'enter'"
-                                  (selectedChange)="datepicker._select($event)"
-                                  (yearSelected)="datepicker._selectYear($event)"
-                                  (monthSelected)="datepicker._selectMonth($event)"
-                                  (_userSelection)="datepicker.close()">
-                </mat-calendar>-->
-              </div>
-              <div class="col-lg-6" *ngIf="this.appointment.service">
-                <section class="col-md-12">
-
-                  <div class="row">
-                    <section class="col col-6">
-                      <label class="label">Duration</label>
-                      <span class="label label-highlighted">{{this.appointment.service.duration}} minutes</span>
-                    </section>
-                    <section class="col col-6">
-                      <label class="label">Resource</label>
-                      <label class="select">
-                        <select name="resource" [(ngModel)]="appointment.resource" required #resource="ngModel">
-                          <option [ngValue]="null" disabled>Any</option>
-                          <option *ngFor='let item of resources' [ngValue]="item">{{item.resourceName}}</option>
-                        </select>
-                      </label>
-                    </section>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <!--<div *ngIf="appointmentSlotsLoading">
-                        <mat-spinner [diameter]="30"></mat-spinner>
-                      </div>-->
-
-                      <mat-grid-list cols="4" rowHeight="25px">
-                        <mat-grid-tile *ngFor="let item of appointmentSlots" (click)="setAppointmentTime(item)" [ngClass]="{'selected-slot':item.time == appointment.time}" class="appointment-slot">{{item.time}}</mat-grid-tile>
-                      </mat-grid-list>
-                    </div>
-                  </div>
-
-                </section>
-              </div>
-            </div>
-
-          </div>
-          <div class="appointment-booking-popup-step-footer">
-            <button type="submit" (click)="gotoApptParticipant(stepper)" class="btn-u">Next</button>
-          </div>
-        </form>
-      </mat-step>
-      <mat-step>
-        <div class="row appointment-booking-popup-step-title">
-          <button mat-mini-fab matStepperPrevious><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-          &nbsp;&nbsp;Add participants
-          <button mat-mini-fab class="popup-close-icon" (click)="AppointmentBooking.hide()"><i class="fa fa-close" aria-hidden="true"></i></button>
-        </div>
-        <div class="appointment-booking-popup-step-content">
-          <mat-selection-list>
-            <mat-list-option *ngFor="let cust of customers" (click)="setCustomer(cust)">
-              {{cust.firstName}} {{cust.lastName}}
-            </mat-list-option>
-          </mat-selection-list>
-
-        </div>
-        <div class="appointment-booking-popup-step-footer">
-          <button type="button" (click)="AppointmentBooking.hide(); createAppointment()" class="btn-u">Create booking</button>
-        </div>
-      </mat-step>
-    </mat-horizontal-stepper>
+  <div class="col-xs-8"><h3 class="text-center">Aug 15, 2018</h3></div>
+  <div class="col-xs-2">
+    <a class="btn-u" (click)="bookAppointment();">
+      <i class="fa fa-plus"></i>&nbsp;New Appointment
+    </a>
   </div>
-</app-modal>
+  <div>
+    <div class="clear-both"></div>
+    <div id='calendar'></div>
+  </div>
+</section>

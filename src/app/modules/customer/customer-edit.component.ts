@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import * as _model from '../../shared/models/models';
 import * as _api from '../../shared/services/api';
 import { Router, ActivatedRoute } from "@angular/router";
+import { UserInfoService } from '../../shared/services/userInfo.service';
 
 @Component({
   moduleId: module.id,
@@ -26,24 +27,36 @@ export class CustomerEditComponent implements OnInit {
   isEmptySubject: boolean = true;
   isSubjectSend: boolean = false;
   submitted = false;
+  fileToUpload: File = null;
+  formData = new FormData();
+  customerId: number = 0;
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private customerService: _api.CustomerService,
+    private fileService: _api.FilesService,
+    private userInfo: UserInfoService,
     private router: Router) {
     this.LoadCustomers();
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      var id = parseInt(params.id);
+      if (id > 0) {
+        this.customerId = id;
+        this.LoadCustomerById(id);
+      }
+    });
+
     this.custForm = this.fb.group({
+      customerId: [this.customerId],
+      organizationId: [this.userInfo.currentUser.organizationId],
       firstName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
       lastName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
       mobileNumber: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
       contactNumber: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
-      emailAddress: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100), Validators.email])
-      ],
+      emailAddress: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100), Validators.email])],
       twitterUserName: ['', Validators.maxLength(50)],
       gender: ['1'],
       dateOfBirth: ['', Validators.compose([Validators.required, Validators.maxLength(10)])],
@@ -56,15 +69,10 @@ export class CustomerEditComponent implements OnInit {
       firstNameSearch: [''],
       lastNameSearch: [''],
       emailAddressSearch: [''],
-      citySearch: ['']
+      citySearch: [''],
+      profileImage: [''],
     });
 
-    this.ClearFields();
-    this.route.params.subscribe(params => {
-      var id = parseInt(params.id);
-      if (id > 0)
-        this.LoadCustomerById(id);
-    });
   }
 
   fileChange(event: any) {
@@ -76,7 +84,6 @@ export class CustomerEditComponent implements OnInit {
   }
 
   ClearFields() {
-
     this.savebuttonText = "Save";
     this.updatedCustomerId = 0;
     this.removeCustomerId = 0;
@@ -95,7 +102,7 @@ export class CustomerEditComponent implements OnInit {
     this.removeCustomerId = 0;
     this.customerService.get(customerId)
       .subscribe((data: any) => {
-        var obj = data["results"][0];
+        var obj = data[0];
         var genderStatus = obj["gender"] == true ? "1" : "0";
         let dateOfBirth = new Date(obj["dateOfBirth"]);
         this.custForm = this.fb.group({
@@ -204,41 +211,39 @@ export class CustomerEditComponent implements OnInit {
     }
   }
 
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    this.formData.append('file', files[0], files[0].name);
+  }
+
   onSubmit(formData: any) {
     this.submitted = true;
     if (formData.valid) {
-      //console.log(this.customer);
-      var genderStatus = formData.controls["gender"].value == "1" ? true : false;
-      let customer = {
-        customerId: this.updatedCustomerId,
-        organizationId: Number(sessionStorage.getItem("organizationId")),
-        firstName: formData.controls["firstName"].value,
-        lastName: formData.controls["lastName"].value,
-        mobileNumber: formData.controls["mobileNumber"].value,
-        contactNumber: formData.controls["contactNumber"].value,
-        emailAddress: formData.controls["emailAddress"].value,
-        twitterUserName: formData.controls["twitterUserName"].value,
-        gender: genderStatus,
-        dateOfBirth: formData.controls["dateOfBirth"].value,
-        unsubscribed: formData.controls["unsubscribed"].value,
-        addressLine1: formData.controls["addressLine1"].value,
-        addressLine2: formData.controls["addressLine2"].value,
-        city: formData.controls["city"].value,
-        postCode: formData.controls["postCode"].value,
-        profileImage: this.profileImage && this.profileImage.name || '',
-        isDeleted: false
-      } as _model.Customer;
-
-      if (this.updatedCustomerId == 0) {
-        this.customerService.create(customer).subscribe((data: any) => {
-          this.LoadCustomers();
-        });
-      } else {
-        this.customerService.update(this.updatedCustomerId, customer).subscribe((data: any) => {
-          this.LoadCustomers();
+      // Upload Image
+      if (this.formData) {
+        this.fileService.upload(this.formData).subscribe(data => {
+          let fileInfo = data as _model.FileInformation;
+          formData.get('profileImage').setValue(fileInfo.onDiskName);
+          if (this.customerId == 0) {
+            this.customerService.create(formData.value).subscribe((data: any) => {
+              
+            });
+          } else {
+            this.customerService.update(this.customerId, formData.value).subscribe((data: any) => {
+             
+            });
+          }
         });
       }
-      this.ClearFields();
+      else {
+        if (this.customerId == 0) {
+          this.customerService.create(formData.value).subscribe((data: any) => {
+          });
+        } else {
+          this.customerService.update(this.customerId, formData.value).subscribe((data: any) => {
+          });
+        }
+      }
     }
   }
 }

@@ -175,10 +175,10 @@ $cell-color: #000000;
    margin-left: 2em;
 }
 
-.dropdown
-{
-   cursor:pointer;
+.dropdown {
+   cursor: pointer;
 }
+
 .nav-menu__main-sections, .nav-menu__login-registration {
    font-size: 16px;
    width: 100.00%;
@@ -216,6 +216,7 @@ $cell-color: #000000;
    margin-bottom: 10px;
    clear: both;
 }
+
 .table-top-form {
    border: 1px solid #dadada;
    border-bottom: 0;
@@ -358,11 +359,12 @@ $cell-color: #000000;
    color: #333;
    background-color: #f5f5f5;
    border-color: #ddd;
-   cursor:pointer;
+   cursor: pointer;
 }
 
 .panel-group .panel-heading {
    border-bottom: 0;
+   padding: 2px !important;
 }
 
 .nav > li > a {
@@ -379,7 +381,7 @@ $cell-color: #000000;
 .panel-title {
    margin-top: 0;
    margin-bottom: 0;
-   font-size: 15px;
+   font-size: 13px;
    color: inherit;
 }
 
@@ -396,7 +398,8 @@ $cell-color: #000000;
 }
 
 .slideaccordion .panel .panel-collapse li {
-   padding: 2px 15px;
+   padding: 2px 4px;
+   font-size: 13px;
 }
 
 .slideaccordion .panel-collapse a.on {
@@ -411,7 +414,7 @@ $cell-color: #000000;
    cursor: pointer;
    color: #337ab7;
    text-decoration: none;
-   font-size:14px !important;
+   font-size: 14px !important;
 }
 
 #header .menu-login-registration-container {
@@ -642,6 +645,7 @@ select:disabled {
    background: #eaeaea !important;
    cursor: not-allowed !important;
 }
+
 input:disabled {
    background: #eaeaea !important;
    cursor: not-allowed !important;
@@ -654,9 +658,9 @@ input:disabled {
 .toast-error {
    background-color: lightcoral;
 }
-.fa-cx
-{
-   font-size:20px;
+
+.fa-cx {
+   font-size: 20px;
 }
 
 .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
@@ -673,7 +677,83 @@ button, input, select, textarea {
    font-size: 17px;
    line-height: inherit;
 }
+
 .mat-step-header .mat-step-icon {
    background-color: #72c02c;
    color: #fefefe;
+}
+
+.mat-dialog-toolbar-icon {
+   padding: 0 14px;
+}
+
+.mat-dialog-toolbar-spacer {
+   flex: 1 1 auto;
+}
+
+.text-align-right {
+   text-align: right;
+}
+
+.cursor-pointer {
+   cursor: pointer;
+}
+
+.mat-step-header:hover {
+   background-color: #fff !important;
+}
+
+.mat-dialog-container {
+   padding: 0 !important;
+}
+
+.mat-toolbar {
+   background: #c3c3c3;
+}
+
+.mat-horizontal-content-container {
+   padding: 5px;
+}
+
+.provider-content {
+   padding: 5px;
+
+   .name {
+      box-sizing: border-box;
+      color: rgb(0, 35, 75);
+      font-size: 20px;
+      border-bottom: 1px dotted;
+   }
+
+   .address {
+      color: rgb(135, 135, 145);
+   }
+}
+
+.visit-summary {
+   padding: 10px;
+}
+
+.date-display {
+   border-bottom: solid 1px #c3c3c3;
+   margin-bottom: 10px;
+   padding-bottom: 10px;
+
+   .date-navigator {
+      margin-top: 2px;
+   }
+
+   .date {
+      font-size: 15px;
+      padding: 5px;
+      word-wrap: break-word;
+      cursor: pointer;
+      margin-bottom: 5px;
+      margin-left: 16px;
+      color: black;
+   }
+}
+.selected-date {
+   font-weight: bold;
+   border-bottom: solid 2px #72c02c;
 }

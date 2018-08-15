@@ -12,6 +12,7 @@ import { NotificationProperties } from '../../shared/interfaces/NotificationProp
 import { NgxSpinnerService } from 'ngx-spinner';
 import * as _model from '../../shared/models/models';
 import * as _api from '../../shared/services/api';
+import { UserInfoService } from '../../shared/services/userInfo.service';
 
 @Component({
   selector: 'openingtimes-component',
@@ -36,7 +37,8 @@ export class OpeningTimesComponent implements OnInit {
     private openingtimesService: _api.OpeningTimeService,
     private notificationService: NotificationService,
     private spinner: NgxSpinnerService,
-    private router: Router
+    private router: Router,
+    private userInfo: UserInfoService,
   ) { }
   ngOnInit() {
     this.LoadOpeningtimes();
@@ -104,6 +106,9 @@ export class OpeningTimesComponent implements OnInit {
   LoadOpeningtimes() {
     this.openingtimesService.getAll().subscribe((data: any) => {
       this.openingTimes = data;
+      if (!this.openingTimes.length) {
+        this.openingTimes = _api.LookupService.openingTimes(this.userInfo.currentUser.organizationId);
+      }
       this.selected = this.openingTimes.filter(op => op.isOpen === true);
     });
   }

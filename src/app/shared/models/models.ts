@@ -21,3 +21,5 @@ export * from './statistics';
 export * from './user';
 export * from './fileInformation';
 export * from './dataSource';
+export * from './apiCredential';
+export * from './lookup';

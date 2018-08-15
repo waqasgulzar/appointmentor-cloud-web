@@ -1,1 +1,108 @@
-﻿<h1 md-dialog-title class="primary-color">hey title</h1>
+﻿<mat-toolbar>
+  New Appointment
+  <span class="mat-dialog-toolbar-icon"></span>
+  <mat-icon class="mat-dialog-toolbar-spacer text-align-right cursor-pointer" title="Close" (click)="onClose()">clear</mat-icon>
+</mat-toolbar>
+<div md-dialog-actions>
+  <mat-horizontal-stepper #stepper>
+    <mat-step>
+      <ng-template matStepLabel>
+        <span *ngIf="!appointment.service">Select a Service</span>
+        <span *ngIf="appointment.service"> <i>Visit for</i> <b>{{appointment.service.serviceName}}</b></span>
+      </ng-template>
+      <mat-selection-list>
+        <mat-list-option *ngFor="let serv of services" (click)="setService(serv, stepper)">
+          {{serv.serviceName}}
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>
+        <span *ngIf="!appointment.resource">Select a time</span>
+        <span *ngIf="appointment.resource"> <i>Appointment with</i> <b>{{appointment.resource.resourceName}}</b> <i>on</i> <b>{{appointment.date | date:'dd/MM/yyyy'}} {{selectedSlot.time}}</b></span>
+      </ng-template>
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 date-display">
+          <mat-icon class="mat-dialog-toolbar-spacer text-align-right cursor-pointer date-navigator" title="Close" (click)="getDates(-4)">keyboard_arrow_left</mat-icon>
+          <a *ngFor="let d of dates" class="date" (click)="setAppointmentDate(d.date)" [ngClass]="{' selected-date': d.date.toString() == appointment.date.toString() }">
+            {{d.display}}
+          </a>&nbsp;
+            <mat-icon class="mat-dialog-toolbar-spacer text-align-right cursor-pointer date-navigator" title="Close" (click)="getDates(4)">keyboard_arrow_right</mat-icon>
+        </div>
+      </div>
+      <div class="col-xs-12 provider-content" *ngFor="let res of resources">
+        <div class="col-xs-1">
+          <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;f=y" width="30">
+        </div>
+        <div class="col-xs-4">
+          <span class="name">{{res.resourceName}}</span>
+          <br />
+          <span class="address">{{fullAddress(res)}}</span>
+        </div>
+        <div class="col-xs-7">
+          <mat-grid-list cols="4" rowHeight="25px">
+            <mat-grid-tile *ngFor="let item of res.appointmentSlots" (click)="setAppointmentTime(res, item, stepper)" [ngClass]="{'selected-slot':item.id == selectedSlot.id}" class="appointment-slot">{{item.time}}</mat-grid-tile>
+          </mat-grid-list>
+        </div>
+      </div>
+
+      <form class="sky-form" novalidate="novalidate">
+        <div class="appointment-booking-popup-step-content">
+          <div class="col-lg-12 no-padding">
+            <div class="col-lg-4 no-padding">
+              <mat-calendar [startAt]="startDate" [selected]="this.appointment.date" (selectedChange)="setAppointmentDate($event)">
+              </mat-calendar>
+            </div>
+            <div class="col-lg-8" *ngIf="this.appointment.service">
+              <section class="col-md-12 no-padding">
+                <div class="row">
+                  <section class="col col-6 no-padding">
+                    <label class="label">Duration</label>
+                    <span class="label label-highlighted">{{this.appointment.service.duration}} minutes</span>
+                  </section>
+                  <section class="col col-6">
+                    <label class="label">Resource</label>
+                    <label class="select">
+                      <select name="resource" [(ngModel)]="appointment.resource" required #resource="ngModel">
+                        <option [ngValue]="null" disabled>Any</option>
+                        <option *ngFor='let item of resources' [ngValue]="item">{{item.resourceName}}</option>
+                      </select>
+                    </label>
+                  </section>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 no-padding">
+                    <mat-grid-list cols="4" rowHeight="25px">
+                      <mat-grid-tile *ngFor="let item of appointmentSlots" (click)="setAppointmentTime(item)" [ngClass]="{'selected-slot':item.time == appointment.time}" class="appointment-slot">{{item.time}}</mat-grid-tile>
+                    </mat-grid-list>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+        <div class="appointment-booking-popup-step-footer">
+          <button type="submit" (click)="gotoApptParticipant(stepper)" class="btn-u">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Add participants</ng-template>
+      <div class="appointment-booking-popup-step-content">
+        <span class="pull-right">
+          <a class="btn-u" (click)="newCustomer()">
+            <i class="fa fa-plus"></i>&nbsp;Create New
+          </a>
+        </span>
+        <mat-selection-list>
+          <mat-list-option *ngFor="let cust of customers" (click)="setCustomer(cust)">
+            {{cust.firstName}} {{cust.lastName}}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <div class="appointment-booking-popup-step-footer">
+        <button type="button" (click)="onSubmit()" class="btn-u">Create booking</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

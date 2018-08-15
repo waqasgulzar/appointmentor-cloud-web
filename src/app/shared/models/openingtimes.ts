@@ -1,12 +1,14 @@
 import { Entity } from './entity';
 export class Openingtimes extends Entity {
-    openingId?: number;
-    organizationId?: number;
-    dayId?: number;
-    openingTime?: string;
-    closingTime?: string;
-    isOpen?: boolean;
-    isDeleted?: boolean;
+  openingId?: number;
+  organizationId?: number;
+  dayId?: number;
+  openingTime?: string;
+  closingTime?: string;
+  isOpen?: boolean;
+  isDeleted?: boolean;
+
+  
 }
 
 export class Timings extends Entity {
@@ -27,3 +29,4 @@ export class Timings extends Entity {
     }
   }
 }
+

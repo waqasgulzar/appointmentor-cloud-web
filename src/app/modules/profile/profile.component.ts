@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
     private fileService: _api.FilesService,
     private sanitizer: DomSanitizer
   ) { }
+
   fileChangeMicrosite(files: any, microsite: number) {
     if (microsite == 0) {
       this.logoForMarketingPath = files[0].nativeElement;
