@@ -1,12 +1,17 @@
-﻿<dashboard-component></dashboard-component>
-<div class="container" style="text-align:left;">
+﻿<mat-toolbar>
+  New Customer
+  <span class="mat-dialog-toolbar-icon"></span>
+  <mat-icon class="mat-dialog-toolbar-spacer text-align-right cursor-pointer" title="Close" (click)="onClose()">clear</mat-icon>
+</mat-toolbar>
   <div class="row">
     <form method="post" id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(custForm);" [formGroup]="custForm" style="border: 1px solid transparent;">
+      <input type="hidden" formControlName="customerId" />
+      <input type="hidden" formControlName="organizationId" />
       <div class="col-md-12 zero-padding">
         <div class="col-xs-6 col-sm-6 col-md-6">
           <label class="input">
             <i class="icon-append fa fa-user"></i>
-            <input formControlName="firstName" maxlength="50" type="text" placeholder="First Name" required="" >
+            <input formControlName="firstName" maxlength="50" type="text" placeholder="First Name" required="">
           </label>
           <div *ngIf="custForm.invalid && submitted" class="form-error-content">
             <div *ngIf="custForm.controls['firstName'].errors && custForm.controls['firstName'].errors.required">
@@ -17,7 +22,7 @@
         <div class="col-xs-6 col-sm-6 col-md-6">
           <label class="input">
             <i class="icon-append fa fa-user"></i>
-            <input formControlName="lastName" maxlength="50" type="text" placeholder="Last Name" required="" >
+            <input formControlName="lastName" maxlength="50" type="text" placeholder="Last Name" required="">
           </label>
           <div *ngIf="custForm.invalid && submitted" class="form-error-content">
             <div *ngIf="custForm.controls['lastName'].errors && custForm.controls['lastName'].errors.required">
@@ -130,16 +135,15 @@
           <section>
             <label for="file" class="input input-file">
               <div class="button">
-                <input type="file" (change)="fileChange($event)" accept=".png,.jpg,.jpeg" onchange="this.parentNode.nextSibling.value = this.value" />Browse
+                <input type="file" (change)="handleFileInput($event.target.files)" accept=".png,.jpg,.jpeg" onchange="this.parentNode.nextSibling.value = this.value" />Browse
               </div><input type="text" readonly="">
             </label>
           </section>
         </div>
       </div>
       <div class="pull-right">
-        <button type="button" class="btn btn-default" action="action" onclick="window.history.go(-1); return false;">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-default" action="action" (click)="onClose()">Cancel</button>
+        <button type="submit" class="btn btn-u">Save</button>
       </div>
     </form>
   </div>
-</div>

@@ -22,7 +22,7 @@ export class CategoryEditComponent implements OnInit {
   category: _model.Category = new _model.Category();
   userForm: FormGroup;
   submitted = false;
-
+  catId:number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -38,13 +38,17 @@ export class CategoryEditComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      OrganizationId: this.userInfoService.currentUser.organizationId,
-      CategoryName: ['', Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9 ]*$')])],
+      categoryId: [this.catId],
+      organizationId: this.userInfoService.currentUser.organizationId,
+      categoryName: ['', Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9 ]*$')])],
     });
 
     this.route.params.subscribe(params => {
       var id = parseInt(params.id);
-      if (id > 0) this.LoadCategory(id);
+      if (id > 0) {
+        this.catId = id;
+        this.LoadCategory(id);
+      }
     });
 
   }
@@ -53,33 +57,56 @@ export class CategoryEditComponent implements OnInit {
     this.submitted = true;
     if (!formData.invalid) {
       this.spinner.show();
-      this.categoryService.create(formData.value).subscribe(
-        (data: any) => {
-          const successNotification: NotificationProperties = {
-            message: 'Category has been save successfully.',
-            title: 'Category'
-          };
-          this.notificationService.success(successNotification);
-          this.spinner.hide();
-          this.router.navigate(['/categories']);
-        },
-        error => {
-          const errorNotification: NotificationProperties = {
-            message: error.error,
-            title: 'Category'
-          };
-          this.notificationService.error(errorNotification);
-          this.spinner.hide();
-        });
+
+      if (this.catId <= 0) {
+        this.categoryService.create(formData.value).subscribe(
+          (data: any) => {
+            const successNotification: NotificationProperties = {
+              message: 'Category has been save successfully.',
+              title: 'Category'
+            };
+            this.notificationService.success(successNotification);
+            this.spinner.hide();
+            this.router.navigate(['/categories']);
+          },
+          error => {
+            const errorNotification: NotificationProperties = {
+              message: error.error,
+              title: 'Category'
+            };
+            this.notificationService.error(errorNotification);
+            this.spinner.hide();
+          });
+      }
+      else {
+        this.categoryService.update(this.catId, formData.value).subscribe(
+          (data: any) => {
+            const successNotification: NotificationProperties = {
+              message: 'Category has been updated successfully.',
+              title: 'Category'
+            };
+            this.notificationService.success(successNotification);
+            this.spinner.hide();
+            this.router.navigate(['/categories']);
+          },
+          error => {
+            const errorNotification: NotificationProperties = {
+              message: error.error,
+              title: 'Category'
+            };
+            this.notificationService.error(errorNotification);
+            this.spinner.hide();
+          });}
     }
   }
 
   LoadCategory(id) {
     this.categoryService.get(id).subscribe((data: any) => {
-      let cat = data['results'][0];
+      let cat = data[0];
       this.userForm.setValue({
-        OrganizationId: cat.organizationId,
-        CategoryName: cat.serviceName
+        categoryId: cat.categoryId,
+        organizationId: cat.organizationId,
+        categoryName: cat.categoryName
       });
     });
   }

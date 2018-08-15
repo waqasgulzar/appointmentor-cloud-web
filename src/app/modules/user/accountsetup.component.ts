@@ -32,15 +32,16 @@ export class AccountSetupComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.orgId = this.userInfo.currentUser.organizationId;
-    this.email = this.userInfo.currentUser.emailAddress;
+    let userInfo = JSON.parse(localStorage.getItem('currentUser'));
+    this.orgId = userInfo.organizationID;
+    this.email = userInfo.emailAddress;
     this.userForm = this.fb.group({
       organizationId: [this.orgId],
       firstName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
       lastName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
       companyName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
       phoneNumber: ['', Validators.compose([Validators.required, Validators.maxLength(12)])],
-      emailAddress: [{value:this.email, disabled: true}],
+      emailAddress: [this.email],
       password: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(15)])],
       timeZoneId: [''],
       currencyId: [''],
@@ -51,7 +52,7 @@ export class AccountSetupComponent implements OnInit {
   onSubmit(userForm: FormGroup) {
     this.submitted = true;
     if (!userForm.invalid) {
-      this.spinner.show();
+      //this.spinner.show();
       this.orgService.update(this.orgId, userForm.value).subscribe((data: any) => {
         this.authenticateService.login(userForm.value['emailAddress'], userForm.value['password']).subscribe(result => {
           if (result) {

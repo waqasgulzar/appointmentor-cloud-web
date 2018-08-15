@@ -1,171 +1,121 @@
-﻿//import { Component, OnInit } from '@angular/core';
-//import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-//import { AssetService } from '.././asset.service';
-//import { Assetservice } from '.././assetservice';
-//import { Router, ActivatedRoute } from "@angular/router";
-//import { ResourcesService } from '../../resources/resources.service';
-//import { environment } from '../../../environments/environment';
-//import { Asset } from '../asset';
-//import { Service } from '../../services/service';
-//const apiUrl = environment.apiUrl;
-//@Component({
-//  moduleId: module.id,
-//  templateUrl: 'asset-edit.html'
-//})
-//export class ResourceEditComponent implements OnInit {
-//  assets: Asset[];
-//  asset: Asset;
-//  services: Service[];
-//  selectedServiceIds: number[] = [];
-//  assetservices: Assetservice[];
-//  assetservice: Assetservice;
-//  submitted = false;
-//  userForm: FormGroup;
-//  savebuttonText: string = "Save";
-//  removeAssetId: number = 0;
-//  updatedAssetId: number = 0;
-//  isCheckAll: boolean = false;
-//  constructor(private fb: FormBuilder, private route: ActivatedRoute, private assetService: AssetService, private resourcesService: ResourcesService, private router: Router) {
-//    if (sessionStorage.getItem("organizationId") == null) {
-//      this.router.navigate(['']);
-//    }
-//    this.LoadAssets();
-//  }
-//  ngOnInit() {
-//    this.userForm = this.fb.group({
-//      name: ['', Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9 ]*$')])],
-//      quantity: ['', Validators.compose([Validators.required, Validators.maxLength(4), Validators.minLength(1), Validators.min(0), Validators.max(1000)])],
-//    });
+﻿import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from "@angular/router";
+import * as _model from '../../../shared/models/models';
+import * as _api from '../../../shared/services/api';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { NotificationProperties } from '../../../shared/interfaces/NotificationProperties';
+import { UserInfoService } from '../../../shared/services/userInfo.service';
 
-//    this.ClearFields();
-//    this.route.params.subscribe(params => {
-//      var id = parseInt(params.id);
-//      if (id > 0)
-//        this.LoadAssetById(id);
-//    });
-//  }
 
-//  onSubmit(formData: any) {
-//    this.submitted = true;
-//    if (!formData.invalid) {
-//      this.asset = {
-//        assetId: this.updatedAssetId,
-//        organizationId: Number(sessionStorage.getItem("organizationId")),
-//        name: formData.controls["name"].value,
-//        quantity: formData.controls["quantity"].value,
-//        isDeleted: false
-//      };
-//      if (this.updatedAssetId == 0) {
-//        this.assetService.postAssets(apiUrl, this.asset).subscribe((data: any) => {
-//          var obj = data["results"][0];
-//          this.router.navigate(['/asset']);
-//        });
-//      }
-//      else {
-//        this.assetService.post(apiUrl, this.updatedAssetId).subscribe((data: any) => {
-//          this.assetService.putAssets(apiUrl, this.updatedAssetId, this.asset).subscribe((data: any) => {
-//            this.router.navigate(['/asset']);
-//          });
-//        });
-//      }
-//      this.assetservices = null;
-//      this.ClearFields();
-//    }
-//  }
-//  LoadServices() {
-//    this.resourcesService.getServices(apiUrl, Number(sessionStorage.getItem("organizationId")))
-//      .subscribe((data: any) => {
-//        this.services = data["results"];
-//      });
-//  }
-//  LoadAssets() {
-//    this.assetService.get(apiUrl, Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
-//      this.assets = data["results"];
-//    });
-//  }
-//  ClearFields() {
-//    this.savebuttonText = "Save";
-//    this.removeAssetId = 0;
-//    this.LoadServices();
-//  }
-//  isServiceChecked(serviceId: number) {
-//    if (this.assetservices != null) {
-//      if (this.assetservices.find(d => d.serviceId === serviceId && d.isDeleted == false)) {
-//        return true;
-//      }
-//      else {
-//        return false;
-//      }
-//    }
-//    else {
-//      return false;
-//    }
-//  }
-//  LoadAssetById(assetId: number) {
-//    this.assetservices = null;
-//    this.selectedServiceIds = [];
-//    this.isCheckAll = false;
-//    this.savebuttonText = "Update";
-//    this.updatedAssetId = assetId;
-//    this.removeAssetId = 0;
-//    this.LoadServices();
-//    this.assetService.getAssetById(apiUrl, assetId)
-//      .subscribe((data: any) => {
-//        console.log(data);
-//        var obj = data["results"][0];
-//        this.assetservices = obj["assetservice"];
-//        this.selectedServiceIds = [];
-//        for (var i = 0; i < obj["assetservice"].length; i++) {
-//          this.selectedServiceIds.push(obj["assetservice"][i]["serviceId"]);
-//        }
-//        this.userForm = this.fb.group({
-//          name: [obj["name"], Validators.compose([Validators.required, Validators.maxLength(50)])],
-//          quantity: [obj["quantity"], Validators.compose([Validators.required, Validators.maxLength(7)])]
-//        });
-//      });
-//  }
 
-//  CheckAll() {
-//    this.isCheckAll = true;
-//    this.selectedServiceIds = [];
-//    this.resourcesService.getServices(apiUrl, Number(sessionStorage.getItem("organizationId")))
-//      .subscribe((data: any) => {
-//        for (var i = 0; i < data["results"].length; i++) {
-//          this.selectedServiceIds.push(data["results"][i]["serviceId"]);
-//        }
-//        console.log(this.selectedServiceIds);
-//      });
-//  }
-//  UncheckAll() {
-//    this.selectedServiceIds = [];
-//    this.isCheckAll = false;
-//    this.assetservices = null;
-//    this.LoadServices();
-//  }
-//  onChange(serviceId: number, event: any) {
-//    if (!event.target.checked) {
-//      if (this.selectedServiceIds.find(d => d === serviceId)) {
-//        let index = this.selectedServiceIds.findIndex(d => d == serviceId);
-//        this.selectedServiceIds.splice(index, 1);
-//      }
-//      console.log("remove it" + serviceId);
-//    }
-//    else {
-//      if (!this.selectedServiceIds.find(d => d === serviceId)) {
-//        this.selectedServiceIds.push(serviceId);
-//        console.log("add it" + serviceId);
-//      }
-//    }
-//    console.log(this.selectedServiceIds);
-//  }
-//  AssetIdForDelete(assetId: number) {
-//    this.removeAssetId = assetId;
-//    console.log(this.removeAssetId);
-//  }
-//  RemoveAsset() {
-//    this.assetService.delete(apiUrl, this.removeAssetId).subscribe((data: any) => {
-//      this.LoadAssets();
-//      this.ClearFields();
-//    });
-//  }
-//}
+@Component({
+    selector: 'resources-edit-component',
+    moduleId: module.id,
+    templateUrl: 'resource-edit.html'
+})
+export class ResourceEditComponent implements OnInit {
+    resourceId: number = 0;
+    submitted = false;
+    resource: _model.Resource = new _model.Resource();
+    userForm: FormGroup;
+
+    constructor(
+        private fb: FormBuilder,
+        private route: ActivatedRoute,
+        private resourceService: _api.ResourceService,
+        private notificationService: NotificationService,
+        private spinner: NgxSpinnerService,
+        private userInfo: UserInfoService,
+        private router: Router) {
+
+    }
+
+    ngOnInit() {
+        this.userForm = this.fb.group({
+            resourceId: [this.resourceId],
+            organizationId: [this.userInfo.currentUser.organizationId],
+            resourceName: ['', [Validators.required, Validators.maxLength(500)]],
+            emailAddress: ['', [Validators.required, Validators.email]],
+            addressLine1: ['', [Validators.required, Validators.maxLength(500)]],
+            addressLine2: ['', [Validators.required, Validators.maxLength(500)]],
+            city: ['', [Validators.required]],
+            postcode: ['', [Validators.required]],
+            color: [''],
+        });
+
+        this.route.params.subscribe(params => {
+            var id = parseInt(params.id);
+            if (id > 0) {
+                this.resourceId = id;
+                this.loadData();
+            }
+        });
+    }
+
+    loadData() {
+        this.resourceService.get(this.resourceId).subscribe((data: any) => {
+            let resource = data[0] as _model.Resource;
+            this.userForm.setValue({
+                resourceId: resource.resourceId,
+                organizationId: this.userInfo.currentUser.organizationId,
+                resourceName: resource.resourceName,
+                emailAddress: resource.emailAddress,
+                addressLine1: resource.addressLine1,
+                addressLine2: resource.addressLine2,
+                city: resource.city,
+                postcode: resource.postcode,
+                color: resource.color
+            });
+        });
+    }
+
+    onSubmit(formData: FormGroup) {
+        this.submitted = true;
+        if (!formData.invalid) {
+
+            this.spinner.show();
+            if (this.resourceId == 0) {
+                this.resourceService.create(formData.value).subscribe(
+                    (data: any) => {
+                        const successNotification: NotificationProperties = {
+                            message: 'Resource has been created successfully.',
+                            title: 'Resources'
+                        };
+                        this.notificationService.success(successNotification);
+                        this.spinner.hide();
+                        this.router.navigate(['/resources']);
+                    },
+                    error => {
+                        this.spinner.hide();
+                        const errorNotification: NotificationProperties = {
+                            message: error.error,
+                            title: 'Resources'
+                        };
+                        this.notificationService.error(errorNotification);
+                    });
+            }
+            else {
+                this.resourceService.update(this.resourceId, formData.value).subscribe((data: any) => {
+                    const successNotification: NotificationProperties = {
+                        message: 'Resource has been updated successfully.',
+                        title: 'Resources'
+                    };
+                    this.notificationService.success(successNotification);
+                    this.spinner.hide();
+                    this.router.navigate(['/resources']);
+                },
+                    error => {
+                        this.spinner.hide();
+                        const errorNotification: NotificationProperties = {
+                            message: error.error,
+                            title: 'Resources'
+                        };
+                        this.notificationService.error(errorNotification);
+                    });
+            }
+        }
+    }
+
+}

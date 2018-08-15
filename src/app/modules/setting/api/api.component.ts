@@ -1,20 +1,24 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validator } from '@angular/forms';
+import * as _model from '../../../shared/models/models';
+import * as _api from '../../../shared/services/api';
 import { Router } from '@angular/router';
+
 @Component({
   moduleId: module.id,
   templateUrl: 'api.html'
 })
 export class ApiComponent implements OnInit {
-  constructor(private router: Router) {
-    if (sessionStorage.getItem('organizationId') == null) {
-      this.router.navigate(['']);
-    }
+  apiCredentials: _model.ApiCredential = new _model.ApiCredential();
+  constructor(
+    private router: Router,
+    private profileService: _api.ProfileService
+  ) {
+
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.profileService.getCredentials().subscribe(response => {
+      this.apiCredentials = response;
+    });
+  }
 }

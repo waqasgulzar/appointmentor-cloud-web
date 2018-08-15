@@ -17,3 +17,8 @@ export class Appointment extends Entity {
     createdOn?: Date;
     modifiedOn?: Date;
 }
+
+export class AppointmentSlot {
+  id: string;
+  time: string;
+}

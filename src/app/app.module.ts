@@ -71,101 +71,12 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import 'rxjs/Rx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule
-} from '@angular/material';
-import { ChargeComponent } from './modules/billing/charge.component';
-import { ReceiptComponent } from './modules/billing/receipt.component';
-import { AssetEditComponent } from './modules/asset/asset-edit/asset-edit.component';
-import { CustomerEditComponent } from './modules/customer/customer-edit.component';
-import { RouterLinkActive } from './shared/directives/routerLinkActive.directive';
-import { UnderProcessComponent } from './shared/underProcess/underProcess.component';
-import { NavTopBarComponent } from './nav/topBar/navTopBar.component';
-import { AppLayoutComponent } from './_layout/app-layout/app-layout.component';
-import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component';
-import { AppHeaderComponent } from './_layout/app-header/app-header.component';
-import { SiteHeaderComponent } from './_layout/site-header/site-header.component';
-import { SiteFooterComponent } from './_layout/site-footer/site-footer.component';
-import { ResourceAssetManagerComponent } from './modules/resource-asset-manager/resource-asset-manager.component';
-import {
-  ModalModule,
-  BsDatepickerModule,
-  BsDropdownModule,
-  TooltipModule
-} from 'ngx-bootstrap';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { NotificationService } from './shared/services/notification.service';
-import { UserInfoService } from './shared/services/userInfo.service';
-import { ServiceEditComponent } from './modules/services/service.edit.component';
-import { RequiredIfDirective } from './shared/directives/required-if.directive';
-import { CategoriesComponent } from './modules/services/category/categories.component';
-import { CategoryEditComponent } from './modules/services/category/category-edit.component';
-
-import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.component';
-import { AppointmentorAuthInterceptor } from './shared/interceptors/auth.interceptors';
-import { ErrorHandlerService } from './shared/services/error-handler.service';
-import * as _api from './shared/services/api';
-import { AuthGuardService } from './shared/services/auth-guard.service';
-import { DataService } from './shared/services/data.service';
-
-
-
-const ROUTER_DIRECTIVES = [RouterLinkActive];
-
-@NgModule({
-  imports: [
-    LoggerModule.forRoot({ level: NgxLoggerLevel.DEBUG }),
-   
-    HttpClientModule,
-    NgxSpinnerModule,
-    TagInputModule,
-    ModalModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    TooltipModule.forRoot(),
-    BrowserAnimationsModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
     MatChipsModule,
-    MatStepperModule,
     MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
@@ -187,132 +98,223 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     MatSlideToggleModule,
     MatSnackBarModule,
     MatSortModule,
+    MatStepperModule,
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,
-    NgxDatatableModule,
-    ToastrModule.forRoot({ preventDuplicates: true }),
-    NgxEditorModule 
-  ],
-  declarations: [
-    ROUTER_DIRECTIVES,
-    AppLayoutComponent,
-    SiteLayoutComponent,
-    AppHeaderComponent,
-    SiteHeaderComponent,
-    SiteFooterComponent,
-    AppComponent,
-    ModalComponent,
-    HomeComponent,
-    LookupComponent,
-    UserComponent,
-    AccountSetupComponent,
-    OpeningTimesComponent,
-    ResourcesComponent,
-    ServicesComponent,
-    CategoriesComponent,
-    CategoryEditComponent,
-    LoginComponent,
-    DashboardComponent,
-    ForgotComponent,
-    ResetComponent,
-    LogoutComponent,
-    CustomerComponent,
-    AppointmentComponent,
-    UserAccountComponent,
-    TaskComponent,
-    AssetComponent,
-    ProfileComponent,
-    GeneralComponent,
-    CustomerSettingComponent,
-    CustomerSettingDetailComponent,
-    UserSettingComponent,
-    UserSettingDetailComponent,
-    EmailSettingComponent,
-    EmailSettingDetailComponent,
-    CustomerDetailComponent,
-    SMSSettingComponent,
-    BookingQuestionComponent,
-    BookingQuestionDetailComponent,
-    OnlineBookingSettingComponent,
-    MarkettingComponent,
-    SupportComponent,
-    CompaignComponent,
-    NotificationComponent,
-    BusinessReportComponent,
-    CustomerReportComponent,
-    ResourceReportComponent,
-    ServiceReportComponent,
-    ReportsComponent,
-    NavbarComponent,
-    NavTopBarComponent,
-    BillingComponent,
-    StockComponent,
-    MonthlyOverviewComponent,
-    PaymenthistoryComponent,
-    ReviewsComponent,
-    BookingappsComponent,
-    ApiComponent,
-    CalendersyncComponent,
-    WebhooksComponent,
-    MicrositeComponent,
-    FreeagentComponent,
-    EposComponent,
-    PaymentsComponent,
-    AppointmentBookingComponent,
-    ChargeComponent,
-    ReceiptComponent,
-    AssetEditComponent,
-    CustomerEditComponent,
-    UnderProcessComponent,
-    ResourceAssetManagerComponent,
-    ServiceEditComponent,
-    RequiredIfDirective,
-    WelcomePackComponent
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AppointmentorAuthInterceptor,
-      multi: true
-    },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
-    ErrorHandlerService,
-    //LoginService,
-    NotificationService,
-    UserInfoService,
-    _api.AuthenticationService,
-    AuthGuardService,
-    _api.AppointmentService,
-    _api.AssetService,
-    _api.AssetServiceService,
-    _api.BookingQuestionService,
-    _api.CategoryService,
-    _api.CustomerService,
-    _api.CustomerSettingService,
-    DataService,
-    _api.EmailSettingService,
-    _api.FilesService,
-    _api.ForgotPasswordService,
-    _api.LookupService,
-    _api.OnlineAppointmentBookingSettingsService,
-    _api.OpeningTimeService,
-    _api.OrganizationService,
-    _api.PaymentService,
-    _api.ProfileService,
-    _api.ResetPasswordService,
-    _api.ResourceService,
-    _api.ServiceService,
-    _api.ServiceResourceService,
-    _api.SmsSettingService,
-    _api.TaskService,
-    _api.UserService,
-    _api.UserSettingService,
-    _api.ValidationService
-  ],
-  entryComponents: [AppointmentBookingComponent],
-  bootstrap: [AppComponent],
-  exports: ROUTER_DIRECTIVES
+    MatTooltipModule
+} from '@angular/material';
+import { ChargeComponent } from './modules/billing/charge.component';
+import { ReceiptComponent } from './modules/billing/receipt.component';
+import { AssetEditComponent } from './modules/asset/asset-edit/asset-edit.component';
+import { CustomerEditComponent } from './modules/customer/customer-edit.component';
+import { RouterLinkActive } from './shared/directives/routerLinkActive.directive';
+import { UnderProcessComponent } from './shared/underProcess/underProcess.component';
+import { NavTopBarComponent } from './nav/topBar/navTopBar.component';
+import { AppLayoutComponent } from './_layout/app-layout/app-layout.component';
+import { SiteLayoutComponent } from './_layout/site-layout/site-layout.component';
+import { AppHeaderComponent } from './_layout/app-header/app-header.component';
+import { SiteHeaderComponent } from './_layout/site-header/site-header.component';
+import { SiteFooterComponent } from './_layout/site-footer/site-footer.component';
+import { ResourceAssetManagerComponent } from './modules/resource-asset-manager/resource-asset-manager.component';
+import {
+    ModalModule,
+    BsDatepickerModule,
+    BsDropdownModule,
+    TooltipModule
+} from 'ngx-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NotificationService } from './shared/services/notification.service';
+import { UserInfoService } from './shared/services/userInfo.service';
+import { ServiceEditComponent } from './modules/services/service.edit.component';
+import { RequiredIfDirective } from './shared/directives/required-if.directive';
+import { CategoriesComponent } from './modules/services/category/categories.component';
+import { CategoryEditComponent } from './modules/services/category/category-edit.component';
+
+import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.component';
+import { AppointmentorAuthInterceptor } from './shared/interceptors/auth.interceptors';
+import { ErrorHandlerService } from './shared/services/error-handler.service';
+import * as _api from './shared/services/api';
+import { AuthGuardService } from './shared/services/auth-guard.service';
+import { DataService } from './shared/services/data.service';
+import { ResourceEditComponent } from './modules/resources/resource-edit/resource-edit.component';
+
+
+
+const ROUTER_DIRECTIVES = [RouterLinkActive];
+
+@NgModule({
+    imports: [
+        LoggerModule.forRoot({ level: NgxLoggerLevel.DEBUG }),
+
+        HttpClientModule,
+        NgxSpinnerModule,
+        TagInputModule,
+        ModalModule.forRoot(),
+        BsDatepickerModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        TooltipModule.forRoot(),
+        BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+
+        MatAutocompleteModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatChipsModule,
+        MatStepperModule,
+        MatDatepickerModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatRadioModule,
+        MatRippleModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatSortModule,
+        MatTableModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        NgxDatatableModule,
+        ToastrModule.forRoot({ preventDuplicates: true }),
+        NgxEditorModule
+    ],
+    declarations: [
+        ROUTER_DIRECTIVES,
+        AppLayoutComponent,
+        SiteLayoutComponent,
+        AppHeaderComponent,
+        SiteHeaderComponent,
+        SiteFooterComponent,
+        AppComponent,
+        ModalComponent,
+        HomeComponent,
+        LookupComponent,
+        UserComponent,
+        AccountSetupComponent,
+        OpeningTimesComponent,
+        ResourcesComponent,
+        ResourceEditComponent,
+        ServicesComponent,
+        CategoriesComponent,
+        CategoryEditComponent,
+        LoginComponent,
+        DashboardComponent,
+        ForgotComponent,
+        ResetComponent,
+        LogoutComponent,
+        CustomerComponent,
+        AppointmentComponent,
+        UserAccountComponent,
+        TaskComponent,
+        AssetComponent,
+        ProfileComponent,
+        GeneralComponent,
+        CustomerSettingComponent,
+        CustomerSettingDetailComponent,
+        UserSettingComponent,
+        UserSettingDetailComponent,
+        EmailSettingComponent,
+        EmailSettingDetailComponent,
+        CustomerDetailComponent,
+        SMSSettingComponent,
+        BookingQuestionComponent,
+        BookingQuestionDetailComponent,
+        OnlineBookingSettingComponent,
+        MarkettingComponent,
+        SupportComponent,
+        CompaignComponent,
+        NotificationComponent,
+        BusinessReportComponent,
+        CustomerReportComponent,
+        ResourceReportComponent,
+        ServiceReportComponent,
+        ReportsComponent,
+        NavbarComponent,
+        NavTopBarComponent,
+        BillingComponent,
+        StockComponent,
+        MonthlyOverviewComponent,
+        PaymenthistoryComponent,
+        ReviewsComponent,
+        BookingappsComponent,
+        ApiComponent,
+        CalendersyncComponent,
+        WebhooksComponent,
+        MicrositeComponent,
+        FreeagentComponent,
+        EposComponent,
+        PaymentsComponent,
+        AppointmentBookingComponent,
+        ChargeComponent,
+        ReceiptComponent,
+        AssetEditComponent,
+        CustomerEditComponent,
+        UnderProcessComponent,
+        ResourceAssetManagerComponent,
+        ServiceEditComponent,
+        RequiredIfDirective,
+        WelcomePackComponent
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AppointmentorAuthInterceptor,
+            multi: true
+        },
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        ErrorHandlerService,
+        //LoginService,
+        NotificationService,
+        UserInfoService,
+        _api.AuthenticationService,
+        AuthGuardService,
+        _api.AppointmentService,
+        _api.AssetService,
+        _api.AssetServiceService,
+        _api.BookingQuestionService,
+        _api.CategoryService,
+        _api.CustomerService,
+        _api.CustomerSettingService,
+        DataService,
+        _api.EmailSettingService,
+        _api.FilesService,
+        _api.ForgotPasswordService,
+        _api.LookupService,
+        _api.OnlineAppointmentBookingSettingsService,
+        _api.OpeningTimeService,
+        _api.OrganizationService,
+        _api.PaymentService,
+        _api.ProfileService,
+        _api.ResetPasswordService,
+        _api.ResourceService,
+        _api.ServiceService,
+        _api.ServiceResourceService,
+        _api.SmsSettingService,
+        _api.TaskService,
+        _api.UserService,
+        _api.UserSettingService,
+        _api.ValidationService
+    ],
+    entryComponents: [AppointmentBookingComponent],
+    bootstrap: [AppComponent],
+    exports: ROUTER_DIRECTIVES
 })
-export class AppModule {}
+export class AppModule { }

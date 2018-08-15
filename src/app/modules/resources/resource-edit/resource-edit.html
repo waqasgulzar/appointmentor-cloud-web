@@ -1,68 +1,110 @@
-﻿<dashboard-component></dashboard-component>
-<div class="container" style="text-align:left;">
-  <div class="row">
-    <header>Create Assets</header>
-    <form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" id="sky-form3" class="sky-form">
-      <section>
-        <div class="wizard">
-          <div class="tab-content">
-            <fieldset>
-              <div class="row">
-                <section class="col col-6">
-                  <label class="label">Name*</label>
-                  <label class="input">
-                    <i class="icon-append fa fa-user"></i>
-                    <input type="text" formControlName="name">
-                  </label>
-                  <div class="form-error-content" *ngIf="submitted">
-                    <span *ngIf="userForm.get('name').errors?.required">
-                      Asset name is required
-                    </span>
-                    <span *ngIf="userForm.get('name').errors?.pattern">
-                      Asset name is invalid
-                    </span>
-                    <span *ngIf="userForm.get('name').errors?.maxlength">
-                      Asset name can not more than 50 characters.
-                    </span>
-                  </div>
-                </section>
-                <section class="col col-6">
-                  <label class="label">Quantity</label>
-                  <label class="input">
-                    <i class="icon-append fa fa-at"></i>
-                    <input type="number" formControlName="quantity" maxlength="5">
-                  </label>
-                  <div class="form-error-content" *ngIf="submitted">
-                    <span *ngIf="userForm.get('quantity').errors?.required">
-                      Quantity required
-                    </span>
-                    <span *ngIf="userForm.get('quantity').errors?.min">
-                      Quantity can not be less than 0.
-                    </span>
-                    <span *ngIf="userForm.get('quantity').errors?.max">
-                      Quantity can not be more than 1000.
-                    </span>
-                  </div>
-                </section>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  Services that require this asset to be available<span class="pull-right"><a (click)="CheckAll()" style="cursor:pointer;">Check All</a>&nbsp;&nbsp;<a (click)="UncheckAll()" style="cursor:pointer;">Uncheck All</a></span>
-                </div>
-                <div class="panel-body">
-                  <div align="left" class="panel panel-default col-md-12" style="padding-bottom:15px;padding-top:12px;">
-                    <label class="checkbox" *ngFor="let item of services">{{item.serviceName}}&nbsp;<input (change)="onChange(item.serviceId, $event)" [checked]="isCheckAll || isServiceChecked(item.serviceId)" type="checkbox" value="{{item.serviceId}}"><i></i></label>
-                  </div>
-                </div>
-              </div>
-              <div class="pull-right">
-                <button type="button" class="btn btn-default" action="action" onclick="window.history.go(-1); return false;">Cancel</button>
-                <button type="submit" class="btn-u">Save</button>
-              </div>
-            </fieldset>
+﻿
+<h3>Create Resource</h3>
+
+<form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" class="sky-form">
+  <input type="hidden" formControlName="resourceId" />
+  <input type="hidden" formControlName="organizationId" />
+  <fieldset>
+    <div class="row">
+      <section class="col col-6">
+        <label class="label required">Name</label>
+        <label class="input">
+          <i class="icon-append fa fa-user"></i>
+          <input type="text" formControlName="resourceName">
+        </label>
+        <div class="form-error-content" *ngIf="submitted">
+          <span *ngIf="userForm.get('resourceName').errors?.required">
+            Resource name is required
+          </span>
+          <span *ngIf="userForm.get('resourceName').errors?.pattern">
+            Resource name is invalid
+          </span>
+          <span *ngIf="userForm.get('resourceName').errors?.maxlength">
+            Resource name can not more than 50 characters.
+          </span>
+        </div>
+      </section>
+
+      <section class="col col-6">
+        <label class="label required">Email</label>
+        <label class="input">
+          <i class="icon-append fa fa-at"></i>
+          <input type="email" formControlName="emailAddress">
+        </label>
+        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+          <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
+            Email is required
+          </div>
+          <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.email">
+            Email is invalid
           </div>
         </div>
       </section>
-    </form>
-  </div>
-</div>
+    </div>
+
+    <div class="row">
+      <section class="col col-6">
+        <label class="label required">Address 1</label>
+        <label class="input">
+          <i class="icon-append fa fa-building"></i>
+          <input formControlName="addressLine1" type="text" maxlength="50" class="form-control" placeholder="Enter House/Office">
+        </label>
+        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+          <div *ngIf="userForm.controls['addressLine1'].errors && userForm.controls['addressLine1'].errors.required">
+            Address is required
+          </div>
+        </div>
+      </section>
+
+      <section class="col col-6">
+        <label class="label">Address 2</label>
+        <label class="input">
+          <i class="icon-append fa fa-building"></i>
+          <input formControlName="addressLine2" type="text" maxlength="50" class="form-control" placeholder="Enter Street Name">
+        </label>
+      </section>
+    </div>
+
+    <div class="row">
+      <section class="col col-6">
+        <label class="label required">City</label>
+        <label class="input">
+          <i class="icon-append fa fa-building"></i>
+          <input formControlName="city" type="text" maxlength="50" class="form-control" placeholder="Enter City Name">
+        </label>
+        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+          <div *ngIf="userForm.controls['city'].errors && userForm.controls['city'].errors.required">
+            City is required
+          </div>
+        </div>
+      </section>
+
+      <section class="col col-6">
+        <label class="label required">Postcode</label>
+        <label class="input">
+          <i class="icon-append fa fa-area-chart"></i>
+          <input formControlName="postcode" type="text" maxlength="50" class="form-control" placeholder="Enter Postcode Name">
+        </label>
+        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+          <div *ngIf="userForm.controls['postcode'].errors && userForm.controls['postcode'].errors.required">
+            Postcode is required
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="row">
+      <label class="label">Color (To show inside appointment calendar)</label>
+      <label class="input">
+        <div class="col-1">
+          <input formControlName="color" type="color">
+        </div>
+      </label>
+    </div>
+
+    <div class="pull-right">
+      <button type="button" class="btn btn-default" action="action" onclick="window.history.go(-1); return false;">Cancel</button>
+      <button type="submit" class="btn-u">Save</button>
+    </div>
+  </fieldset>
+</form>

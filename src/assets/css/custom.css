@@ -882,14 +882,6 @@ select {
   color: #fff;
 }
 
-.fc-event, .fc-event-dot {
-  background-color: #72c02c !important;
-}
-
-.fc-event {
-  border-color: #72c02c !important;
-}
-
 .fc-time-grid-event .fc-time {
   font-size: 20px !important;
 }

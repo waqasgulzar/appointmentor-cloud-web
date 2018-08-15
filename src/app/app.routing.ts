@@ -63,115 +63,118 @@ import { CategoriesComponent } from './modules/services/category/categories.comp
 import { CategoryEditComponent } from './modules/services/category/category-edit.component';
 import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.component';
 import { AuthGuardService as AuthGuard } from './shared/services/auth-guard.service';
+import { ResourceEditComponent } from './modules/resources/resource-edit/resource-edit.component';
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot([
-      //Site routes goes here
-      {
-        path: '',
-        component: SiteLayoutComponent,
-        children: [
-          { path: '', component: HomeComponent, pathMatch: 'full' },
-          { path: 'home', component: HomeComponent },
-          { path: 'login', component: LoginComponent },
-          { path: 'registration', component: UserComponent },
-          { path: 'accountsetup', component: AccountSetupComponent },
-          { path: 'forgot', component: ForgotComponent },
-          //{ path: 'test/:id', component: AboutComponent }
-        ]
-      },
+    imports: [
+        RouterModule.forRoot([
+            //Site routes goes here
+            {
+                path: '',
+                component: SiteLayoutComponent,
+                children: [
+                    { path: '', component: HomeComponent, pathMatch: 'full' },
+                    { path: 'home', component: HomeComponent },
+                    { path: 'login', component: LoginComponent },
+                    { path: 'registration', component: UserComponent },
+                    { path: 'accountsetup', component: AccountSetupComponent },
+                    { path: 'forgot', component: ForgotComponent },
+                    //{ path: 'test/:id', component: AboutComponent }
+                ]
+            },
 
-      // App routes goes here here
-      {
-        canActivate: [AuthGuard], 
-        path: '',
-        component: AppLayoutComponent,
-        children: [
-          { path: 'dashboard', component: DashboardComponent },
-          { path: 'openingtimes', component: OpeningTimesComponent },
-          { path: 'resources', component: ResourceAssetManagerComponent },
-          { path: 'asset', component: AssetComponent },
-          { path: 'asset/:id', component: AssetEditComponent },
+            // App routes goes here here
+            {
+                canActivate: [AuthGuard],
+                path: '',
+                component: AppLayoutComponent,
+                children: [
+                    { path: 'dashboard', component: DashboardComponent },
+                    { path: 'openingtimes', component: OpeningTimesComponent },
+                    { path: 'resources', component: ResourceAssetManagerComponent },
+                    { path: 'resource/:id', component: ResourceEditComponent },
 
-          { path: 'services', component: ServicesComponent },
-          { path: 'service/:id', component: ServiceEditComponent },
+                    { path: 'asset', component: AssetComponent },
+                    { path: 'asset/:id', component: AssetEditComponent },
 
-          { path: 'categories', component: CategoriesComponent },
-          { path: 'category/:id', component: CategoryEditComponent },
+                    { path: 'services', component: ServicesComponent },
+                    { path: 'service/:id', component: ServiceEditComponent },
 
-          { path: 'welcomepack', component: WelcomePackComponent },
-          { path: 'reset/:id', component: ResetComponent },
-          { path: 'customer', component: CustomerComponent },
-          { path: 'customer/:id', component: CustomerEditComponent },
-          { path: 'appointment', component: AppointmentComponent },
-          { path: 'task', component: TaskComponent },
-          { path: 'account', component: UserAccountComponent },
-          { path: 'logout', component: LogoutComponent },
-          { path: 'profile', component: ProfileComponent },
-          { path: 'general', component: GeneralComponent },
-          { path: 'customersetting', component: CustomerSettingComponent },
-          {
-            path: 'customersettingdetail',
-            component: CustomerSettingDetailComponent
-          },
-          { path: 'usersetting', component: UserSettingComponent },
-          { path: 'usersettingdetail', component: UserSettingDetailComponent },
-          { path: 'emailsetting', component: EmailSettingComponent },
-          {
-            path: 'emailsettingdetail',
-            component: EmailSettingDetailComponent
-          },
-          { path: 'customerdetail', component: CustomerDetailComponent },
-          { path: 'smssetting', component: SMSSettingComponent },
-          {
-            path: 'onlinebookingsetting',
-            component: OnlineBookingSettingComponent
-          },
-          { path: 'bookingquestion', component: BookingQuestionComponent },
-          {
-            path: 'bookingquestiondetail',
-            component: BookingQuestionDetailComponent
-          },
-          { path: 'marketing', component: MarkettingComponent },
-          { path: 'support', component: SupportComponent },
-          { path: 'notification', component: NotificationComponent },
-          { path: 'compaign', component: CompaignComponent },
-          { path: 'businessreport', component: BusinessReportComponent },
-          { path: 'customerreport', component: CustomerReportComponent },
-          { path: 'resourcereport', component: ResourceReportComponent },
-          { path: 'servicereport', component: ServiceReportComponent },
-          { path: 'reports', component: ReportsComponent },
-          { path: 'billing', component: BillingComponent },
-          { path: 'stock', component: StockComponent },
-          { path: 'paymenthistory', component: PaymenthistoryComponent },
-          { path: 'monthlyOverview', component: MonthlyOverviewComponent },
-          { path: 'reviews', component: ReviewsComponent },
-          { path: 'bookingapps', component: BookingappsComponent },
-          { path: 'api', component: ApiComponent },
-          { path: 'calendersync', component: CalendersyncComponent },
-          { path: 'webhooks', component: WebhooksComponent },
-          { path: 'microsite', component: MicrositeComponent },
-          { path: 'freeagent', component: FreeagentComponent },
-          { path: 'epos', component: EposComponent },
-          { path: 'payments', component: PaymentsComponent },
-          { path: 'charge', component: ChargeComponent },
-          { path: 'premium/receipt/:id', component: ReceiptComponent },
-          { path: 'underProcess', component: UnderProcessComponent }
-        ]
-      },
+                    { path: 'categories', component: CategoriesComponent },
+                    { path: 'category/:id', component: CategoryEditComponent },
 
-      //no layout routes
+                    { path: 'welcomepack', component: WelcomePackComponent },
+                    { path: 'reset/:id', component: ResetComponent },
+                    { path: 'customers', component: CustomerComponent },
+                    { path: 'customer/:id', component: CustomerEditComponent },
+                    { path: 'appointment', component: AppointmentComponent },
+                    { path: 'task', component: TaskComponent },
+                    { path: 'account', component: UserAccountComponent },
+                    { path: 'logout', component: LogoutComponent },
+                    { path: 'profile', component: ProfileComponent },
+                    { path: 'general', component: GeneralComponent },
+                    { path: 'customersetting', component: CustomerSettingComponent },
+                    {
+                        path: 'customersettingdetail',
+                        component: CustomerSettingDetailComponent
+                    },
+                    { path: 'usersetting', component: UserSettingComponent },
+                    { path: 'usersettingdetail', component: UserSettingDetailComponent },
+                    { path: 'emailsetting', component: EmailSettingComponent },
+                    {
+                        path: 'emailsettingdetail',
+                        component: EmailSettingDetailComponent
+                    },
+                    { path: 'customerdetail', component: CustomerDetailComponent },
+                    { path: 'smssetting', component: SMSSettingComponent },
+                    {
+                        path: 'onlinebookingsetting',
+                        component: OnlineBookingSettingComponent
+                    },
+                    { path: 'bookingquestion', component: BookingQuestionComponent },
+                    {
+                        path: 'bookingquestiondetail',
+                        component: BookingQuestionDetailComponent
+                    },
+                    { path: 'marketing', component: MarkettingComponent },
+                    { path: 'support', component: SupportComponent },
+                    { path: 'notification', component: NotificationComponent },
+                    { path: 'compaign', component: CompaignComponent },
+                    { path: 'businessreport', component: BusinessReportComponent },
+                    { path: 'customerreport', component: CustomerReportComponent },
+                    { path: 'resourcereport', component: ResourceReportComponent },
+                    { path: 'servicereport', component: ServiceReportComponent },
+                    { path: 'reports', component: ReportsComponent },
+                    { path: 'billing', component: BillingComponent },
+                    { path: 'stock', component: StockComponent },
+                    { path: 'paymenthistory', component: PaymenthistoryComponent },
+                    { path: 'monthlyOverview', component: MonthlyOverviewComponent },
+                    { path: 'reviews', component: ReviewsComponent },
+                    { path: 'bookingapps', component: BookingappsComponent },
+                    { path: 'api', component: ApiComponent },
+                    { path: 'calendersync', component: CalendersyncComponent },
+                    { path: 'webhooks', component: WebhooksComponent },
+                    { path: 'microsite', component: MicrositeComponent },
+                    { path: 'freeagent', component: FreeagentComponent },
+                    { path: 'epos', component: EposComponent },
+                    { path: 'payments', component: PaymentsComponent },
+                    { path: 'charge', component: ChargeComponent },
+                    { path: 'premium/receipt/:id', component: ReceiptComponent },
+                    { path: 'underProcess', component: UnderProcessComponent }
+                ]
+            },
 
-      // otherwise redirect to home
-      { path: '**', redirectTo: '' }
-    ])
-  ],
-  exports: [RouterModule]
+            //no layout routes
+
+            // otherwise redirect to home
+            { path: '**', redirectTo: '' }
+        ])
+    ],
+    exports: [RouterModule]
 })
 
 //export const routing = RouterModule.forRoot(appRoutes);
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 //@NgModule({
 //  imports: [
 //    RouterModule.forRoot([

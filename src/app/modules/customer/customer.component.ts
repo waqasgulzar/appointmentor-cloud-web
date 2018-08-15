@@ -3,8 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import * as _model from '../../shared/models/models';
 import * as _api from '../../shared/services/api';
 import { Router } from "@angular/router";
+import { MatDialog } from '@angular/material';
+import { CustomerEditComponent } from './customer-edit.component';
 
 @Component({
+  selector: 'app-customers-component',
   moduleId: module.id,
   templateUrl: 'customer.html'
 })
@@ -26,21 +29,15 @@ export class CustomerComponent implements OnInit {
   isEmptySubject: boolean = true;
   isSubjectSend: boolean = false;
   submitted = false;
-  constructor(private fb: FormBuilder, private customerService: _api.CustomerService, private router: Router) {
+  fileToUpload: File = null;
+  formData = new FormData();
+
+  constructor(private fb: FormBuilder, private customerService: _api.CustomerService, private router: Router, private dialog: MatDialog) {
     this.LoadCustomers();
 
   }
+
   ngOnInit() {
-    this.ClearFields();
-  }
-  fileChange(event: any) {
-    let files = event.target.files;
-    if (files.length > 0) {
-      this.profileImage = files[0];
-      console.log(this.profileImage);
-    }
-  }
-  ClearFields() {
     this.custForm = this.fb.group({
       firstName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
       lastName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
@@ -61,15 +58,23 @@ export class CustomerComponent implements OnInit {
       emailAddressSearch: [''],
       citySearch: ['']
     });
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    this.formData.append('file', files[0], files[0].name);
+  }
+
+  ClearFields() {
+    
     this.savebuttonText = "Save";
     this.updatedCustomerId = 0;
     this.removeCustomerId = 0;
-    //this.LoadCustomers();
+    this.LoadCustomers();
   }
   LoadCustomers() {
-    this.customerService.get(Number(sessionStorage.getItem("organizationId"))).subscribe((data: any) => {
-      this.customers = data["results"];
-      console.log(data["results"]);
+    this.customerService.getAll().subscribe((data: any) => {
+      this.customers = data;
     });
   }
   LoadCustomerById(customerId: number) {
@@ -189,5 +194,21 @@ export class CustomerComponent implements OnInit {
       }
       this.ClearFields();
     }
+  }
+
+  newCustomer() {
+    const dialogRef = this.dialog.open(CustomerEditComponent,
+      {
+        panelClass: 'appointment-booking-dialog',
+        data: new _model.Customer()
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(JSON.stringify(result));
+    });
+  }
+
+  onClose($event) {
+    //this.dialog.close();
   }
 }
