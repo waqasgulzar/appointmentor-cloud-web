@@ -1,3 +1,4 @@
 cd\
 cd E:\Teksify\Appointmentor\appointmentor-cloud-web
-ng build --prod
+call ng build --prod
+pause

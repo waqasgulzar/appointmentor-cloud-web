@@ -45,8 +45,7 @@
           </mat-grid-list>
         </div>
       </div>
-
-      <form class="sky-form" novalidate="novalidate">
+      <!--<form class="sky-form" novalidate="novalidate">
         <div class="appointment-booking-popup-step-content">
           <div class="col-lg-12 no-padding">
             <div class="col-lg-4 no-padding">
@@ -84,16 +83,16 @@
         <div class="appointment-booking-popup-step-footer">
           <button type="submit" (click)="gotoApptParticipant(stepper)" class="btn-u">Next</button>
         </div>
-      </form>
+      </form>-->
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Add participants</ng-template>
       <div class="appointment-booking-popup-step-content">
-        <span class="pull-right">
+        <!--<span class="pull-right">
           <a class="btn-u" (click)="newCustomer()">
             <i class="fa fa-plus"></i>&nbsp;Create New
           </a>
-        </span>
+        </span>-->
         <mat-selection-list>
           <mat-list-option *ngFor="let cust of customers" (click)="setCustomer(cust)">
             {{cust.firstName}} {{cust.lastName}}

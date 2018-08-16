@@ -27,7 +27,7 @@ export abstract class RestService<T> {
   }
 
   get(id: number): Observable<T> {
-    return this.http.get<T>(environment.apiUrl + this.getUri()).pipe(
+    return this.http.get<T>(environment.apiUrl + this.getUri() + `/${id}`).pipe(
       catchError(this.errorHandler.handleError),
       map((response: T) => {
         return response;

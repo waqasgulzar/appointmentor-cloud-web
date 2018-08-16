@@ -102,7 +102,7 @@ export class CategoryEditComponent implements OnInit {
 
   LoadCategory(id) {
     this.categoryService.get(id).subscribe((data: any) => {
-      let cat = data[0];
+      let cat = data;
       this.userForm.setValue({
         categoryId: cat.categoryId,
         organizationId: cat.organizationId,
