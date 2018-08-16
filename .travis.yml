@@ -5,7 +5,6 @@ cache:
     - node_modules
 
 before_install:
-  - npm cache verify
   - npm prune
   - npm update
 
