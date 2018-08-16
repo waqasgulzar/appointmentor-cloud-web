@@ -18,7 +18,7 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="Date of Birth" prop="dateOfBirth" [flexGrow]="1">
           <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-            <span>{{row['dateOfBirth']}}</span>
+            <span>{{row['dateOfBirth'] | date:'dd/MM/yyyy'}}</span>
           </ng-template>
         </ngx-datatable-column> 
         <ngx-datatable-column name="Phone" prop="mobileNumber" [flexGrow]="2">

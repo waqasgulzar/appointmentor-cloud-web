@@ -96,13 +96,14 @@ export class AppointmentComponent implements OnInit {
           scrollTime: '00:00', // undo default 6am scrollTime
           minTime: this.currentDayTimings.openingTime,
           maxTime: this.currentDayTimings.closingTime,
-          header: false,
+          //header: false,
           allDaySlot: false,
-          //header: {
-          //  left: 'today prev,next',
-          //  center: 'title',
-          //  right: 'timelineDay,timelineThreeDays,agendaWeek,month,listWeek'
-          //},
+          header: {
+            left: '',
+            center: 'prev, title, next',
+            right: ''
+            //right: 'timelineDay,timelineThreeDays,agendaWeek,month,listWeek'
+          },
           defaultView: 'agendaDay',
           resources: this.orgResources,
           events: data
@@ -121,7 +122,7 @@ export class AppointmentComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(JSON.stringify(result));
-
+      
       if (result) {
         this.createAppointment(result.appointment);
       }
@@ -138,6 +139,7 @@ export class AppointmentComponent implements OnInit {
       
       this.appointmentService.getAll()
         .subscribe((data: any) => {
+          console.log(data);
           this.notificationService.success(successNotification);
           this.spinner.hide();
           this.containerEl.fullCalendar('removeEvents');

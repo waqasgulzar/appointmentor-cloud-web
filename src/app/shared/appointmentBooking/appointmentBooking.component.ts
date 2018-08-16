@@ -119,9 +119,10 @@ export class AppointmentBookingComponent implements OnInit {
     this.dialogRef.close({ appointment: this.appointment });
   }
 
-  onClose($event) {
+  onClose() {
     this.dialogRef.close();
   }
+
   generateTimeslots(resId, timeInterval, startTime, endTime) {
     if (timeInterval === 0 || timeInterval % 15 !== 0) {
       console.log("Error: Can only accept 15, 30, 60");

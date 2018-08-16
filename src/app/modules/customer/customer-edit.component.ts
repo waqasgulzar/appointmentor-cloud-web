@@ -246,4 +246,8 @@ export class CustomerEditComponent implements OnInit {
       }
     }
   }
+  
+  onClose(){
+  
+  }
 }

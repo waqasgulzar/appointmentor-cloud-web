@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://json.appointmentorcloud.teksify.com/api/'
+  apiUrl: 'https://appointmentor.teksify.com/json'
 };

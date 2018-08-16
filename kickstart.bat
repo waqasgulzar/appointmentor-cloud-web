@@ -1,3 +1,4 @@
 cd\
 cd E:\Teksify\Appointmentor\appointmentor-cloud-web
-ng serve --open
+call ng serve --open
+pause
