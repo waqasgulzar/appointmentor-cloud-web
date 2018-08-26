@@ -40,7 +40,7 @@ export class AccountSetupComponent implements OnInit {
       firstName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
       lastName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
       companyName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
-      phoneNumber: ['', Validators.compose([Validators.required, Validators.maxLength(12)])],
+      phoneNumber: ['', Validators.compose([Validators.pattern("^[0-9]*$"), Validators.required, Validators.maxLength(14)])],
       emailAddress: [this.email],
       password: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(15)])],
       timeZoneId: [''],

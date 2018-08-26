@@ -113,13 +113,13 @@
                           <label class="label required">Phone Number</label>
                           <label class="input">
                             <i class="icon-append fa fa-phone"></i>
-                            <input type="tel" formControlName="phoneNumber" maxlength="50" required>
+                            <input type="text" formControlName="phoneNumber" required>
                           </label>
                           <div class="form-error-content" *ngIf="submitted">
                             <span *ngIf="userForm.get('phoneNumber').errors?.required">
                               Phone Number is required
                             </span>
-                            <span *ngIf="userForm.get('phoneNumber').pattern?.required">
+                            <span *ngIf="userForm.get('phoneNumber').errors?.pattern">
                               Phone Number is invalid
                             </span>
                           </div>
@@ -143,12 +143,12 @@
                             <span *ngIf="userForm.get('password').errors?.required">
                               Password is required
                             </span>
-                            <!--<span *ngIf="userForm.get('password').errors?.minLength)">
-        Your password must be at least 5 characters long
-        </span>
-        <span *ngIf="userForm.get('password').errors?.maxLength)">
-        Your password cannot exceed 15 characters
-        </span>-->
+                            <span *ngIf="userForm.get('password').errors?.minLength">
+                              Your password must be at least 5 characters long
+                            </span>
+                            <span *ngIf="userForm.get('password').errors?.maxLength">
+                              Your password cannot exceed 15 characters
+                            </span>
                           </div>
                         </section>
                       </div>

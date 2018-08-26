@@ -94,8 +94,8 @@ export class AppointmentComponent implements OnInit {
           editable: false, // enable draggable events
           aspectRatio: 1.8,
           scrollTime: '00:00', // undo default 6am scrollTime
-          minTime: this.currentDayTimings.openingTime,
-          maxTime: this.currentDayTimings.closingTime,
+          minTime: this.currentDayTimings && this.currentDayTimings.openingTime || '09:00',
+          maxTime: this.currentDayTimings && this.currentDayTimings.closingTime || '18:00',
           //header: false,
           allDaySlot: false,
           header: {
