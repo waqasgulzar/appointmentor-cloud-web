@@ -1,6 +1,4 @@
-﻿
-
-<div class="row">
+﻿<div class="row">
   <pre>
   1.
   Welcome pack will contain some attachment documents that we will automatically send to the customer when customer/patient register very first time.
@@ -45,7 +43,7 @@
           <label class="label">Type*</label>
           <label class="input">
             <i class="icon-append fa fa-user"></i>
-            <select formControlName="typeId">
+            <select formControlName="typeId" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['typeId'].errors && userForm.controls['typeId'].errors.required}">
               <option *ngFor="let t of types" [value]="t.id">{{t.title}}</option>
             </select>
           </label>
@@ -57,13 +55,41 @@
         </div>
       </div>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-xs-12">
           <label class="label">Cc To:</label>
           <label class="input">
             <i class="icon-append fa fa-user"></i>
-            
+            <mat-form-field>
+              <mat-chip-list #emailCcList>
+                <mat-chip *ngFor="let cc of cclist" [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(cc)">
+                  {{cc.email}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Enter email..."
+                       [matChipInputFor]="emailCcList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+            </mat-form-field>
           </label>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          <label class="label">Cc to:</label>
+          <label class="input">
+            <i class="icon-append fa fa-user"></i>
+            <input formControlName="cc" maxlength="50" type="email" class="form-control" [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['cc'].errors }">
+          </label>
+          <div class="form-error-content" *ngIf="submitted">
+            <span *ngIf="userForm.get('cc').errors?.email">
+              Not a Valid Email
+            </span>
+          </div>
         </div>
       </div>
 
@@ -72,7 +98,7 @@
           <label class="label">Subject*</label>
           <label class="input">
             <i class="icon-append fa fa-user"></i>
-            <input type="text" formControlName="subject" maxlength="50">
+            <input type="text" formControlName="subject" maxlength="50" required required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['subject'].errors && userForm.controls['subject'].errors.required}">
           </label>
           <div class="form-error-content" *ngIf="submitted">
             <span *ngIf="userForm.get('subject').errors?.required">
@@ -88,10 +114,9 @@
 
           </div>
           <label class="label">Message*</label>
-          <label class="input">
-            <i class="icon-append fa fa-user"></i>
-            <app-ngx-editor [config]="editorConfig" [spellcheck]="true" formControlName="message"></app-ngx-editor>
-          </label>
+
+          <app-ngx-editor [config]="editorConfig" required formControlName="message" [spellcheck]="true"></app-ngx-editor>
+
           <div class="form-error-content" *ngIf="submitted">
             <span *ngIf="userForm.get('message').errors?.required">
               Message is required
@@ -99,6 +124,24 @@
           </div>
         </div>
       </div>
+      <!-- <div *ngIf="htmlContent" class="htmlblock block">
+        <h6>HTML Output</h6>
+        <div class="html">
+          {{ htmlContent }}
+        </div>
+      </div> -->
+
+      <!-- <div>
+         <img *ngFor="let sfile of filesToUpload" [src]="sfile" class="rounded mb-3" width="180">
+       </div> -->
+      <input type="file" multiple (change)="detectFiles($event)">
+
+      <!-- <label class="label"></label>
+          <label class="input">
+            {{orgInfo.profile.logoForMarketingPath}}
+          </label> -->
+
+      <!-- <img [src]="trustedProfileImageUrl" alt="logo" style="width:100%; height:100%" /> -->
 
       <div class="margin-top-30 pull-right">
         <button type="button" class="btn btn-default">Preview</button>
