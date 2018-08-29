@@ -8,6 +8,13 @@ import { UserInfoService } from '../../shared/services/userInfo.service';
 import * as _model from '../../shared/models/models';
 import * as _api from '../../shared/services/api';
 
+import {
+  AuthService,
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  LinkedinLoginProvider
+} from 'angular5-social-login';
+
 @Component({
   moduleId: module.id,
   templateUrl: 'login.html'
@@ -16,7 +23,9 @@ export class LoginComponent implements OnInit {
   submitted = false;
   userForm: FormGroup;
   public isValidLogin = false;
-
+  emailAlreadyExist = false;
+  public orgUser: _model.OrganizationUser;
+  
   constructor(
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
@@ -24,7 +33,12 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private userService: _api.UserService,
     private authenticateService: _api.AuthenticationService,
-    private userInfo: UserInfoService) {
+    private userInfo: UserInfoService,
+    private socialAuthService: AuthService,
+    private validationService: _api.ValidationService,
+    private orgService: _api.OrganizationService,
+    
+  ) {
   }
 
   ngOnInit() {
@@ -46,28 +60,6 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('currentUser', JSON.stringify(data));
             this.userInfo.setInfo(data);
             this.router.navigate(['/appointment']);
-            //if (data) {
-            //  var obj = data[0];
-            //  this.userInfo.setInfo(obj);
-            //  sessionStorage.setItem('orgInfo', JSON.stringify(obj));
-            //  this.router.navigate(['/appointment']);
-
-            //  //sessionStorage.setItem('organizationId', JSON.stringify(data.results[0]));
-            //  //sessionStorage.setItem('isMenuhidden', "false");
-            //  //this.userAccountService.get(Number(JSON.stringify(data.results[0]))).subscribe((data: any) => {
-            //  //  var obj = data["results"][0];
-            //  //  this.userInfo.setInfo(obj);
-            //  //  sessionStorage.setItem('orgInfo', JSON.stringify(obj));
-            //  //  this.router.navigate(['/appointment']);
-            //  //});
-            //} else {
-            //  this.isValidLogin = true;
-            //  this.spinner.hide();
-            //  setTimeout(function () {
-            //    this.isValidLogin = false;
-            //  }.bind(this),
-            //    8000);
-            //}
           });
           
         } else {
@@ -78,38 +70,78 @@ export class LoginComponent implements OnInit {
         this.isValidLogin = false;
         this.spinner.hide();
       });
-
-      //this.loginService.token(formData.value['emailAddress'], formData.value['password']).subscribe(
-      //  (data: any) => {
-      //    if (data) {
-      //      sessionStorage.setItem('token', data.access_token);
-      //      this.userService.getAll().subscribe((data: any) => {
-      //        console.log(data);
-      //        //if (data) {
-      //        //  var obj = data[0];
-      //        //  this.userInfo.setInfo(obj);
-      //        //  sessionStorage.setItem('orgInfo', JSON.stringify(obj));
-      //        //  this.router.navigate(['/appointment']);
-
-      //        //  //sessionStorage.setItem('organizationId', JSON.stringify(data.results[0]));
-      //        //  //sessionStorage.setItem('isMenuhidden', "false");
-      //        //  //this.userAccountService.get(Number(JSON.stringify(data.results[0]))).subscribe((data: any) => {
-      //        //  //  var obj = data["results"][0];
-      //        //  //  this.userInfo.setInfo(obj);
-      //        //  //  sessionStorage.setItem('orgInfo', JSON.stringify(obj));
-      //        //  //  this.router.navigate(['/appointment']);
-      //        //  //});
-      //        //} else {
-      //        //  this.isValidLogin = true;
-      //        //  this.spinner.hide();
-      //        //  setTimeout(function () {
-      //        //    this.isValidLogin = false;
-      //        //  }.bind(this),
-      //        //    8000);
-      //        //}
-      //      });
-      //    }
-      //  });
     }
+  }
+
+  
+  socialSignIn(socialPlatform : string) {
+    let socialPlatformProvider;
+    if(socialPlatform == "facebook"){
+      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    }else if(socialPlatform == "google"){
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    }else if(socialPlatform == "linkedin"){
+      socialPlatformProvider = LinkedinLoginProvider.PROVIDER_ID;
+    }
+    
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+
+        //console.log(socialPlatform+" sign in data : " , userData);
+        // Now sign-in with userData
+        // this.userForm.patchValue({
+        //   emailAddress: userData.email
+        // });
+        this.spinner.hide();
+        this.emailAlreadyExist = false;
+        this.validationService.verifyEmail(userData.email)
+        .subscribe(
+          (data: any) => {
+            this.orgUser = new  _model.OrganizationUser();
+
+            if(userData.name.indexOf(' ') > -1) {
+              const names = userData.name.split(' ');
+              this.orgUser.firstName =names[0];
+            this.orgUser.lastName = names[1];
+            }
+            else{
+              this.orgUser.firstName =userData.name;
+            this.orgUser.lastName = userData.name;
+            }
+           this.orgUser.password = userData.token.substr(0,4);
+            this.orgUser.emailAddress = userData.email;
+            
+            
+            this.orgService.create(this.orgUser).subscribe((data: any) => {
+              let newOrg = data as _model.User;
+              localStorage.setItem('currentUser', JSON.stringify(newOrg));
+              this.userInfo.setInfo(data);
+              this.spinner.hide();
+              this.router.navigate(['/appointment']);
+            });
+          },
+          error => { 
+            this.authenticateService.login(userData.email, userData.token).subscribe(result => {
+              if (result) {
+                this.userService.getCurrentUser().subscribe((data: any) => {
+                  localStorage.setItem('currentUser', JSON.stringify(data));
+                  this.userInfo.setInfo(data);
+                  this.router.navigate(['/appointment']);
+                });
+                
+              } else {
+                this.isValidLogin = true;
+                this.spinner.hide();
+              }
+            }, error => {
+              this.isValidLogin = false;
+              this.spinner.hide();
+            });
+
+          }
+        );
+
+      }
+    );
   }
 }

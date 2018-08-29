@@ -140,6 +140,33 @@ import { DataService } from './shared/services/data.service';
 import { ResourceEditComponent } from './modules/resources/resource-edit/resource-edit.component';
 
 
+import {
+    SocialLoginModule,
+    AuthServiceConfig,
+    GoogleLoginProvider,
+    FacebookLoginProvider,
+    LinkedinLoginProvider
+} from "angular5-social-login";
+
+export function getAuthServiceConfigs() {
+    let config = new AuthServiceConfig(
+        [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider("260776801121658")
+          },
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider("380191121936-vjf5j8rp43og4b2jkpnk18minlu3u2rc.apps.googleusercontent.com")
+          },
+          {
+           id: LinkedinLoginProvider.PROVIDER_ID,
+           provider: new LinkedinLoginProvider("Your-Linkedin-Client-Id")
+         },
+        ]
+    );
+    return config;
+  }
 
 const ROUTER_DIRECTIVES = [RouterLinkActive];
 
@@ -194,7 +221,8 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
         MatTooltipModule,
         NgxDatatableModule,
         ToastrModule.forRoot({ preventDuplicates: true }),
-        NgxEditorModule
+        NgxEditorModule,
+        SocialLoginModule
     ],
     declarations: [
         ROUTER_DIRECTIVES,
@@ -279,7 +307,13 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
             useClass: AppointmentorAuthInterceptor,
             multi: true
         },
-        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        { 
+            provide: LocationStrategy, useClass: HashLocationStrategy 
+        },
+        {
+            provide: AuthServiceConfig,
+            useFactory: getAuthServiceConfigs
+        },
         ErrorHandlerService,
         //LoginService,
         NotificationService,

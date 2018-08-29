@@ -31,6 +31,7 @@ export class AssetEditComponent implements OnInit {
     private route: ActivatedRoute,
     private assetService: _api.AssetService,
     private resourcesService: _api.ResourceService,
+    private serviceServices: _api.ServiceService,
     private router: Router
   ) {
 
@@ -90,7 +91,7 @@ export class AssetEditComponent implements OnInit {
     }
   }
   LoadServices() {
-    this.resourcesService.getAll()
+    this.serviceServices.getAll()
       .subscribe((data: any) => {
         this.services = data;
       });
