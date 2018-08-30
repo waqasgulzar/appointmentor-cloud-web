@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  //apiUrl: 'http://localhost:60775'
-  apiUrl: 'https://appointmentor.teksify.com/json'
+  apiUrl: 'http://localhost:60775'
+  //apiUrl: 'https://appointmentor.teksify.com/json'
 };

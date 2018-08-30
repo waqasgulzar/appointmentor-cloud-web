@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   public isValidLogin = false;
   emailAlreadyExist = false;
   public orgUser: _model.OrganizationUser;
-  
+
   constructor(
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     private socialAuthService: AuthService,
     private validationService: _api.ValidationService,
     private orgService: _api.OrganizationService,
-    
+
   ) {
   }
 
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
             this.userInfo.setInfo(data);
             this.router.navigate(['/appointment']);
           });
-          
+
         } else {
           this.isValidLogin = true;
           this.spinner.hide();
@@ -73,17 +73,17 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  
-  socialSignIn(socialPlatform : string) {
+
+  socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
-    if(socialPlatform == "facebook"){
+    if (socialPlatform == "facebook") {
       socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    }else if(socialPlatform == "google"){
+    } else if (socialPlatform == "google") {
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-    }else if(socialPlatform == "linkedin"){
+    } else if (socialPlatform == "linkedin") {
       socialPlatformProvider = LinkedinLoginProvider.PROVIDER_ID;
     }
-    
+
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
 
@@ -95,51 +95,63 @@ export class LoginComponent implements OnInit {
         this.spinner.hide();
         this.emailAlreadyExist = false;
         this.validationService.verifyEmail(userData.email)
-        .subscribe(
-          (data: any) => {
-            this.orgUser = new  _model.OrganizationUser();
+          .subscribe(
+            (data: any) => {
+              this.orgUser = new _model.OrganizationUser();
 
-            if(userData.name.indexOf(' ') > -1) {
-              const names = userData.name.split(' ');
-              this.orgUser.firstName =names[0];
-            this.orgUser.lastName = names[1];
-            }
-            else{
-              this.orgUser.firstName =userData.name;
-            this.orgUser.lastName = userData.name;
-            }
-           this.orgUser.password = userData.token.substr(0,4);
-            this.orgUser.emailAddress = userData.email;
-            
-            
-            this.orgService.create(this.orgUser).subscribe((data: any) => {
-              let newOrg = data as _model.User;
-              localStorage.setItem('currentUser', JSON.stringify(newOrg));
-              this.userInfo.setInfo(data);
-              this.spinner.hide();
-              this.router.navigate(['/appointment']);
-            });
-          },
-          error => { 
-            this.authenticateService.login(userData.email, userData.token).subscribe(result => {
-              if (result) {
-                this.userService.getCurrentUser().subscribe((data: any) => {
-                  localStorage.setItem('currentUser', JSON.stringify(data));
-                  this.userInfo.setInfo(data);
-                  this.router.navigate(['/appointment']);
-                });
-                
-              } else {
-                this.isValidLogin = true;
-                this.spinner.hide();
+              if (userData.name.indexOf(' ') > -1) {
+                const names = userData.name.split(' ');
+                this.orgUser.firstName = names[0];
+                this.orgUser.lastName = names[1];
               }
-            }, error => {
-              this.isValidLogin = false;
-              this.spinner.hide();
-            });
+              else {
+                this.orgUser.firstName = userData.name;
+                this.orgUser.lastName = userData.name;
+              }
+              this.orgUser.password = userData.token.substr(0, 4);
+              this.orgUser.emailAddress = userData.email;
 
-          }
-        );
+              this.orgService.create(this.orgUser).subscribe((data: any) => {
+                let newOrg = data as _model.User;
+                this.authenticateService.login(this.orgUser.emailAddress, this.orgUser.password).subscribe(result => {
+                  if (result) {
+                    this.userService.getCurrentUser().subscribe((data: any) => {
+                      localStorage.setItem('currentUser', JSON.stringify(data));
+                      this.userInfo.setInfo(data);
+                      this.router.navigate(['/appointment']);
+                    });
+
+                  } else {
+                    this.isValidLogin = true;
+                    this.spinner.hide();
+                  }
+                }, error => {
+                  this.isValidLogin = false;
+                  this.spinner.hide();
+                  });
+
+              });
+            },
+            error => {
+              this.authenticateService.login(userData.email, userData.token.substr(0, 4)).subscribe(result => {
+                if (result) {
+                  this.userService.getCurrentUser().subscribe((data: any) => {
+                    localStorage.setItem('currentUser', JSON.stringify(data));
+                    this.userInfo.setInfo(data);
+                    this.router.navigate(['/appointment']);
+                  });
+
+                } else {
+                  this.isValidLogin = true;
+                  this.spinner.hide();
+                }
+              }, error => {
+                this.isValidLogin = false;
+                this.spinner.hide();
+              });
+
+            }
+          );
 
       }
     );

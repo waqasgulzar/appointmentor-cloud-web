@@ -1,5 +1,5 @@
-﻿
-<h3>Create Resource</h3>
+﻿<h3>
+  Create Resource</h3>
 
 <form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" class="sky-form">
   <input type="hidden" formControlName="resourceId" />
@@ -17,7 +17,7 @@
             Resource name is required
           </span>
           <span *ngIf="userForm.get('resourceName').errors?.pattern">
-            Resource name is invalid
+            Resource name should only contain alphabets
           </span>
           <span *ngIf="userForm.get('resourceName').errors?.maxlength">
             Resource name can not more than 50 characters.
@@ -35,7 +35,7 @@
           <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
             Email is required
           </div>
-          <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.email">
+          <div *ngIf="userForm.controls['emailAddress'].errors && !userForm.controls['emailAddress'].errors.required && userForm.controls['emailAddress'].errors.email">
             Email is invalid
           </div>
         </div>
@@ -97,24 +97,22 @@
         <label class="label required">Services</label>
         <mat-list-item *ngFor="let c of categories">
           <h4 mat-line>{{c.categoryName}}</h4>
-          <ngx-datatable [rows]="c.services" [columnMode]="'flex'" [headerHeight]="0" [footerHeight]="0" [rowHeight]="'auto'"
-                         [selectionType]="'checkbox'" (select)='onSelect($event)' [selected]="selectedServices">
+          <ngx-datatable [rows]="c.services" [columnMode]="'flex'" [headerHeight]="0" [footerHeight]="0" [rowHeight]="'auto'" [selectionType]="'checkbox'"
+            (select)='onSelect($event)' [selected]="selectedServices">
             <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
               <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
                 <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
               </ng-template>
-              <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn" let-row="row">
+              <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"
+                let-row="row">
                 <div>
-                  <mat-checkbox (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+                  <mat-checkbox [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
                 </div>
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column prop="serviceName" [flexGrow]="4"></ngx-datatable-column>
           </ngx-datatable>
         </mat-list-item>
-      </section>
-      <section class="col col-6">
-        <pre>{{selectedServices | json}}</pre>
       </section>
     </div>
     <div class="row">

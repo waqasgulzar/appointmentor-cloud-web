@@ -157,11 +157,11 @@ export function getAuthServiceConfigs() {
           },
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider("380191121936-vjf5j8rp43og4b2jkpnk18minlu3u2rc.apps.googleusercontent.com")
+            provider: new GoogleLoginProvider("116169513082-qq5r6q24b55ag0k4mbtj9bu6tolka08h.apps.googleusercontent.com")
           },
           {
            id: LinkedinLoginProvider.PROVIDER_ID,
-           provider: new LinkedinLoginProvider("Your-Linkedin-Client-Id")
+            provider: new LinkedinLoginProvider("773c5d9xsp5bcn")
          },
         ]
     );
@@ -222,7 +222,8 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
         NgxDatatableModule,
         ToastrModule.forRoot({ preventDuplicates: true }),
         NgxEditorModule,
-        SocialLoginModule
+      SocialLoginModule,
+      
     ],
     declarations: [
         ROUTER_DIRECTIVES,

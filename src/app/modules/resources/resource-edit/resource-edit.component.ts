@@ -1,6 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from "@angular/router";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as _model from '../../../shared/models/models';
 import * as _api from '../../../shared/services/api';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -20,7 +25,7 @@ export class ResourceEditComponent implements OnInit {
   userForm: FormGroup;
   services: _model.Service[] = [];
   categories: _model.Category[] = [];
-  selectedServices: Array<_model.ServiceResource> = [];
+  selectedServices: Array<any> = [];
 
   constructor(
     private fb: FormBuilder,
@@ -31,40 +36,58 @@ export class ResourceEditComponent implements OnInit {
     private userInfo: UserInfoService,
     private serviceSvc: _api.ServiceService,
     private catSvc: _api.CategoryService,
-    private router: Router) {
-
-  }
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.userForm = this.fb.group({
       resourceId: [this.resourceId],
       organizationId: [this.userInfo.currentUser.organizationId],
-      resourceName: ['', [Validators.required, Validators.maxLength(500)]],
+      resourceName: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          Validators.pattern('^[a-zA-Z ]*$')
+        ]
+      ],
       emailAddress: ['', [Validators.required, Validators.email]],
-      addressLine1: ['', [Validators.required, Validators.maxLength(500)]],
-      addressLine2: ['', [Validators.required, Validators.maxLength(500)]],
-      city: ['', [Validators.required]],
-      postcode: ['', [Validators.required]],
+      addressLine1: ['', [Validators.required, Validators.maxLength(50)]],
+      addressLine2: ['', [Validators.required, Validators.maxLength(50)]],
+      city: ['', [Validators.required, Validators.maxLength(20)]],
+      postcode: ['', [Validators.required, Validators.maxLength(10)]],
       color: [''],
-      serviceresource: [],
+      serviceresource: []
     });
 
     this.catSvc.getAll().subscribe((data: any) => {
-      this.categories = data.filter((d: _model.Category) => d.services && d.services.length > 0);
-    });
+      this.categories = data.filter(
+        (d: _model.Category) => d.services && d.services.length > 0
+      );
 
-    this.route.params.subscribe(params => {
-      var id = parseInt(params.id);
-      if (id > 0) {
-        this.resourceId = id;
-        this.loadData();
-      }
+      this.route.params.subscribe(params => {
+        var id = parseInt(params.id);
+        if (id > 0) {
+          this.resourceId = id;
+          this.loadData();
+        }
+      });
     });
   }
 
   loadData() {
     this.resourceService.get(this.resourceId).subscribe((data: any) => {
       let resource = data as _model.Resource;
+      for (let rService of resource.serviceresource) {
+        if (rService.serviceId > 0) {
+          for (let cat of this.categories) {
+            this.selectedServices.push(
+              cat.services.find(t => t.serviceId === rService.serviceId)
+            );
+          }
+        }
+      }
+
       this.userForm.setValue({
         resourceId: resource.resourceId,
         organizationId: this.userInfo.currentUser.organizationId,
@@ -77,8 +100,6 @@ export class ResourceEditComponent implements OnInit {
         color: resource.color,
         serviceresource: resource.serviceresource
       });
-
-      this.selectedServices = resource.serviceresource; //.filter(d => { return { "serviceId": d.serviceId, "serviceName": d.serviceName } }) as _model.Service[];
     });
   }
 
@@ -87,8 +108,8 @@ export class ResourceEditComponent implements OnInit {
     serviceResource.serviceId = selected.serviceId;
     serviceResource.serviceName = selected.serviceName;
 
-    //this.selectedServices.splice(0, this.selectedServices.length);
-    this.selectedServices.push(serviceResource);
+    if (selected && selected.serviceId && selected.serviceId > 0)
+      this.selectedServices.push(serviceResource);
   }
 
   onSubmit(formData: FormGroup) {
@@ -114,18 +135,19 @@ export class ResourceEditComponent implements OnInit {
               title: 'Resources'
             };
             this.notificationService.error(errorNotification);
-          });
-      }
-      else {
-        this.resourceService.update(this.resourceId, formData.value).subscribe((data: any) => {
-          const successNotification: NotificationProperties = {
-            message: 'Resource has been updated successfully.',
-            title: 'Resources'
-          };
-          this.notificationService.success(successNotification);
-          this.spinner.hide();
-          this.router.navigate(['/resources']);
-        },
+          }
+        );
+      } else {
+        this.resourceService.update(this.resourceId, formData.value).subscribe(
+          (data: any) => {
+            const successNotification: NotificationProperties = {
+              message: 'Resource has been updated successfully.',
+              title: 'Resources'
+            };
+            this.notificationService.success(successNotification);
+            this.spinner.hide();
+            this.router.navigate(['/resources']);
+          },
           error => {
             this.spinner.hide();
             const errorNotification: NotificationProperties = {
@@ -133,9 +155,9 @@ export class ResourceEditComponent implements OnInit {
               title: 'Resources'
             };
             this.notificationService.error(errorNotification);
-          });
+          }
+        );
       }
     }
   }
-
 }
