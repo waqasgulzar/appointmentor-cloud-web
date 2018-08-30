@@ -753,7 +753,57 @@ button, input, select, textarea {
       color: black;
    }
 }
+
 .selected-date {
    font-weight: bold;
    border-bottom: solid 2px #72c02c;
+}
+
+.omb_socialButtons {
+   button {
+      min-width: 140px;
+      color: #fff;
+      font-size: 18px;
+   }
+
+   .omb_btn-facebook {
+      background: #3b5998;
+   }
+
+   .omb_btn-google {
+      background: #c32f10;
+   }
+
+   .omb_btn-linkedin {
+      background: #00aced;
+   }
+}
+
+
+.omb_loginOr {
+   position: relative;
+   font-size: 1.5em;
+   color: #aaa;
+   margin-top: 1em;
+   margin-bottom: 1em;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+}
+
+.omb_loginOr .omb_hrOr {
+   background-color: #cdcdcd;
+   height: 1px;
+   margin-top: 0px !important;
+   margin-bottom: 0px !important;
+}
+
+.omb_loginOr .omb_spanOr {
+   display: block;
+   position: absolute;
+   left: 50%;
+   top: -0.6em;
+   margin-left: -1.5em;
+   background-color: white;
+   width: 3em;
+   text-align: center;
 }

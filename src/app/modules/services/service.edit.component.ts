@@ -135,7 +135,7 @@ export class ServiceEditComponent implements OnInit {
 
   LoadService(id) {
     this.servicesService.get(id).subscribe((data: any) => {
-      let srv = data['results'][0];
+      let srv = data[0];
       this.userForm.setValue({
         OrganizationId: srv.organizationId,
         ServiceName: srv.serviceName,

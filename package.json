@@ -42,6 +42,7 @@
     "fullcalendar-scheduler": "^1.9.3",
     "hammerjs": "^2.0.8",
     "ngx-bootstrap": "^3.0.0",
+    "ngx-breadcrumbs": "0.0.3",
     "ngx-chips": "^1.9.3",
     "ngx-editor": "^3.3.0",
     "ngx-logger": "^3.0.4",

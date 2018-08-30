@@ -19,7 +19,7 @@
             <ngx-datatable-column name="Services" prop="services" [flexGrow]="2">
               <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
                 <div>
-                  <span *ngFor="let s of row.services">{{s.serviceName}}</span>
+                  <span *ngFor="let s of row.services" class="btn btn-default">{{s.serviceName}}</span>
                 </div>
               </ng-template>
             </ngx-datatable-column>

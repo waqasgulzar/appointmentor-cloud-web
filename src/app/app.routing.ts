@@ -66,115 +66,327 @@ import { AuthGuardService as AuthGuard } from './shared/services/auth-guard.serv
 import { ResourceEditComponent } from './modules/resources/resource-edit/resource-edit.component';
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot([
-            //Site routes goes here
-            {
-                path: '',
-                component: SiteLayoutComponent,
-                children: [
-                    { path: '', component: HomeComponent, pathMatch: 'full' },
-                    { path: 'home', component: HomeComponent },
-                    { path: 'login', component: LoginComponent },
-                    { path: 'registration', component: UserComponent },
-                    { path: 'accountsetup', component: AccountSetupComponent },
-                    { path: 'forgot', component: ForgotComponent },
-                    //{ path: 'test/:id', component: AboutComponent }
-                ]
-            },
+  imports: [
+    RouterModule.forRoot([
+      //Site routes goes here
+      {
+        path: '',
+        component: SiteLayoutComponent,
+        children: [
+          { path: '', component: HomeComponent, pathMatch: 'full' },
+          { path: 'home', component: HomeComponent },
+          { path: 'login', component: LoginComponent },
+          { path: 'registration', component: UserComponent },
+          { path: 'accountsetup', component: AccountSetupComponent },
+          { path: 'forgot', component: ForgotComponent }
+          //{ path: 'test/:id', component: AboutComponent }
+        ]
+      },
 
-            // App routes goes here here
-            {
-                canActivate: [AuthGuard],
-                path: '',
-                component: AppLayoutComponent,
-                children: [
-                    { path: 'dashboard', component: DashboardComponent },
-                    { path: 'openingtimes', component: OpeningTimesComponent },
-                    { path: 'resources', component: ResourceAssetManagerComponent },
-                    { path: 'resource/:id', component: ResourceEditComponent },
+      // App routes goes here here
+      {
+        canActivate: [AuthGuard],
+        path: '',
+        component: AppLayoutComponent,
+        children: [
+          {
+            path: 'dashboard',
+            component: DashboardComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'openingtimes',
+            component: OpeningTimesComponent,
+            data: { breadcrumbs: 'Opening Times' }
+          },
+          {
+            path: 'resources',
+            component: ResourceAssetManagerComponent,
+            data: { breadcrumbs: 'Resources' }
+          },
+          {
+            path: 'resource/:id',
+            component: ResourceEditComponent,
+            data: { breadcrumbs: 'Resource' }
+          },
 
-                    { path: 'asset', component: AssetComponent },
-                    { path: 'asset/:id', component: AssetEditComponent },
+          {
+            path: 'asset',
+            component: AssetComponent,
+            data: { breadcrumbs: 'Assets' }
+          },
+          {
+            path: 'asset/:id',
+            component: AssetEditComponent,
+            data: { breadcrumbs: 'Asset' }
+          },
 
-                    { path: 'services', component: ServicesComponent },
-                    { path: 'service/:id', component: ServiceEditComponent },
+          {
+            path: 'services',
+            component: ServicesComponent,
+            data: { breadcrumbs: 'Services' }
+          },
+          {
+            path: 'service/:id',
+            component: ServiceEditComponent,
+            data: { breadcrumbs: 'Service' }
+          },
 
-                    { path: 'categories', component: CategoriesComponent },
-                    { path: 'category/:id', component: CategoryEditComponent },
+          {
+            path: 'categories',
+            component: CategoriesComponent,
+            data: { breadcrumbs: 'Categories' }
+          },
+          {
+            path: 'category/:id',
+            component: CategoryEditComponent,
+            data: { breadcrumbs: 'Category' }
+          },
 
-                    { path: 'welcomepack', component: WelcomePackComponent },
-                    { path: 'reset/:id', component: ResetComponent },
-                    { path: 'customers', component: CustomerComponent },
-                    { path: 'customer/:id', component: CustomerEditComponent },
-                    { path: 'appointment', component: AppointmentComponent },
-                    { path: 'task', component: TaskComponent },
-                    { path: 'account', component: UserAccountComponent },
-                    { path: 'logout', component: LogoutComponent },
-                    { path: 'profile', component: ProfileComponent },
-                    { path: 'general', component: GeneralComponent },
-                    { path: 'customersetting', component: CustomerSettingComponent },
-                    {
-                        path: 'customersettingdetail',
-                        component: CustomerSettingDetailComponent
-                    },
-                    { path: 'usersetting', component: UserSettingComponent },
-                    { path: 'usersettingdetail', component: UserSettingDetailComponent },
-                    { path: 'emailsetting', component: EmailSettingComponent },
-                    {
-                        path: 'emailsettingdetail',
-                        component: EmailSettingDetailComponent
-                    },
-                    { path: 'customerdetail', component: CustomerDetailComponent },
-                    { path: 'smssetting', component: SMSSettingComponent },
-                    {
-                        path: 'onlinebookingsetting',
-                        component: OnlineBookingSettingComponent
-                    },
-                    { path: 'bookingquestion', component: BookingQuestionComponent },
-                    {
-                        path: 'bookingquestiondetail',
-                        component: BookingQuestionDetailComponent
-                    },
-                    { path: 'marketing', component: MarkettingComponent },
-                    { path: 'support', component: SupportComponent },
-                    { path: 'notification', component: NotificationComponent },
-                    { path: 'compaign', component: CompaignComponent },
-                    { path: 'businessreport', component: BusinessReportComponent },
-                    { path: 'customerreport', component: CustomerReportComponent },
-                    { path: 'resourcereport', component: ResourceReportComponent },
-                    { path: 'servicereport', component: ServiceReportComponent },
-                    { path: 'reports', component: ReportsComponent },
-                    { path: 'billing', component: BillingComponent },
-                    { path: 'stock', component: StockComponent },
-                    { path: 'paymenthistory', component: PaymenthistoryComponent },
-                    { path: 'monthlyOverview', component: MonthlyOverviewComponent },
-                    { path: 'reviews', component: ReviewsComponent },
-                    { path: 'bookingapps', component: BookingappsComponent },
-                    { path: 'api', component: ApiComponent },
-                    { path: 'calendersync', component: CalendersyncComponent },
-                    { path: 'webhooks', component: WebhooksComponent },
-                    { path: 'microsite', component: MicrositeComponent },
-                    { path: 'freeagent', component: FreeagentComponent },
-                    { path: 'epos', component: EposComponent },
-                    { path: 'payments', component: PaymentsComponent },
-                    { path: 'charge', component: ChargeComponent },
-                    { path: 'premium/receipt/:id', component: ReceiptComponent },
-                    { path: 'underProcess', component: UnderProcessComponent }
-                ]
-            },
+          {
+            path: 'welcomepack',
+            component: WelcomePackComponent,
+            data: { breadcrumbs: 'Welcome Pack' }
+          },
+          {
+            path: 'reset/:id',
+            component: ResetComponent,
+            data: { breadcrumbs: 'Password Reset' }
+          },
+          {
+            path: 'customers',
+            component: CustomerComponent,
+            data: { breadcrumbs: 'Customers' }
+          },
+          {
+            path: 'customer/:id',
+            component: CustomerEditComponent,
+            data: { breadcrumbs: 'Customer' }
+          },
+          {
+            path: 'appointment',
+            component: AppointmentComponent,
+            data: { breadcrumbs: 'Appointment' }
+          },
+          {
+            path: 'task',
+            component: TaskComponent,
+            data: { breadcrumbs: 'Tasks' }
+          },
+          {
+            path: 'account',
+            component: UserAccountComponent,
+            data: { breadcrumbs: 'My Account' }
+          },
+          {
+            path: 'logout',
+            component: LogoutComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'profile',
+            component: ProfileComponent,
+            data: { breadcrumbs: 'My Profile' }
+          },
+          {
+            path: 'general',
+            component: GeneralComponent,
+            data: { breadcrumbs: 'General Settings' }
+          },
+          {
+            path: 'customersetting',
+            component: CustomerSettingComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'customersettingdetail',
+            component: CustomerSettingDetailComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'usersetting',
+            component: UserSettingComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'usersettingdetail',
+            component: UserSettingDetailComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'emailsetting',
+            component: EmailSettingComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'emailsettingdetail',
+            component: EmailSettingDetailComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'customerdetail',
+            component: CustomerDetailComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'smssetting',
+            component: SMSSettingComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'onlinebookingsetting',
+            component: OnlineBookingSettingComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'bookingquestion',
+            component: BookingQuestionComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'bookingquestiondetail',
+            component: BookingQuestionDetailComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'marketing',
+            component: MarkettingComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'support',
+            component: SupportComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'notification',
+            component: NotificationComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'compaign',
+            component: CompaignComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'businessreport',
+            component: BusinessReportComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'customerreport',
+            component: CustomerReportComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'resourcereport',
+            component: ResourceReportComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'servicereport',
+            component: ServiceReportComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'reports',
+            component: ReportsComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'billing',
+            component: BillingComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'stock',
+            component: StockComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'paymenthistory',
+            component: PaymenthistoryComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'monthlyOverview',
+            component: MonthlyOverviewComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'reviews',
+            component: ReviewsComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'bookingapps',
+            component: BookingappsComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'api',
+            component: ApiComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'calendersync',
+            component: CalendersyncComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'webhooks',
+            component: WebhooksComponent,
+            data: { breadcrumbs: 'Home' }
+          },
+          {
+            path: 'microsite',
+            component: MicrositeComponent,
+            data: { breadcrumbs: 'Microsite' }
+          },
+          {
+            path: 'freeagent',
+            component: FreeagentComponent,
+            data: { breadcrumbs: 'FreeAgent' }
+          },
+          {
+            path: 'epos',
+            component: EposComponent,
+            data: { breadcrumbs: 'ePos' }
+          },
+          {
+            path: 'payments',
+            component: PaymentsComponent,
+            data: { breadcrumbs: 'Payments' }
+          },
+          {
+            path: 'charge',
+            component: ChargeComponent,
+            data: { breadcrumbs: 'Charge' }
+          },
+          {
+            path: 'premium/receipt/:id',
+            component: ReceiptComponent,
+            data: { breadcrumbs: 'Receipt' }
+          },
+          {
+            path: 'underProcess',
+            component: UnderProcessComponent,
+            data: { breadcrumbs: 'In Progress' }
+          }
+        ]
+      },
 
-            //no layout routes
+      //no layout routes
 
-            // otherwise redirect to home
-            { path: '**', redirectTo: '' }
-        ])
-    ],
-    exports: [RouterModule]
+      // otherwise redirect to home
+      { path: '**', redirectTo: '' }
+    ])
+  ],
+  exports: [RouterModule]
 })
 
 //export const routing = RouterModule.forRoot(appRoutes);
-export class AppRoutingModule { }
+export class AppRoutingModule {}
 //@NgModule({
 //  imports: [
 //    RouterModule.forRoot([

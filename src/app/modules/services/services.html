@@ -15,7 +15,7 @@
             <span>{{row['duration']}} {{row['durationType']}}</span>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Price" prop="price" [flexGrow]="2">
+        <ngx-datatable-column name="Price" prop="formattedPrice" [flexGrow]="2">
           <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
             <span>{{row['isPriceOfApplication'] == false ? value : 'POA' }}</span>
           </ng-template>

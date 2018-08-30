@@ -3,7 +3,8 @@
     <div class="row login_bg" align="center">
       <h1 style="color:#FFF;">
         <b>
-          <span class="fa fa-clock-o"></span> Appointmentor</b>
+          <span class="fa fa-clock-o"></span> Appointmentor
+        </b>
       </h1>
     </div>
   </header>
@@ -14,15 +15,26 @@
         <header>Login</header>
         <fieldset>
           <section>
+            <div class="text-center omb_socialButtons">
+              <button class="btn social-login-btn social-facebook omb_btn-facebook" (click)="socialSignIn('facebook')">Faebook</button>
+              <button class="btn social-login-btn social-google omb_btn-google" (click)="socialSignIn('google')">Google</button>
+              <button class="btn social-login-btn social-google omb_btn-linkedin" (click)="socialSignIn('linkedin')">Linkedin</button>
+            </div>
+          </section>
+          <div class="omb_row-sm-offset-3 omb_loginOr">
+              <hr class="omb_hrOr">
+              <span class="omb_spanOr">or</span>
+          </div>
+          <section>
             <div class="row">
-              <label class="label col col-2">E-mail
+              <label class="label col col-2">
+                E-mail
                 <span style="color:red;">*</span>
               </label>
               <div class="col col-10">
                 <label class="input">
                   <i class="icon-append fa fa-envelope"></i>
-                  <input formControlName="emailAddress" maxlength="100" class="" placeholder="Email Address" type="email" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required}"
-                  />
+                  <input formControlName="emailAddress" maxlength="100" class="" placeholder="Email Address" type="email" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required}" />
                 </label>
                 <div *ngIf="userForm.invalid && submitted" class="form-error-content">
                   <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
@@ -37,14 +49,14 @@
           </section>
           <section>
             <div class="row">
-              <label class="label col col-2 nopad">Password
+              <label class="label col col-2 nopad">
+                Password
                 <span style="color:red;">*</span>
               </label>
               <div class="col col-10">
                 <label class="input">
                   <i class="icon-append fa fa-lock"></i>
-                  <input formControlName="password" maxlength="100" class="" placeholder="Password" type="password" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['password'].errors && userForm.controls['password'].errors.required}"
-                  />
+                  <input formControlName="password" maxlength="100" class="" placeholder="Password" type="password" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['password'].errors && userForm.controls['password'].errors.required}" />
                 </label>
                 <div *ngIf="userForm.invalid && submitted" class="form-error-content">
                   <div *ngIf="userForm.controls['password'].errors && userForm.controls['password'].errors.required">
@@ -64,7 +76,7 @@
           </section>
         </fieldset>
         <footer>
-          <div class="row">           
+          <div class="row">
             <div align="right">
               <button type="submit" class="btn-u">Log in</button>
             </div>
@@ -75,14 +87,7 @@
         </div>
       </form>
 
-      <div class="jumbotron text-center">
-        <div class="left">
-          <button class="btn btn-primary my-2" (click)="socialSignIn('facebook')">Sign in with Facebook</button>
-          <button class="btn btn-primary my-2" (click)="socialSignIn('google')">Signin in with Google</button>   
-          <button class="btn btn-primary my-2" (click)="socialSignIn('linkedin')">Signin in with Linkedin</button>
-        </div> 
-
-      </div>
+      
     </div>
   </section>
 </div>
