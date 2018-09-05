@@ -30,53 +30,53 @@ export class TaskComponent implements OnInit {
     private customerService: _api.CustomerService,
     private resourcesService: _api.ResourceService,
     private router: Router
-  ) {
-
-  }
+  ) {}
   ngOnInit() {
+    this.userForm = this.fb.group({
+      taskId: [],
+      taskName: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(100)])
+      ],
+      resourceId: [],
+      resourceName: [],
+      dueDate: [],
+      customerId: [],
+      customerName: [],
+      details: [],
+      isTaskCompleted: [],
+      completedDate: [],
+      isDeleted: []
+    });
+
     this.ClearFields();
   }
   LoadResources() {
-    this.resourcesService.getAll()
-      .subscribe((data: any) => {
-        this.resources = data;
-      });
+    this.resourcesService.getAll().subscribe((data: any) => {
+      this.resources = data;
+    });
   }
   LoadCustomers() {
-    this.customerService.getAll()
-      .subscribe((data: any) => {
-        this.customers = data;
-      });
+    this.customerService.getAll().subscribe((data: any) => {
+      this.customers = data;
+    });
   }
   LoadTasks() {
-    this.taskService
-      .getAll()
-      .subscribe((data: any) => {
-        console.log(data['results']);
-        this.tasks = data['results'];
-      });
+    this.taskService.getAll().subscribe((data: any) => {
+      console.log(data['results']);
+      this.tasks = data['results'];
+    });
   }
   TaskIdForDelete(taskId: number) {
     this.removeTaskId = taskId;
   }
   RemoveTask() {
-    this.taskService
-      .delete(this.removeTaskId)
-      .subscribe((data: any) => {
-        this.LoadTasks();
-        this.ClearFields();
-      });
+    this.taskService.delete(this.removeTaskId).subscribe((data: any) => {
+      this.LoadTasks();
+      this.ClearFields();
+    });
   }
   ClearFields() {
-    this.userForm = this.fb.group({
-      taskName: [
-        '',
-        Validators.compose([Validators.required, Validators.maxLength(100)])
-      ],
-      drpresources: [''],
-      drpcustomers: [''],
-      dueDate: ['']
-    });
     this.LoadResources();
     this.LoadCustomers();
     this.LoadTasks();

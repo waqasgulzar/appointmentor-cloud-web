@@ -16,14 +16,14 @@
         <fieldset>
           <section>
             <div class="text-center omb_socialButtons">
-              <button class="btn social-login-btn social-facebook omb_btn-facebook" (click)="socialSignIn('facebook')">Faebook</button>
-              <button class="btn social-login-btn social-google omb_btn-google" (click)="socialSignIn('google')">Google</button>
-              <button class="btn social-login-btn social-google omb_btn-linkedin" (click)="socialSignIn('linkedin')">Linkedin</button>
+              <button type="button" class="btn social-login-btn social-facebook omb_btn-facebook" (click)="socialSignIn('facebook')">Faebook</button>
+              <button type="button" class="btn social-login-btn social-google omb_btn-google" (click)="socialSignIn('google')">Google</button>
+              <button type="button" class="btn social-login-btn social-google omb_btn-linkedin" (click)="socialSignIn('linkedin')">Linkedin</button>
             </div>
           </section>
           <div class="omb_row-sm-offset-3 omb_loginOr">
-              <hr class="omb_hrOr">
-              <span class="omb_spanOr">or</span>
+            <hr class="omb_hrOr">
+            <span class="omb_spanOr">or</span>
           </div>
           <section>
             <div class="row">
@@ -34,7 +34,8 @@
               <div class="col col-10">
                 <label class="input">
                   <i class="icon-append fa fa-envelope"></i>
-                  <input formControlName="emailAddress" maxlength="100" class="" placeholder="Email Address" type="email" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required}" />
+                  <input formControlName="emailAddress" maxlength="100" class="" placeholder="Email Address" type="email" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required}"
+                  />
                 </label>
                 <div *ngIf="userForm.invalid && submitted" class="form-error-content">
                   <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
@@ -56,7 +57,8 @@
               <div class="col col-10">
                 <label class="input">
                   <i class="icon-append fa fa-lock"></i>
-                  <input formControlName="password" maxlength="100" class="" placeholder="Password" type="password" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['password'].errors && userForm.controls['password'].errors.required}" />
+                  <input formControlName="password" maxlength="100" class="" placeholder="Password" type="password" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['password'].errors && userForm.controls['password'].errors.required}"
+                  />
                 </label>
                 <div *ngIf="userForm.invalid && submitted" class="form-error-content">
                   <div *ngIf="userForm.controls['password'].errors && userForm.controls['password'].errors.required">
@@ -87,7 +89,7 @@
         </div>
       </form>
 
-      
+
     </div>
   </section>
 </div>

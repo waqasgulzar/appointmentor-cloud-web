@@ -1,149 +1,145 @@
-﻿<mat-toolbar>
-  New Customer
-  <span class="mat-dialog-toolbar-icon"></span>
-  <mat-icon class="mat-dialog-toolbar-spacer text-align-right cursor-pointer" title="Close" (click)="onClose()">clear</mat-icon>
-</mat-toolbar>
-  <div class="row">
-    <form method="post" id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(custForm);" [formGroup]="custForm" style="border: 1px solid transparent;">
-      <input type="hidden" formControlName="customerId" />
-      <input type="hidden" formControlName="organizationId" />
-      <div class="col-md-12 zero-padding">
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-user"></i>
-            <input formControlName="firstName" maxlength="50" type="text" placeholder="First Name" required="">
-          </label>
-          <div *ngIf="custForm.invalid && submitted" class="form-error-content">
-            <div *ngIf="custForm.controls['firstName'].errors && custForm.controls['firstName'].errors.required">
-              First name is required
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-user"></i>
-            <input formControlName="lastName" maxlength="50" type="text" placeholder="Last Name" required="">
-          </label>
-          <div *ngIf="custForm.invalid && submitted" class="form-error-content">
-            <div *ngIf="custForm.controls['lastName'].errors && custForm.controls['lastName'].errors.required">
-              Last name is required
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-phone"></i>
-            <input formControlName="mobileNumber" maxlength="50" type="text" placeholder="Mobile Number" required="">
-          </label>
-          <div *ngIf="custForm.invalid && submitted" class="form-error-content">
-            <div *ngIf="custForm.controls['mobileNumber'].errors && custForm.controls['mobileNumber'].errors.required">
-              Mobile Number is required
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-phone"></i>
-            <input formControlName="contactNumber" maxlength="50" type="text" placeholder="Contact Number">
-          </label>
-          <div *ngIf="custForm.invalid && submitted" class="form-error-content">
-            <div *ngIf="custForm.controls['contactNumber'].errors && custForm.controls['contactNumber'].errors.required">
-              Contact number is required
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-envelope"></i>
-            <input formControlName="emailAddress" maxlength="100" type="email" placeholder="Email address" required="">
-          </label>
-          <div *ngIf="custForm.invalid && submitted" class="form-error-content">
-            <div *ngIf="custForm.controls['emailAddress'].errors && custForm.controls['emailAddress'].errors.required">
-              Email is required
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-user"></i>
-            <input formControlName="twitterUserName" maxlength="50" type="text" placeholder="Twitter Username">
-          </label>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="select">
-            <i class="icon-append fa fa-user"></i>
-            <select formControlName="gender">
-              <option value="1">Male</option>
-              <option value="0">Female</option>
-            </select>
-            <i></i>
-          </label>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-calendar"></i>
-            <input formControlName="dateOfBirth" type="text" placeholder="Date Of Birth" class="hasDatepicker">
-          </label>
-          <div *ngIf="custForm.invalid && submitted" class="form-error-content">
-            <div *ngIf="custForm.controls['dateOfBirth'].errors && custForm.controls['dateOfBirth'].errors.required">
-              Date of Birth is required
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="select">
-            <i class="icon-append fa fa-building"></i>
-            <input formControlName="unsubscribed" type="checkbox" /> Unsubscribed
-            <b class="tooltip tooltip-bottom-right">Unsubscribed</b>
-          </label>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-building"></i>
-            <input formControlName="addressLine1" maxlength="50" type="text" placeholder="Address Line 1">
-          </label>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-building"></i>
-            <input formControlName="addressLine2" maxlength="50" type="text" placeholder="Address Line 2">
-          </label>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-building"></i>
-            <input formControlName="city" maxlength="50" type="text" placeholder="City">
-          </label>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-building"></i>
-            <input formControlName="postCode" maxlength="50" type="text" placeholder="Post Code">
-          </label>
-        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <label class="input">
-            <i class="icon-append fa fa-tags"></i>
-            <input formControlName="tags" maxlength="50" type="text" placeholder="Tags">
-          </label>
+﻿<h3>
+  Create Customer</h3>
+<form method="post" id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(custForm);" [formGroup]="custForm" style="border: 1px solid transparent;">
+  <input type="hidden" formControlName="customerId" />
+  <input type="hidden" formControlName="organizationId" />
+  <div class="col-md-12 zero-padding">
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-user"></i>
+        <input formControlName="firstName" maxlength="50" type="text" placeholder="First Name" required="">
+      </label>
+      <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+        <div *ngIf="custForm.controls['firstName'].errors && custForm.controls['firstName'].errors.required">
+          First name is required
         </div>
       </div>
-      <div class="col-md-12 zero-padding">
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <h4>Add Photo</h4>
-          <span class="help-block">Accepted formats: PNG, JPEG upload photo Choose File</span>
-          <section>
-            <label for="file" class="input input-file">
-              <div class="button">
-                <input type="file" (change)="handleFileInput($event.target.files)" accept=".png,.jpg,.jpeg" onchange="this.parentNode.nextSibling.value = this.value" />Browse
-              </div><input type="text" readonly="">
-            </label>
-          </section>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-user"></i>
+        <input formControlName="lastName" maxlength="50" type="text" placeholder="Last Name" required="">
+      </label>
+      <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+        <div *ngIf="custForm.controls['lastName'].errors && custForm.controls['lastName'].errors.required">
+          Last name is required
         </div>
       </div>
-      <div class="pull-right">
-        <button type="button" class="btn btn-default" action="action" (click)="onClose()">Cancel</button>
-        <button type="submit" class="btn btn-u">Save</button>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-phone"></i>
+        <input formControlName="mobileNumber" maxlength="50" type="text" placeholder="Mobile Number" required="">
+      </label>
+      <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+        <div *ngIf="custForm.controls['mobileNumber'].errors && custForm.controls['mobileNumber'].errors.required">
+          Mobile Number is required
+        </div>
       </div>
-    </form>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-phone"></i>
+        <input formControlName="contactNumber" maxlength="50" type="text" placeholder="Contact Number">
+      </label>
+      <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+        <div *ngIf="custForm.controls['contactNumber'].errors && custForm.controls['contactNumber'].errors.required">
+          Contact number is required
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-envelope"></i>
+        <input formControlName="emailAddress" maxlength="100" type="email" placeholder="Email address" required="">
+      </label>
+      <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+        <div *ngIf="custForm.controls['emailAddress'].errors && custForm.controls['emailAddress'].errors.required">
+          Email is required
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-user"></i>
+        <input formControlName="twitterUserName" maxlength="50" type="text" placeholder="Twitter Username">
+      </label>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="select">
+        <i class="icon-append fa fa-user"></i>
+        <select formControlName="gender">
+          <option value="1">Male</option>
+          <option value="0">Female</option>
+        </select>
+        <i></i>
+      </label>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-calendar"></i>
+        <input formControlName="dateOfBirth" type="text" placeholder="Date Of Birth" class="hasDatepicker">
+      </label>
+      <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+        <div *ngIf="custForm.controls['dateOfBirth'].errors && custForm.controls['dateOfBirth'].errors.required">
+          Date of Birth is required
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="select">
+        <i class="icon-append fa fa-building"></i>
+        <input formControlName="unsubscribed" type="checkbox" /> Unsubscribed
+        <b class="tooltip tooltip-bottom-right">Unsubscribed</b>
+      </label>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-building"></i>
+        <input formControlName="addressLine1" maxlength="50" type="text" placeholder="Address Line 1">
+      </label>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-building"></i>
+        <input formControlName="addressLine2" maxlength="50" type="text" placeholder="Address Line 2">
+      </label>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-building"></i>
+        <input formControlName="city" maxlength="50" type="text" placeholder="City">
+      </label>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-building"></i>
+        <input formControlName="postCode" maxlength="50" type="text" placeholder="Post Code">
+      </label>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <label class="input">
+        <i class="icon-append fa fa-tags"></i>
+        <input formControlName="tags" maxlength="50" type="text" placeholder="Tags">
+      </label>
+    </div>
   </div>
+  <div class="col-md-12 zero-padding">
+    <div class="col-xs-6 col-sm-6 col-md-6">
+      <h4>Add Photo</h4>
+      <span class="help-block">Accepted formats: PNG, JPEG upload photo Choose File</span>
+      <section>
+        <label for="file" class="input input-file">
+          <div class="button">
+            <input type="file" (change)="handleFileInput($event.target.files)" accept=".png,.jpg,.jpeg" onchange="this.parentNode.nextSibling.value = this.value"
+            />Browse
+          </div><input type="text" readonly="">
+        </label>
+      </section>
+    </div>
+  </div>
+  <div class="pull-right">
+    <button type="button" class="btn btn-default" action="action" (click)="onClose()">Cancel</button>
+    <button type="submit" class="btn btn-u">Save</button>
+  </div>
+</form>

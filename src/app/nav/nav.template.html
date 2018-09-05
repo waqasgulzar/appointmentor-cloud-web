@@ -15,7 +15,7 @@
       <li><a [routerLink]="['/resources']" routerLinkActive="on">Team & Resources</a></li>
       <li><a [routerLink]="['/asset']" routerLinkActive="on">Assets, Inventory & Stocks</a></li>
       <li><a [routerLink]="['/task']" routerLinkActive="on">Tasks & Activities </a></li>
-      <li><a [routerLink]="['/general']" routerLinkActive="on">Configurations & Bus: Rules</a></li>
+      <li><a [routerLink]="['/general']" routerLinkActive="on">Configurations & Rules</a></li>
       <li><a [routerLink]="['/account']" routerLinkActive="on">Account Management</a></li>
     </ul>
   </li>
@@ -28,7 +28,7 @@
     <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='customers'">
       <li><a [routerLink]="['/customers']">Profiles & Registrations</a></li>
       <li><a [routerLink]="['/underProcess']">Customer Billing & Payments</a></li>
-      
+
     </ul>
   </li>
 
@@ -71,6 +71,7 @@
       <i class="fr fa fa-angle-up" *ngIf="active=='integrations'" (click)="active=''"></i>
     </a>
     <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='integrations'">
+      <li><a [routerLink]="['/freeagent']">Free Agent</a></li>
       <li><a [routerLink]="['/epos']">Point of Sale - EPoS</a></li>
       <li><a [routerLink]="['/account']">Accounting</a></li>
       <li><a [routerLink]="['/bookingapps']">Booking Apps</a></li>

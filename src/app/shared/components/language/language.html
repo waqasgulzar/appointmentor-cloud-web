@@ -1,0 +1,15 @@
+<mat-toolbar>
+  Add Language
+  <span class="mat-dialog-toolbar-icon"></span>
+  <mat-icon class="mat-dialog-toolbar-spacer text-align-right cursor-pointer" title="Close" (click)="onClose()">clear</mat-icon>
+</mat-toolbar>
+<div md-dialog-actions>
+  <mat-selection-list #language (selectionChange)="onSelection($event, language.selectedOptions)">
+    <mat-list-option *ngFor="let item of languages" [value]='item'>
+      {{item}}
+    </mat-list-option>
+  </mat-selection-list>
+  <div class="pull-right margin-right-10">
+    <button type="button" (click)="onSubmit()" class="btn btn-u">Done</button>
+  </div>
+</div>

@@ -10,8 +10,6 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class LookupService extends RestService<_model.User> {
-  
-  
   constructor(
     protected httpClient: HttpClient,
     protected errorHandler: ErrorHandlerService
@@ -32,23 +30,200 @@ export class LookupService extends RestService<_model.User> {
   }
 
   load(category: string): Observable<_model.Lookup> {
-    return this.http.get<_model.Lookup>(environment.apiUrl + this.getUri() + `?lookupCategory=${category}`).pipe(
-      catchError(this.errorHandler.handleError),
-      map((response: _model.Lookup) => {
-        return response;
-      })
-    );
+    return this.http
+      .get<_model.Lookup>(
+        environment.apiUrl + this.getUri() + `?lookupCategory=${category}`
+      )
+      .pipe(
+        catchError(this.errorHandler.handleError),
+        map((response: _model.Lookup) => {
+          return response;
+        })
+      );
   }
 
   static openingTimes(id): any {
     return [
-      { "openingId": 0, "organizationId": id, "dayId": 1, "openingTime": "09:00:00", "closingTime": "18:00:00", "isOpen": true, "isDeleted": false },
-      { "openingId": 0, "organizationId": id, "dayId": 2, "openingTime": "09:00:00", "closingTime": "18:00:00", "isOpen": true, "isDeleted": false },
-      { "openingId": 0, "organizationId": id, "dayId": 3, "openingTime": "09:00:00", "closingTime": "18:00:00", "isOpen": true, "isDeleted": false },
-      { "openingId": 0, "organizationId": id, "dayId": 4, "openingTime": "09:00:00", "closingTime": "18:00:00", "isOpen": true, "isDeleted": false },
-      { "openingId": 0, "organizationId": id, "dayId": 5, "openingTime": "09:00:00", "closingTime": "18:00:00", "isOpen": true, "isDeleted": false },
-      { "openingId": 0, "organizationId": id, "dayId": 6, "openingTime": "09:00:00", "closingTime": "18:00:00", "isOpen": false, "isDeleted": false },
-      { "openingId": 0, "organizationId": id, "dayId": 7, "openingTime": "09:00:00", "closingTime": "18:00:00", "isOpen": false, "isDeleted": false }];
+      {
+        openingId: 0,
+        organizationId: id,
+        dayId: 1,
+        openingTime: '09:00:00',
+        closingTime: '18:00:00',
+        isOpen: true,
+        isDeleted: false
+      },
+      {
+        openingId: 0,
+        organizationId: id,
+        dayId: 2,
+        openingTime: '09:00:00',
+        closingTime: '18:00:00',
+        isOpen: true,
+        isDeleted: false
+      },
+      {
+        openingId: 0,
+        organizationId: id,
+        dayId: 3,
+        openingTime: '09:00:00',
+        closingTime: '18:00:00',
+        isOpen: true,
+        isDeleted: false
+      },
+      {
+        openingId: 0,
+        organizationId: id,
+        dayId: 4,
+        openingTime: '09:00:00',
+        closingTime: '18:00:00',
+        isOpen: true,
+        isDeleted: false
+      },
+      {
+        openingId: 0,
+        organizationId: id,
+        dayId: 5,
+        openingTime: '09:00:00',
+        closingTime: '18:00:00',
+        isOpen: true,
+        isDeleted: false
+      },
+      {
+        openingId: 0,
+        organizationId: id,
+        dayId: 6,
+        openingTime: '09:00:00',
+        closingTime: '18:00:00',
+        isOpen: false,
+        isDeleted: false
+      },
+      {
+        openingId: 0,
+        organizationId: id,
+        dayId: 7,
+        openingTime: '09:00:00',
+        closingTime: '18:00:00',
+        isOpen: false,
+        isDeleted: false
+      }
+    ];
   }
 
+  static workingHours(id): any {
+    return [
+      {
+        workingHourID: 0,
+        resourceID: id,
+        dayId: 1,
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        isOpen: true,
+        isDeleted: false,
+        isExtraTimeBeforeStartEnabled: false,
+        beforeStartExtraTime: 'None',
+        beforeStartPremium: 0,
+        isExtraTimeAfterEndEnabled: false,
+        afterEndExtraTime: 'None',
+        afterEndPremium: 0,
+        premiumOnHolidays: 0
+      },
+      {
+        workingHourID: 0,
+        resourceID: id,
+        dayId: 2,
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        isOpen: true,
+        isDeleted: false,
+        isExtraTimeBeforeStartEnabled: false,
+        beforeStartExtraTime: 'None',
+        beforeStartPremium: 0,
+        isExtraTimeAfterEndEnabled: false,
+        afterEndExtraTime: 'None',
+        afterEndPremium: 0,
+        premiumOnHolidays: 0
+      },
+      {
+        workingHourID: 0,
+        resourceID: id,
+        dayId: 3,
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        isOpen: true,
+        isDeleted: false,
+        isExtraTimeBeforeStartEnabled: false,
+        beforeStartExtraTime: 'None',
+        beforeStartPremium: 0,
+        isExtraTimeAfterEndEnabled: false,
+        afterEndExtraTime: 'None',
+        afterEndPremium: 0,
+        premiumOnHolidays: 0
+      },
+      {
+        workingHourID: 0,
+        resourceID: id,
+        dayId: 4,
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        isOpen: true,
+        isDeleted: false,
+        isExtraTimeBeforeStartEnabled: false,
+        beforeStartExtraTime: 'None',
+        beforeStartPremium: 0,
+        isExtraTimeAfterEndEnabled: false,
+        afterEndExtraTime: 'None',
+        afterEndPremium: 0,
+        premiumOnHolidays: 0
+      },
+      {
+        workingHourID: 0,
+        resourceID: id,
+        dayId: 5,
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        isOpen: true,
+        isDeleted: false,
+        isExtraTimeBeforeStartEnabled: false,
+        beforeStartExtraTime: 'None',
+        beforeStartPremium: 0,
+        isExtraTimeAfterEndEnabled: false,
+        afterEndExtraTime: 'None',
+        afterEndPremium: 0,
+        premiumOnHolidays: 0
+      },
+      {
+        workingHourID: 0,
+        resourceID: id,
+        dayId: 6,
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        isOpen: false,
+        isDeleted: false,
+        isExtraTimeBeforeStartEnabled: false,
+        beforeStartExtraTime: 'None',
+        beforeStartPremium: 0,
+        isExtraTimeAfterEndEnabled: false,
+        afterEndExtraTime: 'None',
+        afterEndPremium: 0,
+        premiumOnHolidays: 0
+      },
+      {
+        workingHourID: 0,
+        resourceID: id,
+        dayId: 7,
+        startTime: '09:00:00',
+        endTime: '18:00:00',
+        isOpen: false,
+        isDeleted: false,
+        isExtraTimeBeforeStartEnabled: false,
+        beforeStartExtraTime: 'None',
+        beforeStartPremium: 0,
+        isExtraTimeAfterEndEnabled: false,
+        afterEndExtraTime: 'None',
+        afterEndPremium: 0,
+        premiumOnHolidays: 0
+      }
+    ];
+  }
 }

@@ -64,6 +64,8 @@ import { CategoryEditComponent } from './modules/services/category/category-edit
 import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.component';
 import { AuthGuardService as AuthGuard } from './shared/services/auth-guard.service';
 import { ResourceEditComponent } from './modules/resources/resource-edit/resource-edit.component';
+import { RedirectFreeAgent } from './modules/setting/freeagent/redirect-free-agent/redirect-free-agent.component';
+import { ResourcesComponent } from './modules/resources/resources.component';
 
 @NgModule({
   imports: [
@@ -101,7 +103,7 @@ import { ResourceEditComponent } from './modules/resources/resource-edit/resourc
           },
           {
             path: 'resources',
-            component: ResourceAssetManagerComponent,
+            component: ResourcesComponent,
             data: { breadcrumbs: 'Resources' }
           },
           {
@@ -346,6 +348,11 @@ import { ResourceEditComponent } from './modules/resources/resource-edit/resourc
           {
             path: 'freeagent',
             component: FreeagentComponent,
+            data: { breadcrumbs: 'FreeAgent' }
+          },
+          {
+            path: 'redirect/freeagent/:code',
+            component: RedirectFreeAgent,
             data: { breadcrumbs: 'FreeAgent' }
           },
           {

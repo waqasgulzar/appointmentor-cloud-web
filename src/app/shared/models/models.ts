@@ -1,3 +1,4 @@
+export * from './address';
 export * from './appointment';
 export * from './asset';
 export * from './assetService';
@@ -23,3 +24,4 @@ export * from './fileInformation';
 export * from './dataSource';
 export * from './apiCredential';
 export * from './lookup';
+export * from './resourceWorkingHour';
