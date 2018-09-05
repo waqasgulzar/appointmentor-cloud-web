@@ -1,6 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from "@angular/router";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatDialog, MatStepper, MatDialogRef } from '@angular/material';
 import * as _model from '../../shared/models/models';
 import * as _api from '../../shared/services/api';
@@ -39,7 +44,8 @@ export class AppointmentComponent implements OnInit {
   openingtimes: _model.Openingtimes[];
   currentDayTimings: _model.Openingtimes;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private dataService: DataService,
     private resourcesService: _api.ResourceService,
     private appointmentService: _api.AppointmentService,
@@ -50,8 +56,8 @@ export class AppointmentComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService,
     private notificationService: NotificationService,
-    private dialogRef: MatDialog) {
-
+    private dialogRef: MatDialog
+  ) {
     this.appointment = new _model.Appointment();
     var r: _model.Resource;
     this.appointment.resource = r;
@@ -69,16 +75,24 @@ export class AppointmentComponent implements OnInit {
     //  this.LoadAppointments();
     //});
 
-    this.resourcesService.getAll().subscribe(responses => {
+    this.resourcesService.getAll().subscribe((responses: _model.Resource[]) => {
       this.resources = responses;
-      this.orgResources = this.resources.map(item => <any>{ 'id': item.resourceId, 'title': item.resourceName, 'color': 'red' });
+      this.orgResources = this.resources.map(
+        item =>
+          <any>{
+            id: item.resourceId,
+            title: item.firstName + ' ' + item.lastName,
+            color: 'red'
+          }
+      );
       this.openingtimesService.getAll().subscribe(openingTimes => {
         this.openingtimes = openingTimes;
         var day = new Date();
-        this.currentDayTimings = this.openingtimes.filter(item => item.dayId == day.getDay())[0];
+        this.currentDayTimings = this.openingtimes.filter(
+          item => item.dayId == day.getDay()
+        )[0];
         this.LoadAppointments();
       });
-      
     });
   }
 
@@ -87,15 +101,19 @@ export class AppointmentComponent implements OnInit {
   }
 
   LoadAppointments() {
-    this.appointmentService.getAll()
-      .subscribe((data: any) => {
+    this.appointmentService.getAll().subscribe(
+      (data: any) => {
         this.spinner.hide();
         this.containerEl.fullCalendar({
           editable: false, // enable draggable events
           aspectRatio: 1.8,
           scrollTime: '00:00', // undo default 6am scrollTime
-          minTime: this.currentDayTimings && this.currentDayTimings.openingTime || '09:00',
-          maxTime: this.currentDayTimings && this.currentDayTimings.closingTime || '18:00',
+          minTime:
+            (this.currentDayTimings && this.currentDayTimings.openingTime) ||
+            '09:00',
+          maxTime:
+            (this.currentDayTimings && this.currentDayTimings.closingTime) ||
+            '18:00',
           //header: false,
           allDaySlot: false,
           header: {
@@ -106,23 +124,45 @@ export class AppointmentComponent implements OnInit {
           },
           defaultView: 'agendaDay',
           resources: this.orgResources,
-          events: data
+          events: data,
+          eventClick: event => {
+            this.appointmentService
+              .get(Number(event.id))
+              .subscribe((appt: _model.Appointment) => {
+                const dialogRef = this.dialogRef.open(
+                  AppointmentBookingComponent,
+                  {
+                    panelClass: 'appointment-booking-dialog',
+                    data: appt
+                  }
+                );
+
+                dialogRef.afterClosed().subscribe(result => {
+                  console.log(JSON.stringify(result));
+
+                  if (result) {
+                    this.createAppointment(result.appointment);
+                  }
+                });
+              });
+          }
         });
-      }, error => {
+      },
+      error => {
         this.spinner.hide();
-      });
+      }
+    );
   }
 
   bookAppointment() {
-    const dialogRef = this.dialogRef.open(AppointmentBookingComponent,
-      {
-        panelClass: 'appointment-booking-dialog',
-        data: new _model.Appointment()
-      });
+    const dialogRef = this.dialogRef.open(AppointmentBookingComponent, {
+      panelClass: 'appointment-booking-dialog',
+      data: new _model.Appointment()
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(JSON.stringify(result));
-      
+
       if (result) {
         this.createAppointment(result.appointment);
       }
@@ -131,27 +171,29 @@ export class AppointmentComponent implements OnInit {
 
   createAppointment(appt) {
     this.spinner.show();
-    this.appointmentService.create(appt).subscribe((data: any) => {
-      const successNotification: NotificationProperties = {
-        message: 'Appointment has been created successfully.',
-        title: 'Appointment'
-      };
-      
-      this.appointmentService.getAll()
-        .subscribe((data: any) => {
+    this.appointmentService.create(appt).subscribe(
+      (data: any) => {
+        const successNotification: NotificationProperties = {
+          message: 'Appointment has been created successfully.',
+          title: 'Appointment'
+        };
+
+        this.appointmentService.getAll().subscribe((data: any) => {
           console.log(data);
           this.notificationService.success(successNotification);
           this.spinner.hide();
           this.containerEl.fullCalendar('removeEvents');
           this.containerEl.fullCalendar('renderEvents', data, true);
         });
-    }, error => {
-      const errorNotification: NotificationProperties = {
-        message: error.error,
-        title: 'Appointment'
-      };
-      this.notificationService.error(errorNotification);
-      this.spinner.hide();
-    });
+      },
+      error => {
+        const errorNotification: NotificationProperties = {
+          message: error.error,
+          title: 'Appointment'
+        };
+        this.notificationService.error(errorNotification);
+        this.spinner.hide();
+      }
+    );
   }
 }

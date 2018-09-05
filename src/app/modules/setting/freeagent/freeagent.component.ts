@@ -11,10 +11,6 @@ import { Router } from '@angular/router';
   templateUrl: 'freeagent.html'
 })
 export class FreeagentComponent implements OnInit {
-  constructor(private router: Router) {
-    if (sessionStorage.getItem('organizationId') == null) {
-      this.router.navigate(['']);
-    }
-  }
+  constructor(private router: Router) {}
   ngOnInit() {}
 }

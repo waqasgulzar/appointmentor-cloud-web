@@ -19,7 +19,8 @@
     <mat-step>
       <ng-template matStepLabel>
         <span *ngIf="!appointment.resource">Select a time</span>
-        <span *ngIf="appointment.resource"> <i>Appointment with</i> <b>{{appointment.resource.resourceName}}</b> <i>on</i> <b>{{appointment.date | date:'dd/MM/yyyy'}} {{selectedSlot.time}}</b></span>
+        <span *ngIf="appointment.resource"> <i>Appointment with</i> <b>{{appointment.resource.firstName}} {{appointment.resource.lastName}}</b>
+          <i>on</i> <b>{{appointment.date | date:'dd/MM/yyyy'}} {{selectedSlot.time}}</b></span>
       </ng-template>
       <div class="row">
         <div class="col-xs-10 col-xs-offset-1 date-display">
@@ -27,7 +28,7 @@
           <a *ngFor="let d of dates" class="date" (click)="setAppointmentDate(d.date)" [ngClass]="{' selected-date': d.date.toString() == appointment.date.toString() }">
             {{d.display}}
           </a>&nbsp;
-            <mat-icon class="mat-dialog-toolbar-spacer text-align-right cursor-pointer date-navigator" title="Close" (click)="getDates(4)">keyboard_arrow_right</mat-icon>
+          <mat-icon class="mat-dialog-toolbar-spacer text-align-right cursor-pointer date-navigator" title="Close" (click)="getDates(4)">keyboard_arrow_right</mat-icon>
         </div>
       </div>
       <div class="col-xs-12 provider-content" *ngFor="let res of resources">
@@ -35,13 +36,14 @@
           <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;f=y" width="30">
         </div>
         <div class="col-xs-4">
-          <span class="name">{{res.resourceName}}</span>
+          <span class="name">{{res.firstName}} {{res.lastName}}</span>
           <br />
           <span class="address">{{fullAddress(res)}}</span>
         </div>
         <div class="col-xs-7">
           <mat-grid-list cols="4" rowHeight="25px">
-            <mat-grid-tile *ngFor="let item of res.appointmentSlots" (click)="setAppointmentTime(res, item, stepper)" [ngClass]="{'selected-slot':item.id == selectedSlot.id}" class="appointment-slot">{{item.time}}</mat-grid-tile>
+            <mat-grid-tile *ngFor="let item of res.appointmentSlots" (click)="setAppointmentTime(res, item, stepper)" [ngClass]="{'selected-slot':item.id == selectedSlot.id}"
+              class="appointment-slot">{{item.time}}</mat-grid-tile>
           </mat-grid-list>
         </div>
       </div>

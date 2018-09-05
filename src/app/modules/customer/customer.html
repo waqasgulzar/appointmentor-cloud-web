@@ -1,7 +1,7 @@
 ﻿<section class="content-wrapper">
   <h4>Customer Profiles</h4>
   <span class="pull-right">
-    <a class="btn-u" (click)="newCustomer()">
+    <a class="btn-u" [routerLink]="['/customer', 0]">
       <i class="fa fa-plus"></i>&nbsp;Create Customer
     </a>
   </span>
@@ -20,7 +20,7 @@
           <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
             <span>{{row['dateOfBirth'] | date:'dd/MM/yyyy'}}</span>
           </ng-template>
-        </ngx-datatable-column> 
+        </ngx-datatable-column>
         <ngx-datatable-column name="Phone" prop="mobileNumber" [flexGrow]="2">
           <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
             <span>{{row['mobileNumber']}} {{row['contactNumber']}}</span>

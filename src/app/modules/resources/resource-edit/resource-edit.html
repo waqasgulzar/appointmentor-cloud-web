@@ -1,127 +1,384 @@
 ﻿<h3>
   Create Resource</h3>
-
 <form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" class="sky-form">
   <input type="hidden" formControlName="resourceId" />
   <input type="hidden" formControlName="organizationId" />
+  <pre>{{userForm.value | json}}</pre>
   <fieldset>
     <div class="row">
-      <section class="col col-6">
-        <label class="label required">Name</label>
-        <label class="input">
-          <i class="icon-append fa fa-user"></i>
-          <input type="text" formControlName="resourceName">
-        </label>
-        <div class="form-error-content" *ngIf="submitted">
-          <span *ngIf="userForm.get('resourceName').errors?.required">
-            Resource name is required
-          </span>
-          <span *ngIf="userForm.get('resourceName').errors?.pattern">
-            Resource name should only contain alphabets
-          </span>
-          <span *ngIf="userForm.get('resourceName').errors?.maxlength">
-            Resource name can not more than 50 characters.
-          </span>
+      <div class="col col-2 no-padding no-margin">
+        <section>
+          <img [src]="trustedProfileImageUrl" alt="Profile Pic" class="resource-profile-pic" />
+          <input accept="image/*" type="file" class="btn-xs" (change)="handleFileInput($event.target.files)" />
+        </section>
+        <section>
+          <label class="label">Color <p class="text-muted-light">(To show inside appointment calendar)</p></label>
+          <label class="input">
+            <input matInput formControlName="color" type="color">
+          </label>
+        </section>
+      </div>
+      <div class="col col-10">
+        <div class="row">
+          <section class="col col-6">
+            <label class="label required">First Name</label>
+            <label class="input">
+              <i class="icon-append fa fa-user"></i>
+              <input type="text" formControlName="firstName">
+            </label>
+            <div class="form-error-content" *ngIf="submitted">
+              <span *ngIf="userForm.get('firstName').errors?.required">
+                First name is required
+              </span>
+              <span *ngIf="userForm.get('firstName').errors?.pattern">
+                First name should only contain alphabets
+              </span>
+              <span *ngIf="userForm.get('firstName').errors?.maxlength">
+                First name can not more than 50 characters.
+              </span>
+            </div>
+          </section>
+          <section class="col col-6">
+            <label class="label required">Last Name</label>
+            <label class="input">
+              <i class="icon-append fa fa-user"></i>
+              <input type="text" formControlName="lastName">
+            </label>
+            <div class="form-error-content" *ngIf="submitted">
+              <span *ngIf="userForm.get('lastName').errors?.required">
+                Last name is required
+              </span>
+              <span *ngIf="userForm.get('lastName').errors?.pattern">
+                Last name should only contain alphabets
+              </span>
+              <span *ngIf="userForm.get('lastName').errors?.maxlength">
+                Last name can not more than 50 characters.
+              </span>
+            </div>
+          </section>
         </div>
-      </section>
+        <div class="row">
+          <section class="col col-6">
+            <label class="label required">Email</label>
+            <label class="input">
+              <i class="icon-append fa fa-at"></i>
+              <input type="email" formControlName="emailAddress">
+            </label>
+            <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+              <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
+                Email is required
+              </div>
+              <div *ngIf="userForm.controls['emailAddress'].errors && !userForm.controls['emailAddress'].errors.required && userForm.controls['emailAddress'].errors.email">
+                Email is invalid
+              </div>
+            </div>
+          </section>
+          <section class="col col-6">
+            <label class="label required">Gender</label>
+            <label>
+              <mat-radio-group>
+                <mat-radio-button value="Male">Male</mat-radio-button>&nbsp;
+                <mat-radio-button value="Female">Female</mat-radio-button>&nbsp;
+                <mat-radio-button value="Other">Other</mat-radio-button>&nbsp;
+                <mat-radio-button value="NotDisclosed">Prefer not to say</mat-radio-button>
+              </mat-radio-group>
+            </label>
+          </section>
+        </div>
+        <div class="row">
+          <section class="col col-6">
+            <label class="label">Contact Number</label>
+            <label class="input">
+              <i class="icon-append fa fa-user"></i>
+              <input type="tel" formControlName="phone">
+            </label>
+          </section>
+          <section class="col col-6">
+            <label class="label">Mobile Number</label>
+            <label class="input">
+              <i class="icon-append fa fa-user"></i>
+              <input type="tel" formControlName="mobile">
+            </label>
+          </section>
+        </div>
+        <div class="row">
+          <section class="col col-4">
+            <label class="label">Facebook</label>
+            <label class="input">
+              <i class="icon-append fa fa-facebook"></i>
+              <input type="text" formControlName="facebook">
+            </label>
+          </section>
+          <section class="col col-4">
+            <label class="label">Twitter</label>
+            <label class="input">
+              <i class="icon-append fa fa-twitter"></i>
+              <input type="text" formControlName="twitter">
+            </label>
+          </section>
+          <section class="col col-4">
+            <label class="label">LinkedIn</label>
+            <label class="input">
+              <i class="icon-append fa fa-linkedin"></i>
+              <input type="text" formControlName="linkedIn">
+            </label>
+          </section>
+        </div>
+        <div class="row">
+          <section class="col col-11">
+            <label class="label">Language(s) </label>
+            <mat-chip-list>
+              <mat-chip *ngFor="let item of languages" [removable]="'true'" (removed)="removeLanguage(item)">
+                {{item}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+              <mat-icon class="cursor-pointer color-green" title="Add" (click)="addLanguage()">add</mat-icon>
+            </mat-chip-list>
+          </section>
+        </div>
+        <div class="row">
+          <section class="col col-11">
+            <label class="label">Qualifications and Specialisations</label>
+            <mat-form-field class="qualifications-list">
+              <mat-chip-list #qualificationList>
+                <mat-chip *ngFor="let item of qualifications" [selectable]="'true'" [removable]="'true'" (removed)="removeQualification(item)">
+                  {{item}}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <input [matChipInputFor]="qualificationList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addQualification($event)">
+              </mat-chip-list>
+            </mat-form-field>
+          </section>
+        </div>
+        <div class="row">
+          <section class="col col-6">
+            <label class="label">Professional Body Membership Number</label>
+            <label class="input">
+              <i class="icon-append fa fa-user"></i>
+              <input type="text" formControlName="professionalMembershipNumber">
+            </label>
+          </section>
+          <section class="col col-6">
+            <label class="label required">Career Started On: <span class="text-muted-light">(To reflect your experience)</span></label>
+            <label class="input">
+              <i class="icon-append fa fa-user"></i>
+              <input type="text" formControlName="careerStartedOn">
+            </label>
+            <div class="form-error-content" *ngIf="submitted">
+              <span *ngIf="userForm.get('careerStartedOn').errors?.required">
+              </span>
+            </div>
+          </section>
+        </div>
 
-      <section class="col col-6">
-        <label class="label required">Email</label>
-        <label class="input">
-          <i class="icon-append fa fa-at"></i>
-          <input type="email" formControlName="emailAddress">
+
+      </div>
+    </div>
+    <div class="row">
+      <section>
+        <label class="label">Message on Appointment Booking Page
+          <span class="pull-right">
+            Position:&nbsp;
+
+            <input type="radio" name="messageShowPosition" formControlName="messageShowPosition" value="top">Top
+            <input type="radio" name="messageShowPosition" formControlName="messageShowPosition" value="bottom">Bottom
+
+          </span>
         </label>
-        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-          <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
-            Email is required
-          </div>
-          <div *ngIf="userForm.controls['emailAddress'].errors && !userForm.controls['emailAddress'].errors.required && userForm.controls['emailAddress'].errors.email">
-            Email is invalid
-          </div>
-        </div>
+        <label class="textarea">
+          <textarea matInput formControlName="messageOnBookingApp" matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="6"></textarea>
+        </label>
       </section>
     </div>
-
     <div class="row">
-      <section class="col col-6">
-        <label class="label required">Address 1</label>
-        <label class="input">
-          <i class="icon-append fa fa-building"></i>
-          <input formControlName="addressLine1" type="text" maxlength="50" class="form-control" placeholder="Enter House/Office">
-        </label>
-        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-          <div *ngIf="userForm.controls['addressLine1'].errors && userForm.controls['addressLine1'].errors.required">
-            Address is required
-          </div>
-        </div>
-      </section>
-
-      <section class="col col-6">
-        <label class="label">Address 2</label>
-        <label class="input">
-          <i class="icon-append fa fa-building"></i>
-          <input formControlName="addressLine2" type="text" maxlength="50" class="form-control" placeholder="Enter Street Name">
-        </label>
-      </section>
-    </div>
-
-    <div class="row">
-      <section class="col col-6">
-        <label class="label required">City</label>
-        <label class="input">
-          <i class="icon-append fa fa-building"></i>
-          <input formControlName="city" type="text" maxlength="50" class="form-control" placeholder="Enter City Name">
-        </label>
-        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-          <div *ngIf="userForm.controls['city'].errors && userForm.controls['city'].errors.required">
-            City is required
-          </div>
-        </div>
-      </section>
-
-      <section class="col col-6">
-        <label class="label required">Postcode</label>
-        <label class="input">
-          <i class="icon-append fa fa-area-chart"></i>
-          <input formControlName="postcode" type="text" maxlength="50" class="form-control" placeholder="Enter Postcode Name">
-        </label>
-        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-          <div *ngIf="userForm.controls['postcode'].errors && userForm.controls['postcode'].errors.required">
-            Postcode is required
-          </div>
-        </div>
+      <section>
+        <app-address formControlName="address"></app-address>
       </section>
     </div>
     <div class="row">
-      <section class="col col-4">
+      <section>
         <label class="label required">Services</label>
-        <mat-list-item *ngFor="let c of categories">
-          <h4 mat-line>{{c.categoryName}}</h4>
-          <ngx-datatable [rows]="c.services" [columnMode]="'flex'" [headerHeight]="0" [footerHeight]="0" [rowHeight]="'auto'" [selectionType]="'checkbox'"
-            (select)='onSelect($event)' [selected]="selectedServices">
+        <!-- <mat-list-item *ngFor="let c of categories">
+          <h4 mat-line>{{c.categoryName}}</h4> -->
+        <ngx-datatable [rows]="services" class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [footerHeight]="0" [rowHeight]="'auto'"
+          [selectionType]="'checkbox'" (select)='onSelect($event)' [selected]="selectedServices">
+          <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [flexGrow]="1">
+            <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+              Enable
+              <!-- <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" /> -->
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"
+              let-row="row">
+              <div>
+                <mat-checkbox [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Service Name" prop="serviceName" [flexGrow]="2"></ngx-datatable-column>
+          <ngx-datatable-column name="Duration" prop="duration" [flexGrow]="1">
+            <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+              <span>{{row['duration']}} {{row['durationType']}}</span>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+        <!-- </mat-list-item> -->
+      </section>
+    </div>
+
+    <div class="row">
+      <section>
+        <label class="label">Enable gap between appointments</label>
+        <label class="select">
+          <select formControlName="gapBetweenAppointments" class="form-control">
+            <option selected>None</option>
+            <option>5 Minutes</option>
+            <option>10 Minutes</option>
+            <option>15 Minutes</option>
+            <option>30 Minutes</option>
+          </select>
+          <i></i>
+        </label>
+      </section>
+    </div>
+
+    <div class="row">
+      <section>
+        <label class="label required">Online Booking Availability
+          <span class="pull-right"> <input type="checkbox" (change)="showAdvanced = !showAdvanced" /> Show Advanced
+          </span>
+        </label>
+        <div class="panel panel-green margin-bottom-40 zero-border" *ngIf="!showAdvanced">
+          <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='resource.workingHours'
+            [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
+            <ngx-datatable-column name="Day" prop="dayId" [flexGrow]="1">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <div>{{dayOfWeek(value-1)}}</div>
+              </ng-template>
+            </ngx-datatable-column>
             <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
               <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
                 <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
               </ng-template>
-              <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"
-                let-row="row">
-                <div>
-                  <mat-checkbox [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+              <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-rowIndex="rowIndex" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event); updateIsOpen($event, rowIndex, isSelected)"
+                />
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [sortable]="false" name="Start Time" prop="startTime" [flexGrow]="2" headerClass="text-center">
+              <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                <div class="text-center">
+                  <select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'hour')">
+                    <option *ngFor="let time of timings.hours" [value]="time">{{time}}</option>
+                  </select>
+                  <select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'minute')">
+                    <option *ngFor="let time of timings.minutes" [value]="time">{{time}}</option>
+                  </select>
                 </div>
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column prop="serviceName" [flexGrow]="4"></ngx-datatable-column>
+            <ngx-datatable-column [sortable]="false" name="End Time" prop="endTime" [flexGrow]="2" headerClass="text-center">
+              <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                <div class="text-center">
+                  <select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'hour')">
+                    <option *ngFor="let time of timings.hours" [value]="time">{{time}}</option>
+                  </select>
+                  <select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'minute')">
+                    <option *ngFor="let time of timings.minutes" [value]="time">{{time}}</option>
+                  </select>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Action" prop="isOpen" [flexGrow]="2">
+              <ng-template let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                <a *ngIf="value" (click)="updateAllTimings($event, rowIndex)" style="cursor: pointer">Apply time to all</a>
+                <span *ngIf="!value">sit back and relax-all day closed</span>
+              </ng-template>
+            </ngx-datatable-column>
           </ngx-datatable>
-        </mat-list-item>
-      </section>
-    </div>
-    <div class="row">
-      <label class="label">Color (To show inside appointment calendar)</label>
-      <label class="input">
-        <div class="col-1">
-          <input formControlName="color" type="color">
         </div>
-      </label>
+
+        <div class="panel panel-green margin-bottom-40 zero-border" *ngIf="showAdvanced">
+          <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='resource.workingHours'
+            [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
+            <ngx-datatable-column name="Day" prop="dayId" [flexGrow]="1">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <div>{{dayOfWeek(value-1)}}</div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+              <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+              </ng-template>
+              <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-rowIndex="rowIndex" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event); updateIsOpen($event, rowIndex, isSelected)"
+                />
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [sortable]="false" name="Before Start Time" prop="beforeStartExtraTime" [flexGrow]="2" headerClass="text-center">
+              <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                <div class="text-center">
+                  <select [value]="value" [disabled]="!isSelected">
+                    <option *ngFor="let time of extraTimes" [value]="time">{{time}}</option>
+                  </select>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [sortable]="false" name="Premium" prop="beforeStartPremium" [flexGrow]="1" headerClass="text-center">
+              <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                <div class="text-center">
+                  <input type="number" class="resource-premium-input" [value]="value" min="0" max="100" minlength="1" maxlength="3">%
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [sortable]="false" name="Start Time" prop="startTime" [flexGrow]="2" headerClass="text-center">
+              <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                <div class="text-center">
+                  <select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'hour')">
+                    <option *ngFor="let time of timings.hours" [value]="time">{{time}}</option>
+                  </select>
+                  <select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'minute')">
+                    <option *ngFor="let time of timings.minutes" [value]="time">{{time}}</option>
+                  </select>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [sortable]="false" name="End Time" prop="endTime" [flexGrow]="2" headerClass="text-center">
+              <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                <div class="text-center">
+                  <select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'hour')">
+                    <option *ngFor="let time of timings.hours" [value]="time">{{time}}</option>
+                  </select>
+                  <select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'minute')">
+                    <option *ngFor="let time of timings.minutes" [value]="time">{{time}}</option>
+                  </select>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [sortable]="false" name="After End Time" prop="afterEndExtraTime" [flexGrow]="2" headerClass="text-center">
+              <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                <div class="text-center">
+                  <select [value]="value" [disabled]="!isSelected">
+                    <option *ngFor="let time of extraTimes" [value]="time">{{time}}</option>
+                  </select>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [sortable]="false" name="Premium" prop="afterEndPremium" [flexGrow]="1" headerClass="text-center">
+              <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                <div class="text-center">
+                  <input type="number" class="resource-premium-input" [value]="value" min="0" max="100" minlength="1" maxlength="3">%
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Action" prop="isOpen" [flexGrow]="2">
+              <ng-template let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                <a *ngIf="value" (click)="updateAllTimings($event, rowIndex)" style="cursor: pointer">Apply time to all</a>
+                <span *ngIf="!value">sit back and relax-all day closed</span>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </section>
     </div>
 
     <div class="pull-right">

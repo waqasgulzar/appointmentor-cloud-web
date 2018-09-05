@@ -6,7 +6,6 @@ import { Entity } from '../models/entity';
 
 @Injectable()
 export class DataService {
-
   private _resources: Array<_model.Resource> = [];
   private _categories: Array<_model.Category> = [];
   private _services: Array<_model.Service> = [];
@@ -18,10 +17,8 @@ export class DataService {
     private servicesService: _api.ServiceService,
     private resourcesService: _api.ResourceService,
     private openingtimesService: _api.OpeningTimeService,
-    private categoryService: _api.CategoryService,
-  ) {
-
-  }
+    private categoryService: _api.CategoryService
+  ) {}
 
   requestDataFromMultipleSources(): Observable<any[]> {
     let resources = this.resourcesService.getAll();
@@ -36,11 +33,14 @@ export class DataService {
     if (this._resources.length > 0) {
       return Observable.of(this._resources);
     } else {
-      this.resourcesService.getAll().map(response => {
-        this.observable = null;
-        this._resources = response;
-        return this._resources;
-      }).share();
+      this.resourcesService
+        .getAll()
+        .map((responses: _model.Resource[]) => {
+          this.observable = null;
+          this._resources = responses;
+          return this._resources;
+        })
+        .share();
     }
   }
 
@@ -48,11 +48,14 @@ export class DataService {
     if (this._categories.length > 0) {
       return Observable.of(this._categories);
     } else {
-      this.categoryService.getAll().map(response => {
-        this.observable = null;
-        this._categories = response;
-        return this._categories;
-      }).share();
+      this.categoryService
+        .getAll()
+        .map(response => {
+          this.observable = null;
+          this._categories = response;
+          return this._categories;
+        })
+        .share();
     }
   }
 
@@ -60,24 +63,29 @@ export class DataService {
     if (this._services.length > 0) {
       return Observable.of(this._services);
     } else {
-      this.servicesService.getAll().map(response => {
-        this.observable = null;
-        this._services = response;
-        return this._services;
-      }).share();
+      this.servicesService
+        .getAll()
+        .map(response => {
+          this.observable = null;
+          this._services = response;
+          return this._services;
+        })
+        .share();
     }
   }
-
 
   getOpeningTImes() {
     if (this._openingTimes.length > 0) {
       return Observable.of(this._openingTimes);
     } else {
-      this.openingtimesService.getAll().map(response => {
-        this.observable = null;
-        this._openingTimes = response;
-        return this._openingTimes;
-      }).share();
+      this.openingtimesService
+        .getAll()
+        .map(response => {
+          this.observable = null;
+          this._openingTimes = response;
+          return this._openingTimes;
+        })
+        .share();
     }
   }
 
@@ -85,11 +93,14 @@ export class DataService {
     if (this._customers.length > 0) {
       return Observable.of(this._customers);
     } else {
-      this.customerService.getAll().map(response => {
-        this.observable = null;
-        this._customers = response;
-        return this._customers;
-      }).share();
+      this.customerService
+        .getAll()
+        .map(response => {
+          this.observable = null;
+          this._customers = response;
+          return this._customers;
+        })
+        .share();
     }
   }
 }

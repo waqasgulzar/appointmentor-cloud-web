@@ -41,10 +41,8 @@ export class ServiceEditComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private userInfoService: UserInfoService,
     private lookupService: _api.LookupService,
-    private categoryService: _api.CategoryService,
-  ) {
-
-  }
+    private categoryService: _api.CategoryService
+  ) {}
 
   ngOnInit() {
     this.spinner.show();
@@ -55,8 +53,18 @@ export class ServiceEditComponent implements OnInit {
 
     this.userForm = this.fb.group({
       OrganizationId: this.userInfoService.currentUser.organizationId,
-      ServiceName: ['', Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9 ]*$')])],
-      Duration: ['', Validators.compose([Validators.required, Validators.maxLength(2)])],
+      ServiceName: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.maxLength(50),
+          Validators.pattern('^[a-zA-Z0-9 ]*$')
+        ])
+      ],
+      Duration: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(2)])
+      ],
       DurationType: ['Minutes'],
       Price: [0, Validators.compose([Validators.required])],
       ckPriceOnApplication: [false],
@@ -70,12 +78,15 @@ export class ServiceEditComponent implements OnInit {
       bufferTimeAfter: [null],
       isOnlineGroupBooking: [false],
       isCustomBookableTime: [false],
-      isDeleted: [false],
+      isDeleted: [false]
     });
 
     this.route.params.subscribe(params => {
       var id = parseInt(params.id);
-      if (id > 0) this.LoadService(id);
+      if (id > 0) {
+        this.id = id;
+        this.LoadService(id);
+      }
     });
 
     this.loadPermission();
@@ -98,7 +109,9 @@ export class ServiceEditComponent implements OnInit {
         duration: formData.controls['Duration'].value,
         durationType: formData.controls['DurationType'].value,
         isPriceOfApplication: formData.controls['ckPriceOnApplication'].value,
-        price: formData.controls['ckPriceOnApplication'].value ? 0 : formData.controls['Price'].value,
+        price: formData.controls['ckPriceOnApplication'].value
+          ? 0
+          : formData.controls['Price'].value,
         categoryId: formData.controls['categoryId'].value,
         permissionId: formData.controls['PermissionId'].value,
         isCustomerSupport: formData.controls['ckCustomerSupport'].value,
@@ -112,24 +125,47 @@ export class ServiceEditComponent implements OnInit {
         isDeleted: false
       } as _model.Service;
 
-      this.servicesService.create(service).subscribe(
-        (data: any) => {
-          const successNotification: NotificationProperties = {
-            message: 'Service has been save successfully.',
-            title: 'Service'
-          };
-          this.notificationService.success(successNotification);
-          this.spinner.hide();
-          this.router.navigate(['/categories']);
-        },
-        error => {
-          const errorNotification: NotificationProperties = {
-            message: error.error,
-            title: 'Service'
-          };
-          this.notificationService.error(errorNotification);
-          this.spinner.hide();
-        });
+      if (this.id > 0) {
+        this.servicesService.update(this.id, service).subscribe(
+          (data: any) => {
+            const successNotification: NotificationProperties = {
+              message: 'Service has been updated successfully.',
+              title: 'Service'
+            };
+            this.notificationService.success(successNotification);
+            this.spinner.hide();
+            this.router.navigate(['/categories']);
+          },
+          error => {
+            const errorNotification: NotificationProperties = {
+              message: error.error,
+              title: 'Service'
+            };
+            this.notificationService.error(errorNotification);
+            this.spinner.hide();
+          }
+        );
+      } else {
+        this.servicesService.create(service).subscribe(
+          (data: any) => {
+            const successNotification: NotificationProperties = {
+              message: 'Service has been save successfully.',
+              title: 'Service'
+            };
+            this.notificationService.success(successNotification);
+            this.spinner.hide();
+            this.router.navigate(['/categories']);
+          },
+          error => {
+            const errorNotification: NotificationProperties = {
+              message: error.error,
+              title: 'Service'
+            };
+            this.notificationService.error(errorNotification);
+            this.spinner.hide();
+          }
+        );
+      }
     }
   }
 
@@ -144,7 +180,16 @@ export class ServiceEditComponent implements OnInit {
         Price: srv.price,
         ckPriceOnApplication: srv.isPriceOfApplication,
         ckCustomerSupport: srv.isCustomerSupport,
-        Occupancy: srv.occupancy
+        Occupancy: srv.occupancy,
+        PermissionId: srv.permissionId,
+        categoryId: srv.categoryId,
+        serviceDescription: srv.serviceDescription,
+        offerPrice: srv.offerPrice,
+        bufferTimeBefore: srv.bufferTimeBefore,
+        bufferTimeAfter: srv.bufferTimeAfter,
+        isOnlineGroupBooking: srv.isOnlineGroupBooking,
+        isCustomBookableTime: srv.isCustomBookableTime,
+        isDeleted: srv.isDeleted
       });
     });
   }
