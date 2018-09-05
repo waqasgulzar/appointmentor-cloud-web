@@ -15,3 +15,9 @@ install:
 script:
   - ng build --prod
   
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: node deploy.js
+  on:
+    branch: stage
