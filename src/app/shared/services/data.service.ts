@@ -1,8 +1,9 @@
 ﻿import * as _model from '../../shared/models/models';
 import * as _api from '../../shared/services/api';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of, forkJoin } from 'rxjs';
 import { Entity } from '../models/entity';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DataService {
@@ -26,81 +27,76 @@ export class DataService {
     let services = this.servicesService.getAll();
     let openingTimes = this.openingtimesService.getAll();
     let customers = this.customerService.getAll();
-    return Observable.forkJoin([customers, services, resources, openingTimes]);
+    return forkJoin([customers, services, resources, openingTimes]);
   }
 
   getResources() {
     if (this._resources.length > 0) {
-      return Observable.of(this._resources);
+      return of(this._resources);
     } else {
-      this.resourcesService
-        .getAll()
-        .map((responses: _model.Resource[]) => {
+      this.resourcesService.getAll().pipe(
+        map((responses: _model.Resource[]) => {
           this.observable = null;
           this._resources = responses;
           return this._resources;
         })
-        .share();
+      );
     }
   }
 
   getCategories() {
     if (this._categories.length > 0) {
-      return Observable.of(this._categories);
+      return of(this._categories);
     } else {
-      this.categoryService
-        .getAll()
-        .map(response => {
+      this.categoryService.getAll().pipe(
+        map(response => {
           this.observable = null;
           this._categories = response;
           return this._categories;
         })
-        .share();
+      );
     }
   }
 
   getServices() {
     if (this._services.length > 0) {
-      return Observable.of(this._services);
+      return of(this._services);
     } else {
-      this.servicesService
-        .getAll()
-        .map(response => {
+      this.servicesService.getAll().pipe(
+        map(response => {
           this.observable = null;
           this._services = response;
           return this._services;
         })
-        .share();
+      );
     }
   }
 
   getOpeningTImes() {
     if (this._openingTimes.length > 0) {
-      return Observable.of(this._openingTimes);
+      return of(this._openingTimes);
     } else {
-      this.openingtimesService
-        .getAll()
-        .map(response => {
+      this.openingtimesService.getAll().pipe(
+        map(response => {
           this.observable = null;
           this._openingTimes = response;
           return this._openingTimes;
         })
-        .share();
+      );
     }
   }
 
   getCustomers() {
     if (this._customers.length > 0) {
-      return Observable.of(this._customers);
+      return of(this._customers);
     } else {
-      this.customerService
-        .getAll()
-        .map(response => {
+      this.customerService.getAll().pipe(
+        map(response => {
           this.observable = null;
           this._customers = response;
           return this._customers;
         })
-        .share();
+      );
     }
   }
 }

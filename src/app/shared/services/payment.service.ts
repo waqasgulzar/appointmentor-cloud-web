@@ -4,7 +4,8 @@ import * as _model from '../../shared/models/models';
 import { HttpClient } from '@angular/common/http';
 import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 import { Entity } from '../../shared/models/entity';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class PaymentService extends RestService<_model.PaymentInfo> {
@@ -28,7 +29,8 @@ export class PaymentService extends RestService<_model.PaymentInfo> {
   }
 
   Charge(model: _model.PaymentInfo): Observable<any> {
-    return this.http.post(this.getUri() + '/charge', model)
-      .map((response: Response) => response.json());
+    return this.http
+      .post(this.getUri() + '/charge', model)
+      .pipe(map((response: Response) => response.json()));
   }
 }

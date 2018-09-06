@@ -63,7 +63,6 @@ import { EposComponent } from './modules/setting/epos/epos.component';
 import { PaymentsComponent } from './modules/setting/payments/payments.component';
 import { AppointmentBookingComponent } from './shared/appointmentBooking/appointmentBooking.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { NgxEditorModule } from 'ngx-editor';
 import { ToastrModule } from 'ngx-toastr';
 import { TagInputModule } from 'ngx-chips';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
@@ -143,14 +142,13 @@ import {
   SocialLoginModule,
   AuthServiceConfig,
   GoogleLoginProvider,
-  FacebookLoginProvider,
-  LinkedinLoginProvider
-} from 'angular5-social-login';
+  FacebookLoginProvider
+  //LinkedinLoginProvider,
+} from 'angular-6-social-login';
 import { RedirectFreeAgent } from './modules/setting/freeagent/redirect-free-agent/redirect-free-agent.component';
 import { AddressComponent } from './shared/components/address/address.component';
 import { LanguageComponent } from './shared/components/language/language.component';
 import { QualificationsComponent } from './shared/components/qualifications/qualifications.component';
-
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig([
     {
@@ -160,13 +158,13 @@ export function getAuthServiceConfigs() {
     {
       id: GoogleLoginProvider.PROVIDER_ID,
       provider: new GoogleLoginProvider(
-        '116169513082-qq5r6q24b55ag0k4mbtj9bu6tolka08h.apps.googleusercontent.com'
+        '116169513082-oole97icce4valkclk7ktrrgn4ulept6.apps.googleusercontent.com'
       )
-    },
-    {
-      id: LinkedinLoginProvider.PROVIDER_ID,
-      provider: new LinkedinLoginProvider('773c5d9xsp5bcn')
     }
+    //   {
+    //     id: LinkedinLoginProvider.PROVIDER_ID,
+    //     provider: new LinkedinLoginProvider("773c5d9xsp5bcn")
+    //  }
   ]);
   return config;
 }
@@ -224,7 +222,6 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     MatTooltipModule,
     NgxDatatableModule,
     ToastrModule.forRoot({ preventDuplicates: true }),
-    NgxEditorModule,
     SocialLoginModule
   ],
   declarations: [
