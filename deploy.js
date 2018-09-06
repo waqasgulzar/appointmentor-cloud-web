@@ -14,10 +14,10 @@ var PORT = ENV.FTP_SERVER_PORT || 21;
 
 var client = new Client();
 client.on('greeting', function(msg) {
-  c.list(function(err, list) {
+  client .list(function(err, list) {
       if (err) throw err;
       console.dir(list);
-      c.end();
+      client.end();
     });
   
   console.log(chalk.green('greeting'), msg);
