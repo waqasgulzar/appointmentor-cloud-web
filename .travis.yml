@@ -16,7 +16,7 @@ script:
   - ng build --prod
   
 deploy:
-  skip_cleanup: true
+  skip_cleanup: false
   provider: script
   script: node deploy.js
   on:
