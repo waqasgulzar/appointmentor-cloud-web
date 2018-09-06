@@ -11,12 +11,15 @@ var PASSWORD = ENV.FTP_PASSWORD;
 var HOST = ENV.FTP_SERVER_HOST;
 var PORT = ENV.FTP_SERVER_PORT || 21;
 
-console.log(chalk.red(HOST))
-console.log(chalk.red(BUILD_PATH))
-console.log(chalk.red(TARGET_PATH))
 
 var client = new Client();
 client.on('greeting', function(msg) {
+  c.list(function(err, list) {
+      if (err) throw err;
+      console.dir(list);
+      c.end();
+    });
+  
   console.log(chalk.green('greeting'), msg);
 });
 client.on('ready', function() {
