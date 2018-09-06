@@ -10,7 +10,11 @@ var USERNAME = ENV.FTP_USERNAME;
 var PASSWORD = ENV.FTP_PASSWORD;
 var HOST = ENV.FTP_SERVER_HOST;
 var PORT = ENV.FTP_SERVER_PORT || 21;
- 
+
+console.log(chalk.red(HOST))
+console.log(chalk.red(BUILD_PATH))
+console.log(chalk.red(TARGET_PATH))
+
 var client = new Client();
 client.on('greeting', function(msg) {
   console.log(chalk.green('greeting'), msg);
@@ -22,11 +26,11 @@ client.on('ready', function() {
      * somehow you need to workout what files you are going to upload
      * you may need to compare with what already exists in the server
      */
-    var uploadList = ['dist/*']
+    var uploadList = ['dist/*.*']
     var total = uploadList.length;
     var uploadCount = 0;
     var errorList = [];
-	console.info(total, chalk.yellow(' files found in dist folder to deploy'));
+    console.info(total, chalk.yellow(' files found in dist folder to deploy'));
     uploadList.forEach(function(file) {
       console.log(chalk.blue('start'), file.local + chalk.grey(' --> ') + file.target);
       client.put(file.local, file.target, function(err) {
