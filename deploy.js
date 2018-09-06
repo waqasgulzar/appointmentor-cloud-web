@@ -22,10 +22,11 @@ client.on('ready', function() {
      * somehow you need to workout what files you are going to upload
      * you may need to compare with what already exists in the server
      */
-    var uploadList = ['dist/*'];
+    var uploadList = ['dist/*']
     var total = uploadList.length;
     var uploadCount = 0;
     var errorList = [];
+	console.info(total, chalk.yellow(' files found in dist folder to deploy'));
     uploadList.forEach(function(file) {
       console.log(chalk.blue('start'), file.local + chalk.grey(' --> ') + file.target);
       client.put(file.local, file.target, function(err) {
