@@ -115,7 +115,7 @@
           </div>
           <label class="label">Message*</label>
 
-          <app-ngx-editor [config]="editorConfig" required formControlName="message" [spellcheck]="true"></app-ngx-editor>
+          <!-- <app-ngx-editor [config]="editorConfig" required formControlName="message" [spellcheck]="true"></app-ngx-editor> -->
 
           <div class="form-error-content" *ngIf="submitted">
             <span *ngIf="userForm.get('message').errors?.required">

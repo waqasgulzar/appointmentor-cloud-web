@@ -9,8 +9,7 @@ import * as _model from '../../../shared/models/models';
 import * as _api from '../../../shared/services/api';
 import { Router } from '@angular/router';
 import { UserInfoService } from '../../../shared/services/userInfo.service';
-import { Observable } from 'rxjs/Observable';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { Observable, forkJoin } from 'rxjs';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NotificationProperties } from '../../../shared/interfaces/NotificationProperties';
@@ -39,10 +38,7 @@ export class GeneralComponent implements OnInit {
     private openingtimesService: _api.OpeningTimeService,
     private lookupSrv: _api.LookupService,
     private router: Router
-  ) {
-
-
-  }
+  ) {}
 
   ngOnInit() {
     this.orgInfo = this.userInfo.currentUser;
@@ -61,20 +57,21 @@ export class GeneralComponent implements OnInit {
       isDeleted: ['']
     });
 
-    Observable.forkJoin(
+    forkJoin(
       this.lookupSrv.load('Currency'),
       this.lookupSrv.load('Timezone')
-    ).subscribe(([currencies, timezones]) => {
-      this.currencylist = currencies;
-      this.timezonelist = timezones;
+    ).subscribe(
+      ([currencies, timezones]) => {
+        this.currencylist = currencies;
+        this.timezonelist = timezones;
 
-      //this.userForm = this.fb.group({
-      //  calendarIntervalIncrement: ['15'],
-      //  dateFormat: ['mm/dd/yyyy'],
-      //  timeZone: [this.orgInfo.timezoneId],
-      //  currency: [this.orgInfo.currencyId]
-      //});
-    },
+        //this.userForm = this.fb.group({
+        //  calendarIntervalIncrement: ['15'],
+        //  dateFormat: ['mm/dd/yyyy'],
+        //  timeZone: [this.orgInfo.timezoneId],
+        //  currency: [this.orgInfo.currencyId]
+        //});
+      },
       err => console.error(err)
     );
   }
@@ -95,23 +92,26 @@ export class GeneralComponent implements OnInit {
     this.submitted = true;
     if (!formData.invalid) {
       this.spinner.show();
-      this.orgService.update(this.orgInfo.organizationId, formData.value).subscribe(
-        (data: any) => {
-          const successNotification: NotificationProperties = {
-            message: 'Settings has been updated successfully.',
-            title: 'Settings'
-          };
-          this.notificationService.success(successNotification);
-          this.spinner.hide();
-        },
-        error => {
-          const errorNotification: NotificationProperties = {
-            message: error.error,
-            title: 'Settings'
-          };
-          this.notificationService.error(errorNotification);
-          this.spinner.hide();
-        });
+      this.orgService
+        .update(this.orgInfo.organizationId, formData.value)
+        .subscribe(
+          (data: any) => {
+            const successNotification: NotificationProperties = {
+              message: 'Settings has been updated successfully.',
+              title: 'Settings'
+            };
+            this.notificationService.success(successNotification);
+            this.spinner.hide();
+          },
+          error => {
+            const errorNotification: NotificationProperties = {
+              message: error.error,
+              title: 'Settings'
+            };
+            this.notificationService.error(errorNotification);
+            this.spinner.hide();
+          }
+        );
     }
   }
 }

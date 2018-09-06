@@ -4,13 +4,13 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
-  ChangeDetectorRef,  OnInit
+  ChangeDetectorRef,
+  OnInit
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as _api from '../../shared/services/api';
 import { ActivatedRoute } from '@angular/router';
-
 
 @Component({
   selector: 'receipt-component',
@@ -20,15 +20,12 @@ export class ReceiptComponent implements OnInit {
   user: any;
   practice: any;
   id: number = 0;
-  
+
   constructor(
     private cd: ChangeDetectorRef,
     private paymentService: _api.PaymentService,
-    private route: ActivatedRoute,
-    ) { }
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit() {
-    
-  }
-
+  ngOnInit() {}
 }

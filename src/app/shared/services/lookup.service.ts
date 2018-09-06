@@ -6,7 +6,7 @@ import { ErrorHandlerService } from '../../shared/services/error-handler.service
 import { Entity } from '../../shared/models/entity';
 import { environment } from '../../../environments/environment';
 import { catchError, map } from 'rxjs/operators';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class LookupService extends RestService<_model.User> {
