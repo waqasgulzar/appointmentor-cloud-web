@@ -22,7 +22,7 @@ client.on('ready', function() {
      * somehow you need to workout what files you are going to upload
      * you may need to compare with what already exists in the server
      */
-    var uploadList = /* your upload list */
+    var uploadList = ['dist/*'];
     var total = uploadList.length;
     var uploadCount = 0;
     var errorList = [];
