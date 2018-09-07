@@ -3,7 +3,7 @@
 <form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" class="sky-form">
   <input type="hidden" formControlName="resourceId" />
   <input type="hidden" formControlName="organizationId" />
-  <pre>{{userForm.value | json}}</pre>
+  <!-- <pre>{{userForm.value | json}}</pre> -->
   <fieldset>
     <div class="row">
       <div class="col col-2 no-padding no-margin">
@@ -13,7 +13,7 @@
         </section>
         <section>
           <label class="label">Color <p class="text-muted-light">(To show inside appointment calendar)</p></label>
-          <label class="input">
+          <label class="input col col-6">
             <input matInput formControlName="color" type="color">
           </label>
         </section>
@@ -314,7 +314,7 @@
                 />
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column [sortable]="false" name="Before Start Time" prop="beforeStartExtraTime" [flexGrow]="2" headerClass="text-center">
+            <ngx-datatable-column [sortable]="false" name="Premium Service Before Start" prop="beforeStartExtraTime" [flexGrow]="2" headerClass="text-center">
               <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
                 <div class="text-center">
                   <select [value]="value" [disabled]="!isSelected">
@@ -354,7 +354,7 @@
                 </div>
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column [sortable]="false" name="After End Time" prop="afterEndExtraTime" [flexGrow]="2" headerClass="text-center">
+            <ngx-datatable-column [sortable]="false" name="Premium Service After End" prop="afterEndExtraTime" [flexGrow]="2" headerClass="text-center">
               <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
                 <div class="text-center">
                   <select [value]="value" [disabled]="!isSelected">

@@ -61,22 +61,20 @@ export class AppointmentBookingComponent implements OnInit {
     if (data.id > 0) {
       this.appointment = data;
     } else {
+      this.startDate = new Date();
       var r: _model.Resource;
+      this.appointment = new _model.Appointment();
+      this.appointment.date = this.startDate;
       this.appointment.resource = r;
       this.appointment.customers = new Array<_model.Customer>();
     }
   }
 
   ngOnInit() {
-    this.startDate = new Date();
-    console.log(this.appointment);
-    if (this.appointment.id <= 0) {
-      this.appointment.date = this.startDate;
-    }
     this.getDates(4);
 
     this.user = this.userInfo.currentUser;
-    this.spinner.show();
+
     this.dataService
       .requestDataFromMultipleSources()
       .subscribe(responseList => {
@@ -84,8 +82,6 @@ export class AppointmentBookingComponent implements OnInit {
         this.services = responseList[1];
         this.resources = responseList[2];
         this.openingtimes = responseList[3];
-
-        this.spinner.hide();
       });
 
     this.firstFormGroup = this._formBuilder.group({

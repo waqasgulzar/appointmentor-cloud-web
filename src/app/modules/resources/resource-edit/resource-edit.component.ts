@@ -3,7 +3,8 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
+  ValidationErrors
 } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as _model from '../../../shared/models/models';
@@ -29,7 +30,7 @@ export class ResourceEditComponent implements OnInit {
   resourceId: number = 0;
   submitted = false;
   resource: _model.Resource = new _model.Resource();
-  languages: string[] = [];
+  languages: string[] = ['English'];
   qualifications: string[] = [];
   userForm = this.fb.group({
     resourceId: [this.resourceId],
@@ -50,26 +51,26 @@ export class ResourceEditComponent implements OnInit {
         Validators.pattern('^[a-zA-Z ]*$')
       ]
     ],
-    gender: ['male', [Validators.required]],
-    phone: ['', [Validators.required]],
-    mobile: ['', [Validators.required]],
+    gender: ['Male', [Validators.required]],
+    phone: [''],
+    mobile: [''],
     emailAddress: ['', [Validators.required, Validators.email]],
     address: new FormControl(''),
     isSendConfirmationEmail: ['', [Validators.required]],
     color: ['', [Validators.required]],
-    isDeleted: ['', [Validators.required]],
-    profileImageUrl: ['', [Validators.required]],
+    isDeleted: ['false'],
+    profileImageUrl: [''],
     professionalMembershipNumber: [''],
-    careerStartedOn: ['', [Validators.required]],
+    careerStartedOn: [''],
     languages: ['', [Validators.required]],
-    qualifications: ['', [Validators.required]],
-    twitter: ['', [Validators.required]],
-    linkedIn: ['', [Validators.required]],
-    facebook: ['', [Validators.required]],
-    google: ['', [Validators.required]],
+    qualifications: [''],
+    twitter: [''],
+    linkedIn: [''],
+    facebook: [''],
+    google: [''],
     gapBetweenAppointments: ['None', [Validators.required]],
-    messageOnBookingApp: ['', [Validators.required]],
-    messageShowPosition: ['', [Validators.required]],
+    messageOnBookingApp: [''],
+    messageShowPosition: [''],
     serviceResource: [],
     workingHours: []
   });
@@ -161,6 +162,8 @@ export class ResourceEditComponent implements OnInit {
       environment.apiUrl + '/UploadFiles/' + this.resource.profileImageUrl
     );
 
+    this.languages = this.resource.languages.split(',');
+    this.qualifications = this.resource.qualifications.split(',');
     this.userForm.setValue({
       resourceId: this.resource.resourceId,
       organizationId: this.userInfo.currentUser.organizationId,
@@ -202,53 +205,65 @@ export class ResourceEditComponent implements OnInit {
 
   onSubmit(formData: FormGroup) {
     this.submitted = true;
-    if (!formData.invalid) {
-      formData.get('serviceresource').setValue(this.selectedServices);
-      formData.get('languages').setValue(this.languages);
-      console.log(JSON.stringify(formData.value));
 
-      // this.spinner.show();
-      // if (this.resourceId == 0) {
-      //   this.resourceService.create(formData.value).subscribe(
-      //     (data: any) => {
-      //       const successNotification: NotificationProperties = {
-      //         message: 'Resource has been created successfully.',
-      //         title: 'Resources'
-      //       };
-      //       this.notificationService.success(successNotification);
-      //       this.spinner.hide();
-      //       this.router.navigate(['/resources']);
-      //     },
-      //     error => {
-      //       this.spinner.hide();
-      //       const errorNotification: NotificationProperties = {
-      //         message: error.error,
-      //         title: 'Resources'
-      //       };
-      //       this.notificationService.error(errorNotification);
-      //     }
-      //   );
-      // } else {
-      //   this.resourceService.update(this.resourceId, formData.value).subscribe(
-      //     (data: any) => {
-      //       const successNotification: NotificationProperties = {
-      //         message: 'Resource has been updated successfully.',
-      //         title: 'Resources'
-      //       };
-      //       this.notificationService.success(successNotification);
-      //       this.spinner.hide();
-      //       this.router.navigate(['/resources']);
-      //     },
-      //     error => {
-      //       this.spinner.hide();
-      //       const errorNotification: NotificationProperties = {
-      //         message: error.error,
-      //         title: 'Resources'
-      //       };
-      //       this.notificationService.error(errorNotification);
-      //     }
-      //   );
-      // }
+    Object.keys(this.userForm.controls).forEach(key => {
+      const controlErrors: ValidationErrors = this.userForm.get(key).errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
+        });
+      }
+    });
+
+    if (!formData.invalid) {
+      formData.get('serviceResource').setValue(this.selectedServices);
+      formData.get('languages').setValue(this.languages.join());
+      formData.get('qualifications').setValue(this.qualifications.join());
+      this.spinner.show();
+      if (this.resourceId == 0) {
+        this.resourceService.create(formData.value).subscribe(
+          (data: any) => {
+            const successNotification: NotificationProperties = {
+              message: 'Resource has been created successfully.',
+              title: 'Resources'
+            };
+            this.notificationService.success(successNotification);
+            this.spinner.hide();
+            this.router.navigate(['/resources']);
+          },
+          error => {
+            this.spinner.hide();
+            const errorNotification: NotificationProperties = {
+              message: error.error,
+              title: 'Resources'
+            };
+            this.notificationService.error(errorNotification);
+          }
+        );
+      } else {
+        this.resourceService.update(this.resourceId, formData.value).subscribe(
+          (data: any) => {
+            const successNotification: NotificationProperties = {
+              message: 'Resource has been updated successfully.',
+              title: 'Resources'
+            };
+            this.notificationService.success(successNotification);
+            this.spinner.hide();
+            this.router.navigate(['/resources']);
+          },
+          error => {
+            this.spinner.hide();
+            const errorNotification: NotificationProperties = {
+              message: error.error,
+              title: 'Resources'
+            };
+            this.notificationService.error(errorNotification);
+          }
+        );
+      }
     }
   }
 
