@@ -8,13 +8,7 @@ import { MatDialogRef } from '@angular/material';
   styleUrls: ['language.scss']
 })
 export class LanguageComponent {
-  languages: string[] = [
-    'English - US',
-    'English - UK',
-    'Arabic',
-    'French',
-    'Italian'
-  ];
+  languages: string[] = ['English', 'Arabic', 'French', 'Italian'];
   selectedLanguages: string[] = [];
   constructor(private dialogRef: MatDialogRef<QualificationsComponent>) {}
 

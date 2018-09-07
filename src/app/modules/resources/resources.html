@@ -1,6 +1,7 @@
 ﻿<section class="content-wrapper">
   <h4>Who or What are your Resources?</h4>
-  <p>Resources are whoever or whatever your customers can book for period of times.They can be employees, facilities or room. For example, normally your first resource is you.</p>
+  <p>Resources are whoever or whatever your customers can book for period of times.They can be employees, facilities or room.
+    For example, normally your first resource is you.</p>
   <span class="pull-right">
     <a class="btn-u" [routerLink]="['/resource', 0]">
       <i class="fa fa-plus"></i>&nbsp;Create Resource
@@ -13,7 +14,11 @@
         <div style="height:30px; width:30px;" [style.background-color]="'row[color]'"></div>
       </ng-template>
     </ngx-datatable-column>-->
-    <ngx-datatable-column name="Resource Name" prop="resourceName" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Resource Name" [flexGrow]="2">
+      <ng-template ngx-datatable-cell-template let-row="row">
+        <span>{{row['firstName']}} {{row['lastName']}}</span>
+      </ng-template>
+    </ngx-datatable-column>
     <ngx-datatable-column name="Email" prop="emailAddress" [flexGrow]="2"></ngx-datatable-column>
     <ngx-datatable-column name="Address" [flexGrow]="3">
       <ng-template let-value="value" ngx-datatable-cell-template let-row="row">

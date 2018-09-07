@@ -17,15 +17,6 @@
           <input type="hidden" formControlName="organizationId">
           <div class="row">
             <section class="col col-6">
-              <label class="label required">Your Business Type</label>
-              <label class="input">
-                <i class="icon-append fa fa-building"></i>
-                <select formControlName="typeId">
-                  <option *ngFor="let item of orgTypes" [value]="item.id">{{item.title}}</option>
-                </select>
-              </label>
-            </section>
-            <section class="col col-6">
               <label class="label required">Company Name</label>
               <label class="input">
                 <i class="icon-append fa fa-building-o"></i>
@@ -37,6 +28,16 @@
                 </span>
               </div>
             </section>
+            <section class="col col-6">
+              <label class="label required">Business Type</label>
+              <label class="input">
+                <i class="icon-append fa fa-building"></i>
+                <select formControlName="typeId">
+                  <option *ngFor="let item of orgTypes" [value]="item.id">{{item.title}}</option>
+                </select>
+              </label>
+            </section>
+
           </div>
 
           <div class="row">

@@ -1,5 +1,6 @@
 ﻿<mat-toolbar>
-  New Appointment
+  <span *ngIf="appointment.id <= 0">New Appointment</span>
+  <span *ngIf="appointment.id > 0">Edit Appointment</span>
   <span class="mat-dialog-toolbar-icon"></span>
   <mat-icon class="mat-dialog-toolbar-spacer text-align-right cursor-pointer" title="Close" (click)="onClose()">clear</mat-icon>
 </mat-toolbar>
@@ -8,7 +9,7 @@
     <mat-step>
       <ng-template matStepLabel>
         <span *ngIf="!appointment.service">Select a Service</span>
-        <span *ngIf="appointment.service"> <i>Visit for</i> <b>{{appointment.service.serviceName}}</b></span>
+        <span *ngIf="appointment.service"> <i>Visit for</i> &nbsp; <b>{{appointment.service.serviceName}}</b></span>
       </ng-template>
       <mat-selection-list>
         <mat-list-option *ngFor="let serv of services" (click)="setService(serv, stepper)">
@@ -19,8 +20,8 @@
     <mat-step>
       <ng-template matStepLabel>
         <span *ngIf="!appointment.resource">Select a time</span>
-        <span *ngIf="appointment.resource"> <i>Appointment with</i> <b>{{appointment.resource.firstName}} {{appointment.resource.lastName}}</b>
-          <i>on</i> <b>{{appointment.date | date:'dd/MM/yyyy'}} {{selectedSlot.time}}</b></span>
+        <span *ngIf="appointment.resource"> <i>Appointment with</i> &nbsp; <b>{{appointment.resource.firstName}} {{appointment.resource.lastName}}</b>
+          <i>on</i> &nbsp; <b>{{appointment.date | date:'dd/MM/yyyy'}} {{selectedSlot.time}}</b></span>
       </ng-template>
       <div class="row">
         <div class="col-xs-10 col-xs-offset-1 date-display">
