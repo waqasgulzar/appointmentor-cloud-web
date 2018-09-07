@@ -19,12 +19,10 @@ export class AuthenticationService {
     let body = `grant_type=password&userName=${username}&password=${password}`;
     return this.http.post(this.authUrl, body, httpOptions).pipe(
       map((response: any) => {
-        return response.map(item => {
-          if (item && item['access_token']) {
-            localStorage.setItem('token', item['access_token']);
-          }
-          return item;
-        });
+        if (response && response['access_token']) {
+          localStorage.setItem('token', response['access_token']);
+        }
+        return response;
       })
     );
   }
