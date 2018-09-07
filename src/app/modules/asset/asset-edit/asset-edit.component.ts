@@ -112,6 +112,7 @@ export class AssetEditComponent implements OnInit {
     this.submitted = true;
     if (!formData.invalid) {
       this.spinner.show();
+      formData.value.assetservice = this.selectedServices;
       if (this.updatedAssetId == 0) {
         this.assetService.create(formData.value).subscribe(
           (data: any) => {

@@ -75,6 +75,9 @@
           <span *ngIf="userForm.get('Duration').errors?.required">
             Duration is required
           </span>
+          <span *ngIf="userForm.get('Duration').errors?.min">
+            Duration can not be less than 0.
+          </span>
         </div>
       </div>
 
@@ -95,6 +98,9 @@
           <div class="form-error-content" *ngIf="submitted">
             <span *ngIf="userForm.get('Price').errors?.required">
               Price is required
+            </span>
+            <span *ngIf="userForm.get('Price').errors?.min">
+              Price can not be less than 0.
             </span>
           </div>
         </div>
@@ -120,7 +126,7 @@
 
     <div class="row">
       <div class="col-xs-4">
-        <label class="label">Occupancy</label>
+        <label *ngIf="!isPriceOnApplication" class="label">Occupancy</label>
         <label class="input">
           <span *ngIf="!isPriceOnApplication">
             <input formControlName="Occupancy" type="number" value="1" min="1" class="form-control"/>
