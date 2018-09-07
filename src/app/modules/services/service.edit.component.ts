@@ -63,10 +63,10 @@ export class ServiceEditComponent implements OnInit {
       ],
       Duration: [
         '',
-        Validators.compose([Validators.required, Validators.maxLength(2)])
+        Validators.compose([Validators.required, Validators.maxLength(2), Validators.min(0)])
       ],
       DurationType: ['Minutes'],
-      Price: [0, Validators.compose([Validators.required])],
+      Price: [0, Validators.compose([Validators.required, Validators.min(0)])],
       ckPriceOnApplication: [false],
       ckCustomerSupport: [false],
       Occupancy: ['1'],
