@@ -1,5 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, ValidationErrors } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  ValidationErrors
+} from '@angular/forms';
 import * as _model from '../../shared/models/models';
 import * as _api from '../../shared/services/api';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -19,6 +25,7 @@ export class AccountSetupComponent implements OnInit {
   emailAddress: FormControl;
   orgId: number = 0;
   email: string;
+  orgTypes: any[];
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -27,22 +34,49 @@ export class AccountSetupComponent implements OnInit {
     private router: Router,
     private userInfo: UserInfoService,
     private spinner: NgxSpinnerService,
-    private authenticateService: _api.AuthenticationService
-  ) {
-
-  }
+    private authenticateService: _api.AuthenticationService,
+    private lookupService: _api.LookupService
+  ) {}
   ngOnInit() {
+    this.lookupService.load('OrgTypes').subscribe((data: any) => {
+      this.orgTypes = data;
+    });
+
     let userInfo = JSON.parse(localStorage.getItem('currentUser'));
     this.orgId = userInfo.organizationID;
     this.email = userInfo.emailAddress;
     this.userForm = this.fb.group({
       organizationId: [this.orgId],
-      firstName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
-      lastName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
-      companyName: ['', Validators.compose([Validators.required, Validators.maxLength(50)])],
-      phoneNumber: ['', Validators.compose([Validators.pattern("^[0-9]*$"), Validators.required, Validators.maxLength(14)])],
+      typeId: [1],
+      firstName: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(50)])
+      ],
+      lastName: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(50)])
+      ],
+      companyName: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(50)])
+      ],
+      phoneNumber: [
+        '',
+        Validators.compose([
+          Validators.pattern('^[0-9]*$'),
+          Validators.required,
+          Validators.maxLength(14)
+        ])
+      ],
       emailAddress: [this.email],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(15)])],
+      password: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(15)
+        ])
+      ],
       timeZoneId: [''],
       currencyId: [''],
       isDeleted: ['']
@@ -50,25 +84,34 @@ export class AccountSetupComponent implements OnInit {
   }
 
   onSubmit(userForm: FormGroup) {
+    this.getFormValidationErrors();
     this.submitted = true;
     if (!userForm.invalid) {
       //this.spinner.show();
-      this.orgService.update(this.orgId, userForm.value).subscribe((data: any) => {
-        this.authenticateService.login(userForm.value['emailAddress'], userForm.value['password']).subscribe(result => {
-          if (result) {
-            this.userService.getCurrentUser().subscribe((data: any) => {
-              localStorage.setItem('currentUser', JSON.stringify(data));
-              this.userInfo.setInfo(data);
-              this.router.navigate(['/appointment']);
-              this.spinner.hide();
-            });
-          }
-        }, error => {
-          this.spinner.hide();
+      this.orgService
+        .update(this.orgId, userForm.value)
+        .subscribe((data: any) => {
+          this.authenticateService
+            .login(userForm.value['emailAddress'], userForm.value['password'])
+            .subscribe(
+              result => {
+                if (result) {
+                  this.userService.getCurrentUser().subscribe((data: any) => {
+                    localStorage.setItem('currentUser', JSON.stringify(data));
+                    this.userInfo.setInfo(data);
+                    this.router.navigate(['/appointment']);
+                    this.spinner.hide();
+                  });
+                }
+              },
+              error => {
+                this.spinner.hide();
+              }
+            );
         });
-      });
+    } else {
+      this.getFormValidationErrors();
     }
-    else { this.getFormValidationErrors(); }
   }
 
   getFormValidationErrors() {
@@ -76,7 +119,10 @@ export class AccountSetupComponent implements OnInit {
       const controlErrors: ValidationErrors = this.userForm.get(key).errors;
       if (controlErrors != null) {
         Object.keys(controlErrors).forEach(keyError => {
-          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+          console.log(
+            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            controlErrors[keyError]
+          );
         });
       }
     });
