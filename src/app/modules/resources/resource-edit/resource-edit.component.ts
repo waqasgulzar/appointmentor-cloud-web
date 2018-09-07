@@ -162,8 +162,12 @@ export class ResourceEditComponent implements OnInit {
       environment.apiUrl + '/UploadFiles/' + this.resource.profileImageUrl
     );
 
-    this.languages = this.resource.languages.split(',');
-    this.qualifications = this.resource.qualifications.split(',');
+    if (this.resource.languages && this.resource.languages.length > 0)
+      this.languages = this.resource.languages.split(',');
+
+    if (this.resource.qualifications && this.resource.qualifications.length > 0)
+      this.qualifications = this.resource.qualifications.split(',');
+
     this.userForm.setValue({
       resourceId: this.resource.resourceId,
       organizationId: this.userInfo.currentUser.organizationId,
