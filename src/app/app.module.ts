@@ -336,6 +336,7 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     DataService,
     _api.EmailSettingService,
     _api.FilesService,
+    _api.MediaLibraryService,
     _api.ForgotPasswordService,
     _api.LookupService,
     _api.OnlineAppointmentBookingSettingsService,
