@@ -4,20 +4,20 @@
       <div class="col-xs-8">
         <input type="hidden" formControlName="categoryId">
         <input type="hidden" formControlName="organizationId">
-        <label class="label">Category Name*</label>
+        <label class="label">Plan Name*</label>
         <label class="input">
           <i class="icon-append fa fa-user"></i>
           <input type="text" formControlName="categoryName" maxlength="50">
         </label>
         <div class="form-error-content" *ngIf="submitted">
           <span *ngIf="userForm.get('categoryName').errors?.required">
-            Category name is required
+            Plan name is required
           </span>
           <span *ngIf="userForm.get('categoryName').errors?.pattern">
-            Category name is invalid
+            Plan name is invalid
           </span>
           <span *ngIf="userForm.get('categoryName').errors?.maxlength">
-            Category name can not more than 50 characters.
+            Plan name can not more than 50 characters.
           </span>
         </div>
       </div>

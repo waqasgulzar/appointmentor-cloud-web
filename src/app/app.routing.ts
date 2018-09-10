@@ -135,12 +135,12 @@ import { ResourcesComponent } from './modules/resources/resources.component';
           },
 
           {
-            path: 'categories',
+            path: 'plans',
             component: CategoriesComponent,
             data: { breadcrumbs: 'Categories' }
           },
           {
-            path: 'category/:id',
+            path: 'plan/:id',
             component: CategoryEditComponent,
             data: { breadcrumbs: 'Category' }
           },

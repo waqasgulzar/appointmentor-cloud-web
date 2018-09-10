@@ -93,11 +93,11 @@ export class TaskComponent implements OnInit {
       this.spinner.show();
       let task = {
         taskId: 0,
-        taskName: formData.controls['taskName'].value,
-        resourceId: formData.controls['drpresources'].value,
+        taskName: formData.controls['taskName'],
+        resourceId: formData.controls['drpresources'],
         resourceName: '',
-        dueDate: formData.controls['dueDate'].value,
-        customerId: formData.controls['drpcustomers'].value,
+        dueDate: formData.controls['dueDate'],
+        customerId: formData.controls['drpcustomers'],
         customerName: '',
         details: '',
         isTaskCompleted: false,

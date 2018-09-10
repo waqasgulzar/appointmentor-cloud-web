@@ -134,7 +134,7 @@ export class ServiceEditComponent implements OnInit {
             };
             this.notificationService.success(successNotification);
             this.spinner.hide();
-            this.router.navigate(['/categories']);
+            this.router.navigate(['/plans']);
           },
           error => {
             const errorNotification: NotificationProperties = {
@@ -154,7 +154,7 @@ export class ServiceEditComponent implements OnInit {
             };
             this.notificationService.success(successNotification);
             this.spinner.hide();
-            this.router.navigate(['/categories']);
+            this.router.navigate(['/plans']);
           },
           error => {
             const errorNotification: NotificationProperties = {

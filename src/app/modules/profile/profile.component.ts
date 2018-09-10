@@ -131,9 +131,10 @@ export class ProfileComponent implements OnInit {
 
   onSubmit(userForm: FormGroup) {
     this.submitted = true;
-    this.spinner.show();
+   
 
     if (userForm.valid) {
+      this.spinner.show();
       // Upload Image
       this.fileService.upload(this.formData).subscribe(data => {
         let fileInfo = data as _model.FileInformation;
