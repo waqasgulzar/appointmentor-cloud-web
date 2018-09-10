@@ -78,7 +78,7 @@
               <label class="label required">Phone Number</label>
               <label class="input">
                 <i class="icon-append fa fa-phone"></i>
-                <input type="text" formControlName="phoneNumber" required>
+                <input type="number" formControlName="phoneNumber" required>
               </label>
               <div class="form-error-content" *ngIf="submitted">
                 <span *ngIf="userForm.get('phoneNumber').errors?.required">

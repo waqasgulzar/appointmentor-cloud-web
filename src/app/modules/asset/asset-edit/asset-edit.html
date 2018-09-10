@@ -45,14 +45,16 @@
         <section>
           <label class="label required">Services</label>
 
-          <ngx-datatable [rows]="services" class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [footerHeight]="0" [rowHeight]="'auto'"
-            [selectionType]="'checkbox'" (select)='onSelect($event)' [selected]="selectedServices">
-            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [flexGrow]="1">
-              <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+          <ngx-datatable [rows]="services" class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30"
+            [footerHeight]="0" [rowHeight]="'auto'" [selectionType]="'checkbox'" (select)='onSelect($event)' [selected]="selectedServices">
+            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"
+              [flexGrow]="1">
+              <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                let-selectFn="selectFn">
                 Enable
               </ng-template>
-              <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"
-                let-row="row">
+              <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                let-onCheckboxChangeFn="onCheckboxChangeFn" let-row="row">
                 <div>
                   <mat-checkbox [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
                 </div>

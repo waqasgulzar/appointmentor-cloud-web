@@ -62,17 +62,17 @@ export class CategoryEditComponent implements OnInit {
         this.categoryService.create(formData.value).subscribe(
           (data: any) => {
             const successNotification: NotificationProperties = {
-              message: 'Category has been save successfully.',
-              title: 'Category'
+              message: 'Plan has been save successfully.',
+              title: 'Plan'
             };
             this.notificationService.success(successNotification);
             this.spinner.hide();
-            this.router.navigate(['/categories']);
+            this.router.navigate(['/plans']);
           },
           error => {
             const errorNotification: NotificationProperties = {
               message: error.error,
-              title: 'Category'
+              title: 'Plan'
             };
             this.notificationService.error(errorNotification);
             this.spinner.hide();
@@ -82,17 +82,17 @@ export class CategoryEditComponent implements OnInit {
         this.categoryService.update(this.catId, formData.value).subscribe(
           (data: any) => {
             const successNotification: NotificationProperties = {
-              message: 'Category has been updated successfully.',
-              title: 'Category'
+              message: 'Plan has been updated successfully.',
+              title: 'Plan'
             };
             this.notificationService.success(successNotification);
             this.spinner.hide();
-            this.router.navigate(['/categories']);
+            this.router.navigate(['/plans']);
           },
           error => {
             const errorNotification: NotificationProperties = {
               message: error.error,
-              title: 'Category'
+              title: 'Plan'
             };
             this.notificationService.error(errorNotification);
             this.spinner.hide();
