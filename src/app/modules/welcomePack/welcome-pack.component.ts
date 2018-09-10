@@ -56,7 +56,6 @@ export class WelcomePackComponent implements OnInit {
       { id: 3, title: "Customer Registration" }
     ];
 
-
     this.mediaFileForm = this.fb.group({
       //id: [],
       //mediaTypeId: [],

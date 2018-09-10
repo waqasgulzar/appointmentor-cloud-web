@@ -9,7 +9,7 @@ export * from './customer.service';
 export * from './customerSetting.service';
 export * from './emailSetting.service';
 export * from './files.service';
-export * from './MediaLibrary.service';
+export * from './mediaLibrary.service';
 export * from './forgotPassword.service';
 export * from './lookup.service';
 export * from './onlineBookingSetting.service';
