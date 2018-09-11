@@ -25,3 +25,4 @@ export * from './dataSource';
 export * from './apiCredential';
 export * from './lookup';
 export * from './resourceWorkingHour';
+export * from './mediaLibrary';

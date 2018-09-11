@@ -134,7 +134,24 @@
       <!-- <div>
          <img *ngFor="let sfile of filesToUpload" [src]="sfile" class="rounded mb-3" width="180">
        </div> -->
-      <input type="file" multiple>
+
+       <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='files'>
+        <ngx-datatable-column name="Type" prop="Type" [flexGrow]="2"></ngx-datatable-column>
+        <ngx-datatable-column name="Name" prop="fileName" [flexGrow]="2"></ngx-datatable-column>
+        <ngx-datatable-column name="Size" prop="fileSize" [flexGrow]="2">
+         
+        </ngx-datatable-column>
+        
+        <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
+          <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
+            <button type="button" class="btn btn-default" (click)="removeFile(row['id'])">
+               Remove
+            </button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+
+      <input type="file"  multiple (change)="handleFileInput($event.target.files)">
 
       <!-- <label class="label"></label>
           <label class="input">
