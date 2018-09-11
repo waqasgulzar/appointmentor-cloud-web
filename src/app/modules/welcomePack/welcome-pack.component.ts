@@ -24,8 +24,7 @@ export class WelcomePackComponent implements OnInit {
   mediaFileForm: FormGroup;
   formData = new FormData();
   submitted = false;
-  files: Array<_model.MediaLibrary>;
-  mediaLibObj = new _model.MediaLibrary();
+  files: Array<_model.MediaLibrary>;  
   types: Array<any>;
   cclist = [{ email: this.userInfo.currentUser.emailAddress }];
   editorConfig = {
