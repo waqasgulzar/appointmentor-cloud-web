@@ -135,7 +135,7 @@
          <img *ngFor="let sfile of filesToUpload" [src]="sfile" class="rounded mb-3" width="180">
        </div> -->
 
-       <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='uploadedMediaLibraryFiles'>
+       <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='files'>
         <ngx-datatable-column name="Type" prop="Type" [flexGrow]="2"></ngx-datatable-column>
         <ngx-datatable-column name="Name" prop="fileName" [flexGrow]="2"></ngx-datatable-column>
         <ngx-datatable-column name="Size" prop="fileSize" [flexGrow]="2">

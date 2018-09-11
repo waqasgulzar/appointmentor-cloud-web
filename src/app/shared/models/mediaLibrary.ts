@@ -9,5 +9,5 @@ export class MediaLibrary extends Entity {
   onDiskPath: string;
   createdBy: number;
   createdOn: Date;
-  isDeleted: true;
+  isDeleted: boolean=false;
 }
