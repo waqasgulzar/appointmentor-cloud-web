@@ -21,11 +21,11 @@ import * as _api from '../../shared/services/api';
 export class WelcomePackComponent implements OnInit {
   orgInfo = new _model.User();
   userForm: FormGroup;
-  mediaFileForm: FormGroup;
   formData = new FormData();
   submitted = false;
-  files: Array<_model.MediaLibrary>;  
-  types: Array<any>;
+  files: Array<_model.MediaLibrary>;
+  mediaTypes: Array<any>;
+  documentTypes: Array<any>;
   cclist = [{ email: this.userInfo.currentUser.emailAddress }];
   editorConfig = {
     editable: true,
@@ -45,27 +45,15 @@ export class WelcomePackComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private userInfo: UserInfoService,
     private fileService: _api.FilesService,
-    private mediaLibraryService: _api.MediaLibraryService
+    private mediaLibraryService: _api.MediaLibraryService,
+    private lookUpService: _api.LookupService
   ) {}
 
   ngOnInit() {
     this.orgInfo = this.userInfo.currentUser;
-    this.types = [
-      { id: 1, title: 'Appointment Booking' },
-      { id: 2, title: 'Appointment Cancellation' },
-      { id: 3, title: 'Customer Registration' }
-    ];
-
-    this.loadMediaLibrary();
-
-    this.mediaFileForm = this.fb.group({
-      fileName: [],
-      fileSize: []
-    });
-
     this.userForm = this.fb.group({
       organizationId: this.orgInfo.organizationId,
-      typeId: [0, [Validators.required]],
+      mediaTypeId: [0, [Validators.required]],
       cc: [''],
       subject: [
         '',
@@ -80,36 +68,49 @@ export class WelcomePackComponent implements OnInit {
         Validators.compose([Validators.required, Validators.maxLength(500)])
       ]
     });
+
+    this.loadData();
+  }
+
+  loadData() {
+    this.lookUpService.load('MediaTypes').subscribe((data: any) => {
+      this.mediaTypes = data;
+    });
+
+    this.lookUpService.load('DocumentTypes').subscribe((data: any) => {
+      this.documentTypes = data;
+    });
+
+    this.loadMediaLibrary();
   }
 
   loadMediaLibrary() {
     this.mediaLibraryService
       .getAll()
       .subscribe((data: Array<_model.MediaLibrary>) => {
-        this.files = data;
+        this.files = data.filter(
+          t => t.mediaTypeId === Number(this.userForm.get('mediaTypeId'))
+        );
       });
   }
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
-
-    this.mediaFileForm.setValue({
-      fileName: this.fileToUpload.name,
-      fileSize: this.fileToUpload.size
-    });
-
-    this.fileService.upload(this.mediaFileForm.value).subscribe(
-      data => {
-        let fileInfo = data as _model.MediaLibrary;
+    this.formData.append('file', files[0], files[0].name);
+    const mediaTypeId = this.userForm.value['mediaTypeId'];
+    const documentType = this.documentTypes.find(
+      t => t.title === this.fileToUpload.type
+    ) as _model.Lookup;
+    this.fileService.upload(this.formData).subscribe(
+      (fileInfo: _model.FileInformation) => {
         let media = new _model.MediaLibrary();
-        media.fileName = fileInfo.fileName;
-        media.fileSize = fileInfo.fileSize;
+        media.fileName = this.fileToUpload.name;
+        media.fileSize = this.fileToUpload.size;
         media.onDiskName = fileInfo.onDiskName;
         media.onDiskPath = fileInfo.onDiskPath;
-        media.mediaTypeId = 1; // Number(this.userForm.get('typeId'));
-        media.documentTypeId = 1;
+        media.mediaTypeId = Number(mediaTypeId);
+        media.documentTypeId = documentType.id;
         media.isDeleted = false;
-
         this.mediaLibraryService.create(media).subscribe(data => {
           this.loadMediaLibrary();
         });

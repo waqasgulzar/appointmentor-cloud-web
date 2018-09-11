@@ -20,15 +20,15 @@
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Email" prop="emailAddress" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Address" [flexGrow]="3">
+    <ngx-datatable-column name="Address" prop="address" [flexGrow]="3">
       <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-        <span>{{row['addressLine1']}}</span>
-        <span *ngIf="row['addressLine2']">, {{row['addressLine2']}}</span>
-        <span *ngIf="row['city']">, {{row['city']}}</span>
-        <span *ngIf="row['postcode']">, {{row['postcode']}}</span>
+        <span>{{value.addressLine1}}</span>
+        <span *ngIf="value.addressLine2">, {{value.addressLine2}}</span>
+        <span *ngIf="value.city">, {{value.city}}</span>
+        <span *ngIf="value.postcode">, {{value.postcode}}</span>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Services" prop="serviceresource" [flexGrow]="2">
+    <ngx-datatable-column name="Services" prop="serviceResource" [flexGrow]="2">
       <ng-template let-value="value" ngx-datatable-cell-template>
         <label *ngFor="let item of value" class="margin-left-5">
           <span class="badge">{{item.serviceName}}</span>

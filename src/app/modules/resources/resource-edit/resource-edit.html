@@ -77,10 +77,10 @@
             <label class="label required">Gender</label>
             <label>
               <mat-radio-group>
-                <mat-radio-button value="Male">Male</mat-radio-button>&nbsp;
-                <mat-radio-button value="Female">Female</mat-radio-button>&nbsp;
-                <mat-radio-button value="Other">Other</mat-radio-button>&nbsp;
-                <mat-radio-button value="NotDisclosed">Prefer not to say</mat-radio-button>
+                <mat-radio-button value="Male" [checked]="resource.gender ==='Male'">Male</mat-radio-button>&nbsp;
+                <mat-radio-button value="Female" [checked]="resource.gender ==='Female'">Female</mat-radio-button>&nbsp;
+                <mat-radio-button value="Other" [checked]="resource.gender ==='Other'">Other</mat-radio-button>&nbsp;
+                <mat-radio-button value="NotDisclosed" [checked]="resource.gender ==='NotDisclosed'">Prefer not to say</mat-radio-button>
               </mat-radio-group>
             </label>
           </section>
@@ -180,8 +180,8 @@
           <span class="pull-right">
             Position:&nbsp;
 
-            <input type="radio" name="messageShowPosition" formControlName="messageShowPosition" value="top">Top
-            <input type="radio" name="messageShowPosition" formControlName="messageShowPosition" value="bottom">Bottom
+            <input type="radio" name="messageShowPosition" [checked]="resource.messageShowPosition ==='top'" formControlName="messageShowPosition" value="top">Top
+            <input type="radio" name="messageShowPosition" [checked]="resource.messageShowPosition ==='bottom'" formControlName="messageShowPosition" value="bottom">Bottom
 
           </span>
         </label>
