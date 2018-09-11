@@ -60,16 +60,8 @@ export class WelcomePackComponent implements OnInit {
     this.loadMediaLibrary();
 
     this.mediaFileForm = this.fb.group({
-      //id: [],
-      //mediaTypeId: [],
-      //documentTypeId: [],
       fileName: [],
       fileSize: []
-      //onDiskName: [],
-      //onDiskPath: [],
-      //createdBy: [],
-      //createdOn: [],
-      //isDeleted: false
     });
 
     this.userForm = this.fb.group({
@@ -98,29 +90,6 @@ export class WelcomePackComponent implements OnInit {
         this.files = data;
       });
   }
-
-  // add(event: MatChipInputEvent): void {
-  //   const input = event.input;
-  //   const value = event.value;
-
-  //   // Add our fruit
-  //   if ((value || "").trim()) {
-  //     this.cclist.push({ email: value.trim() });
-  //   }
-
-  //   // Reset the input value
-  //   if (input) {
-  //     input.value = "";
-  //   }
-  // }
-
-  // remove(cc): void {
-  //   const index = this.cclist.indexOf(cc);
-
-  //   if (index >= 0) {
-  //     this.cclist.splice(index, 1);
-  //   }
-  // }
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
