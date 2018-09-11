@@ -27,7 +27,7 @@ export class Resource extends Entity {
   google: string = '';
   gapBetweenAppointments: string = '';
   messageOnBookingApp: string = '';
-  messageShowPosition: string = '';
+  messageShowPosition: string = 'top';
   serviceResource?: Array<ServiceResource> = new Array<ServiceResource>();
   appointmentSlots?: _model.AppointmentSlot[] = new Array<
     _model.AppointmentSlot

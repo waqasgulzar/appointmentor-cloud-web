@@ -43,12 +43,12 @@
           <label class="label">Type*</label>
           <label class="input">
             <i class="icon-append fa fa-user"></i>
-            <select formControlName="typeId" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['typeId'].errors && userForm.controls['typeId'].errors.required}">
-              <option *ngFor="let t of types" [value]="t.id">{{t.title}}</option>
+            <select formControlName="mediaTypeId" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['typeId'].errors && userForm.controls['typeId'].errors.required}">
+              <option *ngFor="let t of mediaTypes" [value]="t.id">{{t.title}}</option>
             </select>
           </label>
           <div class="form-error-content" *ngIf="submitted">
-            <span *ngIf="userForm.get('typeId').errors?.required">
+            <span *ngIf="userForm.get('mediaTypeId').errors?.required">
               Type is required
             </span>
           </div>
@@ -135,23 +135,23 @@
          <img *ngFor="let sfile of filesToUpload" [src]="sfile" class="rounded mb-3" width="180">
        </div> -->
 
-       <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='files'>
+      <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='files'>
         <ngx-datatable-column name="Type" prop="Type" [flexGrow]="2"></ngx-datatable-column>
         <ngx-datatable-column name="Name" prop="fileName" [flexGrow]="2"></ngx-datatable-column>
         <ngx-datatable-column name="Size" prop="fileSize" [flexGrow]="2">
-         
+
         </ngx-datatable-column>
-        
+
         <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
           <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
             <button type="button" class="btn btn-default" (click)="removeFile(row['id'])">
-               Remove
+              Remove
             </button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
 
-      <input type="file"  multiple (change)="handleFileInput($event.target.files)">
+      <input type="file" multiple (change)="handleFileInput($event.target.files)">
 
       <!-- <label class="label"></label>
           <label class="input">
