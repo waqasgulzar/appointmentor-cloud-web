@@ -1,5 +1,5 @@
 ﻿<div class="row">
-  <pre>
+  <!-- <pre>
   1.
   Welcome pack will contain some attachment documents that we will automatically send to the customer when customer/patient register very first time.
 
@@ -31,7 +31,7 @@
   (These could be booked service information, terms & conditions, business policies, parking & transport information etc)
 
   In Future we may consider to make it more interactive. (e.g. customer agrees or disagree buttons would be available inside mail)
-</pre>
+</pre> -->
 </div>
 
 <form id="sky-form3" class="sky-form zero-padding" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
@@ -43,7 +43,7 @@
           <label class="label">Type*</label>
           <label class="input">
             <i class="icon-append fa fa-user"></i>
-            <select formControlName="mediaTypeId" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['typeId'].errors && userForm.controls['typeId'].errors.required}">
+            <select formControlName="mediaTypeId" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['mediaTypeId'].errors && userForm.controls['mediaTypeId'].errors.required}">
               <option *ngFor="let t of mediaTypes" [value]="t.id">{{t.title}}</option>
             </select>
           </label>
@@ -114,9 +114,11 @@
 
           </div>
           <label class="label">Message*</label>
-
-          <!-- <app-ngx-editor [config]="editorConfig" required formControlName="message" [spellcheck]="true"></app-ngx-editor> -->
-
+          <label class="input">
+            <i class="icon-append fa fa-user"></i>
+            <input type="text" formControlName="message" maxlength="1000" required required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['message'].errors && userForm.controls['message'].errors.required}">
+            <!-- <app-ngx-editor [config]="editorConfig" required formControlName="message" [spellcheck]="true"></app-ngx-editor> -->
+          </label>
           <div class="form-error-content" *ngIf="submitted">
             <span *ngIf="userForm.get('message').errors?.required">
               Message is required
@@ -136,16 +138,14 @@
        </div> -->
 
       <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='files'>
-        <ngx-datatable-column name="Type" prop="Type" [flexGrow]="2"></ngx-datatable-column>
-        <ngx-datatable-column name="Name" prop="fileName" [flexGrow]="2"></ngx-datatable-column>
-        <ngx-datatable-column name="Size" prop="fileSize" [flexGrow]="2">
-
-        </ngx-datatable-column>
+        <ngx-datatable-column name="Type" prop="documentTypeId" [flexGrow]="1"></ngx-datatable-column>
+        <ngx-datatable-column name="Name" prop="fileName" [flexGrow]="4"></ngx-datatable-column>
+        <ngx-datatable-column name="Size" prop="fileSize" [flexGrow]="1"></ngx-datatable-column>
 
         <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
           <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
             <button type="button" class="btn btn-default" (click)="removeFile(row['id'])">
-              Remove
+              X
             </button>
           </ng-template>
         </ngx-datatable-column>

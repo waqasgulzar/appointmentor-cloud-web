@@ -352,7 +352,8 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     _api.TaskService,
     _api.UserService,
     _api.UserSettingService,
-    _api.ValidationService
+    _api.ValidationService,
+    _api.WelcomePackService
   ],
   entryComponents: [
     AppointmentBookingComponent,
