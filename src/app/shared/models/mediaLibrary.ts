@@ -1,4 +1,5 @@
 import { Entity } from "./entity";
+import { Lookup } from "./lookup";
 export class MediaLibrary extends Entity {
   id: number;
   mediaTypeId: number;
@@ -10,4 +11,6 @@ export class MediaLibrary extends Entity {
   createdBy: number;
   createdOn: Date;
   isDeleted: boolean=false;
+  documentType: Lookup;
+  mediaType: Lookup;
 }

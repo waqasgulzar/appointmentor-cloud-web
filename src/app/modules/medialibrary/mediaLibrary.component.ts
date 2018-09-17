@@ -7,6 +7,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NotificationProperties } from '../../shared/interfaces/NotificationProperties';
 import { UserInfoService } from '../../shared/services/userInfo.service';
 import * as _api from '../../shared/services/api';
+import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
 
 @Component({
   moduleId: module.id,
@@ -30,7 +32,8 @@ export class MediaLibraryComponent implements OnInit {
     private fileService: _api.FilesService,
     private mediaLibraryService: _api.MediaLibraryService,
     private lookUpService: _api.LookupService,
-    private welcomePackService: _api.WelcomePackService
+    private welcomePackService: _api.WelcomePackService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -47,6 +50,12 @@ export class MediaLibraryComponent implements OnInit {
     });
 
     this.loadMediaLibrary();
+  }
+
+  getTrustedUrl(onDiskName) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(
+      environment.apiUrl + '/UploadFiles/' + onDiskName
+    );
   }
 
   loadData() {
@@ -71,7 +80,7 @@ export class MediaLibraryComponent implements OnInit {
         media.fileSize = this.fileToUpload.size;
         media.onDiskName = fileInfo.onDiskName;
         media.onDiskPath = fileInfo.onDiskPath;
-        media.mediaTypeId = 1;//Number(mediaTypeId);
+        media.mediaTypeId = 1; //Number(mediaTypeId);
         media.documentTypeId =
           documentType.id == undefined ? 1 : documentType.id;
         media.isDeleted = false;
