@@ -62,6 +62,7 @@ import { ServiceEditComponent } from './modules/services/service.edit.component'
 import { CategoriesComponent } from './modules/services/category/categories.component';
 import { CategoryEditComponent } from './modules/services/category/category-edit.component';
 import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.component';
+import {MediaLibraryComponent} from './modules/medialibrary/mediaLibrary.component';
 import { AuthGuardService as AuthGuard } from './shared/services/auth-guard.service';
 import { ResourceEditComponent } from './modules/resources/resource-edit/resource-edit.component';
 import { RedirectFreeAgent } from './modules/setting/freeagent/redirect-free-agent/redirect-free-agent.component';
@@ -149,6 +150,11 @@ import { ResourcesComponent } from './modules/resources/resources.component';
             path: 'welcomepack',
             component: WelcomePackComponent,
             data: { breadcrumbs: 'Welcome Pack' }
+          },
+          {
+            path: 'medialibrary',
+            component: MediaLibraryComponent,
+            data: {breadcrumbs: 'Media Library'}
           },
           {
             path: 'reset/:id',

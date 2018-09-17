@@ -131,6 +131,7 @@ import { CategoriesComponent } from './modules/services/category/categories.comp
 import { CategoryEditComponent } from './modules/services/category/category-edit.component';
 
 import { WelcomePackComponent } from './modules/welcomePack/welcome-pack.component';
+import {MediaLibraryComponent} from './modules/medialibrary/mediaLibrary.component';
 import { AppointmentorAuthInterceptor } from './shared/interceptors/auth.interceptors';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import * as _api from './shared/services/api';
@@ -300,6 +301,7 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     ServiceEditComponent,
     RequiredIfDirective,
     WelcomePackComponent,
+    MediaLibraryComponent,
     RedirectFreeAgent,
     AddressComponent,
     AppointmentBookingComponent,
@@ -352,7 +354,8 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     _api.TaskService,
     _api.UserService,
     _api.UserSettingService,
-    _api.ValidationService
+    _api.ValidationService,
+    _api.WelcomePackService
   ],
   entryComponents: [
     AppointmentBookingComponent,

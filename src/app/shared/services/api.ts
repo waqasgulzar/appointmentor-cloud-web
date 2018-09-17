@@ -26,6 +26,7 @@ export * from './task.service';
 export * from './user.service';
 export * from './userSetting.service';
 export * from './validation.service';
+export * from './welcomePack.service';
 
 import { AssetServiceService } from './assetService.service';
 import { AppointmentService } from './appointment.service';
@@ -54,5 +55,34 @@ import { TaskService } from './task.service';
 import { UserService } from './user.service';
 import { UserSettingService } from './userSetting.service';
 import { ValidationService } from './validation.service';
+import { WelcomePackService } from './welcomePack.service';
 
-export const APIS = [AuthenticationService, AppointmentService, AssetService, AssetServiceService, BookingQuestionService, CategoryService, CustomerService, CustomerSettingService, EmailSettingService, FilesService, ForgotPasswordService, LookupService, OnlineAppointmentBookingSettingsService, OpeningTimeService, OrganizationService, PaymentService, ProfileService, ResetPasswordService, ResourceService, ServiceService, ServiceResourceService, SmsSettingService, TaskService, UserService, UserSettingService, ValidationService];
+export const APIS = [
+  AuthenticationService,
+  AppointmentService,
+  AssetService,
+  AssetServiceService,
+  BookingQuestionService,
+  CategoryService,
+  CustomerService,
+  CustomerSettingService,
+  EmailSettingService,
+  FilesService,
+  ForgotPasswordService,
+  LookupService,
+  OnlineAppointmentBookingSettingsService,
+  OpeningTimeService,
+  OrganizationService,
+  PaymentService,
+  ProfileService,
+  ResetPasswordService,
+  ResourceService,
+  ServiceService,
+  ServiceResourceService,
+  SmsSettingService,
+  TaskService,
+  UserService,
+  UserSettingService,
+  ValidationService,
+  WelcomePackService
+];

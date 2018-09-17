@@ -11,7 +11,7 @@ export abstract class RestService<T> {
   constructor(
     protected http: HttpClient,
     protected errorHandler: ErrorHandlerService
-  ) { }
+  ) {}
 
   abstract getId(model: T): number;
   abstract getUri(): string;
@@ -36,30 +36,39 @@ export abstract class RestService<T> {
   }
 
   search(model: T): Observable<Entity> {
-    return this.http.post<Entity>(environment.apiUrl + this.getUri() + '/search', model).pipe(
-      catchError(this.errorHandler.handleError),
-      map((response: Entity) => {
-        return this.getInstance().deserialize(response);
-      })
-    );
+    return this.http
+      .post<Entity>(environment.apiUrl + this.getUri() + '/search', model)
+      .pipe(
+        catchError(this.errorHandler.handleError),
+        map((response: Entity) => {
+          return this.getInstance().deserialize(response);
+        })
+      );
   }
 
   create(model: T): Observable<Entity> {
-    return this.http.post<Entity>(environment.apiUrl + this.getUri(), model).pipe(
-      catchError(this.errorHandler.handleError),
-      map((response: Entity) => {
-        return this.getInstance().deserialize(response);
-      })
-    );
+    return this.http
+      .post<Entity>(environment.apiUrl + this.getUri(), model)
+      .pipe(
+        catchError(this.errorHandler.handleError),
+        map((response: Entity) => {
+          return this.getInstance().deserialize(response);
+        })
+      );
   }
 
   bulk(operation: string, model: Array<T>): Observable<Entity> {
-    return this.http.post<Entity>(environment.apiUrl + this.getUri() + '/bulk/' + operation, model).pipe(
-      catchError(this.errorHandler.handleError),
-      map((response: Entity) => {
-        return this.getInstance().deserialize(response);
-      })
-    );
+    return this.http
+      .post<Entity>(
+        environment.apiUrl + this.getUri() + '/bulk/' + operation,
+        model
+      )
+      .pipe(
+        catchError(this.errorHandler.handleError),
+        map((response: Entity) => {
+          return this.getInstance().deserialize(response);
+        })
+      );
   }
 
   update(id: number, model: T): Observable<boolean> {
@@ -77,7 +86,9 @@ export abstract class RestService<T> {
 
   delete(id: number): Observable<boolean> {
     return this.http
-      .delete(environment.apiUrl + this.getUri(), { observe: 'response' })
+      .delete(environment.apiUrl + this.getUri() + `?id=${id}`, {
+        observe: 'response'
+      })
       .pipe(
         catchError(this.errorHandler.handleError),
         map((response: HttpResponse<T>) => {

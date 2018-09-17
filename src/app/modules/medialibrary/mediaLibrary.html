@@ -1,0 +1,52 @@
+<form id="sky-form3" class="sky-form zero-padding" novalidate  [formGroup]="mediaLibraryForm">
+    <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-8">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- <label class="label">Type*</label> -->
+                    <label class="input">
+                        <!-- <i class="icon-append fa fa-user"></i> -->
+                        <!-- <select formControlName="AccesLevelId" required [ngClass]="{'has-error':mediaLibraryForm.invalid && submitted && mediaLibraryForm.controls['AccesLevelId'].errors && mediaLibraryForm.controls['AccesLevelId'].errors.required}">
+                            <option *ngFor="let a of accesLevels" [value]="a.id">{{a.title}}</option>
+                        </select> -->
+                    </label>
+                    <div class="form-error-content" *ngIf="submitted">
+                        <span *ngIf="userForm.get('AccesLevelId').errors?.required">
+                            Type is required
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <input type="file" multiple (change)="handleFileInput($event.target.files)">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'"
+                        [rows]='files'>
+                        <ngx-datatable-column name="Type" prop="documentTypeId" [flexGrow]="1"></ngx-datatable-column>
+                        <ngx-datatable-column name="Name" prop="fileName" [flexGrow]="3"></ngx-datatable-column>
+                        <ngx-datatable-column name="Size" prop="fileSize" [flexGrow]="1"></ngx-datatable-column>
+                        <ngx-datatable-column name="Access Level" prop="accesLevel" [flexGrow]="2"></ngx-datatable-column>
+                        <ngx-datatable-column name="Preview" prop="Preview" [flexGrow]="2"></ngx-datatable-column>
+
+                        <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
+                            <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row"
+                                ngx-datatable-cell-template>
+                                <button type="button" class="btn btn-default" (click)="removeFile(row['id'])">
+                                    X
+                                </button>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3">
+
+        </div>
+    </div>
+</form>

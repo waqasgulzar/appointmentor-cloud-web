@@ -46,7 +46,8 @@ export class WelcomePackComponent implements OnInit {
     private userInfo: UserInfoService,
     private fileService: _api.FilesService,
     private mediaLibraryService: _api.MediaLibraryService,
-    private lookUpService: _api.LookupService
+    private lookUpService: _api.LookupService,
+    private welcomePackService: _api.WelcomePackService
   ) {}
 
   ngOnInit() {
@@ -88,10 +89,19 @@ export class WelcomePackComponent implements OnInit {
     this.mediaLibraryService
       .getAll()
       .subscribe((data: Array<_model.MediaLibrary>) => {
-        this.files = data.filter(
-          t => t.mediaTypeId === Number(this.userForm.get('mediaTypeId'))
-        );
+        this.files = data; //.filter(t => t.mediaTypeId == Number(this.userForm.get('mediaTypeId')));
       });
+  }
+
+  removeFile(id: number) {
+    this.mediaLibraryService.delete(id).subscribe((data: any) => {
+      this.loadMediaLibrary();
+      const successNotification: NotificationProperties = {
+        message: 'File has been deleted successfully.',
+        title: 'Welcome Pack'
+      };
+      this.notificationService.success(successNotification);
+    });
   }
 
   handleFileInput(files: FileList) {
@@ -109,7 +119,8 @@ export class WelcomePackComponent implements OnInit {
         media.onDiskName = fileInfo.onDiskName;
         media.onDiskPath = fileInfo.onDiskPath;
         media.mediaTypeId = Number(mediaTypeId);
-        media.documentTypeId = documentType.id;
+        media.documentTypeId =
+          documentType.id == undefined ? 1 : documentType.id;
         media.isDeleted = false;
         this.mediaLibraryService.create(media).subscribe(data => {
           this.loadMediaLibrary();
@@ -125,6 +136,20 @@ export class WelcomePackComponent implements OnInit {
     this.submitted = true;
 
     if (!userForm.valid) {
+      this.spinner.hide();
+      this.welcomePackService.create(userForm.value).subscribe(
+        data => {
+          const successNotification: NotificationProperties = {
+            message: 'Welcome Pack has been save successfully.',
+            title: 'Welcome Pack'
+          };
+          this.notificationService.success(successNotification);
+          this.spinner.hide();
+        },
+        error => {
+          this.spinner.hide();
+        }
+      );
     }
   }
 }
