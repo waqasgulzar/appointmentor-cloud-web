@@ -63,8 +63,8 @@ export class TaskComponent implements OnInit {
   }
   LoadTasks() {
     this.taskService.getAll().subscribe((data: any) => {
-      console.log(data['results']);
-      this.tasks = data['results'];
+      //console.log(data['results']);
+      this.tasks = data;
     });
   }
   TaskIdForDelete(taskId: number) {
@@ -89,15 +89,20 @@ export class TaskComponent implements OnInit {
 
   onSubmit(formData: any) {
     this.submitted = true;
+
+    // const documentType = this.documentTypes.find(
+    //   t => t.title === this.fileToUpload.type
+    // ) as _model.Lookup;
+
     if (!formData.invalid) {
       this.spinner.show();
       let task = {
         taskId: 0,
-        taskName: formData.controls['taskName'],
-        resourceId: formData.controls['drpresources'],
+        taskName: formData.controls['taskName'].value,
+        resourceId: formData.controls['resourceId'].value,
         resourceName: '',
-        dueDate: formData.controls['dueDate'],
-        customerId: formData.controls['drpcustomers'],
+        dueDate: formData.controls['dueDate'].value,
+        customerId: formData.controls['customerId'].value,
         customerName: '',
         details: '',
         isTaskCompleted: false,
@@ -106,6 +111,10 @@ export class TaskComponent implements OnInit {
       } as _model.ResourceTask;
       this.taskService.create(task).subscribe((data: any) => {
         this.ClearFields();
+        this.userForm.reset();
+        this.userForm.markAsPristine();
+        this.userForm.markAsUntouched();
+        this.submitted = false;
       });
       this.spinner.hide();
     }

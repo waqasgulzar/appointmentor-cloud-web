@@ -21,6 +21,44 @@
           </span>
         </div>
       </div>
+
+      <div class="col-xs-8">
+        <label class="label">Description</label>
+        <label class="input">
+          <i class="icon-append fa fa-user"></i>
+          <input type="text" formControlName="categoryDescription" maxlength="50">
+        </label>
+        <div class="form-error-content" *ngIf="submitted">
+          <!-- <span *ngIf="userForm.get('categoryName').errors?.required">
+            Plan name is required
+          </span> -->
+          <!-- <span *ngIf="userForm.get('categoryName').errors?.pattern">
+            Plan name is invalid
+          </span> -->
+          <!-- <span *ngIf="userForm.get('categoryName').errors?.maxlength">
+            Plan name can not more than 50 characters.
+          </span> -->
+        </div>
+      </div>
+
+      <div class="col-xs-8">
+        <label class="label">Online Description</label>
+        <label class="input">
+          <i class="icon-append fa fa-user"></i>
+          <input type="text" formControlName="categoryOnlineDescription" maxlength="50">
+        </label>
+        <div class="form-error-content" *ngIf="submitted">
+          <!-- <span *ngIf="userForm.get('categoryName').errors?.required">
+            Plan name is required
+          </span>
+          <span *ngIf="userForm.get('categoryName').errors?.pattern">
+            Plan name is invalid
+          </span>
+          <span *ngIf="userForm.get('categoryName').errors?.maxlength">
+            Plan name can not more than 50 characters.
+          </span> -->
+        </div>
+      </div>
     </div>
     <footer class="pull-right">
       <button class="btn btn-u">Save</button>
