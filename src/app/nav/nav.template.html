@@ -41,11 +41,11 @@
       <i class="fr fa fa-angle-up" *ngIf="active=='communications'" (click)="active=''"></i>
     </a>
     <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='communications'">
-      <li><a [routerLink]="['/welcomepack']">Comms & Messages </a></li>
-      <li><a [routerLink]="['/underProcess']">Feedback & Notiﬁcations</a></li>
-      <li><a [routerLink]="['/emailsetting']">Follow up / Recall Manager</a></li>
-      <li><a [routerLink]="['/reviews']">Reviews & Social Media</a></li>
-      <li><a [routerLink]="['/marketing']">Marketing Campaigns</a></li>
+      <li><a [routerLink]="['/underProcess']">Comms & Messages </a></li>
+      <li><a [routerLink]="['/emailsetting']">Feedback & Notiﬁcations</a></li>
+      <li><a [routerLink]="['/underProcess']">Follow up / Recall Manager</a></li>
+      <li><a [routerLink]="['/Reviews']">Reviews & Social Media</a></li>
+      <li><a [routerLink]="['/Marketing']">Marketing Campaigns</a></li>
       <li><a [routerLink]="['/welcomepack']">Templates (Welcome, FB)</a></li>
       <li><a [routerLink]="['/underProcess']">CRM Routines</a></li>
       <li><a [routerLink]="['/underProcess']">INTERNAL Team (MattMost)</a></li>
@@ -57,9 +57,9 @@
     
      
       <li><a [routerLink]="['/emailsetting']">Email & SMS</a></li> -->
-      
-      
-     
+
+
+
       <li><a [routerLink]="['/medialibrary']">Media Library </a></li>
     </ul>
   </li>
@@ -93,7 +93,7 @@
     </a>
     <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='integrations'">
       <li><a [routerLink]="['/epos']">Point of Sale - EPoS</a></li>
-      <li><a [routerLink]="['/account']">Accounting</a></li>
+      <li><a [routerLink]="['/underProcess']">Accounting</a></li>
       <li><a [routerLink]="['/bookingapps']">Booking Apps</a></li>
       <li><a [routerLink]="['/api']">APIs & Webhooks</a></li>
 
@@ -124,13 +124,30 @@
       <i class="fr fa fa-angle-down" *ngIf="active!='billings'" (click)="active='billings'"></i>
       <i class="fr fa fa-angle-up" *ngIf="active=='billings'" (click)="active=''"></i>
     </a>
-    <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='billings'">
-      <li><a [routerLink]="['/underProcess']">Income</a></li>
-      <li><a [routerLink]="['/billing']">Invoices and Payments</a></li>
-      <li><a [routerLink]="['/underProcess']">Insurance Billing</a></li>
-      <li><a [routerLink]="['/underProcess']">Expenses</a></li>
-      <li><a [routerLink]="['/underProcess']">Billing (Platform)</a></li>
-      <li><a [routerLink]="['/underProcess']">Team and Op Costs</a></li>
+    <ul class="nav panel-group">
+      <li class="on panel panel-default">
+        <a class="submenu-toggle panel-heading">
+          <h4 class="panel-title"><i class="fa fa-file-invoice"></i>Income</h4>
+          <i class="fr fa fa-angle-down" *ngIf="active!='income'" (click)="active='income'"></i>
+          <i class="fr fa fa-angle-up" *ngIf="active=='income'" (click)="active=''"></i>
+        </a>
+        <ul class="submenu panel-collapse collapse list-unstyled in"  *ngIf="active=='income'">
+          <li><a [routerLink]="['/billing']">Invoices and Payments</a></li>
+          <li><a [routerLink]="['/underProcess']">Insurance Billing</a></li>
+        </ul>
+      </li>
+
+      <li class="on panel panel-default">
+        <a class="submenu-toggle panel-heading">
+          <h4 class="panel-title"><i class="fa fa-file-invoice"></i>Expenses</h4>
+          <i class="fr fa fa-angle-down" *ngIf="active!='expense'" (click)="active='expense'"></i>
+          <i class="fr fa fa-angle-up" *ngIf="active=='expense'" (click)="active=''"></i>
+        </a>
+        <ul class="submenu panel-collapse collapse list-unstyled in" *ngIf="active=='expense'">
+          <li><a [routerLink]="['/underProcess']">Billing (Platform)</a></li>
+          <li><a [routerLink]="['/underProcess']">Team and Op Costs</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li class="on panel panel-default">

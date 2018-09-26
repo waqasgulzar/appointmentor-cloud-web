@@ -1,4 +1,4 @@
-﻿<mat-tab-group>
+﻿<mat-tab-group >
   <mat-tab label="Plans">
     <section class="content-wrapper">
       <span class="pull-right">
@@ -26,7 +26,10 @@
             <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
               <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
                 <button type="button" class="btn btn-default" [routerLink]="['/plan', row['categoryId']]">
-                   Edit
+                  Edit
+                </button>
+                <button type="button" class="btn btn-danger" >
+                  Delete
                 </button>
               </ng-template>
             </ngx-datatable-column>
@@ -39,5 +42,3 @@
     <services-component></services-component>
   </mat-tab>
 </mat-tab-group>
-
-

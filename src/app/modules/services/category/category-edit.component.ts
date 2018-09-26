@@ -13,7 +13,6 @@ import { UserInfoService } from '../../../shared/services/userInfo.service';
 import * as _model from '../../../shared/models/models';
 import * as _api from '../../../shared/services/api';
 
-
 @Component({
   moduleId: module.id,
   templateUrl: 'category-edit.html'
@@ -22,7 +21,7 @@ export class CategoryEditComponent implements OnInit {
   category: _model.Category = new _model.Category();
   userForm: FormGroup;
   submitted = false;
-  catId:number = 0;
+  catId: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -32,15 +31,22 @@ export class CategoryEditComponent implements OnInit {
     private notificationService: NotificationService,
     private spinner: NgxSpinnerService,
     private userInfoService: UserInfoService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.userForm = this.fb.group({
       categoryId: [this.catId],
       organizationId: this.userInfoService.currentUser.organizationId,
-      categoryName: ['', Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9 ]*$')])],
+      categoryName: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.maxLength(50),
+          Validators.pattern('^[a-zA-Z0-9 ]*$')
+        ])
+      ],
+      categoryDescription: [''],
+      categoryOnlineDescription: ['']
     });
 
     this.route.params.subscribe(params => {
@@ -50,7 +56,6 @@ export class CategoryEditComponent implements OnInit {
         this.LoadCategory(id);
       }
     });
-
   }
 
   onSubmit(formData: any) {
@@ -76,9 +81,9 @@ export class CategoryEditComponent implements OnInit {
             };
             this.notificationService.error(errorNotification);
             this.spinner.hide();
-          });
-      }
-      else {
+          }
+        );
+      } else {
         this.categoryService.update(this.catId, formData.value).subscribe(
           (data: any) => {
             const successNotification: NotificationProperties = {
@@ -96,7 +101,9 @@ export class CategoryEditComponent implements OnInit {
             };
             this.notificationService.error(errorNotification);
             this.spinner.hide();
-          });}
+          }
+        );
+      }
     }
   }
 
@@ -106,7 +113,13 @@ export class CategoryEditComponent implements OnInit {
       this.userForm.setValue({
         categoryId: cat.categoryId,
         organizationId: cat.organizationId,
-        categoryName: cat.categoryName
+        categoryName: cat.categoryName,
+        categoryDescription:
+          cat.categoryDescription == undefined ? '' : cat.categoryDescription,
+        categoryOnlineDescription:
+          cat.categoryOnlineDescription == undefined
+            ? ''
+            : cat.categoryOnlineDescription
       });
     });
   }

@@ -19,24 +19,22 @@ import * as _api from '../../../shared/services/api';
 export class CategoriesComponent implements OnInit {
   categories: Array<_model.Category>;
   submitted = false;
+  selected = [];
 
   constructor(
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
     private router: Router,
     private categoryService: _api.CategoryService
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit() {
     this.LoadCategories();
   }
-  
+
   LoadCategories() {
     this.categoryService.getAll().subscribe((data: any) => {
-        this.categories = data;
-      });
+      this.categories = data;
+    });
   }
-
 }
