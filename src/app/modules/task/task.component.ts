@@ -63,7 +63,6 @@ export class TaskComponent implements OnInit {
   }
   LoadTasks() {
     this.taskService.getAll().subscribe((data: any) => {
-      //console.log(data['results']);
       this.tasks = data;
     });
   }
@@ -89,11 +88,6 @@ export class TaskComponent implements OnInit {
 
   onSubmit(formData: any) {
     this.submitted = true;
-
-    // const documentType = this.documentTypes.find(
-    //   t => t.title === this.fileToUpload.type
-    // ) as _model.Lookup;
-
     if (!formData.invalid) {
       this.spinner.show();
       let task = {

@@ -37,12 +37,6 @@ export class MediaLibraryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.accesLevels = [
-    //   { id: 1, title: 'Personal' },
-    //   { id: 2, title: 'Local share' },
-    //   { id: 3, title: 'Global share' }
-    // ];
-
     this.loadData();
     this.orgInfo = this.userInfo.currentUser;
     this.mediaLibraryForm = this.fb.group({
@@ -72,28 +66,6 @@ export class MediaLibraryComponent implements OnInit {
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     this.formData.append('file', files[0], files[0].name);
-
-    // const documentType = this.documentTypes.find(
-    //   t => t.title === this.fileToUpload.type
-    // ) as _model.Lookup;
-
-    // this.fileService
-    //   .upload(this.formData)
-    //   .subscribe((fileInfo: _model.FileInformation) => {
-    //     let media = new _model.MediaLibrary();
-    //     media.fileName = this.fileToUpload.name;
-    //     media.fileSize = this.fileToUpload.size;
-    //     media.onDiskName = fileInfo.onDiskName;
-    //     media.onDiskPath = fileInfo.onDiskPath;
-    //     media.mediaTypeId = 1; //Number(mediaTypeId);
-    //     media.documentTypeId =
-    //       documentType.id == undefined ? 1 : documentType.id;
-    //     media.isDeleted = false;
-
-    //     this.mediaLibraryService.create(media).subscribe(data => {
-    //       this.loadMediaLibrary();
-    //     });
-    //   });
   }
 
   onSubmit(userForm: FormGroup) {
