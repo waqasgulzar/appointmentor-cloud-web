@@ -1,7 +1,24 @@
 <section class="content-wrapper">
     <h3>Media Library</h3>
-    <form id="sky-form3" class="sky-form" novalidate [formGroup]="mediaLibraryForm">
+    <form id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(mediaLibraryForm)" [formGroup]="mediaLibraryForm">
         <fieldset>
+            <div class="row">
+                <section>
+                    <label class="label">Type*</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-user"></i>
+                        <select formControlName="mediaTypeId" required [ngClass]="{'has-error':mediaLibraryForm.invalid && submitted && mediaLibraryForm.controls['mediaTypeId'].errors && mediaLibraryForm.controls['mediaTypeId'].errors.required}">
+                            <option *ngFor="let t of accesLevels" [value]="t.id">{{t.title}}</option>
+                        </select>
+                    </label>
+                    <div class="form-error-content" *ngIf="submitted">
+                        <span *ngIf="mediaLibraryForm.get('mediaTypeId').errors?.required">
+                            Type is required
+                        </span>
+                    </div>
+                </section>
+            </div>
+
             <div class="row">
                 <section>
                     <label class="label">Select File to Upload</label>
@@ -11,6 +28,9 @@
                 </section>
             </div>
         </fieldset>
+        <footer>
+            <button class="btn-u pull-right">Save</button>
+        </footer>
     </form>
     <div class="col col-10 margin-top-20">
         <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='files'>
@@ -19,7 +39,7 @@
             <ngx-datatable-column name="Size (KB)" prop="fileSize" [flexGrow]="1"></ngx-datatable-column>
             <ngx-datatable-column name="Preview" prop="Preview" [flexGrow]="3">
                 <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
-                    <img [src]="getTrustedUrl(row['onDiskName'])" class="media-library-preview" />
+                    <!-- <img [src]="getTrustedUrl(row['onDiskName'])" class="media-library-preview" /> -->
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">

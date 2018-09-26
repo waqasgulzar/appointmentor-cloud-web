@@ -132,7 +132,6 @@ export class ProfileComponent implements OnInit {
 
   onSubmit(userForm: FormGroup) {
     this.submitted = true;
-   
 
     if (userForm.valid) {
       this.spinner.show();

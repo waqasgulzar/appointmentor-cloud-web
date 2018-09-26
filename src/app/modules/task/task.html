@@ -17,7 +17,7 @@
       <section class="col col-6">
         <label class="label">Assign to</label>
         <label class="select">
-          <select name="gender" formControlName="drpresources">
+          <select  formControlName="resourceId">
             <option value="">All Resources</option>
             <option *ngFor="let item of resources" [selected]="item.resourceId == lookupselected" value="{{item.resourceId}}">{{item.firstName}}
               {{item.lastName}}</option>
@@ -28,7 +28,7 @@
       <section class="col col-6">
         <label class="label">Assign to customer</label>
         <label class="select">
-          <select name="gender" formControlName="drpresources">
+          <select  formControlName="customerId">
             <option value="">Select customer</option>
             <option *ngFor="let item of customers" [selected]="item.customerId == lookupselected" value="{{item.customerId}}">{{item.firstName}}
               {{item.lastName}}</option>
@@ -61,7 +61,7 @@
 </div>
 <div class="col-md-12" align="center">
   <div class="panel-body">
-    <form novalidate (ngSubmit)="onSubmit(userForm);" [formGroup]="userForm" id="sky-form3" class="sky-form" style="border:1px solid transparent;">
+    <form novalidate id="sky-form3" class="sky-form" style="border:1px solid transparent;">
       <table class="table table-bordered">
         <thead>
           <tr>

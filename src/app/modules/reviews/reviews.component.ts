@@ -7,10 +7,7 @@ import { Router } from "@angular/router";
 })
 export class ReviewsComponent implements OnInit {
 
-    constructor(private router: Router) {
-        if (sessionStorage.getItem("organizationId") == null) {
-            this.router.navigate(['']);
-        }
+    constructor(private router: Router) {        
     }
     ngOnInit() {
     }

@@ -37,15 +37,10 @@ export class MediaLibraryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.accesLevels = [
-      { id: 1, title: 'Personal' },
-      { id: 2, title: 'Local share' },
-      { id: 3, title: 'Global share' }
-    ];
-
     this.loadData();
     this.orgInfo = this.userInfo.currentUser;
     this.mediaLibraryForm = this.fb.group({
+      mediaTypeId: [],
       AccesLevelId: []
     });
 
@@ -59,6 +54,10 @@ export class MediaLibraryComponent implements OnInit {
   }
 
   loadData() {
+    this.lookUpService.load('MediaTypes').subscribe((data: any) => {
+      this.accesLevels = data;
+    });
+
     this.lookUpService.load('DocumentTypes').subscribe((data: any) => {
       this.documentTypes = data;
     });
@@ -67,28 +66,65 @@ export class MediaLibraryComponent implements OnInit {
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     this.formData.append('file', files[0], files[0].name);
+  }
 
-    const documentType = this.documentTypes.find(
-      t => t.title === this.fileToUpload.type
-    ) as _model.Lookup;
+  onSubmit(userForm: FormGroup) {
+    this.submitted = true;
+    if (userForm.valid) {
+      this.spinner.show();
 
-    this.fileService
-      .upload(this.formData)
-      .subscribe((fileInfo: _model.FileInformation) => {
-        let media = new _model.MediaLibrary();
-        media.fileName = this.fileToUpload.name;
-        media.fileSize = this.fileToUpload.size;
-        media.onDiskName = fileInfo.onDiskName;
-        media.onDiskPath = fileInfo.onDiskPath;
-        media.mediaTypeId = 1; //Number(mediaTypeId);
-        media.documentTypeId =
-          documentType.id == undefined ? 1 : documentType.id;
-        media.isDeleted = false;
+      const documentType = this.documentTypes.find(
+        t => t.title === this.fileToUpload.type
+      ) as _model.Lookup;
 
-        this.mediaLibraryService.create(media).subscribe(data => {
-          this.loadMediaLibrary();
-        });
-      });
+      const mediaTypeId =Number(userForm.controls['mediaTypeId'].value);
+
+      const mediaType = this.accesLevels.find(
+        t => t.id === mediaTypeId
+      ) as _model.Lookup;
+
+      this.fileService.upload(this.formData).subscribe(
+        (fileInfo: _model.FileInformation) => {
+          let media = new _model.MediaLibrary();
+          media.fileName = this.fileToUpload.name;
+          media.fileSize = this.fileToUpload.size;
+          media.onDiskName = fileInfo.onDiskName;
+          media.onDiskPath = fileInfo.onDiskPath;
+          media.mediaTypeId = Number(userForm.controls['mediaTypeId'].value); //Number(mediaTypeId);
+          media.documentTypeId =
+            documentType.id == undefined ? 1 : documentType.id;
+          media.isDeleted = false;
+          media.documentType = documentType;
+          media.mediaType = mediaType;
+          
+          console.log(media);
+
+          this.mediaLibraryService.create(media).subscribe(
+            data => {
+              this.loadMediaLibrary();
+            },
+            error => {
+              this.spinner.hide();
+              const errorNotification: NotificationProperties = {
+                message: error.error,
+                title: 'Media Library'
+              };
+              this.submitted = false;
+              this.notificationService.error(errorNotification);
+            }
+          );
+        },
+        error => {
+          this.spinner.hide();
+          const errorNotification: NotificationProperties = {
+            message: error.error,
+            title: 'Media Library'
+          };
+          this.submitted = false;
+          this.notificationService.error(errorNotification);
+        }
+      );
+    }
   }
 
   removeFile(id: number) {

@@ -12,9 +12,6 @@ import { Router } from '@angular/router';
 })
 export class MarkettingComponent implements OnInit {
   constructor(private router: Router) {
-    if (sessionStorage.getItem('organizationId') == null) {
-      this.router.navigate(['']);
-    }
   }
   ngOnInit() {}
 }
