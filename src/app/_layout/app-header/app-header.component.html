@@ -1,26 +1,24 @@
-<nav class="top-bar navbar navbar-static-top ">
+
+<!--<nav class="top-bar navbar navbar-static-top">
   <div class="container-fluid">
-    <div class="collapse navbar-collapse">
       <div class="row ">
-        <div class="col-xs-3">
+        <div class=" col-md-3 col-lg-3 col-xs-12">
           <a class="logo-link" [routerLink]="['/appointment']">
             <img [src]="trustedProfileImageUrl" alt="logo" style="width:15%;" />
           </a>
-          <!-- <span class="fa fa-building"></span> -->
+        &lt;!&ndash;- <span class="fa fa-building"></span>-&ndash;&gt;
           <strong style="text-align:left;">{{userInfo?.currentUser?.profile?.businessName}}</strong>
           <div>{{userInfo?.currentUser?.profile?.street}}, {{userInfo?.currentUser?.profile?.city}}, {{userInfo?.currentUser?.profile?.postCode}}</div>
-
         </div>
-        <div class="col-xs-4">
+        <div class=" col-md-4 col-lg-4 col-xs-6">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search for..." disabled="disabled">
             <span class="input-group-btn">
               <button class="btn btn-search" type="button" disabled="disabled"><i class="fa fa-search fa-fw"></i> Search</button>
             </span>
           </div>
-
         </div>
-        <div class="col-xs-5 text-right">
+        <div class=" col-md-5 col-lg-5 col-xs-6 text-right">
           <ul class="nav navbar-nav navbar-right">
             <li class="upper-links" align="center"><a class="links" disabled="disabled"><i class="fa fa-question-circle fa-cx"></i><br/>Help</a></li>
             <li class="upper-links" align="center"><a class="links" disabled="disabled"><i class="fa fa-bell  fa-cx"></i><br/>Alerts</a></li>
@@ -37,6 +35,116 @@
           </ul>
         </div>
       </div>
+  </div>
+</nav>-->
+<!--
+<nav class="navbar navbar-inverse" role="navigation">
+  &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    &lt;!&ndash;<a class="navbar-brand" href="#">Title</a>&ndash;&gt;
+    <a class="logo-link navbar-brand" [routerLink]="['/appointment']" style="width:40%;">
+      <img [src]="trustedProfileImageUrl" alt="logo" />
+    </a>
+    <strong style="text-align:left;">{{userInfo?.currentUser?.profile?.businessName}}</strong>
+    <div>{{userInfo?.currentUser?.profile?.street}}, {{userInfo?.currentUser?.profile?.city}}, {{userInfo?.currentUser?.profile?.postCode}}</div>
+  </div>
+
+  &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+      <li class="active"></li>
+      <li></li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search for.."  disabled="disabled">
+      </div>
+      <button type="submit" class="btn btn-default"  disabled="disabled"><i class="fa fa-search fa-fw"></i>&nbsp;&nbsp;Search</button>
+    </form>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="upper-links" align="center"><a class="links" disabled="disabled"><i class="fa fa-question-circle fa-cx"></i><br/>Help</a></li>
+      <li class="upper-links" align="center"><a class="links" disabled="disabled"><i class="fa fa-bell  fa-cx"></i><br/>Alerts</a></li>
+      <li class="upper-links" align="center"><a class="links" disabled="disabled"><i class="fa fa-trophy  fa-cx"></i><br/>Achievements</a></li>
+      <li class="dropdown"  align="center" (click)="showMenu()">
+        <a  class="dropdown-toggle links" data-toggle="dropdown"><i class="fa fa-user  fa-cx"></i><br
+        />{{userInfo?.currentUser?.firstName}}&nbsp; <b class="caret"></b></a>
+        <ul class="dropdown-menu user-top-right-menu" *ngIf="active=='user'">
+          <li><a title="Dashboard" [routerLink]="['/profile']"><i class="fa fa-book"></i>&nbsp;&nbsp;Profile</a></li>
+          <li><a title="Settings" [routerLink]="['/reset', 0]"><i class="fa fa-gear"></i>&nbsp;&nbsp;Password</a></li>
+          <li class="divider"></li>
+          <li><a [routerLink]="['/logout']"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;
+</nav>-->
+<nav #navbar class="navbar navbar-expand-lg navbar-transparent  navbar-absolute">
+  <div class="container-fluid">
+    <div class="navbar-wrapper">
+      <div class="navbar-minimize">
+        <button mat-raised-button (click)="minimizeSidebar()" class="btn btn-just-icon btn-white btn-fab btn-round">
+          <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+          <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+        </button>
+      </div>
+      <a class="navbar-brand" href="{{getPath()}}"> {{getTitle()}}</a>
+    </div>
+    <button mat-button class="navbar-toggler btn-no-ripple" type="button" (click)="sidebarToggle()">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+      <form class="navbar-form">
+        <div class="input-group no-border">
+          <input type="text" value="" class="form-control" placeholder="Search...">
+          <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+            <i class="material-icons">search</i>
+            <div class="ripple-container"></div>
+          </button>
+        </div>
+      </form>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#pablo">
+            <i class="material-icons">dashboard</i>
+            <p>
+              <span class="d-lg-none d-md-block">Stats</span>
+            </p>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="material-icons">notifications</i>
+            <span class="notification">5</span>
+            <p>
+              <span class="d-lg-none d-md-block">Some Actions</span>
+            </p>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Mike John responded to your email</a>
+            <a class="dropdown-item" href="#">You have 5 new tasks</a>
+            <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+            <a class="dropdown-item" href="#">Another Notification</a>
+            <a class="dropdown-item" href="#">Another One</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#pablo">
+            <i class="material-icons">person</i>
+            <p>
+              <span class="d-lg-none d-md-block">Account</span>
+            </p>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

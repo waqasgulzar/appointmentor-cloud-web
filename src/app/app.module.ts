@@ -116,12 +116,6 @@ import { AppHeaderComponent } from './_layout/app-header/app-header.component';
 import { SiteHeaderComponent } from './_layout/site-header/site-header.component';
 import { SiteFooterComponent } from './_layout/site-footer/site-footer.component';
 import { ResourceAssetManagerComponent } from './modules/resource-asset-manager/resource-asset-manager.component';
-import {
-  ModalModule,
-  BsDatepickerModule,
-  BsDropdownModule,
-  TooltipModule
-} from 'ngx-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NotificationService } from './shared/services/notification.service';
 import { UserInfoService } from './shared/services/userInfo.service';
@@ -150,6 +144,7 @@ import { RedirectFreeAgent } from './modules/setting/freeagent/redirect-free-age
 import { AddressComponent } from './shared/components/address/address.component';
 import { LanguageComponent } from './shared/components/language/language.component';
 import { QualificationsComponent } from './shared/components/qualifications/qualifications.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig([
     {
@@ -179,10 +174,6 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     HttpClientModule,
     NgxSpinnerModule,
     TagInputModule,
-    ModalModule.forRoot(),
-    BsDatepickerModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    TooltipModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
@@ -306,7 +297,8 @@ const ROUTER_DIRECTIVES = [RouterLinkActive];
     AddressComponent,
     AppointmentBookingComponent,
     QualificationsComponent,
-    LanguageComponent
+    LanguageComponent,
+    SidebarComponent
   ],
   providers: [
     {
