@@ -28,6 +28,7 @@ export class AppHeaderComponent implements OnInit {
     );
   }
 
+
   showMenu() {
     if (this.active === 'user') this.active = '';
     else this.active = 'user';

@@ -93,17 +93,17 @@ import { ResourcesComponent } from './modules/resources/resources.component';
         component: AppLayoutComponent,
         children: [
           {
-            path: 'dashboard',
+            path: 'reports/dashboard',
             component: DashboardComponent,
             data: { breadcrumbs: 'Home' }
           },
           {
-            path: 'openingtimes',
+            path: 'organisation/openingtimes',
             component: OpeningTimesComponent,
             data: { breadcrumbs: 'Opening Times' }
           },
           {
-            path: 'resources',
+            path: 'organisation/resources',
             component: ResourcesComponent,
             data: { breadcrumbs: 'Resources' }
           },
@@ -114,7 +114,7 @@ import { ResourcesComponent } from './modules/resources/resources.component';
           },
 
           {
-            path: 'asset',
+            path: 'organisation/asset',
             component: AssetComponent,
             data: { breadcrumbs: 'Assets' }
           },
@@ -125,7 +125,7 @@ import { ResourcesComponent } from './modules/resources/resources.component';
           },
 
           {
-            path: 'services',
+            path: 'organisation/services',
             component: ServicesComponent,
             data: { breadcrumbs: 'Services' }
           },
@@ -147,12 +147,12 @@ import { ResourcesComponent } from './modules/resources/resources.component';
           },
 
           {
-            path: 'welcomepack',
+            path: 'communications/welcomepack',
             component: WelcomePackComponent,
             data: { breadcrumbs: 'Welcome Pack' }
           },
           {
-            path: 'medialibrary',
+            path: 'communications/medialibrary',
             component: MediaLibraryComponent,
             data: {breadcrumbs: 'Media Library'}
           },
@@ -162,7 +162,7 @@ import { ResourcesComponent } from './modules/resources/resources.component';
             data: { breadcrumbs: 'Password Reset' }
           },
           {
-            path: 'customers',
+            path: 'customer/customers',
             component: CustomerComponent,
             data: { breadcrumbs: 'Customers' }
           },
@@ -177,12 +177,12 @@ import { ResourcesComponent } from './modules/resources/resources.component';
             data: { breadcrumbs: 'Appointment' }
           },
           {
-            path: 'task',
+            path: 'organisation/task',
             component: TaskComponent,
             data: { breadcrumbs: 'Tasks' }
           },
           {
-            path: 'account',
+            path: 'organisation/account',
             component: UserAccountComponent,
             data: { breadcrumbs: 'My Account' }
           },
@@ -192,12 +192,12 @@ import { ResourcesComponent } from './modules/resources/resources.component';
             data: { breadcrumbs: 'Home' }
           },
           {
-            path: 'profile',
+            path: 'organisation/profile',
             component: ProfileComponent,
             data: { breadcrumbs: 'My Profile' }
           },
           {
-            path: 'general',
+            path: 'organisation/general',
             component: GeneralComponent,
             data: { breadcrumbs: 'General Settings' }
           },
@@ -222,7 +222,7 @@ import { ResourcesComponent } from './modules/resources/resources.component';
             data: { breadcrumbs: 'Home' }
           },
           {
-            path: 'emailsetting',
+            path: 'communications/emailsetting',
             component: EmailSettingComponent,
             data: { breadcrumbs: 'Home' }
           },
@@ -257,7 +257,7 @@ import { ResourcesComponent } from './modules/resources/resources.component';
             data: { breadcrumbs: 'Home' }
           },
           {
-            path: 'marketing',
+            path: 'communications/marketing',
             component: MarkettingComponent,
             data: { breadcrumbs: 'Home' }
           },
@@ -302,7 +302,7 @@ import { ResourcesComponent } from './modules/resources/resources.component';
             data: { breadcrumbs: 'Home' }
           },
           {
-            path: 'billing',
+            path: 'financial/billing',
             component: BillingComponent,
             data: { breadcrumbs: 'Home' }
           },
@@ -317,22 +317,22 @@ import { ResourcesComponent } from './modules/resources/resources.component';
             data: { breadcrumbs: 'Home' }
           },
           {
-            path: 'monthlyOverview',
+            path: 'reports/monthlyOverview',
             component: MonthlyOverviewComponent,
             data: { breadcrumbs: 'Home' }
           },
           {
-            path: 'reviews',
+            path: 'communications/reviews',
             component: ReviewsComponent,
             data: { breadcrumbs: 'Home' }
           },
           {
-            path: 'bookingapps',
+            path: 'integrations/bookingapps',
             component: BookingappsComponent,
             data: { breadcrumbs: 'Home' }
           },
           {
-            path: 'api',
+            path: 'integrations/api',
             component: ApiComponent,
             data: { breadcrumbs: 'Home' }
           },
@@ -347,12 +347,12 @@ import { ResourcesComponent } from './modules/resources/resources.component';
             data: { breadcrumbs: 'Home' }
           },
           {
-            path: 'microsite',
+            path: 'tools/microsite',
             component: MicrositeComponent,
             data: { breadcrumbs: 'Microsite' }
           },
           {
-            path: 'freeagent',
+            path: 'integrations/freeagent',
             component: FreeagentComponent,
             data: { breadcrumbs: 'FreeAgent' }
           },
@@ -362,12 +362,12 @@ import { ResourcesComponent } from './modules/resources/resources.component';
             data: { breadcrumbs: 'FreeAgent' }
           },
           {
-            path: 'epos',
+            path: 'integrations/epos',
             component: EposComponent,
             data: { breadcrumbs: 'ePos' }
           },
           {
-            path: 'payments',
+            path: 'tools/payments',
             component: PaymentsComponent,
             data: { breadcrumbs: 'Payments' }
           },

@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Constant } from '../../shared/constants/constants';
-import { BsModalService } from 'ngx-bootstrap';
+
 import { AssetEditComponent } from './asset-edit/asset-edit.component';
 import * as _model from '../../shared/models/models';
 import * as _api from '../../shared/services/api';
@@ -33,7 +33,7 @@ export class AssetComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private assetService: _api.AssetService,
-    private bsModalService: BsModalService,
+    //private bsModalService: BsModalService,
     private resourcesService: _api.ResourceService,
     private router: Router
   ) {
@@ -219,9 +219,9 @@ export class AssetComponent implements OnInit {
       asset: asset
     };
 
-    this.bsModalService.show(
-      AssetEditComponent,
-      Object.assign({}, { initialState }, { class: 'modal-md' })
-    );
+    // this.bsModalService.show(
+    //   AssetEditComponent,
+    //   Object.assign({}, { initialState }, { class: 'modal-md' })
+    // );
   }
 }
