@@ -73,3 +73,16 @@
         position: absolute;
     }
 }
+.ngx-datatable .datatable-body-cell
+{
+    padding: 12px 8px !important;
+}
+.table-responsive
+{
+    overflow-x:hidden !important;
+}
+/*
+.navbar .collapse .navbar-nav .nav-item .nav-link
+{
+    color:#000 !important;
+}*/

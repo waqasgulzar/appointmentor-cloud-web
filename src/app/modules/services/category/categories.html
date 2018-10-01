@@ -1,6 +1,8 @@
-﻿<mat-tab-group >
-  <mat-tab label="Plans">
-    <section class="content-wrapper">
+﻿<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+<!--    <section class="content-wrapper">
       <span class="pull-right">
         <a class="btn-u" [routerLink]="['/plan', 0]">
           <i class="fa fa-plus"></i>&nbsp;Create Plan
@@ -8,37 +10,75 @@
       </span>
       <hr>
       <div class="panel panel-default">
-        <div>
-          <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='categories'>
-            <ngx-datatable-column name="#" width="20">
-              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                <strong>{{rowIndex+1}}</strong>
-              </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Name" prop="categoryName" [flexGrow]="2"></ngx-datatable-column>
-            <ngx-datatable-column name="Services" prop="services" [flexGrow]="2">
-              <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-                <div>
-                  <span *ngFor="let s of row.services" class="btn btn-default">{{s.serviceName}}</span>
-                </div>
-              </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
-              <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
-                <button type="button" class="btn btn-default" [routerLink]="['/plan', row['categoryId']]">
-                  Edit
-                </button>
-                <button type="button" class="btn btn-danger" >
-                  Delete
-                </button>
-              </ng-template>
-            </ngx-datatable-column>
-          </ngx-datatable>
+        <div>-->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-rose card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">assignment</i>
+          </div>
+          <h4 class="card-title">Plans</h4>
         </div>
+        <div class="card-body">
+          <ul class="nav nav-pills nav-pills-warning" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#plans" role="tablist">
+                Plans
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#services" role="tablist">
+                Services
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content tab-space">
+            <div class="tab-pane active" id="plans">
+              <div class="table-responsive">
+
+                <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='categories'>
+                  <ngx-datatable-column name="#" width="20">
+                    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                      <strong>{{rowIndex+1}}</strong>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Name" prop="categoryName" [flexGrow]="2"></ngx-datatable-column>
+                  <ngx-datatable-column name="Services" prop="services" [flexGrow]="2">
+                    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+                      <div>
+                        <span *ngFor="let s of row.services" class="btn btn-default">{{s.serviceName}}</span>
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
+                    <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
+
+                        <button mat-raised-button type="button" class="btn btn-success btn-link" [routerLink]="['/plan', row['categoryId']]">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button mat-raised-button type="button" class="btn btn-danger btn-link">
+                            <i class="material-icons">close</i>
+                        </button>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+            <div class="tab-pane" id="services">
+              <services-component></services-component>
+            </div>
+
+          </div>
+
+
       </div>
-    </section>
-  </mat-tab>
-  <mat-tab label="Services">
-    <services-component></services-component>
-  </mat-tab>
-</mat-tab-group>
+    </div>
+    </div>
+
+  <!--<mat-tab label="Services">-->
+    <!---->
+  <!--</mat-tab>-->
+
+    </div>
+  </div>
+</div>

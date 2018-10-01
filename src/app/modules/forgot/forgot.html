@@ -1,5 +1,5 @@
 ﻿
-    <div class="container-fluid zero-padding">
+   <!-- <div class="container-fluid zero-padding">
          <header>
             <div class="row login_bg" align="center">
                 <h1 style="color:#FFF;">
@@ -47,4 +47,53 @@
                 </form>
             </div>
         </section>
+    </div>-->
+    <div class="wrapper wrapper-full-page">
+        <div class="page-header header-filter" filter-color="black" style="background-image: url('./assets/img/login.jpg'); background-size: cover; background-position: top center;">
+            <div class="container">
+                <div class="row">
+                    <div *ngIf="isEmailSendMessage" class="container" align="center">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h5>If your email address was recognised, a password reset email is on its way to you.</h5>
+                                        <button mat-raised-button class="btn btn-rose btn-fill" (click)="showSwal('basic')">Alert</button>
+                                    </div>
+                                </div>
+                        <a [routerLink]="['']">Home</a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 ml-auto mr-auto">
+                        <form novalidate novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" *ngIf="!isEmailSendMessage">
+                            <div class="card card-login card-hidden">
+                                <div class="card-header card-header-rose text-center">
+                                    <h4 class="card-title">Forgot</h4>
+                                </div>
+                                <div class="card-body ">
+                                    <span class="bmd-form-group">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">email</i>
+                      </span>
+                    </div>
+                   <input formControlName="emailAddress" maxlength="100" class="form-control" placeholder="Your@email.com" type="email" required />
+                            </div>
+                            </span>
+                                    <div class="row">
+                                        <div class="col col-4"></div>
+                                        <div class="col col-8">
+                                            <span class="p">Enter your email address  and we'll send you a link to securely reset your password.</span><br /><br />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer justify-content-center">
+                                    <button type="submit" [disabled]="userForm.invalid" class="btn-rose" mat-raised-button >Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer ">
+            </footer>
+        </div>
     </div>

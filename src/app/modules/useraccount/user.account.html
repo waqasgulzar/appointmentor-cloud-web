@@ -1,12 +1,23 @@
-﻿<form action="#" method="post" id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
-  <header align="left">User Account</header>
+﻿<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">User Account</h4>
+          </div>
+          <div class="card-body">
+              <form action="#" method="post"  novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
 
   <fieldset>
     <div class="row">
-      <section class="col col-6">
+      <div class="col-md-6 col-sm-12">
         <label class="label required">First Name</label>
         <label class="input">
-          <i class="icon-append fa fa-user"></i>
+          
           <input formControlName="firstName" maxlength="50" type="text" class="form-control" placeholder="First Name" required>
         </label>
         <div *ngIf="userForm.invalid && submitted" class="form-error-content">
@@ -14,11 +25,11 @@
             First Name is required
           </div>
         </div>
-      </section>
-      <section class="col col-6">
+      </div>
+      <section class="col-md-6 col-sm-12">
         <label class="label required">Last Name</label>
         <label class="input">
-          <i class="icon-append fa fa-user"></i>
+          
           <input formControlName="lastName" maxlength="50" type="text" class="form-control" placeholder="Last Name" required>
         </label>
         <div *ngIf="userForm.invalid && submitted" class="form-error-content">
@@ -29,10 +40,9 @@
       </section>
     </div>
     <div class="row">
-      <section class="col col-6">
+      <section class="col-md-6 col-sm-12">
         <label class="label required">E-mail</label>
         <label class="input">
-          <i class="icon-append fa fa-envelope-o"></i>
           <input formControlName="emailAddress" disabled="disabled" maxlength="100" type="email" class="form-control" placeholder="Email Address"
             required>
         </label>
@@ -49,7 +59,7 @@
     </div>
 
     <footer>
-      <button type="submit" class="btn-u pull-right">Save Changes</button>
+      <button type="submit" class="btn-rose pull-right">Save Changes</button>
     </footer>
   </fieldset>
   <div class="message">
@@ -57,3 +67,9 @@
     <p>Your message was successfully sent!</p>
   </div>
 </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

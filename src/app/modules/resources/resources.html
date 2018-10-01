@@ -1,14 +1,27 @@
-﻿<section class="content-wrapper">
+﻿<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Resources</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+<section class="content-wrapper">
   <h4>Who or What are your Resources?</h4>
   <p>Resources are whoever or whatever your customers can book for period of times.They can be employees, facilities or room.
     For example, normally your first resource is you.</p>
-  <span class="pull-right">
+  <span class="pull-right pt-2">
     <a class="btn-u" [routerLink]="['/resource', 0]">
       <i class="fa fa-plus"></i>&nbsp;Create Resource
     </a>
   </span>
   <hr>
-  <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='resources'>
+  <ngx-datatable class='table table-striped' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='resources'>
     <!--<ngx-datatable-column [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-row="row">
         <div style="height:30px; width:30px;" [style.background-color]="'row[color]'"></div>
@@ -47,3 +60,10 @@
     </ngx-datatable-column>
   </ngx-datatable>
 </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
