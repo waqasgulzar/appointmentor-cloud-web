@@ -1,4 +1,5 @@
-﻿<div class="main-content">
+﻿
+<div class="main-content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -7,92 +8,15 @@
             <div class="card-icon">
               <i class="material-icons">assignment</i>
             </div>
-            <h4 class="card-title">Assets</h4>
+            <h4 class="card-title">Create Assets</h4>
           </div>
           <div class="card-body">
-              <header>Create Assets</header>
-<form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
-  <div class="tab-content">
-   <!-- <fieldset>
-      <div class="row">
-        <section class="col col-6">
-          <label class="label">Name*</label>
-          <label class="input">
-            <i class="icon-append fa fa-user"></i>
-            <input type="text" formControlName="name">
-          </label>
-          <div class="form-error-content" *ngIf="submitted">
-            <span *ngIf="userForm.get('name').errors?.required">
-              Asset name is required
-            </span>
-            <span *ngIf="userForm.get('name').errors?.pattern">
-              Asset name is invalid
-            </span>
-            <span *ngIf="userForm.get('name').errors?.maxlength">
-              Asset name can not more than 50 characters.
-            </span>
-          </div>
-        </section>
-        <section class="col col-6">
-          <label class="label">Quantity</label>
-          <label class="input">
-            <i class="icon-append fa fa-at"></i>
-            <input type="number" formControlName="quantity" maxlength="5">
-          </label>
-          <div class="form-error-content" *ngIf="submitted">
-            <span *ngIf="userForm.get('quantity').errors?.required">
-              Quantity required
-            </span>
-            <span *ngIf="userForm.get('quantity').errors?.min">
-              Quantity can not be less than 0.
-            </span>
-            <span *ngIf="userForm.get('quantity').errors?.max">
-              Quantity can not be more than 1000.
-            </span>
-          </div>
-        </section>
-      </div>
-
-      <div class="row">
-        <section>
-          <label class="label required">Services</label>
-
-          <ngx-datatable [rows]="services" class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30"
-            [footerHeight]="0" [rowHeight]="'auto'" [selectionType]="'checkbox'" (select)='onSelect($event)' [selected]="selectedServices">
-            <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"
-              [flexGrow]="1">
-              <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
-                let-selectFn="selectFn">
-                Enable
-              </ng-template>
-              <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
-                let-onCheckboxChangeFn="onCheckboxChangeFn" let-row="row">
-                <div>
-                  <mat-checkbox [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
-                </div>
-              </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Service Name" prop="serviceName" [flexGrow]="2"></ngx-datatable-column>
-            <ngx-datatable-column name="Duration" prop="duration" [flexGrow]="1">
-              <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-                <span>{{row['duration']}} {{row['durationType']}}</span>
-              </ng-template>
-            </ngx-datatable-column>
-          </ngx-datatable>
-        </section>
-      </div>
-
-      <div class="pull-right">
-        <button type="button" class="btn btn-default" action="action" onclick="window.history.go(-1); return false;">Cancel</button>
-        <button type="submit" class="btn-u">Save</button>
-      </div>
-    </fieldset>-->
-      <form class="form-horizontal">
+  <div class="tab-content m-2">
+      <form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" class="form-horizontal">
           <div class="row">
-              <label class="col-md-3 col-2 col-form-label">Email</label>
-              <div class="col-md-9 col-9">
+              <div class="col-lg-5 col-md-8 col-sm-4">
                   <mat-form-field class="example-full-width">
-                      <input matInput type="text" formControlName="name">
+                      <input matInput type="text" formControlName="name" placeholder="Name">
                   </mat-form-field>
                   <div class="form-error-content" *ngIf="submitted">
             <span *ngIf="userForm.get('name').errors?.required">
@@ -106,31 +30,57 @@
             </span>
                   </div>
               </div>
-          </div>
-          <div class="row">
-              <label class="col-md-3 col-2 col-form-label">Password</label>
-              <div class="col-md-9 col-9">
+              <div class="col-lg-5 col-md-8 col-sm-4">
                   <mat-form-field class="example-full-width">
-                      <input matInput type="password">
+                      <input matInput type="number" formControlName="quantity" maxlength="5" placeholder="Quantity">
                   </mat-form-field>
-              </div>
-          </div>
-          <div class="row">
-              <label class="col-md-3"></label>
-              <div class="col-md-9">
-                  <div class="form-check">
-                      <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" value=""> Remember me
-                          <span class="form-check-sign">
-                        <span class="check"></span>
-                      </span>
-                      </label>
+                  <div class="form-error-content" *ngIf="submitted">
+            <span *ngIf="userForm.get('quantity').errors?.required">
+              Quantity required
+            </span>
+                      <span *ngIf="userForm.get('quantity').errors?.min">
+              Quantity can not be less than 0.
+            </span>
+                      <span *ngIf="userForm.get('quantity').errors?.max">
+              Quantity can not be more than 1000.
+            </span>
                   </div>
               </div>
           </div>
+          <div class="row">
+                  <label class="label required">Services</label>
+                    <div class="table-responsive">
+                  <ngx-datatable [rows]="services" class='table bootstrap' [columnMode]="'flex'" [headerHeight]="50"
+                                 [footerHeight]="0" [rowHeight]="'auto'" [selectionType]="'checkbox'" (select)='onSelect($event)' [selected]="selectedServices">
+                      <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"
+                                            [flexGrow]="1">
+                          <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                                       let-selectFn="selectFn">
+                              Enable
+                          </ng-template>
+                          <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                                       let-onCheckboxChangeFn="onCheckboxChangeFn" let-row="row">
+                              <div>
+                                  <mat-checkbox [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+                              </div>
+                          </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Service Name" prop="serviceName" [flexGrow]="2"></ngx-datatable-column>
+                      <ngx-datatable-column name="Duration" prop="duration" [flexGrow]="1">
+                          <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+                              <span>{{row['duration']}} {{row['durationType']}}</span>
+                          </ng-template>
+                      </ngx-datatable-column>
+                  </ngx-datatable>
+                    </div>
+          </div>
+          <div class="pull-right">
+              <button type="button" class="btn btn-default" action="action" onclick="window.history.go(-1); return false;">Cancel</button>
+              <button type="submit" class="btn btn-rose">Save</button>
+          </div>
+
       </form>
   </div>
-</form>
           </div>
         </div>
       </div>

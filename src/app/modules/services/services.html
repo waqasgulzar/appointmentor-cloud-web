@@ -8,7 +8,7 @@
   <hr>
   <div class="panel panel-default">
     <div>
-      <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='services'>
+      <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [rows]='services'>
         <ngx-datatable-column name="Name" prop="serviceName" [flexGrow]="2"></ngx-datatable-column>
         <ngx-datatable-column name="Duration" prop="quantity" [flexGrow]="2">
           <ng-template let-value="value" ngx-datatable-cell-template let-row="row">

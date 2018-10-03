@@ -36,7 +36,7 @@
             <div class="tab-pane active" id="plans">
               <div class="table-responsive">
 
-                <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='categories'>
+                <ngx-datatable class='table table-striped' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [rows]='categories'>
                   <ngx-datatable-column name="#" width="20">
                     <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                       <strong>{{rowIndex+1}}</strong>

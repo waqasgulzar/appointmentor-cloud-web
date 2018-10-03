@@ -569,19 +569,16 @@
                   </div>
                 </div>
               <div class="row">
-                <app-address formControlName="address"></app-address>
+                <app-address formControlName="Address"></app-address>
               </div>
-              <div class="row">
-                <section>
-                  <label class="label required">Services</label>
-                  <!--<mat-list-item *ngFor="let c of categories">
-                  <h4 mat-line>{{c.categoryName}}</h4>-->
-                  <ngx-datatable [rows]="services" class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [footerHeight]="0" [rowHeight]="'auto'"
+              <div class="row ml-2 mr-2">
+                  <label class="label required"><h4>Services</h4></label>
+                    <div class="table-responsive">
+                  <ngx-datatable [rows]="services" class='table table-striped' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="0" [rowHeight]="'auto'"
                                  [selectionType]="'checkbox'" (select)='onSelect($event)' [selected]="selectedServices">
                     <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [flexGrow]="1">
                       <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
                         Enable
-                        &lt;!&ndash; <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" /> &ndash;&gt;
                       </ng-template>
                       <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"
                                    let-row="row">
@@ -597,26 +594,10 @@
                       </ng-template>
                     </ngx-datatable-column>
                   </ngx-datatable>
-                  <!--&lt;!&ndash; </mat-list-item> &ndash;&gt;-->
-                </section>
+                    </div>
               </div>
-              <!--<div class="row">
-                <section>
-                  <label class="label">Enable gap between appointments</label>
-                  <label class="select">
-                    <mat-select formControlName="gapBetweenAppointments" class="form-control">
-                      <mat-option selected>None</mat-option>
-                      <mat-option>5 Minutes</mat-option>
-                      <mat-option>10 Minutes</mat-option>
-                      <mat-option>15 Minutes</mat-option>
-                      <mat-option>30 Minutes</mat-option>
-                    </mat-select>
-                    <i></i>
-                  </label>
-                </section>
-              </div>-->
-              <div class="row pt-2 pb-2">
-                <div class="col-lg-5 col-md-8 col-sm-4">
+              <div class="row pt-2 pb-2 m-2">
+                <div class="col-lg-12 col-md-12 col-sm-12">
                   <mat-form-field>
                     <mat-select placeholder="Enable gap between appointments"  ariaLabel="cities[0]" formControlName="gapBetweenAppointments" >
                       <mat-option value="1">None</mat-option>
@@ -628,14 +609,26 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div class="row">
-                <section>
-                  <label class="label required">Online Booking Availability
-                    <span class="pull-right"> <input type="checkbox" (change)="showAdvanced = !showAdvanced" /> Show Advanced
-          </span>
+              <div class="row m-2">
+                <div class="col-md-10">
+                    <label class="label required"><h4>Online Booking Availability</h4>
                   </label>
+                </div>
+                  <div class="col-md-2">
+                  <div align="right">
+                  <div class="form-check">
+                      <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox" value="" (change)="showAdvanced = !showAdvanced" > Show Advanced
+                          <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                      </label>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="table-responsive">
                   <div class="panel panel-green margin-bottom-40 zero-border" *ngIf="!showAdvanced">
-                    <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='resource.workingHours'
+                    <ngx-datatable class='table table-striped' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [rows]='resource.workingHours'
                                    [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
                       <ngx-datatable-column name="Day" prop="dayId" [flexGrow]="1">
                         <ng-template let-value="value" ngx-datatable-cell-template>
@@ -644,11 +637,27 @@
                       </ngx-datatable-column>
                       <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
                         <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
-                          <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+                          <!--<input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />-->
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" value="" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" >
+                                    <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                                </label>
+                            </div>
                         </ng-template>
                         <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-rowIndex="rowIndex" let-onCheckboxChangeFn="onCheckboxChangeFn">
-                          <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event); updateIsOpen($event, rowIndex, isSelected)"
-                          />
+                          <!--<input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event); updateIsOpen($event, rowIndex, isSelected)"
+                          />-->
+                            <div class="form-check">
+                                <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" [checked]="isSelected" (change)="onCheckboxChangeFn($event); updateIsOpen($event, rowIndex, isSelected)" >
+                                    <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                                </label>
+                            </div>
                         </ng-template>
                       </ngx-datatable-column>
                       <ngx-datatable-column [sortable]="false" name="Start Time" prop="startTime" [flexGrow]="2" headerClass="text-center">
@@ -765,8 +774,12 @@
                       </ngx-datatable-column>
                     </ngx-datatable>
                   </div>
-                </section>
+                  </div>
               </div>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" action="action" onclick="window.history.go(-1); return false;">Cancel</button>
+                    <button type="submit" class="btn btn-rose">Save</button>
+                </div>
             </form>
           </div>
         </div>

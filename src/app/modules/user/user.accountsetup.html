@@ -115,62 +115,125 @@
     </div>
   </div>
 </div>
-<!---<form action="#" method="post" id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
-    <header align="left">User Account</header>
 
-    <fieldset>
-        <div class="row">
-            <section class="col col-6">
-                <label class="label required">First Name</label>
-                <label class="input">
-                    <i class="icon-append fa fa-user"></i>
-                    <input formControlName="firstName" maxlength="50" type="text" class="form-control" placeholder="First Name" required>
-                </label>
-                <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-                    <div *ngIf="userForm.controls['firstName'].errors && userForm.controls['firstName'].errors.required">
-                        First Name is required
-                    </div>
-                </div>
-            </section>
-            <section class="col col-6">
-                <label class="label required">Last Name</label>
-                <label class="input">
-                    <i class="icon-append fa fa-user"></i>
-                    <input formControlName="lastName" maxlength="50" type="text" class="form-control" placeholder="Last Name" required>
-                </label>
-                <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-                    <div *ngIf="userForm.controls['lastName'].errors && userForm.controls['lastName'].errors.required">
-                        Last Name is required
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="row">
-            <section class="col col-6">
-                <label class="label required">E-mail</label>
-                <label class="input">
-                    <i class="icon-append fa fa-envelope-o"></i>
-                    <input formControlName="emailAddress" disabled="disabled" maxlength="100" type="email" class="form-control" placeholder="Email Address"
-                           required>
-                </label>
-                <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-                    <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
-                        Email is required
-                    </div>
-                    <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.email && !userForm.controls['emailAddress'].errors.required">
-                        Email is invalid
-                    </div>
-                </div>
-            </section>
-
-        </div>
-
-        <footer>
-            <button type="submit" class="btn-u pull-right">Save Changes</button>
-        </footer>
-    </fieldset>
-    <div class="message">
-        <i class="rounded-x fa fa-check"></i>
-        <p>Your message was successfully sent!</p>
+<!--<div class="container-fluid zero-padding">
+  <header>
+    <div class="row login_bg" align="center">
+      <h1 style="color:#FFF;">
+        <b>
+          <span class="fa fa-clock-o"></span> Appointmentor
+        </b>
+      </h1>
     </div>
-</form>-->
+  </header>
+  <div class="clearfix margin-bottom-30"></div>
+  <section class="col-md-12">
+    <div class="col-md-offset-1 col-md-10">
+      <form method="post" id="sky-form3" class="sky-form border-lining " novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+        <header>Profile</header>
+        <fieldset>
+          <input type="hidden" formControlName="organizationId">
+          <div class="row">
+            <section class="col col-6">
+              <label class="label required">Company Name</label>
+              <label class="input">
+                <i class="icon-append fa fa-building-o"></i>
+                <input type="text" formControlName="companyName" maxlength="50" required>
+              </label>
+              <div class="form-error-content" *ngIf="submitted">
+                <span *ngIf="userForm.get('companyName').errors?.required">
+                  Company Name is required
+                </span>
+              </div>
+            </section>
+            <section class="col col-6">
+              <label class="label required">Business Type</label>
+              <label class="input">
+                <i class="icon-append fa fa-building"></i>
+                <select formControlName="typeId">
+                  <option *ngFor="let item of orgTypes" [value]="item.id">{{item.title}}</option>
+                </select>
+              </label>
+            </section>
+
+          </div>
+
+          <div class="row">
+            <section class="col col-6">
+              <label class="label required">Contact First Name</label>
+              <label class="input">
+                <i class="icon-append fa fa-user"></i>
+                <input type="text" formControlName="firstName" maxlength="50" required autofocus>
+              </label>
+              <div class="form-error-content" *ngIf="submitted">
+                <span *ngIf="userForm.get('firstName').errors?.required">
+                  First Name is required
+                </span>
+              </div>
+            </section>
+            <section class="col col-6">
+              <label class="label required">Contact Last Name</label>
+              <label class="input">
+                <i class="icon-append fa fa-user"></i>
+                <input type="text" formControlName="lastName" maxlength="50" required>
+              </label>
+              <div class="form-error-content" *ngIf="submitted">
+                <span *ngIf="userForm.get('lastName').errors?.required">
+                  Last Name is required
+                </span>
+              </div>
+            </section>
+          </div>
+          <div class="row">
+            <section class="col col-6">
+              <label class="label required">E-mail Address</label>
+              <label class="input">
+                <i class="icon-append fa fa-envelope-o"></i>
+                <input type="email" formControlName="emailAddress" disabled="disabled" maxlength="100" required>
+              </label>
+            </section>
+            <section class="col col-6">
+              <label class="label required">Phone Number</label>
+              <label class="input">
+                <i class="icon-append fa fa-phone"></i>
+                <input type="number" formControlName="phoneNumber" required>
+              </label>
+              <div class="form-error-content" *ngIf="submitted">
+                <span *ngIf="userForm.get('phoneNumber').errors?.required">
+                  Phone Number is required
+                </span>
+                <span *ngIf="userForm.get('phoneNumber').errors?.pattern">
+                  Phone Number is invalid
+                </span>
+              </div>
+            </section>
+          </div>
+          <div class="row">
+
+            <section class="col col-6">
+              <label class="label required">Password</label>
+              <label class="input">
+                <i class="icon-append fa fa-lock"></i>
+                <input type="password" formControlName="password" maxlength="50" required>
+              </label>
+              <div class="form-error-content" *ngIf="submitted">
+                <span *ngIf="userForm.get('password').errors?.required">
+                  Password is required
+                </span>
+                <span *ngIf="userForm.get('password').errors?.minLength">
+                  Your password must be at least 5 characters long
+                </span>
+                <span *ngIf="userForm.get('password').errors?.maxLength">
+                  Your password cannot exceed 15 characters
+                </span>
+              </div>
+            </section>
+          </div>
+        </fieldset>
+        <div class="pull-right">
+          <button type="submit" class="btn btn-u">Save & Continue</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>-->

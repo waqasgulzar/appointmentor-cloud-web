@@ -81,8 +81,21 @@
 {
     overflow-x:hidden !important;
 }
-/*
-.navbar .collapse .navbar-nav .nav-item .nav-link
+.form-check .form-check-sign .check1 {
+    /* position: relative; */
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(0,0,0, .54);
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 3px;
+    left: 1px;
+    top: -13px;
+}
+.ngx-datatable .datatable-header
 {
-    color:#000 !important;
-}*/
+    background:#9c27b0 !important;
+    color:#fff !important;
+    padding: 10px !important;
+}
