@@ -1,4 +1,16 @@
-﻿<!--
+﻿
+<!--<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Create Resource</h4>
+          </div>
+          <div class="card-body">
 <form novalidate (ngSubmit)="onSubmit(userForm);" [formGroup]="userForm" id="sky-form" class="sky-form">
   <header style="text-align:left;">Tasks</header>
   <fieldset>
@@ -94,6 +106,12 @@
     </form>
   </div>
 </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 &lt;!&ndash;delete pop-up&ndash;&gt;
 <div class="modal fade" id="delete_customer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -114,6 +132,8 @@
     </div>
   </div>
 </div>-->
+
+
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
@@ -127,49 +147,86 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-<form novalidate (ngSubmit)="onSubmit(userForm);" [formGroup]="userForm" >
-<div class="col-md-12 " style="display:none;">
-    <div class="panel">
-        <div class="panel-body">
-            No tasks found.
-        </div>
-    </div>
-</div>
-<div class="col-md-12" align="center">
-    <div class="panel-body">
-        <form novalidate style="border:1px solid transparent;">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Task</th>
-                    <th>Resource</th>
-                    <th>Customer</th>
-                    <th>Due Date</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of tasks">
-                    <td>{{item.taskName}}</td>
-                    <td>{{item.resourceName}}</td>
-                    <td>{{item.customerName}}</td>
-                    <td>{{item.dueDate}}</td>
-                    <td>Pending</td>
-                    <td>
-                        <div class="inline-group">
+                            <form novalidate (ngSubmit)="onSubmit(userForm);" [formGroup]="userForm" >
+                                <div class="row m-2">
+
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput formControlName="taskName" type="text" maxlength="100" placeholder="Add New Task" required />
+                                    </mat-form-field>
+                                    <div class="form-error-content" *ngIf="submitted">
+        <span *ngIf="userForm.get('taskName').errors?.required">
+          Task name is required
+        </span>
+                                    </div>
+                                    <div>
+                                    </div>
+                                </div>
+                                <div class="row m-1">
+                                    <div class="col-md-6">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Assign to" formControlName="resourceId" >
+                                                <mat-option value="1">All Resources</mat-option>
+                                                <mat-option *ngFor="let item of resources" <!--[selected]="item.resourceId == lookupselected" value="{{item.resourceId}}-->">{{item.firstName}}
+                                                    {{item.lastName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-form-field>
+
+                                            <mat-select placeholder="Assign to customer" formControlName="customerId" >
+                                                <mat-option value="1">Select customer</mat-option>
+                                                <mat-option *ngFor="let item of customers" <!--[selected]="item.customerId == lookupselected" value="{{item.customerId}}"-->>{{item.firstName}}
+                                                {{item.lastName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row m-1">
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput formControlName="dueDate" type="date" placeholder="Due Date" />
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-rose pull-right">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="col-md-12" align="center">
+                                <div class="panel-body">
+                                    <form novalidate id="" class="" >
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>Task</th>
+                                            <th>Resource</th>
+                                            <th>Customer</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let item of tasks">
+                                            <td>{{item.taskName}}</td>
+                                            <td>{{item.resourceName}}</td>
+                                            <td>{{item.customerName}}</td>
+                                            <td>{{item.dueDate}}</td>
+                                            <td>Pending</td>
+                                            <td>
+                                                <div class="inline-group">
                 <span><label class="checkbox" style="margin-right: 0px;"><input type="checkbox" value="isComplete" />&nbsp;&nbsp;<a
                         style="cursor: pointer;" (click)="TaskIdForDelete(item.taskId); delete_customer.show()"><i></i></a></label><a><i
                         class="fa fa-trash-o zero-padding" style="padding-top: 8px;" data-toggle="modal" data-target="#delete_customer"></i></a></span>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
-</div>
-</form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

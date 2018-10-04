@@ -1,4 +1,4 @@
-﻿<section class="content-wrapper">
+﻿<!--<section class="content-wrapper">
   <h4>Customer Profiles</h4>
   <span class="pull-right">
     <a class="btn-u" [routerLink]="['/customer', 0]">
@@ -36,4 +36,55 @@
       </ngx-datatable>
     </div>
   </div>
-</section>
+</section>-->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Customer Profiles</h4>
+            <span class="pull-right">
+    <a class="btn-u" [routerLink]="['/customer', 0]">
+      <i class="fa fa-plus"></i>&nbsp;Create Customer
+    </a>
+  </span>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <ngx-datatable class='table table-striped' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [rows]='customers'>
+                <ngx-datatable-column name="Name" prop="firstName" [flexGrow]="2">
+                  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+                    <span>{{row['firstName']}} {{row['lastName']}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Email" prop="emailAddress" [flexGrow]="2">
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Date of Birth" prop="dateOfBirth" [flexGrow]="1">
+                  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+                    <span>{{row['dateOfBirth'] | date:'dd/MM/yyyy'}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Phone" prop="mobileNumber" [flexGrow]="2">
+                  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+                    <span>{{row['mobileNumber']}} {{row['contactNumber']}}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
+                    <button type="button" class="btn btn-default" [routerLink]="['/customer', row['serviceId']]">
+                      Edit
+                    </button>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
