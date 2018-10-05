@@ -1,4 +1,18 @@
-﻿<form id="sky-form3" class="sky-form zero-padding" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+﻿<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Edit Services</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+
+              <!--<form id="sky-form3" class="sky-form zero-padding" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
   <div class="col-xs-12">
     <div class="row">
       <div class="col-xs-8">
@@ -29,15 +43,15 @@
           <input type="text" formControlName="categoryDescription" maxlength="50">
         </label>
         <div class="form-error-content" *ngIf="submitted">
-          <!-- <span *ngIf="userForm.get('categoryName').errors?.required">
+          &lt;!&ndash; <span *ngIf="userForm.get('categoryName').errors?.required">
             Plan name is required
-          </span> -->
-          <!-- <span *ngIf="userForm.get('categoryName').errors?.pattern">
+          </span> &ndash;&gt;
+          &lt;!&ndash; <span *ngIf="userForm.get('categoryName').errors?.pattern">
             Plan name is invalid
-          </span> -->
-          <!-- <span *ngIf="userForm.get('categoryName').errors?.maxlength">
+          </span> &ndash;&gt;
+          &lt;!&ndash; <span *ngIf="userForm.get('categoryName').errors?.maxlength">
             Plan name can not more than 50 characters.
-          </span> -->
+          </span> &ndash;&gt;
         </div>
       </div>
 
@@ -48,7 +62,7 @@
           <input type="text" formControlName="categoryOnlineDescription" maxlength="50">
         </label>
         <div class="form-error-content" *ngIf="submitted">
-          <!-- <span *ngIf="userForm.get('categoryName').errors?.required">
+          &lt;!&ndash; <span *ngIf="userForm.get('categoryName').errors?.required">
             Plan name is required
           </span>
           <span *ngIf="userForm.get('categoryName').errors?.pattern">
@@ -56,7 +70,7 @@
           </span>
           <span *ngIf="userForm.get('categoryName').errors?.maxlength">
             Plan name can not more than 50 characters.
-          </span> -->
+          </span> &ndash;&gt;
         </div>
       </div>
     </div>
@@ -64,4 +78,54 @@
       <button class="btn btn-u">Save</button>
     </footer>
   </div>
-</form>
+</form>-->
+              <form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+              <div class="row pb-2">
+                <input type="hidden" formControlName="categoryId">
+                <input type="hidden" formControlName="organizationId">
+                <label class="col-sm-2">Plan Name*</label>
+
+                <div class="col-sm-7">
+                  <input type="text" formControlName="categoryName" maxlength="50" class="form-control">
+                  <div class="form-error-content" *ngIf="submitted">
+          <span *ngIf="userForm.get('categoryName').errors?.required">
+            Plan name is required
+          </span>
+                    <span *ngIf="userForm.get('categoryName').errors?.pattern">
+            Plan name is invalid
+          </span>
+                    <span *ngIf="userForm.get('categoryName').errors?.maxlength">
+            Plan name can not more than 50 characters.
+          </span>
+                  </div>
+                </div>
+              </div>
+                <div class="row pb-2">
+                  <label class="col-sm-2">Description*</label>
+
+                  <div class="col-sm-7">
+                    <input type="text" formControlName="categoryDescription" maxlength="50" class="form-control">
+                    <div class="form-error-content">
+                    </div>
+                  </div>
+                </div>
+                <div class="row" >
+                  <label class="col-sm-2">Online Description*</label>
+
+                  <div class="col-sm-7">
+                    <input type="text" formControlName="categoryOnlineDescription" maxlength="50" class="form-control">
+                    <div class="form-error-content">
+                    </div>
+                  </div>
+                </div>
+                <footer class="pull-right">
+                  <button class="btn btn-rose">Save</button>
+                </footer>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

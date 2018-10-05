@@ -1,4 +1,122 @@
-﻿<div class="container-fluid zero-padding">
+﻿
+<div class="container-fluid zero-padding">
+  <header>
+    <div class="row login_bg" align="center">
+      <h1 style="color:#FFF;">
+        <b>
+          <span class="fa fa-clock-o"></span> Appointmentor
+        </b>
+      </h1>
+    </div>
+  </header>
+  <div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-rose card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">assignment</i>
+              </div>
+              <h4 class="card-title">Profile</h4>
+            </div>
+            <div class="card-body">
+  <section class="col-md-12">
+    <div class="col-md-offset-1 col-md-10">
+      <form method="post"  novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+          <input class="form-control" type="hidden" formControlName="organizationId">
+        <div class="row pb-2 pt-2">
+          <div class="col-md-6">
+
+            <input class="form-control" type="text" formControlName="companyName" maxlength="50" required placeholder="Company Name">
+
+            <div class="form-error-content" *ngIf="submitted">
+                <span *ngIf="userForm.get('companyName').errors?.required">
+                  Company Name is required
+                </span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field>
+              <mat-select placeholder="Business Type" formControlName="typeId">
+                <option *ngFor="let item of orgTypes" [value]="item.id">{{item.title}}</option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row pb-2 pt-2">
+          <div class="col-md-6">
+
+            <input class="form-control" type="text" formControlName="firstName" maxlength="50" required autofocus placeholder="Contact First Name">
+
+
+            <div class="form-error-content" *ngIf="submitted">
+                <span *ngIf="userForm.get('firstName').errors?.required">
+                  First Name is required
+                </span>
+            </div>
+          </div>
+          <div class="col-md-6">
+
+            <input class="form-control" type="text" formControlName="lastName" maxlength="50" required placeholder="Contact Last Name">
+            <div class="form-error-content" *ngIf="submitted">
+                <span *ngIf="userForm.get('lastName').errors?.required">
+                  Last Name is required
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="row pb-2 pt-2">
+          <div class="col-md-6">
+
+            <input class="form-control" type="email" formControlName="emailAddress" disabled="disabled" maxlength="100" required placeholder="Email">
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="number" formControlName="phoneNumber" required placeholder="Phone Number">
+            <div class="form-error-content" *ngIf="submitted">
+                <span *ngIf="userForm.get('phoneNumber').errors?.required">
+                  Phone Number is required
+                </span>
+              <span *ngIf="userForm.get('phoneNumber').errors?.pattern">
+                  Phone Number is invalid
+                </span>
+            </div>
+          </div>
+        </div>
+        <div class="row pb-2 pt-2">
+          <div class="col-md-6">
+
+            <input class="form-control" type="password" formControlName="password" maxlength="50" required placeholder="Password">
+            <div class="form-error-content" *ngIf="submitted">
+                <span *ngIf="userForm.get('password').errors?.required">
+                  Password is required
+                </span>
+              <span *ngIf="userForm.get('password').errors?.minLength">
+                  Your password must be at least 5 characters long
+                </span>
+              <span *ngIf="userForm.get('password').errors?.maxLength">
+                  Your password cannot exceed 15 characters
+                </span>
+            </div>
+          </div>
+          <div class="col-md-6">
+          </div>
+        </div>
+        <div class="pull-right">
+          <button type="submit" class="btn btn-rose">Save & Continue</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="container-fluid zero-padding">
   <header>
     <div class="row login_bg" align="center">
       <h1 style="color:#FFF;">
@@ -118,4 +236,4 @@
       </form>
     </div>
   </section>
-</div>
+</div>-->

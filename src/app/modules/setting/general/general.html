@@ -1,66 +1,129 @@
-﻿<form  class="sky-form zero-padding" novalidate [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+﻿<!--<form  class="zero-padding" novalidate [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
   <div class="col-xs-12">
     <h2>General Setting</h2>
     <hr />
 
     <div class="row">
-      <div class="col-xs-8">
+      <div class="col-xs-4">
         <label class="label">Calendar interval increments</label>
-        <label class="select">
-          <select formControlName="calendarIntervalIncrement">
-            <option value="1">1 minute</option>
-            <option value="2">2 minutes</option>
-            <option value="3">3 minutes</option>
-            <option value="5">5 minutes</option>
-            <option value="10">10 minutes</option>
-            <option value="15">15 minutes</option>
-            <option value="30">30 minutes</option>
-            <option value="60">60 minutes</option>
-          </select>
+        <label class="mat-select">
+          <mat-select formControlName="calendarIntervalIncrement">
+            <mat-option value="1">1 minute</mat-option>
+            <mat-option value="2">2 minutes</mat-option>
+            <mat-option value="3">3 minutes</mat-option>
+            <mat-option value="5">5 minutes</mat-option>
+            <mat-option value="10">10 minutes</mat-option>
+            <mat-option value="15">15 minutes</mat-option>
+            <mat-option value="30">30 minutes</mat-option>
+            <mat-option value="60">60 minutes</mat-option>
+          </mat-select>
           <i></i>
         </label>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-xs-8">
+      <div class="col-xs-4">
         <label class="label">Timezone</label>
-        <label class="select">
-          <select formControlName="timeZoneId">
-            <option *ngFor="let item of timezonelist" [value]="item.id">{{item.title}}</option>
-          </select>
+        <label class="mat-select">
+          <mat-select formControlName="timeZoneId">
+            <mat-option *ngFor="let item of timezonelist" [value]="item.id">{{item.title}}</mat-option>
+          </mat-select>
           <i></i>
         </label>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-xs-8">
+      <div class="col-xs-4">
         <label class="label">Currency</label>
-        <label class="select">
-          <select formControlName="currencyId">
-            <option *ngFor="let item of currencylist" [value]="item.id">{{item.title}}</option>
-          </select>
+        <label class="mat-select">
+          <mat-select formControlName="currencyId">
+            <mat-option *ngFor="let item of currencylist" [value]="item.id">{{item.title}}</mat-option>
+          </mat-select>
           <i></i>
         </label>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-xs-8">
+      <div class="col-xs-4">
         <label class="label">Date Format</label>
-        <label class="select">
-          <select formControlName="dateFormat">
-            <option value="dd/mm/yyyy">dd/mm/yyyy</option>
-            <option value="mm/dd/yyyy">mm/dd/yyyy</option>
-          </select>
+        <label class="mat-select">
+          <mat-select formControlName="dateFormat">
+            <mat-option value="dd/mm/yyyy">dd/mm/yyyy</mat-option>
+            <mat-option value="mm/dd/yyyy">mm/dd/yyyy</mat-option>
+          </mat-select>
           <i></i>
         </label>
       </div>
     </div>
 
     <footer class="pull-right">
-      <button class="btn btn-u">Save</button>
+      <button class="btn btn-rose">Save</button>
     </footer>
   </div>
+</form>-->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">General Setting</h4>
+          </div>
+          <div class="card-body">
+              <form  novalidate [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+                  <div class="row pt-2 pb-2">
+                      <div class="col-lg-5 col-md-8 col-sm-4">
+                          <mat-form-field>
+                              <mat-select placeholder="Calendar interval increments"  ariaLabel="cities[0]" formControlName="calendarIntervalIncrement" >
+                                  <mat-option value="1">1 minute</mat-option>
+                                  <mat-option value="2">2 minutes</mat-option>
+                                  <mat-option value="3">3 minutes</mat-option>
+                                  <mat-option value="5">5 minutes</mat-option>
+                                  <mat-option value="10">10 minutes</mat-option>
+                                  <mat-option value="15">15 minutes</mat-option>
+                                  <mat-option value="30">30 minutes</mat-option>
+                                  <mat-option value="60">60 minutes</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-lg-5 col-md-8 col-sm-4">
+                          <mat-form-field>
+                              <mat-select placeholder="Single City" formControlName="timeZoneId">
+                                  <mat-option *ngFor="let item of timezonelist" [value]="item.id">{{item.title}}</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="row pt-2 pb-2">
+                      <div class="col-lg-5 col-md-8 col-sm-4">
+                          <mat-form-field>
+                              <mat-select formControlName="currencyId" placeholder="currencyId">
+                                  <mat-option *ngFor="let item of currencylist" [value]="item.id">{{item.title}}</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-lg-5 col-md-8 col-sm-4">
+                          <mat-form-field>
+                              <mat-select placeholder="Date Format" formControlName="dateFormat">
+                                  <mat-option value="dd/mm/yyyy">dd/mm/yyyy</mat-option>
+                                  <mat-option value="mm/dd/yyyy">mm/dd/yyyy</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                      </div>
+                  </div>
+    <footer class="pull-right">
+      <button class="btn btn-rose">Save</button>
+    </footer>
 </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

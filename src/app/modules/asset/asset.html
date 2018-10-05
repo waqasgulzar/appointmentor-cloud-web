@@ -1,10 +1,10 @@
-﻿<section class="content-wrapper">
+﻿<!--<section class="content-wrapper">
   <h4>You can manage assets here.</h4>
   <span class="pull-right">
     <a class="btn-u" [routerLink]="['/asset', 0]">
       <i class="fa fa-plus"></i>&nbsp;Create Asset
     </a>
-    <!--<button type="button" class="btn btn-primary pull-right" (click)="createUpdateAsset()">+&nbsp;Create Asset</button>-->
+    &lt;!&ndash;<button type="button" class="btn btn-primary pull-right" (click)="createUpdateAsset()">+&nbsp;Create Asset</button>&ndash;&gt;
   </span>
   <hr>
   <div class="panel panel-default">
@@ -12,7 +12,7 @@
       <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='assets'>
         <ngx-datatable-column name="Name" prop="name" [flexGrow]="2"></ngx-datatable-column>
         <ngx-datatable-column name="Quantity" prop="quantity" [flexGrow]="2"></ngx-datatable-column>
-        <!--<ngx-datatable-column name="Services" prop="assetservice" [flexGrow]="3">
+        &lt;!&ndash;<ngx-datatable-column name="Services" prop="assetservice" [flexGrow]="3">
           <ng-template let-value="value" ngx-datatable-cell-template>
             <ul>
               <li *ngFor="let item of value">
@@ -20,18 +20,62 @@
               </li>
             </ul>
           </ng-template>
-        </ngx-datatable-column>-->
+        </ngx-datatable-column>&ndash;&gt;
+        <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
+          <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
+            <button type="button" class="btn btn-default" [routerLink]="['/asset', row['assetId']]">
+              Edit
+            </button>
+            &lt;!&ndash;<button type="button" class="btn btn-default" (click)="delete()">
+              Delete
+            </button>&ndash;&gt;
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</section>-->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Assets</h4>
+          </div>
+          <div class="card-body">
+      <section class="content-wrapper">
+  <h4>You can manage assets here.</h4>
+  <span class="pull-right pt-2 pb-2">
+    <a class="btn-rose" [routerLink]="['/asset', 0]">
+      <i class="fa fa-plus"></i>&nbsp;Create Asset
+    </a>
+  </span>
+  <hr>
+  <div class="panel panel-default">
+    <div>
+      <ngx-datatable class='table table-striped' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [rows]='assets'>
+        <ngx-datatable-column name="Name" prop="name" [flexGrow]="2"></ngx-datatable-column>
+        <ngx-datatable-column name="Quantity" prop="quantity" [flexGrow]="2"></ngx-datatable-column>
         <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
           <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
             <button type="button" class="btn btn-default" [routerLink]="['/asset', row['assetId']]">
                Edit
             </button>
-            <!--<button type="button" class="btn btn-default" (click)="delete()">
-              Delete
-            </button>-->
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
     </div>
   </div>
 </section>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+

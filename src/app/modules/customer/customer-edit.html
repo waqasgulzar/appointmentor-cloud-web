@@ -1,4 +1,4 @@
-﻿<h3>
+﻿<!--<h3>
   Create Customer</h3>
 <form method="post" id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(custForm);" [formGroup]="custForm" style="border: 1px solid transparent;">
   <input type="hidden" formControlName="customerId" />
@@ -142,4 +142,164 @@
     <button type="button" class="btn btn-default" action="action" (click)="onClose()">Cancel</button>
     <button type="submit" class="btn btn-u">Save</button>
   </div>
-</form>
+</form>-->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Edit Customer</h4>
+          </div>
+          <div class="card-body">
+            <form method="post" novalidate (ngSubmit)="onSubmit(custForm);" [formGroup]="custForm" style="border: 1px solid transparent;">
+              <input type="hidden" formControlName="customerId" />
+              <input type="hidden" formControlName="organizationId" />
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <mat-form-field class="example-full-width">
+                    <input matInput formControlName="firstName" maxlength="50" type="text" placeholder="First Name" required="">
+                    </mat-form-field>
+                  <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+                    <div *ngIf="custForm.controls['firstName'].errors && custForm.controls['firstName'].errors.required">
+                      First name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput formControlName="lastName" maxlength="50" type="text" placeholder="Last Name" required="">
+                  </mat-form-field>
+                  <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+                    <div *ngIf="custForm.controls['lastName'].errors && custForm.controls['lastName'].errors.required">
+                      Last name is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput formControlName="mobileNumber" maxlength="50" type="text" placeholder="Mobile Number" required="">
+                  </mat-form-field>
+                  <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+                    <div *ngIf="custForm.controls['mobileNumber'].errors && custForm.controls['mobileNumber'].errors.required">
+                      Mobile Number is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput formControlName="contactNumber" maxlength="50" type="text" placeholder="Contact Number">
+                  </mat-form-field>
+                  <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+                    <div *ngIf="custForm.controls['contactNumber'].errors && custForm.controls['contactNumber'].errors.required">
+                      Contact number is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput formControlName="emailAddress" maxlength="100" type="email" placeholder="Email address" required="">
+                  </mat-form-field>
+                  <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+                    <div *ngIf="custForm.controls['emailAddress'].errors && custForm.controls['emailAddress'].errors.required">
+                      Email is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput formControlName="twitterUserName" maxlength="50" type="text" placeholder="Twitter Username">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <mat-select formControlName="gender">
+                      <mat-option value="1">Male</mat-option>
+                      <mat-option value="0">Female</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput formControlName="dateOfBirth" type="text" placeholder="Date Of Birth" class="hasDatepicker">
+                  </mat-form-field>
+                  <div *ngIf="custForm.invalid && submitted" class="form-error-content">
+                    <div *ngIf="custForm.controls['dateOfBirth'].errors && custForm.controls['dateOfBirth'].errors.required">
+                      Date of Birth is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" value=""> Unsubscribed
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput formControlName="addressLine1" maxlength="50" type="text" placeholder="Address Line 1">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput formControlName="addressLine2" maxlength="50" type="text" placeholder="Address Line 2">
+                  </mat-form-field>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput formControlName="city" maxlength="50" type="text" placeholder="City">
+                  </mat-form-field>
+                </div>
+            </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput formControlName="postCode" maxlength="50" type="text" placeholder="Post Code">
+                  </mat-form-field>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput formControlName="tags" maxlength="50" type="text" placeholder="Tags">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                  <h4>Add Photo</h4>
+                  <span class="help-block">Accepted formats: PNG, JPEG upload photo Choose File</span>
+                    <label for="file" class="input input-file">
+                      <div class="button">
+                        <input type="file" (change)="handleFileInput($event.target.files)" accept=".png,.jpg,.jpeg" onchange="this.parentNode.nextSibling.value = this.value"
+                        />Browse
+                      </div><input type="text" readonly="">
+                    </label>
+                </div>
+              </div>
+              <div class="pull-right">
+                <button type="button" class="btn btn-default" action="action" (click)="onClose()">Cancel</button>
+                <button type="submit" class="btn btn-rose">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

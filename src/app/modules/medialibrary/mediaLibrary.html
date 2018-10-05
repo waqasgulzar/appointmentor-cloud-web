@@ -1,4 +1,4 @@
-<section class="content-wrapper">
+<!--<section class="content-wrapper">
     <h3>Media Library</h3>
     <form id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(mediaLibraryForm)" [formGroup]="mediaLibraryForm">
         <fieldset>
@@ -39,7 +39,7 @@
             <ngx-datatable-column name="Size (KB)" prop="fileSize" [flexGrow]="1"></ngx-datatable-column>
             <ngx-datatable-column name="Preview" prop="Preview" [flexGrow]="3">
                 <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
-                    <!-- <img [src]="getTrustedUrl(row['onDiskName'])" class="media-library-preview" /> -->
+                    &lt;!&ndash; <img [src]="getTrustedUrl(row['onDiskName'])" class="media-library-preview" /> &ndash;&gt;
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
@@ -51,4 +51,62 @@
             </ngx-datatable-column>
         </ngx-datatable>
     </div>
-</section>
+</section>-->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Media Library</h4>
+                    </div>
+                    <div class="card-body">
+                        <form  novalidate (ngSubmit)="onSubmit(mediaLibraryForm)" [formGroup]="mediaLibraryForm">
+                            <div class="row m-2">
+                                    <label class="label">Type*</label>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select formControlName="mediaTypeId" required [ngClass]="{'has-error':mediaLibraryForm.invalid && submitted && mediaLibraryForm.controls['mediaTypeId'].errors && mediaLibraryForm.controls['mediaTypeId'].errors.required}">
+                                            <mat-option *ngFor="let t of accesLevels" [value]="t.id">{{t.title}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div class="form-error-content" *ngIf="submitted">
+                        <span *ngIf="mediaLibraryForm.get('mediaTypeId').errors?.required">
+                            Type is required
+                        </span>
+                                    </div>
+                            </div>
+
+                            <div class="row m-2">
+                                    <label class="label">Select File to Upload</label>
+                                        <input type="file" multiple (change)="handleFileInput($event.target.files)">
+                            </div>
+                            <div class="row mt-5">
+                                <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [rows]='files'>
+                                    <ngx-datatable-column name="Access Level" prop="mediaType.title" [flexGrow]="1"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Name" prop="fileName" [flexGrow]="2"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Size (KB)" prop="fileSize" [flexGrow]="1"></ngx-datatable-column>
+                                    <ngx-datatable-column name="Preview" prop="Preview" [flexGrow]="3">
+                                        <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
+                                            <!-- <img [src]="getTrustedUrl(row['onDiskName'])" class="media-library-preview" /> -->
+                                        </ng-template>
+                                    </ngx-datatable-column>
+                                    <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
+                                        <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
+                                            <button mat-raised-button="" type="button" class="btn btn-danger btn-link" (click)="removeFile(row['id'])"><span class="mat-button-wrapper"><i class="material-icons">close</i></span><div class="mat-button-ripple mat-ripple" matripple=""></div><div class="mat-button-focus-overlay"></div></button>
+                                        </ng-template>
+                                    </ngx-datatable-column>
+                                </ngx-datatable>
+                            </div>
+                            <footer>
+                                <button class="btn btn-rose pull-right">Save</button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

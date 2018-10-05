@@ -1,4 +1,4 @@
-﻿<div class="col-xs-12">
+﻿<!--<div class="col-xs-12">
 <form class="sky-form" [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" novalidate="novalidate">
   <fieldset>
     <mat-tab-group>
@@ -176,11 +176,11 @@
   </footer>
 </form>
 </div>-->
-<div class="main-content">
+<!--<div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-10 mr-auto ml-auto">
-        <!--      Wizard container        -->
+      <div class="col-md-12 mr-auto ml-auto">
+        &lt;!&ndash;      Wizard container        &ndash;&gt;
         <div class="wizard-container">
           <div class="card card-wizard" data-color="rose" id="wizardProfile">
             <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" novalidate="novalidate">
@@ -488,8 +488,123 @@
             </form>
           </div>
         </div>
-        <!-- wizard container -->
+        &lt;!&ndash; wizard container &ndash;&gt;
       </div>
     </div>
   </div>
+</div>-->
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Organisation Profile</h4>
+                    </div>
+                    <div class="card-body">
+                        <form  [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" novalidate="novalidate">
+                                        <ul class="nav nav-pills nav-pills-warning" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#basicinfo" role="tablist">
+                                                    Basic Info
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#address" role="tablist">
+                                                    Address
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#contactdetails" role="tablist">
+                                                    Contact Details
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#communicationdetails" role="tablist">
+                                                    Communication Details
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#images" role="tablist">
+                                                    Images
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content tab-space">
+                                            <div class="tab-pane active" id="basicinfo">
+                                                <div class="row">
+                                                    <div class="input-group form-control-lg">
+                                                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">record_voice_over</i>
+                            </span>
+                                                        </div>
+                                                        <mat-form-field class="example-full-width has-label">
+                                                            <input type="text"
+                                                                   name="lastname"
+                                                                   matInput
+                                                                   id="text"
+                                                                   placeholder="last Name"
+                                                                   formControlName="lastName">
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                <label>Business Name<span style="color: red;">*</span></label>
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput type="text" formControlName="businessName" maxlength="50" class="form-control" placeholder="Enter Business Name">
+                                                </mat-form-field>
+                                                <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                                                    <div *ngIf="userForm.controls['businessName'].errors && userForm.controls['businessName'].errors.required">
+                                                        Business Name is required
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label>Business Name<span style="color: red;">*</span></label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <textarea formControlName="aboutYourBusiness" maxlength="2500" class="form-control" rows="7"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="row">
+                                                    <label>Logo for marketing automation&nbsp;&nbsp;<i class="fa fa-info"></i></label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput accept="image/*" type="file" class="btn btn-rose" (change)="handleFileInput($event.target.files)" />
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="row">
+
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="address">
+                                                Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
+                                                <br />
+                                                <br />Dramatically maintain clicks-and-mortar solutions without functional solutions.
+                                            </div>
+                                            <div class="tab-pane" id="contactdetails">
+                                                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
+                                                <br />
+                                                <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
+                                            </div>
+                                            <div class="tab-pane" id="communicationdetails">
+                                                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
+                                                <br />
+                                                <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
+                                            </div>
+                                            <div class="tab-pane" id="images">
+                                                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
+                                                <br />
+                                                <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
+                                            </div>
+                                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

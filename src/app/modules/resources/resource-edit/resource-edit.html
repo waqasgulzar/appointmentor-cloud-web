@@ -1,9 +1,8 @@
-﻿<h3>
-  Create Resource</h3>
+﻿<!--<h3>Create Resource</h3>
 <form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm" class="sky-form">
   <input type="hidden" formControlName="resourceId" />
   <input type="hidden" formControlName="organizationId" />
-  <!-- <pre>{{userForm.value | json}}</pre> -->
+  <pre>{{userForm.value | json}}</pre>
   <fieldset>
     <div class="row">
       <div class="col col-2 no-padding no-margin">
@@ -13,7 +12,7 @@
         </section>
         <section>
           <label class="label">Color <p class="text-muted-light">(To show inside appointment calendar)</p></label>
-          <label class="input col col-6">
+          <label class="input">
             <input matInput formControlName="color" type="color">
           </label>
         </section>
@@ -77,10 +76,10 @@
             <label class="label required">Gender</label>
             <label>
               <mat-radio-group>
-                <mat-radio-button value="Male" [checked]="resource.gender ==='Male'">Male</mat-radio-button>&nbsp;
-                <mat-radio-button value="Female" [checked]="resource.gender ==='Female'">Female</mat-radio-button>&nbsp;
-                <mat-radio-button value="Other" [checked]="resource.gender ==='Other'">Other</mat-radio-button>&nbsp;
-                <mat-radio-button value="NotDisclosed" [checked]="resource.gender ==='NotDisclosed'">Prefer not to say</mat-radio-button>
+                <mat-radio-button value="Male">Male</mat-radio-button>&nbsp;
+                <mat-radio-button value="Female">Female</mat-radio-button>&nbsp;
+                <mat-radio-button value="Other">Other</mat-radio-button>&nbsp;
+                <mat-radio-button value="NotDisclosed">Prefer not to say</mat-radio-button>
               </mat-radio-group>
             </label>
           </section>
@@ -180,8 +179,8 @@
           <span class="pull-right">
             Position:&nbsp;
 
-            <input type="radio" name="messageShowPosition" [checked]="resource.messageShowPosition ==='top'" formControlName="messageShowPosition" value="top">Top
-            <input type="radio" name="messageShowPosition" [checked]="resource.messageShowPosition ==='bottom'" formControlName="messageShowPosition" value="bottom">Bottom
+            <input type="radio" name="messageShowPosition" formControlName="messageShowPosition" value="top">Top
+            <input type="radio" name="messageShowPosition" formControlName="messageShowPosition" value="bottom">Bottom
 
           </span>
         </label>
@@ -198,17 +197,17 @@
     <div class="row">
       <section>
         <label class="label required">Services</label>
-        <!-- <mat-list-item *ngFor="let c of categories">
-          <h4 mat-line>{{c.categoryName}}</h4> -->
+        &lt;!&ndash; <mat-list-item *ngFor="let c of categories">
+        <h4 mat-line>{{c.categoryName}}</h4> &ndash;&gt;
         <ngx-datatable [rows]="services" class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [footerHeight]="0" [rowHeight]="'auto'"
-          [selectionType]="'checkbox'" (select)='onSelect($event)' [selected]="selectedServices">
+                       [selectionType]="'checkbox'" (select)='onSelect($event)' [selected]="selectedServices">
           <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [flexGrow]="1">
             <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
               Enable
-              <!-- <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" /> -->
+              &lt;!&ndash; <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" /> &ndash;&gt;
             </ng-template>
             <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"
-              let-row="row">
+                         let-row="row">
               <div>
                 <mat-checkbox [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
               </div>
@@ -221,7 +220,7 @@
             </ng-template>
           </ngx-datatable-column>
         </ngx-datatable>
-        <!-- </mat-list-item> -->
+        &lt;!&ndash; </mat-list-item> &ndash;&gt;
       </section>
     </div>
 
@@ -229,13 +228,13 @@
       <section>
         <label class="label">Enable gap between appointments</label>
         <label class="select">
-          <select formControlName="gapBetweenAppointments" class="form-control">
-            <option selected>None</option>
-            <option>5 Minutes</option>
-            <option>10 Minutes</option>
-            <option>15 Minutes</option>
-            <option>30 Minutes</option>
-          </select>
+          <mat-select formControlName="gapBetweenAppointments" class="form-control">
+            <mat-option selected>None</mat-option>
+            <mat-option>5 Minutes</mat-option>
+            <mat-option>10 Minutes</mat-option>
+            <mat-option>15 Minutes</mat-option>
+            <mat-option>30 Minutes</mat-option>
+          </mat-select>
           <i></i>
         </label>
       </section>
@@ -249,7 +248,7 @@
         </label>
         <div class="panel panel-green margin-bottom-40 zero-border" *ngIf="!showAdvanced">
           <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='resource.workingHours'
-            [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
+                         [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
             <ngx-datatable-column name="Day" prop="dayId" [flexGrow]="1">
               <ng-template let-value="value" ngx-datatable-cell-template>
                 <div>{{dayOfWeek(value-1)}}</div>
@@ -267,24 +266,24 @@
             <ngx-datatable-column [sortable]="false" name="Start Time" prop="startTime" [flexGrow]="2" headerClass="text-center">
               <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
                 <div class="text-center">
-                  <select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'hour')">
-                    <option *ngFor="let time of timings.hours" [value]="time">{{time}}</option>
-                  </select>
-                  <select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'minute')">
-                    <option *ngFor="let time of timings.minutes" [value]="time">{{time}}</option>
-                  </select>
+                  <mat-select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'hour')">
+                    <mat-option *ngFor="let time of timings.hours" [value]="time">{{time}}</mat-option>
+                  </mat-select>
+                  <mat-select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'minute')">
+                    <mat-option *ngFor="let time of timings.minutes" [value]="time">{{time}}</mat-option>
+                  </mat-select>
                 </div>
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [sortable]="false" name="End Time" prop="endTime" [flexGrow]="2" headerClass="text-center">
               <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
                 <div class="text-center">
-                  <select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'hour')">
-                    <option *ngFor="let time of timings.hours" [value]="time">{{time}}</option>
-                  </select>
-                  <select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'minute')">
-                    <option *ngFor="let time of timings.minutes" [value]="time">{{time}}</option>
-                  </select>
+                  <mat-select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'hour')">
+                    <mat-option *ngFor="let time of timings.hours" [value]="time">{{time}}</mat-option>
+                  </mat-select>
+                  <mat-select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'minute')">
+                    <mat-option *ngFor="let time of timings.minutes" [value]="time">{{time}}</mat-option>
+                  </mat-select>
                 </div>
               </ng-template>
             </ngx-datatable-column>
@@ -299,7 +298,7 @@
 
         <div class="panel panel-green margin-bottom-40 zero-border" *ngIf="showAdvanced">
           <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='resource.workingHours'
-            [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
+                         [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
             <ngx-datatable-column name="Day" prop="dayId" [flexGrow]="1">
               <ng-template let-value="value" ngx-datatable-cell-template>
                 <div>{{dayOfWeek(value-1)}}</div>
@@ -314,12 +313,12 @@
                 />
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column [sortable]="false" name="Premium Service Before Start" prop="beforeStartExtraTime" [flexGrow]="2" headerClass="text-center">
+            <ngx-datatable-column [sortable]="false" name="Before Start Time" prop="beforeStartExtraTime" [flexGrow]="2" headerClass="text-center">
               <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
                 <div class="text-center">
-                  <select [value]="value" [disabled]="!isSelected">
-                    <option *ngFor="let time of extraTimes" [value]="time">{{time}}</option>
-                  </select>
+                  <mat-select [value]="value" [disabled]="!isSelected">
+                    <mat-option *ngFor="let time of extraTimes" [value]="time">{{time}}</mat-option>
+                  </mat-select>
                 </div>
               </ng-template>
             </ngx-datatable-column>
@@ -333,33 +332,33 @@
             <ngx-datatable-column [sortable]="false" name="Start Time" prop="startTime" [flexGrow]="2" headerClass="text-center">
               <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
                 <div class="text-center">
-                  <select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'hour')">
-                    <option *ngFor="let time of timings.hours" [value]="time">{{time}}</option>
-                  </select>
-                  <select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'minute')">
-                    <option *ngFor="let time of timings.minutes" [value]="time">{{time}}</option>
-                  </select>
+                  <mat-select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'hour')">
+                    <mat-option *ngFor="let time of timings.hours" [value]="time">{{time}}</mat-option>
+                  </mat-select>
+                  <mat-select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'minute')">
+                    <mat-option *ngFor="let time of timings.minutes" [value]="time">{{time}}</mat-option>
+                  </mat-select>
                 </div>
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column [sortable]="false" name="End Time" prop="endTime" [flexGrow]="2" headerClass="text-center">
               <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
                 <div class="text-center">
-                  <select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'hour')">
-                    <option *ngFor="let time of timings.hours" [value]="time">{{time}}</option>
-                  </select>
-                  <select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'minute')">
-                    <option *ngFor="let time of timings.minutes" [value]="time">{{time}}</option>
-                  </select>
+                  <mat-select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'hour')">
+                    <mat-option *ngFor="let time of timings.hours" [value]="time">{{time}}</mat-option>
+                  </mat-select>
+                  <mat-select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'minute')">
+                    <mat-option *ngFor="let time of timings.minutes" [value]="time">{{time}}</mat-option>
+                  </mat-select>
                 </div>
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column [sortable]="false" name="Premium Service After End" prop="afterEndExtraTime" [flexGrow]="2" headerClass="text-center">
+            <ngx-datatable-column [sortable]="false" name="After End Time" prop="afterEndExtraTime" [flexGrow]="2" headerClass="text-center">
               <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
                 <div class="text-center">
-                  <select [value]="value" [disabled]="!isSelected">
-                    <option *ngFor="let time of extraTimes" [value]="time">{{time}}</option>
-                  </select>
+                  <mat-select [value]="value" [disabled]="!isSelected">
+                    <mat-option *ngFor="let time of extraTimes" [value]="time">{{time}}</mat-option>
+                  </mat-select>
                 </div>
               </ng-template>
             </ngx-datatable-column>
@@ -386,4 +385,405 @@
       <button type="submit" class="btn-u">Save</button>
     </div>
   </fieldset>
-</form>
+</form>-->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Create Resource</h4>
+          </div>
+          <div class="card-body">
+            <form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+              <div class="row">
+                <div class="col-md-2 no-padding no-margin col-sm-4">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail img-circle">
+                                <img [src]="trustedProfileImageUrl" alt="Profile Pic" class="resource-profile-pic">
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
+                            <div>
+                                <span class="btn btn-round btn-rose btn-file">
+                                    <span class="fileinput-new">Add Photo</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" accept="image/*" name="..." (change)="handleFileInput($event.target.files)"  />
+                                </span>
+                                <br />
+                                <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                        </div>
+                        <label class="label">Color <p class="text-muted-light">(To show inside appointment calendar)</p></label>
+                        <input matInput formControlName="color" type="color">
+                </div>
+                <div class="col-md-10">
+
+                    <div class="row pb-2">
+                        <div class="col-md-6">
+
+                            <input type="text" formControlName="firstName" class="form-control" placeholder="First Name">
+
+
+                            <div class="form-error-content" *ngIf="submitted">
+              <span *ngIf="userForm.get('firstName').errors?.required">
+                First name is required
+              </span>
+                                <span *ngIf="userForm.get('firstName').errors?.pattern">
+                First name should only contain alphabets
+              </span>
+                                <span *ngIf="userForm.get('firstName').errors?.maxlength">
+                First name can not more than 50 characters.
+              </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
+                            <div class="form-error-content" *ngIf="submitted">
+              <span *ngIf="userForm.get('lastName').errors?.required">
+                Last name is required
+              </span>
+                                <span *ngIf="userForm.get('lastName').errors?.pattern">
+                Last name should only contain alphabets
+              </span>
+                                <span *ngIf="userForm.get('lastName').errors?.maxlength">
+                Last name can not more than 50 characters.
+              </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-md-6">
+
+                            <input type="Email" formControlName="emailAddress" class="form-control" placeholder="Email">
+                            <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                                <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
+                                    Email is required
+                                </div>
+                                <div *ngIf="userForm.controls['emailAddress'].errors && !userForm.controls['emailAddress'].errors.required && userForm.controls['emailAddress'].errors.email">
+                                    Email is invalid
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="label required">Gender</label>&nbsp;&nbsp;
+                            <label>
+                                <mat-radio-group>
+                                    <mat-radio-button value="Male">Male</mat-radio-button>&nbsp;
+                                    <mat-radio-button value="Female">Female</mat-radio-button>&nbsp;
+                                    <mat-radio-button value="Other">Other</mat-radio-button>&nbsp;
+                                    <mat-radio-button value="NotDisclosed">Prefer not to say</mat-radio-button>
+                                </mat-radio-group>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-md-6">
+
+                            <input type="tel" formControlName="phone" class="form-control" placeholder="Contact Number">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="tel" formControlName="mobile" class="form-control" placeholder="Mobile Number">
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-md-4">
+
+                            <input type="text" formControlName="facebook" class="form-control" placeholder="Facebook">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" formControlName="twitter" class="form-control" placeholder="Twitter">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" formControlName="linkedIn" class="form-control" placeholder="LinkedIn">
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-md-11">
+                            <label class="label">Language(s) </label>
+                            <mat-chip-list>
+                                <mat-chip *ngFor="let item of languages" [removable]="'true'" (removed)="removeLanguage(item)">
+                                    {{item}}
+                                    <mat-icon matChipRemove>cancel</mat-icon>
+                                </mat-chip>
+                                <mat-icon class="cursor-pointer color-green" title="Add" (click)="addLanguage()">add</mat-icon>
+                            </mat-chip-list>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-md-11">
+                            <label class="label">Qualifications and Specialisations</label>
+                            <mat-form-field class="qualifications-list">
+                                <mat-chip-list #qualificationList>
+                                    <mat-chip *ngFor="let item of qualifications" [selectable]="'true'" [removable]="'true'" (removed)="removeQualification(item)">
+                                        {{item}}
+                                        <mat-icon matChipRemove>cancel</mat-icon>
+                                    </mat-chip>
+                                    <input [matChipInputFor]="qualificationList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addQualification($event)">
+                                </mat-chip-list>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-md-6">
+                            <label class="label">Professional Body Membership Number</label>
+                            <label class="input">
+
+                                <input type="text" formControlName="professionalMembershipNumber" class="form-control">
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="label required">Career Started On: <span class="text-muted-light">(To reflect your experience)</span></label>
+                            <label class="input">
+
+                                <input type="text" formControlName="careerStartedOn" class="form-control">
+                            </label>
+                            <div class="form-error-content" *ngIf="submitted">
+              <span *ngIf="userForm.get('careerStartedOn').errors?.required">
+              </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <label class="label required">Message on Appointment Booking Page</label>
+                    <label>
+                        <mat-radio-group>
+                            <mat-radio-button name="messageShowPosition" formControlName="messageShowPosition" value="top">Top</mat-radio-button>&nbsp;
+                            <mat-radio-button name="messageShowPosition" formControlName="messageShowPosition" value="bottom">Bottom</mat-radio-button>&nbsp;
+                        </mat-radio-group>
+                    </label>
+
+                  </div>
+                  <div class="col-md-12">
+                    <label class="textarea form-control">
+                      <textarea matInput formControlName="messageOnBookingApp" matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="6"></textarea>
+                    </label>
+                  </div>
+                </div>
+              <div class="row">
+                <app-address formControlName="Address"></app-address>
+              </div>
+              <div class="row ml-2 mr-2">
+                  <label class="label required"><h4>Services</h4></label>
+                    <div class="table-responsive">
+                  <ngx-datatable [rows]="services" class='table table-striped' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="0" [rowHeight]="'auto'"
+                                 [selectionType]="'checkbox'" (select)='onSelect($event)' [selected]="selectedServices">
+                    <ngx-datatable-column [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false" [flexGrow]="1">
+                      <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                        Enable
+                      </ng-template>
+                      <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn"
+                                   let-row="row">
+                        <div>
+                          <mat-checkbox [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+                        </div>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Service Name" prop="serviceName" [flexGrow]="2"></ngx-datatable-column>
+                    <ngx-datatable-column name="Duration" prop="duration" [flexGrow]="1">
+                      <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+                        <span>{{row['duration']}} {{row['durationType']}}</span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                  </ngx-datatable>
+                    </div>
+              </div>
+              <div class="row pt-2 pb-2 m-2">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <mat-form-field>
+                    <mat-select placeholder="Enable gap between appointments"  ariaLabel="cities[0]" formControlName="gapBetweenAppointments" >
+                      <mat-option value="1">None</mat-option>
+                      <mat-option value="5">5 minutes</mat-option>
+                      <mat-option value="10">10 minutes</mat-option>
+                      <mat-option value="15">15 minutes</mat-option>
+                      <mat-option value="30">30 minutes</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row m-2">
+                <div class="col-md-10">
+                    <label class="label required"><h4>Online Booking Availability<span style="color:red;">*</span></h4>
+                  </label>
+                </div>
+                  <div class="col-md-2">
+                  <div align="right">
+                  <div class="form-check">
+                      <label class="form-check-label">
+                          <input class="form-check-input" type="checkbox" value="" (change)="showAdvanced = !showAdvanced" > Show Advanced
+                          <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                      </label>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="table-responsive">
+                  <div class="panel panel-green margin-bottom-40 zero-border" *ngIf="!showAdvanced">
+                    <ngx-datatable class='table table-striped' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [rows]='resource.workingHours'
+                                   [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
+                      <ngx-datatable-column name="Day" prop="dayId" [flexGrow]="1">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                          <div>{{dayOfWeek(value-1)}}</div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+                        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                          <!--<input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />-->
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" value="" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" >
+                                    <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                                </label>
+                            </div>
+                        </ng-template>
+                        <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-rowIndex="rowIndex" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                          <!--<input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event); updateIsOpen($event, rowIndex, isSelected)"
+                          />-->
+                            <div class="form-check">
+                                <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" [checked]="isSelected" (change)="onCheckboxChangeFn($event); updateIsOpen($event, rowIndex, isSelected)" >
+                                    <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                                </label>
+                            </div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [sortable]="false" name="Start Time" prop="startTime" [flexGrow]="2" headerClass="text-center">
+                        <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                          <div class="text-center">
+                            <mat-select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'hour')">
+                              <mat-option *ngFor="let time of timings.hours" [value]="time">{{time}}</mat-option>
+                            </mat-select>
+                            <mat-select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'minute')">
+                              <mat-option *ngFor="let time of timings.minutes" [value]="time">{{time}}</mat-option>
+                            </mat-select>
+                          </div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [sortable]="false" name="End Time" prop="endTime" [flexGrow]="2" headerClass="text-center">
+                        <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                          <div class="text-center">
+                            <mat-select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'hour')">
+                              <mat-option *ngFor="let time of timings.hours" [value]="time">{{time}}</mat-option>
+                            </mat-select>
+                            <mat-select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'minute')">
+                              <mat-option *ngFor="let time of timings.minutes" [value]="time">{{time}}</mat-option>
+                            </mat-select>
+                          </div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Action" prop="isOpen" [flexGrow]="2">
+                        <ng-template let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                          <a *ngIf="value" (click)="updateAllTimings($event, rowIndex)" style="cursor: pointer">Apply time to all</a>
+                          <span *ngIf="!value">sit back and relax-all day closed</span>
+                        </ng-template>
+                      </ngx-datatable-column>
+                    </ngx-datatable>
+                  </div>
+
+                  <div class="panel panel-green margin-bottom-40 zero-border" *ngIf="showAdvanced">
+                    <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='resource.workingHours'
+                                   [selected]="selected" [selectionType]="'checkbox'" (select)='onSelect($event)'>
+                      <ngx-datatable-column name="Day" prop="dayId" [flexGrow]="1">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                          <div>{{dayOfWeek(value-1)}}</div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+                        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+                          <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+                        </ng-template>
+                        <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-rowIndex="rowIndex" let-onCheckboxChangeFn="onCheckboxChangeFn">
+                          <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event); updateIsOpen($event, rowIndex, isSelected)"
+                          />
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [sortable]="false" name="Before Start Time" prop="beforeStartExtraTime" [flexGrow]="2" headerClass="text-center">
+                        <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                          <div class="text-center">
+                            <mat-select [value]="value" [disabled]="!isSelected">
+                              <mat-option *ngFor="let time of extraTimes" [value]="time">{{time}}</mat-option>
+                            </mat-select>
+                          </div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [sortable]="false" name="Premium" prop="beforeStartPremium" [flexGrow]="1" headerClass="text-center">
+                        <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                          <div class="text-center">
+                            <input type="number" class="resource-premium-input" [value]="value" min="0" max="100" minlength="1" maxlength="3">%
+                          </div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [sortable]="false" name="Start Time" prop="startTime" [flexGrow]="2" headerClass="text-center">
+                        <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                          <div class="text-center">
+                            <mat-select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'hour')">
+                              <mat-option *ngFor="let time of timings.hours" [value]="time">{{time}}</mat-option>
+                            </mat-select>
+                            <mat-select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'startTime', rowIndex, 'minute')">
+                              <mat-option *ngFor="let time of timings.minutes" [value]="time">{{time}}</mat-option>
+                            </mat-select>
+                          </div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [sortable]="false" name="End Time" prop="endTime" [flexGrow]="2" headerClass="text-center">
+                        <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                          <div class="text-center">
+                            <mat-select class="col-5" [value]="getHour(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'hour')">
+                              <mat-option *ngFor="let time of timings.hours" [value]="time">{{time}}</mat-option>
+                            </mat-select>
+                            <mat-select class="col-5" [value]="getMinute(value)" [disabled]="!isSelected" (change)="updateValue($event, 'endTime', rowIndex, 'minute')">
+                              <mat-option *ngFor="let time of timings.minutes" [value]="time">{{time}}</mat-option>
+                            </mat-select>
+                          </div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [sortable]="false" name="After End Time" prop="afterEndExtraTime" [flexGrow]="2" headerClass="text-center">
+                        <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                          <div class="text-center">
+                            <mat-select [value]="value" [disabled]="!isSelected">
+                              <mat-option *ngFor="let time of extraTimes" [value]="time">{{time}}</mat-option>
+                            </mat-select>
+                          </div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column [sortable]="false" name="Premium" prop="afterEndPremium" [flexGrow]="1" headerClass="text-center">
+                        <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-isSelected="isSelected" let-rowIndex="rowIndex">
+                          <div class="text-center">
+                            <input type="number" class="resource-premium-input" [value]="value" min="0" max="100" minlength="1" maxlength="3">%
+                          </div>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Action" prop="isOpen" [flexGrow]="2">
+                        <ng-template let-value="value" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                          <a *ngIf="value" (click)="updateAllTimings($event, rowIndex)" style="cursor: pointer">Apply time to all</a>
+                          <span *ngIf="!value">sit back and relax-all day closed</span>
+                        </ng-template>
+                      </ngx-datatable-column>
+                    </ngx-datatable>
+                  </div>
+                  </div>
+              </div>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" action="action" onclick="window.history.go(-1); return false;">Cancel</button>
+                    <button type="submit" class="btn btn-rose">Save</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

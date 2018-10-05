@@ -42,13 +42,13 @@ export const ROUTES: RouteInfo[] = [{
     collapse: 'components',
     children: [
         {path: 'profile', title: 'Organisation Proﬁle', ab:'B'},
-        {path: 'calendersync', title: 'Timings & Calendar', ab:'TC'},
-        {path: 'services', title: 'Plans, Services & Prices', ab:'PSP'},
+        {path: 'openingtimes', title: 'Timings & Calendar', ab:'TC'},
+        {path: 'plans', title: 'Plans, Services & Prices', ab:'PSP'},
         {path: 'resources', title: 'Team & Resources', ab:'TR'},
-        {path: 'assets', title: 'Assets, Inventory & Stocks', ab:'AIS'},
+        {path: 'asset', title: 'Assets, Inventory & Stocks', ab:'AIS'},
         {path: 'task', title: 'Tasks & Activities', ab:'TA'},
-        {path: 'configuration', title: 'Configurations & Rules', ab:'CR'},
-        {path: 'account', title: 'Account Management', ab:'AM'}
+        {path: 'general', title: 'Configurations & Rules', ab:'CR'},
+        {path: 'account', title: 'Account Management', ab:'AM'},
 
     ]
 },{
@@ -98,11 +98,10 @@ export const ROUTES: RouteInfo[] = [{
 },{
     path: '/integrations',
     title: 'Integrations',
-    type: 'link',
+    type: 'sub',
     icontype: 'widgets',
     collapse: 'charts',
     children: [
-        {path: 'payments', title: 'e-Payments ', ab:'P'},
         {path: 'epos', title: 'Point of Sale - EPoS', ab:'POS'},
         {path: 'account', title: 'Accounting', ab:'A'},
         {path: 'bookingapps', title: 'Booking Apps', ab:'B'},
@@ -113,7 +112,7 @@ export const ROUTES: RouteInfo[] = [{
 },{
     path: '/reports',
     title: 'Reports',
-    type: 'link',
+    type: 'sub',
     icontype: 'timeline',
     collapse: 'dashboard',
     children: [
@@ -125,7 +124,7 @@ export const ROUTES: RouteInfo[] = [{
 },{
     path: '/financial',
     title: 'Financial Management',
-    type: 'link',
+    type: 'sub',
     icontype: 'date_range',
     collapse: 'md',
     children: [
@@ -153,7 +152,7 @@ export const ROUTES: RouteInfo[] = [{
 },{
     path: '/links',
     title: 'Recently Used Links',
-    type: 'link',
+    type: 'sub',
     icontype: 'date_range',
     collapse: 'calender',
     children: [

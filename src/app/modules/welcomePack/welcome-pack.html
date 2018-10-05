@@ -1,5 +1,5 @@
-﻿<div class="row">
-  <!-- <pre>
+﻿<!--<div class="row">
+  &lt;!&ndash; <pre>
   1.
   Welcome pack will contain some attachment documents that we will automatically send to the customer when customer/patient register very first time.
 
@@ -15,7 +15,7 @@
 
   In Future we may consider to make it more interactive. (e.g. customer agrees or disagree buttons would be available inside mail)
 
-  ----------------------------------------------------------------------------------------------------------
+  &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;
 
   2.
   Booking Information pack will contain information about the service booked, some attachment documents that we will automatically send to the customer when customer/patient books an appointment every time.
@@ -31,7 +31,7 @@
   (These could be booked service information, terms & conditions, business policies, parking & transport information etc)
 
   In Future we may consider to make it more interactive. (e.g. customer agrees or disagree buttons would be available inside mail)
-</pre> -->
+</pre> &ndash;&gt;
 </div>
 
 <form id="sky-form3" class="sky-form zero-padding" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
@@ -40,7 +40,7 @@
     <div class="col-xs-8">
       <div class="row">
         <div class="col-xs-12">
-          <label class="label">Type*</label>
+          <label class="label">Type</label>
           <label class="input">
             <i class="icon-append fa fa-user"></i>
             <select formControlName="mediaTypeId" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['mediaTypeId'].errors && userForm.controls['mediaTypeId'].errors.required}">
@@ -55,7 +55,7 @@
         </div>
       </div>
 
-      <!-- <div class="row">
+      &lt;!&ndash; <div class="row">
         <div class="col-xs-12">
           <label class="label">Cc To:</label>
           <label class="input">
@@ -76,7 +76,7 @@
             </mat-form-field>
           </label>
         </div>
-      </div> -->
+      </div> &ndash;&gt;
 
       <div class="row">
         <div class="col-xs-12">
@@ -117,7 +117,7 @@
           <label class="input">
             <i class="icon-append fa fa-user"></i>
             <input type="text" formControlName="message" maxlength="1000" required required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['message'].errors && userForm.controls['message'].errors.required}">
-            <!-- <app-ngx-editor [config]="editorConfig" required formControlName="message" [spellcheck]="true"></app-ngx-editor> -->
+            &lt;!&ndash; <app-ngx-editor [config]="editorConfig" required formControlName="message" [spellcheck]="true"></app-ngx-editor> &ndash;&gt;
           </label>
           <div class="form-error-content" *ngIf="submitted">
             <span *ngIf="userForm.get('message').errors?.required">
@@ -126,16 +126,16 @@
           </div>
         </div>
       </div>
-      <!-- <div *ngIf="htmlContent" class="htmlblock block">
+      &lt;!&ndash; <div *ngIf="htmlContent" class="htmlblock block">
         <h6>HTML Output</h6>
         <div class="html">
           {{ htmlContent }}
         </div>
-      </div> -->
+      </div> &ndash;&gt;
 
-      <!-- <div>
+      &lt;!&ndash; <div>
          <img *ngFor="let sfile of filesToUpload" [src]="sfile" class="rounded mb-3" width="180">
-       </div> -->
+       </div> &ndash;&gt;
 
       <ngx-datatable class='table bootstrap' [columnMode]="'flex'" [headerHeight]="30" [rowHeight]="'auto'" [rows]='files'>
         <ngx-datatable-column name="Type" prop="documentTypeId" [flexGrow]="1"></ngx-datatable-column>
@@ -153,20 +153,112 @@
 
       <input type="file" multiple (change)="handleFileInput($event.target.files)">
 
-      <!-- <label class="label"></label>
+      &lt;!&ndash; <label class="label"></label>
           <label class="input">
             {{orgInfo.profile.logoForMarketingPath}}
-          </label> -->
+          </label> &ndash;&gt;
 
-      <!-- <img [src]="trustedProfileImageUrl" alt="logo" style="width:100%; height:100%" /> -->
+      &lt;!&ndash; <img [src]="trustedProfileImageUrl" alt="logo" style="width:100%; height:100%" /> &ndash;&gt;
 
-      <div class="margin-top-30 pull-right">
+      <div class=" pull-right">
         <button type="button" class="btn btn-default">Preview</button>
-        <button class="btn btn-u">Generate</button>
+        <button class="btn btn-rose">Generate</button>
       </div>
     </div>
-    <div class="col-xs-3">
+  </div>
+</form>-->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Welcome Pack</h4>
+          </div>
+          <div class="card-body">
+            <form novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+              <div class="row">
+                    <div class="col-md-12">
+                      <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Type*" formControlName="mediaTypeId" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['mediaTypeId'].errors && userForm.controls['mediaTypeId'].errors.required}">
+                                <mat-option *ngFor="let t of mediaTypes" [value]="t.id">{{t.title}}</mat-option>
+                            </mat-select>
+                      </mat-form-field>
+                        <div class="form-error-content" *ngIf="submitted">
+            <span *ngIf="userForm.get('mediaTypeId').errors?.required">
+              Type is required
+            </span>
+                        </div>
+                    </div>
+                </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Cc to:" formControlName="cc" maxlength="50" type="email" class="form-control" [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['cc'].errors }">
+                  </mat-form-field>
+                  <div class="form-error-content" *ngIf="submitted">
+            <span *ngIf="userForm.get('cc').errors?.email">
+              Not a Valid Email
+            </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label class="label">Subject*</label>
+                  <mat-form-field class="example-full-width">
+                    <input matInput type="text" formControlName="subject" maxlength="50" required required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['subject'].errors && userForm.controls['subject'].errors.required}">
+                  </mat-form-field>
+                  <div class="form-error-content" *ngIf="submitted">
+            <span *ngIf="userForm.get('subject').errors?.required">
+              Subject is required
+            </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label class="label">Message*</label>
+                  <mat-form-field class="example-full-width">
+                    <input matInput type="text" formControlName="message" maxlength="1000" required required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['message'].errors && userForm.controls['message'].errors.required}">
+                    <!-- <app-ngx-editor [config]="editorConfig" required formControlName="message" [spellcheck]="true"></app-ngx-editor> -->
+                  </mat-form-field>
+                  <div class="form-error-content" *ngIf="submitted">
+            <span *ngIf="userForm.get('message').errors?.required">
+              Message is required
+            </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+              <ngx-datatable class='table table-striped' [columnMode]="'flex'" [headerHeight]="50" [rowHeight]="'auto'" [rows]='files'>
+                <ngx-datatable-column name="Type" prop="documentTypeId" [flexGrow]="1"></ngx-datatable-column>
+                <ngx-datatable-column name="Name" prop="fileName" [flexGrow]="4"></ngx-datatable-column>
+                <ngx-datatable-column name="Size" prop="fileSize" [flexGrow]="1"></ngx-datatable-column>
 
+                <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
+                  <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
+                    <button mat-raised-button="" type="button" class="btn btn-danger btn-link" (click)="removeFile(row['id'])"><span class="mat-button-wrapper"><i class="material-icons">close</i></span><div class="mat-button-ripple mat-ripple" matripple=""></div><div class="mat-button-focus-overlay"></div></button>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+              </div>
+              <div class="row m-2">
+                <input  type="file" multiple (change)="handleFileInput($event.target.files)">
+              </div>
+              <div class="row m-2">
+                  <div class=" pull-right">
+                      <button type="button" class="btn btn-default">Preview</button>
+                      <button class="btn btn-rose">Generate</button>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</form>
+</div>

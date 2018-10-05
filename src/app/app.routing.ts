@@ -136,7 +136,7 @@ import { ResourcesComponent } from './modules/resources/resources.component';
           },
 
           {
-            path: 'plans',
+            path: 'organisation/plans',
             component: CategoriesComponent,
             data: { breadcrumbs: 'Categories' }
           },
@@ -382,7 +382,7 @@ import { ResourcesComponent } from './modules/resources/resources.component';
             data: { breadcrumbs: 'Receipt' }
           },
           {
-            path: 'underProcess',
+            path: 'communications/underProcess',
             component: UnderProcessComponent,
             data: { breadcrumbs: 'In Progress' }
           }

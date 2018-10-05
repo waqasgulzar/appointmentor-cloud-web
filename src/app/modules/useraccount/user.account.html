@@ -1,59 +1,141 @@
-﻿<form action="#" method="post" id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
-  <header align="left">User Account</header>
-
-  <fieldset>
+﻿
+<div class="main-content">
+  <div class="container-fluid">
     <div class="row">
-      <section class="col col-6">
-        <label class="label required">First Name</label>
-        <label class="input">
-          <i class="icon-append fa fa-user"></i>
-          <input formControlName="firstName" maxlength="50" type="text" class="form-control" placeholder="First Name" required>
-        </label>
-        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-          <div *ngIf="userForm.controls['firstName'].errors && userForm.controls['firstName'].errors.required">
-            First Name is required
+      <div class="col-md-12">
+        <form action="#" method="post" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">User Account</h4>
           </div>
-        </div>
-      </section>
-      <section class="col col-6">
-        <label class="label required">Last Name</label>
-        <label class="input">
-          <i class="icon-append fa fa-user"></i>
-          <input formControlName="lastName" maxlength="50" type="text" class="form-control" placeholder="Last Name" required>
-        </label>
-        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-          <div *ngIf="userForm.controls['lastName'].errors && userForm.controls['lastName'].errors.required">
-            Last Name is required
-          </div>
-        </div>
-      </section>
-    </div>
-    <div class="row">
-      <section class="col col-6">
-        <label class="label required">E-mail</label>
-        <label class="input">
-          <i class="icon-append fa fa-envelope-o"></i>
-          <input formControlName="emailAddress" disabled="disabled" maxlength="100" type="email" class="form-control" placeholder="Email Address"
-            required>
-        </label>
-        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-          <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
-            Email is required
-          </div>
-          <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.email && !userForm.controls['emailAddress'].errors.required">
-            Email is invalid
-          </div>
-        </div>
-      </section>
+          <div class="card-body">
+                <div class="row pb-2">
 
-    </div>
+                  <label class="col-sm-2 col-form-label required">First Name</label>
 
-    <footer>
-      <button type="submit" class="btn-u pull-right">Save Changes</button>
-    </footer>
-  </fieldset>
-  <div class="message">
-    <i class="rounded-x fa fa-check"></i>
-    <p>Your message was successfully sent!</p>
+                  <div class="col-sm-7">
+                    
+                      <input formControlName="firstName" maxlength="50" type="text" class="form-control" placeholder="First Name" required>
+                      
+                    
+                    <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                      <div *ngIf="userForm.controls['firstName'].errors && userForm.controls['firstName'].errors.required">
+                        First Name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row pb-2">
+
+                  <label class="col-sm-2 col-form-label required">Last Name</label>
+
+                  <div class="col-sm-7">
+                    
+                      <input formControlName="lastName" maxlength="100" type="text" class="form-control" placeholder="Last Name" required>
+                        <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                            <div *ngIf="userForm.controls['lastName'].errors && userForm.controls['lastName'].errors.required">
+                                Last Name is required
+                            </div>
+                        </div>
+                    
+                  </div>
+                </div>
+                <div class="row pb-2">
+
+                  <label class="col-sm-2 col-form-label">Email</label>
+
+                  <div class="col-sm-7">
+                    
+                      <input formControlName="emailAddress" disabled="disabled" maxlength="100" type="email" class="form-control" placeholder="Email Address"
+                             required>
+                    
+
+                    <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                      <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
+                        Email is required
+                      </div>
+                      <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.email && !userForm.controls['emailAddress'].errors.required">
+                        Email is invalid
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="card-footer">
+            <div >
+            <button mat-raised-button type="submit" class="btn btn-rose btn-fill" align="right">Save Changes</button>
+            </div>
+          </div>
+          <div class="message">
+            <i class="rounded-x fa fa-check"></i>
+            <p>Your message was successfully sent!</p>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
   </div>
-</form>
+</div>
+<!--
+<form action="#" method="post" id="sky-form3" class="sky-form" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+    <header align="left">User Account</header>
+
+    <fieldset>
+        <div class="row">
+            <section class="col col-6">
+                <label class="label required">First Name</label>
+                <label class="input">
+                    <i class="icon-append fa fa-user"></i>
+                    <input formControlName="firstName" maxlength="50" type="text" class="form-control" placeholder="First Name" required>
+                </label>
+                <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                    <div *ngIf="userForm.controls['firstName'].errors && userForm.controls['firstName'].errors.required">
+                        First Name is required
+                    </div>
+                </div>
+            </section>
+            <section class="col col-6">
+                <label class="label required">Last Name</label>
+                <label class="input">
+                    <i class="icon-append fa fa-user"></i>
+                    <input formControlName="lastName" maxlength="50" type="text" class="form-control" placeholder="Last Name" required>
+                </label>
+                <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                    <div *ngIf="userForm.controls['lastName'].errors && userForm.controls['lastName'].errors.required">
+                        Last Name is required
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="row">
+            <section class="col col-6">
+                <label class="label required">E-mail</label>
+                <label class="input">
+                    <i class="icon-append fa fa-envelope-o"></i>
+                    <input formControlName="emailAddress" disabled="disabled" maxlength="100" type="email" class="form-control" placeholder="Email Address"
+                           required>
+                </label>
+                <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                    <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.required">
+                        Email is required
+                    </div>
+                    <div *ngIf="userForm.controls['emailAddress'].errors && userForm.controls['emailAddress'].errors.email && !userForm.controls['emailAddress'].errors.required">
+                        Email is invalid
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <footer>
+            <button type="submit" class="btn-u pull-right">Save Changes</button>
+        </footer>
+    </fieldset>
+    <div class="message">
+        <i class="rounded-x fa fa-check"></i>
+        <p>Your message was successfully sent!</p>
+    </div>
+</form>-->
