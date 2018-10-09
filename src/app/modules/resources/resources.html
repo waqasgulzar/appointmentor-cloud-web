@@ -50,11 +50,14 @@
     </ngx-datatable-column>
     <ngx-datatable-column name="Actions" [flexGrow]="2" [sortable]="false">
       <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
-        <button type="button" class="btn btn-default" [routerLink]="['/resource', row['resourceId']]">
+        <!--<button type="button" class="btn btn-default" [routerLink]="['/resource', row['resourceId']]">
           Edit
+        </button>-->
+        <button mat-raised-button  type="button" class="btn btn-default btn-link">
+          <i class="material-icons">delete</i>
         </button>
-        <button type="button" class="btn btn-default">
-          Delete
+        <button mat-raised-button type="button" class="btn btn-default btn-link" [routerLink]="['/resource', row['resourceId']]">
+          <i class="material-icons">edit</i>
         </button>
       </ng-template>
     </ngx-datatable-column>

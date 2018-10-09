@@ -158,7 +158,7 @@ export const ROUTES: RouteInfo[] = [{
     children: [
         {path: 'underProcess', title: 'Recall Manager ', ab:'P'},
         {path: 'billing', title: 'Support & Feedback', ab:'POS'},
-        {path: 'underProcess', title: 'Services', ab:'S'}
+        {path: 'service-edit', title: 'Services', ab:'S'}
 
     ]
 

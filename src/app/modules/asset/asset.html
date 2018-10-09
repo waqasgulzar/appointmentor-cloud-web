@@ -62,8 +62,11 @@
         <ngx-datatable-column name="Quantity" prop="quantity" [flexGrow]="2"></ngx-datatable-column>
         <ngx-datatable-column name="Actions" [flexGrow]="1" [sortable]="false">
           <ng-template let-rowIndex="rowIndex" let-id="value" let-row="row" ngx-datatable-cell-template>
-            <button type="button" class="btn btn-default" [routerLink]="['/asset', row['assetId']]">
+            <!--<button type="button" class="btn btn-default" [routerLink]="['/asset', row['assetId']]">
                Edit
+            </button>-->
+            <button mat-raised-button type="button" class="btn btn-default btn-link" [routerLink]="['/asset', row['assetId']]">
+              <i class="material-icons">edit</i>
             </button>
           </ng-template>
         </ngx-datatable-column>

@@ -1,13 +1,13 @@
-﻿<section tion class="content-wrapper">
+﻿<!--<section tion class="content-wrapper">
   <form class="sky-form" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
     <h4>You can change your password here.</h4>
     <hr />
     <fieldset>
       <div class="row" *ngIf="!(isReset || isLinkExpired)">
         <div class="row">
-          <section class="col col-6">
+          <section class="col-md-6">
             <label class="label">Password <span style="color: red;">*</span></label>
-            <label class="input"><input formControlName="password" maxlength="20" class="form-control" type="password" required /></label>
+            <label class="input"><input matInput  formControlName="password" maxlength="20" type="password" required /></label>
             <div *ngIf="userForm.invalid && submitted" class="form-error-content">
               <div *ngIf="userForm.controls['password'].errors && userForm.controls['password'].errors.required">
                 Password is required
@@ -17,9 +17,9 @@
         </div>
 
         <div class="row">
-          <section class="col col-6">
+          <section class="col-md-6">
             <label class="label">Confirm Password <span style="color: red;">*</span></label>
-            <label class="input"><input formControlName="confirmPassword" maxlength="20" class="form-control" type="password" required /></label>
+            <label class="input"><input matInput  formControlName="confirmPassword" maxlength="20" type="password" required /></label>
             <div *ngIf="userForm.invalid && submitted" class="form-error-content">
               <div *ngIf="userForm.controls['confirmPassword'].errors && userForm.controls['confirmPassword'].errors.required">
                 Confirm Password is required
@@ -59,4 +59,82 @@
     </div>
 
   </form>
-</section>
+</section>-->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title">Financial Reports</h4>
+          </div>
+          <div class="card-body">
+            <form class="sky-form" novalidate (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+              <h4>You can change your password here.</h4>
+              <hr />
+              <fieldset>
+                <div class="row" *ngIf="!(isReset || isLinkExpired)">
+                  <div class="row">
+                    <section class="col-md-6">
+                      <label class="label">Password <span style="color: red;">*</span></label>
+                      <label class="input"><input matInput  formControlName="password" maxlength="20" type="password" required /></label>
+                      <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                        <div *ngIf="userForm.controls['password'].errors && userForm.controls['password'].errors.required">
+                          Password is required
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+
+                  <div class="row">
+                    <section class="col-md-6">
+                      <label class="label">Confirm Password <span style="color: red;">*</span></label>
+                      <label class="input"><input matInput  formControlName="confirmPassword" maxlength="20" type="password" required /></label>
+                      <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                        <div *ngIf="userForm.controls['confirmPassword'].errors && userForm.controls['confirmPassword'].errors.required">
+                          Confirm Password is required
+                        </div>
+                        <div *ngIf="userForm.errors?.mismatch && (userForm.controls['password'].dirty || userForm.controls['confirmPassword'].touched && !userForm.controls['confirmPassword'].errors.required)">
+                          Passwords don't match.
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+
+                  <footer>
+                    <button type="submit" class="btn btn-rose pull-right">Reset your Password</button>
+                  </footer>
+                </div>
+              </fieldset>
+
+
+              <div *ngIf="!isPasswordMatch">
+                <div class="alert alert-info alert-dismissible">
+                  <h4><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Alert!</h4>
+                  Passwords do not match. Please try again.
+                </div>
+              </div>
+              <div *ngIf="isLinkExpired">
+                <div class="alert alert-info alert-dismissible">
+                  <h4><i class="icon fa fa-"></i>Alert!</h4>
+                  Reset password link is either wrong or it has been expired. Please perform forgot operation again in order to achive desire result.
+                </div>
+              </div>
+              <div *ngIf="isReset">
+                <div class="alert alert-success alert-dismissible">
+                  <h4><i class="icon fa fa-"></i>Alert!</h4>
+                  Password has been reset successfully.
+                </div>
+                <a [routerLink]="['login']">Sign In</a>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -281,16 +281,24 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                  <h4>Add Photo</h4>
-                  <span class="help-block">Accepted formats: PNG, JPEG upload photo Choose File</span>
-                    <label for="file" class="input input-file">
-                      <div class="button">
-                        <input type="file" (change)="handleFileInput($event.target.files)" accept=".png,.jpg,.jpeg" onchange="this.parentNode.nextSibling.value = this.value"
-                        />Browse
-                      </div><input type="text" readonly="">
-                    </label>
-                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 pt-2">
+                    <h4>Add Photo</h4>
+                    <span class="help-block">Accepted formats: PNG, JPEG upload photo Choose File</span>
+                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                      <div class="fileinput-new thumbnail">
+                        <img src="./assets/img/image_placeholder.jpg" alt="...">
+                      </div>
+                      <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                      <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select image</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="..." (change)="handleFileInput($event.target.files)" accept=".png,.jpg,.jpeg" onchange="this.parentNode.nextSibling.value = this.value" />
+                                </span>
+                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                      </div>
+                    </div>
+                  </div>
               </div>
               <div class="pull-right">
                 <button type="button" class="btn btn-default" action="action" (click)="onClose()">Cancel</button>

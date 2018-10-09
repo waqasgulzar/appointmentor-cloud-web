@@ -146,7 +146,7 @@
                     <input formControlName="password" maxlength="100" class="form-control" placeholder="Password" type="password" required [ngClass]="{'has-error':userForm.invalid && submitted && userForm.controls['password'].errors && userForm.controls['password'].errors.required}"
                     />
                     <div *ngIf="userForm.invalid && submitted" class="form-error-content">
-                  <div *ngIf="userForm.controls['password'].errors && userForm.controls['password'].errors.required">
+                  <div *ngIf="userForm.controls['password'].errors && userForm.controls['password'].errors.required" >
                     Password is required
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 ﻿
-<section class="col-md-12 admin_margin">
+<!--<section class="col-md-12 admin_margin">
   <div class="tab-content" style="padding:10px;background-color:#fff;border:0px;">
     <div class="tab-pane fade in active panel-default">
       <h2>API <button type="button" class="btn btn-default pull-right">View documentation &nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></button></h2>
@@ -19,4 +19,35 @@
 
     </div>
   </div>
-</section>
+</section>-->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">API</h4>
+                    </div>
+                    <div class="card-body">
+                        <h4>API <button type="button" class="btn btn-default pull-right">View documentation &nbsp;&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></button></h4>
+                        <p>Connect to Appointmentor's public facing API</p>
+                            <div class="alert alert-warning">
+                                <strong>Api Key:</strong> <h3>{{apiCredentials.apiKey}}</h3>
+                            </div>
+
+                            <div class="alert alert-warning">
+                                <strong>Api Secret:</strong> <h3>{{apiCredentials.apiSecret}}</h3>
+                            </div>
+
+                            <div class="alert alert-warning">
+                                <strong>Api Token:</strong> <h3>{{apiCredentials.apiToken}}</h3>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

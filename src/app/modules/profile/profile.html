@@ -499,6 +499,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+
+                    <form  [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" novalidate="novalidate">
                     <div class="card-header card-header-rose card-header-icon">
                         <div class="card-icon">
                             <i class="material-icons">assignment</i>
@@ -506,7 +508,6 @@
                         <h4 class="card-title">Organisation Profile</h4>
                     </div>
                     <div class="card-body">
-                        <form  [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" novalidate="novalidate">
                                         <ul class="nav nav-pills nav-pills-warning" role="tablist">
                                             <li class="nav-item">
                                                 <a class="nav-link active" data-toggle="tab" href="#basicinfo" role="tablist">
@@ -540,23 +541,75 @@
                                                     <div class="input-group form-control-lg">
                                                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                              <i class="material-icons">record_voice_over</i>
+                              Business Name Required *
                             </span>
                                                         </div>
+                                                        <div class="col-md-12">
                                                         <mat-form-field class="example-full-width has-label">
                                                             <input type="text"
-                                                                   name="lastname"
+                                                                   name="Business Name *"
                                                                    matInput
                                                                    id="text"
-                                                                   placeholder="last Name"
-                                                                   formControlName="lastName">
+                                                                   placeholder="Business Name"
+                                                                   formControlName="lastName"
+                                                                   maxlength="50"  >
                                                         </mat-form-field>
+
+                                                            <div *ngIf="userForm.invalid && submitted" class="form-error-content">
+                                                                <div *ngIf="userForm.controls['businessName'].errors && userForm.controls['businessName'].errors.required">
+                                                                    Business Name is required
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
+                                                    <div class="input-group form-control-lg">
+                                                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              Business Company Required *
+                            </span>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <mat-form-field class="example-full-width has-label">
+                                                                <textarea matInput formControlName="aboutYourBusiness" maxlength="2500" rows="7"></textarea>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-group form-control-lg">
+                                                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              Logo for marketing automation
+                            </span>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                                <div class="fileinput-new thumbnail">
+                                                                    <img src="./assets/img/image_placeholder.jpg" alt="...">
+                                                                </div>
+                                                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                                <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select File</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="..." accept="image/*"  (change)="handleFileInput($event.target.files)" />
+                                </span>
+                                                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                            <img [src]="trustedProfileImageUrl" alt="logo" style="width:10%;"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                             <!-- <div class="row">
                                                 <label>Business Name<span style="color: red;">*</span></label>
                                                 <mat-form-field class="example-full-width">
-                                                    <input matInput type="text" formControlName="businessName" maxlength="50" class="form-control" placeholder="Enter Business Name">
+                                                    <input matInput type="text" formControlName="businessName" maxlength="50"  placeholder="Enter Business Name">
                                                 </mat-form-field>
                                                 <div *ngIf="userForm.invalid && submitted" class="form-error-content">
                                                     <div *ngIf="userForm.controls['businessName'].errors && userForm.controls['businessName'].errors.required">
@@ -565,9 +618,9 @@
                                                 </div>
                                                 </div>
                                                 <div class="row">
-                                                    <label>Business Name<span style="color: red;">*</span></label>
+                                                    <label>Business Company<span style="color: red;">*</span></label>
                                                     <mat-form-field class="example-full-width">
-                                                        <textarea formControlName="aboutYourBusiness" maxlength="2500" class="form-control" rows="7"></textarea>
+                                                        <textarea formControlName="aboutYourBusiness" maxlength="2500" rows="7"></textarea>
                                                     </mat-form-field>
                                                 </div>
                                                 <div class="row">
@@ -578,31 +631,135 @@
                                                 </div>
                                                 <div class="row">
 
-                                                </div>
+                                                </div>-->
                                             </div>
                                             <div class="tab-pane" id="address">
-                                                Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
-                                                <br />
-                                                <br />Dramatically maintain clicks-and-mortar solutions without functional solutions.
+                                                <div class="row p-2">
+                                                    <label class="label">Street Name</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="street" type="text" maxlength="50"  placeholder="Enter Street Name">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <label class="label">City</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="city" type="text" maxlength="50" placeholder="Enter City Name">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <label class="label">Postcode</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="postCode" type="text" maxlength="50" placeholder="Enter Postcode Name">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <!--<section>
+                                                    <label class="label">Street Name</label>
+                                                    <label class="input">
+                                                        <i class="icon-append fa fa-building"></i>
+                                                        <input matInput formControlName="street" type="text" maxlength="50"  placeholder="Enter Street Name">
+                                                    </label>
+                                                </section>-->
+                                                <!--<section>
+                                                    <label class="label">City</label>
+                                                    <label class="input">
+                                                        <i class="icon-append fa fa-building"></i>
+                                                        <input formControlName="city" type="text" maxlength="50" class="form-control" placeholder="Enter City Name">
+                                                    </label>
+                                                </section>
+                                                <section>
+                                                    <label class="label">Postcode</label>
+                                                    <label class="input">
+                                                        <i class="icon-append fa fa-area-chart"></i>
+                                                        <input formControlName="postCode" type="text" maxlength="50" class="form-control" placeholder="Enter Postcode Name">
+                                                    </label>
+                                                </section>-->
                                             </div>
                                             <div class="tab-pane" id="contactdetails">
-                                                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
-                                                <br />
-                                                <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
+                                                <div class="row p-2">
+                                                    <label class="label">Business Phone Number</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="businessPhoneNumber" type="text" maxlength="50" placeholder="Enter Business Phone Number">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <label class="label">Business Website</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="businessWebsite" type="text" maxlength="500"  placeholder="Enter Business Website">
+                                                    </mat-form-field>
+                                                </div>
                                             </div>
                                             <div class="tab-pane" id="communicationdetails">
-                                                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
-                                                <br />
-                                                <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
+                                                <div class="row p-2">
+                                                    <label class="label">Mobile Number where we send the notification</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="mobileNumber" type="text" maxlength="50"  placeholder="Enter mobile number">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <label class="label">Email Address</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="emailAddress" type="email" maxlength="50"  placeholder="Enter Email Address">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <label class="label">Other Email Address(where we send copies of your notification separted by commas)</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="otherEmailAddress" type="email" maxlength="500"  placeholder="e.g hello@appointmentor.com,info@appointmentor.com">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <label class="label">Send Email Address (The email address shown to customer in email we send on your behalf)</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="sendFromEmailAddress" type="email" maxlength="50" placeholder="e.g hello@appointmentor.com">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <label class="label">Other Email Address (where we send copies of your notification separted by commas)</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="otherEmailAddress" type="email" maxlength="500"  placeholder="e.g hello@appointmentor.com,info@appointmentor.com">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <label class="label">Send from Name for Email Address (The name shown to your customers in email we send on your behalf)</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="sendFromNameForEmail" type="email" maxlength="50" class="form-control" placeholder="e.g personal">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <label class="label">Send from Name for SMS (The name shown to your customers in SMS we send on your behalf(11 character max))</label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput formControlName="sendFromNameForSMS" type="email" maxlength="11" id="eaddress" placeholder="@ Appointmentor">
+                                                    </mat-form-field>
+                                                </div>
                                             </div>
                                             <div class="tab-pane" id="images">
-                                                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
-                                                <br />
-                                                <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
+                                                <div class="row">
+                                                <div class="col-md-4 col-sm-4">
+                                                    <h4>Banner Name for microsite  </h4>
+                                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                                        <div class="fileinput-new thumbnail">
+                                                            <img src="./assets/img/image_placeholder.jpg" alt="...">
+                                                        </div>
+                                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                        <div>
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <span class="fileinput-new">Select File</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="..." formControlName="bannerImageForMicrosite" />
+                                </span>
+                                                            <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
                                             </div>
+                                            <footer class="p-2">
+                                                <button class="btn btn-rose pull-right">Save</button>
+                                            </footer>
                                         </div>
-                        </form>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

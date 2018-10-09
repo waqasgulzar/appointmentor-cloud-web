@@ -1,10 +1,10 @@
 ﻿
-<header>
-    <!-- Modal -->
+<!---<header>
+    &lt;!&ndash; Modal &ndash;&gt;
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 
-            <!-- Modal content-->
+            &lt;!&ndash; Modal content&ndash;&gt;
             <div class="modal-content col-md-12 zero-padding">
 
                 <div class="modal-body zero-padding col-md-12 zero-padding">
@@ -34,9 +34,9 @@
                             <div class="form-group cstm-padding">
                                 <label for="Service" class="control-label col-sm-2">Date:</label>
                                 <div class="col-md-offset-1 col-md-9">
-                                    <!--<datepicker date-enabled-dates="{{enableDates}}" date-format="dd-MM-yyyy">
+                                    &lt;!&ndash;<datepicker date-enabled-dates="{{enableDates}}" date-format="dd-MM-yyyy">
                                         <input class="form-control" ng-change="dateChoised()" ng-model="date" type="text" />
-                                    </datepicker>-->
+                                    </datepicker>&ndash;&gt;
                                 </div>
                             </div>
                             <div class="form-group cstm-padding">
@@ -47,7 +47,7 @@
                             </div>
                             <div class="form-group cstm-padding">
                                 <label for="Service" class="col-md-2">Time:</label>
-                                <!--<div class=" col-md-9" style="
+                                &lt;!&ndash;<div class=" col-md-9" style="
 									max-height: 200px;
 									    overflow-y: scroll;
 									    background: #fff;border: 1px solid #979797;border-radius: 4px;width: 306px;margin-left: 53px;">
@@ -57,7 +57,7 @@
                                     <div *ngFor="let time of availableTimings">
                                         <label class="btn-block">{{time}}<input ng-click="timeSelected(time)" type="radio" name="optradio" class="pull-right"></label>
                                     </div>
-                                </div>-->
+                                </div>&ndash;&gt;
                             </div>
                             <label ng-if="errorOnPage2" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
                             <div class="form-group cstm-padding">
@@ -69,7 +69,7 @@
 
 
 
-                        <!---- <form class="form-horizontal" ng-show="appointmentPage1">
+                        &lt;!&ndash;&#45;&#45; <form class="form-horizontal" ng-show="appointmentPage1">
                              <div class="form-group cstm-padding">
                                  <label for="Service" class="control-label col-sm-2">Category:</label>
                                  <div class="col-md-offset-1 col-md-9">
@@ -93,20 +93,20 @@
                                  <div class="col-md-offset-1 col-md-9">
                                      <input class="form-control" type="text" value="{{selectedAppointmentService.price}}">
                                  </div>
-                             </div>-->
-                        <!-- <div class="form-group">
+                             </div>&ndash;&gt;
+                        &lt;!&ndash; <div class="form-group">
                         <label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
-                        <!-- </div> -->
-                        <!---- <div class="form-group cstm-padding">
+                        &lt;!&ndash; </div> &ndash;&gt;
+                        &lt;!&ndash;&#45;&#45; <div class="form-group cstm-padding">
                                 <button ng-hide="appointmentPage1" ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
                                 <button ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
                             </div>
-                        </form>-->
-                        <!-----<form class="form-horizontal" ng-show="appointmentPage3">
+                        </form>&ndash;&gt;
+                        &lt;!&ndash;-&#45;&#45;<form class="form-horizontal" ng-show="appointmentPage3">
                             <div class="form-group cstm-padding">
                                 <label for="Service" class="control-label col-sm-2">Existing Customer</label>
                                 <div class="col-md-offset-1 col-md-9">
-                                    <!--<angucomplete-alt id="ex1"
+                                    &lt;!&ndash;<angucomplete-alt id="ex1"
                                                       placeholder="Search Customer"
                                                       pause="100"
                                                       selected-object="selectedCustomer"
@@ -114,8 +114,8 @@
                                                       search-fields="name"
                                                       title-field="name"
                                                       minlength="1"
-                                                      input-class="form-control form-control-small" />-->
-                        <!-----</div>
+                                                      input-class="form-control form-control-small" />&ndash;&gt;
+                        &lt;!&ndash;-&#45;&#45;</div>
                         </div>
                         <div class="form-group cstm-padding">
                             <label for="Service" class="col-md-2">New Customer:</label>
@@ -147,15 +147,15 @@
                                 <textarea name="name" rows="4" cols="34" placeholder="Booking Notes"></textarea>
                             </div>
 
-                        </div>-->
-                        <!-- <div class="form-group"> -->
-                        <!----<label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
-                         <!-- </div> -->
-                        <!----<div class="form-group cstm-padding">
+                        </div>&ndash;&gt;
+                        &lt;!&ndash; <div class="form-group"> &ndash;&gt;
+                        &lt;!&ndash;&#45;&#45;<label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
+                         &lt;!&ndash; </div> &ndash;&gt;
+                        &lt;!&ndash;&#45;&#45;<div class="form-group cstm-padding">
                                 <button ng-hide="appointmentPage1" ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
                                 <button ng-hide="appointmentPage3" ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
                             </div>
-                        </form>-->
+                        </form>&ndash;&gt;
 
                     </div>
                     <div id="menu1" class="tab-pane fade">
@@ -190,22 +190,20 @@
                                 <h3 class="panel-title"><i class="fa fa-tasks"></i>API</h3>
                             </div>
                             <div class="panel-body">
-                                <form action="assets/php/demo-contacts-process.php" method="post" id="sky-form3" class="sky-form" novalidate="novalidate" style="border:1px solid #fff;">
-                                    <div class="form-group">
-                                        <label class="label">API Key</label>
-                                        <label class="input">
-                                            <i class="icon-append fa fa-user"></i>
-                                            <input name="name" id="name" type="text">
-                                        </label>
+                                <form action="assets/php/demo-contacts-process.php" method="post" novalidate="novalidate" style="border:1px solid #fff;">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="API Key" type="text" id="name">
+                                        </mat-form-field>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="label">API Secret</label>
-                                        <label class="input">
-                                            <i class="icon-append fa fa-lock"></i>
-                                            <input name="pass" id="pass" type="password">
-                                        </label>
+                                        <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="API Secret" type="text" id="password">
+                                        </mat-form-field>
                                     </div>
-                                    <button type="submit" class="btn-u btn-u-green">Save</button>
+                                    </div>
+                                    <button type="submit" class="btn btn-rose">Save</button>
                                 </form>
                             </div>
                         </div>
@@ -213,7 +211,7 @@
                     <div class="col-md-6">
                         <h2>Data Syncronising</h2>
                         <p>Import existing EposNow customers.</p>
-                        <button type="button" class="btn btn-u-green">
+                        <button type="button" class="btn btn-rose">
                             Import data from EposNow
                         </button>
                         <div class="clearfix margin-bottom-20"></div>
@@ -230,7 +228,7 @@
                                 <label class="checkbox"><input name="checkbox-inline" type="checkbox"><i></i>resources</label>
                             </div>
                             <div class="clearfix margin-bottom-20"></div>
-                            <button type="button" class="btn btn-u-green">
+                            <button type="button" class="btn btn-rose">
                                 export data from EposNow
                             </button>
                         </form>
@@ -283,4 +281,147 @@
 
             </div>
      
-</section>
+</section>-->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">EposNow Integration</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Authentication</h4>
+                                <p>We need your EposNow API credentials to connect. You can find them in EposNow -> Apps -> Api -> (scroll down) Access Credentials.</p>
+                                <div class="panel panel-green margin-bottom-40">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title"><i class="fa fa-tasks"></i>API</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <form action="assets/php/demo-contacts-process.php" method="post" novalidate="novalidate" style="border:1px solid #fff;">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput placeholder="API Key" type="text" id="name">
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <mat-form-field class="example-full-width">
+                                                        <input matInput placeholder="API Secret" type="text" id="password">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-rose">Save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Data Syncronising</h4>
+                                <p>Import existing EposNow customers.</p>
+                                <button type="button" class="btn btn-rose">
+                                    Import data from EposNow
+                                </button>
+                                <div class="clearfix margin-bottom-20"></div>
+                                <p>
+                                    Export your Appointmentor resources, customers and services to EposNow
+                                </p>
+                                <p>
+                                    <b>Attention!</b>Default location and staff access right must be selected.
+                                </p>
+                                <form action="assets/php/demo-contacts-process.php" method="post" novalidate="novalidate" style="border:1px solid #fff;">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value=""> services
+                                            <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value=""> customers
+                                            <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value=""> resources
+                                            <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                                        </label>
+                                    </div>
+                                    <button type="button" class="btn btn-rose">
+                                        export data from EposNow
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-md-12">
+                                <h4>Default Settings</h4>
+                                <p>Set your default location, staff access right and tax rate.</p>
+                                <form action="#"  style="border:1px solid #fff;">
+                                    <div class="row">
+                                        <div class="col-md-8 pt-3">
+                                        <p>
+                                            Default EposNow Location
+                                        </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                                <mat-form-field >
+                                                    <mat-select multiple placeholder="Please Select">
+                                                        <mat-option value="0">1
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 pt-2">
+                                        <p>
+                                            Default EposNow Staff Access Right
+                                        </p>
+                                        </div>
+                                            <div class="col-md-4">
+                                                <mat-form-field >
+                                                    <mat-select multiple placeholder="Please Select">
+                                                        <mat-option value="0">1
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 pt-2">
+                                        <p>
+                                            Default EposNow Tax Rate
+                                        </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field >
+                                                <mat-select multiple placeholder="Please Select">
+                                                    <mat-option value="0">1
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
