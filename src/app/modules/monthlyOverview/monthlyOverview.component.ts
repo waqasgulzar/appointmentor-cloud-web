@@ -7,9 +7,9 @@ import { Router } from "@angular/router";
 })
 export class MonthlyOverviewComponent implements OnInit {
     monthlyoverview: [];
-   public tableData1: TableData;
+   /*public tableData1: TableData;
     public tableData2: TableData;
-    public tableData3: TableData;
+    public tableData3: TableData;*/
     constructor(private router: Router) {
     }
 
