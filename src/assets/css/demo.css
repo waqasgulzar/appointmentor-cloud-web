@@ -99,3 +99,12 @@
     color:#fff !important;
     padding: 10px !important;
 }
+.modal-dialog .modal-header
+{
+    background-color:#9c27b0 !important;
+    color:#fff !important;
+}
+.form-error-content
+{
+    color:red !important;
+}

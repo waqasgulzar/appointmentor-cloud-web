@@ -1,10 +1,10 @@
 ﻿<dashboard-component></dashboard-component>
-<header>
-    <!-- Modal -->
+<!--<header>
+    &lt;!&ndash; Modal &ndash;&gt;
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 
-            <!-- Modal content-->
+            &lt;!&ndash; Modal content&ndash;&gt;
             <div class="modal-content col-md-12 zero-padding">
 
                 <div class="modal-body zero-padding col-md-12 zero-padding">
@@ -34,9 +34,9 @@
                             <div class="form-group cstm-padding">
                                 <label for="Service" class="control-label col-sm-2">Date:</label>
                                 <div class="col-md-offset-1 col-md-9">
-                                    <!--<datepicker date-enabled-dates="{{enableDates}}" date-format="dd-MM-yyyy">
+                                    &lt;!&ndash;<datepicker date-enabled-dates="{{enableDates}}" date-format="dd-MM-yyyy">
                                         <input class="form-control" ng-change="dateChoised()" ng-model="date" type="text" />
-                                    </datepicker>-->
+                                    </datepicker>&ndash;&gt;
                                 </div>
                             </div>
                             <div class="form-group cstm-padding">
@@ -47,7 +47,7 @@
                             </div>
                             <div class="form-group cstm-padding">
                                 <label for="Service" class="col-md-2">Time:</label>
-                                <!--<div class=" col-md-9" style="
+                                &lt;!&ndash;<div class=" col-md-9" style="
 									max-height: 200px;
 									    overflow-y: scroll;
 									    background: #fff;border: 1px solid #979797;border-radius: 4px;width: 306px;margin-left: 53px;">
@@ -57,7 +57,7 @@
                                     <div *ngFor="let time of availableTimings">
                                         <label class="btn-block">{{time}}<input ng-click="timeSelected(time)" type="radio" name="optradio" class="pull-right"></label>
                                     </div>
-                                </div>-->
+                                </div>&ndash;&gt;
                             </div>
                             <label ng-if="errorOnPage2" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
                             <div class="form-group cstm-padding">
@@ -69,7 +69,7 @@
 
 
 
-                        <!---- <form class="form-horizontal" ng-show="appointmentPage1">
+                        &lt;!&ndash;&#45;&#45; <form class="form-horizontal" ng-show="appointmentPage1">
                              <div class="form-group cstm-padding">
                                  <label for="Service" class="control-label col-sm-2">Category:</label>
                                  <div class="col-md-offset-1 col-md-9">
@@ -93,20 +93,20 @@
                                  <div class="col-md-offset-1 col-md-9">
                                      <input class="form-control" type="text" value="{{selectedAppointmentService.price}}">
                                  </div>
-                             </div>-->
-                        <!-- <div class="form-group">
+                             </div>&ndash;&gt;
+                        &lt;!&ndash; <div class="form-group">
                         <label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
-                        <!-- </div> -->
-                        <!---- <div class="form-group cstm-padding">
+                        &lt;!&ndash; </div> &ndash;&gt;
+                        &lt;!&ndash;&#45;&#45; <div class="form-group cstm-padding">
                                 <button ng-hide="appointmentPage1" ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
                                 <button ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
                             </div>
-                        </form>-->
-                        <!-----<form class="form-horizontal" ng-show="appointmentPage3">
+                        </form>&ndash;&gt;
+                        &lt;!&ndash;-&#45;&#45;<form class="form-horizontal" ng-show="appointmentPage3">
                             <div class="form-group cstm-padding">
                                 <label for="Service" class="control-label col-sm-2">Existing Customer</label>
                                 <div class="col-md-offset-1 col-md-9">
-                                    <!--<angucomplete-alt id="ex1"
+                                    &lt;!&ndash;<angucomplete-alt id="ex1"
                                                       placeholder="Search Customer"
                                                       pause="100"
                                                       selected-object="selectedCustomer"
@@ -114,8 +114,8 @@
                                                       search-fields="name"
                                                       title-field="name"
                                                       minlength="1"
-                                                      input-class="form-control form-control-small" />-->
-                        <!-----</div>
+                                                      input-class="form-control form-control-small" />&ndash;&gt;
+                        &lt;!&ndash;-&#45;&#45;</div>
                         </div>
                         <div class="form-group cstm-padding">
                             <label for="Service" class="col-md-2">New Customer:</label>
@@ -147,15 +147,15 @@
                                 <textarea name="name" rows="4" cols="34" placeholder="Booking Notes"></textarea>
                             </div>
 
-                        </div>-->
-                        <!-- <div class="form-group"> -->
-                        <!----<label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
-                         <!-- </div> -->
-                        <!----<div class="form-group cstm-padding">
+                        </div>&ndash;&gt;
+                        &lt;!&ndash; <div class="form-group"> &ndash;&gt;
+                        &lt;!&ndash;&#45;&#45;<label ng-if="errorOnPage1" style="margin-top: 20px;margin-left: 111px;" class="alert-danger">Please Choice all Option</label>
+                         &lt;!&ndash; </div> &ndash;&gt;
+                        &lt;!&ndash;&#45;&#45;<div class="form-group cstm-padding">
                                 <button ng-hide="appointmentPage1" ng-click="prePage()" style="margin-left: 12px;" type="button" class="btn btn-default">Previous</button>
                                 <button ng-hide="appointmentPage3" ng-click="nextPage()" style="margin-right: 16px;" type="button" class="btn btn-default pull-right">Next</button>
                             </div>
-                        </form>-->
+                        </form>&ndash;&gt;
 
                     </div>
                     <div id="menu1" class="tab-pane fade">
@@ -184,4 +184,25 @@
     <div class="col-md-12 admin-margin">
         <p class="text-center">You haven't created any Booking Apps yet. Click "Create new app" to get started!<button type="button" class="btn-u pull-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;Create New App</button></p>
     </div>
-</section>
+</section>-->
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <h4 class="card-title">Booking Apps</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12 admin-margin">
+                            <p class="text-center">You haven't created any Booking Apps yet. Click "Create new app" to get started!<button type="button" class="btn btn-rose pull-right"><i class="fa fa-plus"></i>&nbsp;&nbsp;Create New App</button></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
