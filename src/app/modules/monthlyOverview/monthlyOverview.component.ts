@@ -6,7 +6,6 @@ import { Router } from "@angular/router";
     templateUrl: 'monthlyOverview.html'
 })
 export class MonthlyOverviewComponent implements OnInit {
-    monthlyoverview: [];
    /*public tableData1: TableData;
     public tableData2: TableData;
     public tableData3: TableData;*/
