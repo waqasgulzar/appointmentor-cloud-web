@@ -77,7 +77,7 @@ export class MediaLibraryComponent implements OnInit {
         t => t.title === this.fileToUpload.type
       ) as _model.Lookup;
 
-      const mediaTypeId =Number(userForm.controls['mediaTypeId'].value);
+      const mediaTypeId = Number(userForm.controls['mediaTypeId'].value);
 
       const mediaType = this.accesLevels.find(
         t => t.id === mediaTypeId
@@ -92,16 +92,19 @@ export class MediaLibraryComponent implements OnInit {
           media.onDiskPath = fileInfo.onDiskPath;
           media.mediaTypeId = Number(userForm.controls['mediaTypeId'].value); //Number(mediaTypeId);
           media.documentTypeId =
-            documentType.id == undefined ? 1 : documentType.id;
+            ( documentType == undefined || documentType.id == undefined )
+              ? 1
+              : documentType.id;
           media.isDeleted = false;
           media.documentType = documentType;
           media.mediaType = mediaType;
-          
-          console.log(media);
+
+          //console.log(media);
 
           this.mediaLibraryService.create(media).subscribe(
             data => {
               this.loadMediaLibrary();
+              this.spinner.hide();
             },
             error => {
               this.spinner.hide();
